@@ -1,0 +1,11 @@
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--
+    Rename this file as GameDir.props and put location of your EFT install here.
+    Example: C:\Battlestate Games\EFT
+
+    NOTE: Compiled output will be written to this directory as well!
+  -->
+  <PropertyGroup>
+    <EFTGameDir>J:\TarkovGame\EFT_Multiplayer</EFTGameDir>
+  </PropertyGroup>
+</Project>

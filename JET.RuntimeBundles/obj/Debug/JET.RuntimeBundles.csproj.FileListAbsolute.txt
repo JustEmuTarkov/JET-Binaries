@@ -1,0 +1,9 @@
+J:\_git\JustEmuTarkov-Base\Module\JET.RuntimeBundles\bin\Debug\NLog.JET.RuntimeBundles.dll
+J:\_git\JustEmuTarkov-Base\Module\JET.RuntimeBundles\bin\Debug\NLog.JET.RuntimeBundles.pdb
+J:\_git\JustEmuTarkov-Base\Module\JET.RuntimeBundles\bin\Debug\NLog.JET.SinglePlayer.dll
+J:\_git\JustEmuTarkov-Base\Module\JET.RuntimeBundles\bin\Debug\NLog.JET.SinglePlayer.pdb
+J:\_git\JustEmuTarkov-Base\Module\JET.RuntimeBundles\obj\Debug\JET.RuntimeBundles.csprojAssemblyReference.cache
+J:\_git\JustEmuTarkov-Base\Module\JET.RuntimeBundles\obj\Debug\JET.RuntimeBundles.csproj.CoreCompileInputs.cache
+J:\_git\JustEmuTarkov-Base\Module\JET.RuntimeBundles\obj\Debug\JET.RuntimeBundles.csproj.CopyComplete
+J:\_git\JustEmuTarkov-Base\Module\JET.RuntimeBundles\obj\Debug\NLog.JET.RuntimeBundles.dll
+J:\_git\JustEmuTarkov-Base\Module\JET.RuntimeBundles\obj\Debug\NLog.JET.RuntimeBundles.pdb
