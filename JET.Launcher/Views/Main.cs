@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using JET.Common.Utils.App;
 
@@ -10,25 +13,23 @@ namespace JET.Launcher
 	{
 		private LauncherConfig launcherConfig;
 		private ProcessMonitor monitor;
-		private ServerManager serverManager;
 		private Account accountManager;
 		private GameStarter gameStarter;
-		private StaticData sD = new StaticData(); // considered as string translator
+		private readonly StaticData sD = new StaticData(); // considered as string translator
 		private int _processedAction = 0;
         #region INIT Functions
         public Main()
 		{
 			InitializeComponent();
 			InitializeLauncher();
-			//Update.Enabled = true;
-			Update.Start();
+			//UpdateTick.Enabled = true;
+			UpdateTick.Start();
 			//_processedAction = 0;
 		}
         private void InitializeLauncher()
 		{
 			launcherConfig = JsonHandler.LoadLauncherConfig();
 			monitor = new ProcessMonitor(sD.eft_name, 1000, aliveCallback: null, exitCallback: GameExitCallback);
-			serverManager = new ServerManager();
 			accountManager = new Account(launcherConfig);
 			gameStarter = new GameStarter();
 
@@ -36,12 +37,6 @@ namespace JET.Launcher
 			{
 				launcherConfig.Servers.Add("https://127.0.0.1");
 				JsonHandler.SaveLauncherConfig(launcherConfig);
-			}
-			_RefreshServerList();
-			if (serverManager.SelectedServer != null)
-			{
-				serverManager.SelectServer(Field_SelectServer.SelectedIndex);
-				RequestHandler.ChangeBackendUrl(serverManager.SelectedServer.backendUrl);
 			}
 		}
         #endregion
@@ -136,7 +131,6 @@ namespace JET.Launcher
 			}
 			
 		}
-
         private void SetLoggedAs(bool v)
         {
 			if (v)
@@ -153,7 +147,6 @@ namespace JET.Launcher
 				LBL_LoginAs.Visible = false;
 			}
         }
-
         ///<summary>
         /// Set Names of Buttons (sub's and main one's)
         ///</summary>
@@ -212,11 +205,10 @@ namespace JET.Launcher
 				case 3:
 					_SetObjVisibility(true, true, true, false, false);
 					Field_SelectEdition.Items.Clear();
-					if (serverManager.SelectedServer == null)
+					if (ServerManager.SelectedServer == null)
 					{
 						_RefreshServerList();
-						serverManager.SelectServer(0);
-						if (serverManager.SelectedServer == null)
+						if (ServerManager.SelectedServer == null)
 						{
 							MessageBox.Show("Selected Server is still 'null' !!!!");
 							return;
@@ -224,7 +216,7 @@ namespace JET.Launcher
 
 					}
 
-					foreach (string edition in serverManager.SelectedServer.editions)
+					foreach (string edition in ServerManager.SelectedServer.editions)
 					{
 						Field_SelectEdition.Items.Add(edition);
 					}
@@ -249,11 +241,10 @@ namespace JET.Launcher
 					return;
 			}
 		}
-
         #region Functions
-		private void _Connect() { 
+		/*private void _Connect() { 
 			// not used cause its embeded :)
-		}
+		}*/
 		private void _Login() {
 			int status = accountManager.Login(Field_Email.Text, Field_Password.Text);
 
@@ -274,7 +265,7 @@ namespace JET.Launcher
 			}
 		}
 		private void _StartGame() {
-			int status = gameStarter.LaunchGame(serverManager.SelectedServer, accountManager.SelectedAccount);
+			int status = gameStarter.LaunchGame(ServerManager.SelectedServer, accountManager.SelectedAccount);
 
 			switch (status)
 			{
@@ -384,23 +375,10 @@ namespace JET.Launcher
 		}
 		private void _RefreshServerList()
 		{
-			serverManager.LoadServers(launcherConfig.Servers.ToArray());
-			Field_SelectServer.Items.Clear();
-
-			foreach (ServerInfo server in serverManager.AvailableServers)
-			{
-				Field_SelectServer.Items.Add(server.name);
-			}
-
-			if (Field_SelectServer.Items.Count > 0)
-			{
-				Field_SelectServer.SelectedIndex = 0;
-				return;
-			}
-			Field_SelectServer.Text = sD.ERROR_MSG.noServers;
+			ServerManager.requestSended = true;
+			ServerManager.LoadServers(launcherConfig.Servers.ToArray());
 		}
 		#endregion
-
 		#region Side Buttons Helpers
 		/// <summary>
 		/// Side Button number 1, Handles Refresh servers, Register, Logout, all sort of Go back Btn's
@@ -484,18 +462,17 @@ namespace JET.Launcher
 				case 4:
 					_processedAction = 7;
 					Field_SelectEdition.Items.Clear();
-					if (serverManager.SelectedServer == null)
+					if (ServerManager.SelectedServer == null)
 					{
 						_RefreshServerList();
-						serverManager.SelectServer(0);
-						if (serverManager.SelectedServer == null)
+						if (ServerManager.SelectedServer == null)
 						{
 							MessageBox.Show("Selected Server is still 'null' !!!!");
 							return;
 						}
 					}
 
-					foreach (string edition in serverManager.SelectedServer.editions)
+					foreach (string edition in ServerManager.SelectedServer.editions)
 					{
 						Field_SelectEdition.Items.Add(edition);
 					}
@@ -505,7 +482,6 @@ namespace JET.Launcher
 			}
 		}
 		#endregion
-
 		#region Special Functions
 		private void GameExitCallback(ProcessMonitor monitor)
 		{
@@ -523,7 +499,6 @@ namespace JET.Launcher
 				TrayIcon.Visible = false;
 		}
         #endregion
-
         private void BTN_GenLaunchArgs_Click(object sender, EventArgs e)
         {
 			if (accountManager != null)
@@ -539,11 +514,44 @@ namespace JET.Launcher
 		private void FormUpdate(object sender, EventArgs e)
 		{
 			if (_previousAction != _processedAction) {
-				BTN_Process.Enabled = true;
 				ButtonNameAssigner();
 				InputVisAssigner();
 				SetLoggedAs(_processedAction >= 4);
 				_previousAction = _processedAction;
+			}
+			ServerAutoCheck();
+		}
+		private void ServerAutoCheck() {
+			if (!ServerManager.requestSended)
+			{
+				if (ServerManager.AvailableServers.Count <= 0)
+				{
+					Task.Factory.StartNew(() => _RefreshServerList());
+				}
+				else
+				{
+					if (Field_SelectServer.Items.Count <= 0)
+					{
+						Field_SelectServer.Items.Clear();
+						foreach (ServerInfo server in ServerManager.AvailableServers)
+						{
+							Field_SelectServer.Items.Add(server.name);
+						}
+
+						if (Field_SelectServer.Items.Count > 0)
+						{
+							Field_SelectServer.SelectedIndex = 0;
+							ServerManager.SelectServer(0);
+							if (_processedAction == 0) BTN_Process.Enabled = true;
+						}
+						else
+						{
+							Field_SelectServer.Text = sD.ERROR_MSG.noServers;
+							if (_processedAction == 0) BTN_Process.Enabled = false;
+						}
+					}
+				}
+
 			}
 		}
 	}

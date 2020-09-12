@@ -8,10 +8,24 @@ namespace JET.Launcher
 {
 	public static class Program
 	{
-        private static StaticData staticText = new StaticData();
+        private static readonly StaticData staticText = new StaticData();
 		[STAThread]
 		private static void Main()
 		{
+            
+            /*if (!File.Exists(Path.Combine(Environment.CurrentDirectory, "ConsistencyInfo")))
+            {
+                MessageBox.Show("No ConsistancyInfo file, assuming we are not in the game directory", "ConsistantyInfo Check Failed!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+                return;
+            }
+            if (!File.Exists(Path.Combine(Environment.CurrentDirectory, "EscapeFromTarkov.exe")))
+            {
+                MessageBox.Show("No game files found, assuming we are not in the game directory", "Check Failed!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+                return;
+            }*/
+
             // set rendering
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -44,19 +58,27 @@ namespace JET.Launcher
 			LogManager.Instance.Error(text);
             MessageBox.Show(text, staticText.EXCEPTIONS.exception, MessageBoxButtons.OK,MessageBoxIcon.Error);
         }
-
+        private static string filename;
         private static Assembly AssemblyResolveEvent(object sender, ResolveEventArgs args)
         {
-            string assembly = new AssemblyName(args.Name).Name;
-            string filename = Path.Combine(Environment.CurrentDirectory, $"{staticText.eft_managed}{assembly}{staticText.dll_ext}");
-
-            // resources are embedded inside assembly
-            if (filename.Contains("resources"))
+            try
             {
-                return null;
-            }
+                string assembly = new AssemblyName(args.Name).Name;
+                filename = Path.Combine(Environment.CurrentDirectory, $"{staticText.eft_managed}{assembly}{staticText.dll_ext}");
 
-            return Assembly.LoadFrom(filename);
+                // resources are embedded inside assembly
+                if (filename.Contains("resources"))
+                {
+                    return null;
+                }
+                return Assembly.LoadFrom(filename);
+            }
+            catch (Exception) 
+            {
+                MessageBox.Show($"Cannot find a file named:\r\n{filename}\r\nApplication will close after pressing OK.","No File Found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+            return null;
         }
     }
 }

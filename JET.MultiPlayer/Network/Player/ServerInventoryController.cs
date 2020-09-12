@@ -19,7 +19,7 @@ namespace ServerLib.Network.Player
         protected override void Execute(GClass1613 operation, Callback callback)
         {
             base.Execute(operation, callback);
-            Console.WriteLine($"ServerInventoryController Execute GClass1611 operation {operation.gclass1486_0.Id}");
+            Console.WriteLine($"ServerInventoryController Execute GClass1613 operation {operation.gclass1486_0.Id}");
         }
 
         internal override void Execute(GClass1591 operation, Callback callback)
@@ -27,7 +27,7 @@ namespace ServerLib.Network.Player
             if (operation == null)
             {
                 callback?.Invoke("operation is null");
-                Console.WriteLine("ServerInventoryController Execute GClass1589 operation null");
+                Console.WriteLine("ServerInventoryController Execute GClass1591 operation null");
                 return;
             }
 

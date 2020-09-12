@@ -1,0 +1,26 @@
+## Git ignore for retards ;)
+packages
+JET.Launcher/obj
+JET.Launcher/obj/Debug
+JET.Launcher/obj/Relese
+JET.Launcher/obj/Debug/TempPE/
+JET.Launcher/bin
+JET.Launcher/bin/release
+JET.Launcher/bin/debug
+JET.Common/obj
+JET.Common/obj/Debug
+JET.Common/obj/Relese
+JET.Common/obj/Debug/TempPE/
+JET.Common/bin
+JET.Common/bin/release
+JET.Common/bin/debug
+JET.Core/obj
+JET.Core/obj/Debug
+JET.Core/obj/Relese
+JET.Core/obj/Debug/TempPE/
+JET.Core/bin
+JET.Core/bin/release
+JET.Core/bin/debug
+*.log
+*.7z
+Build/EscapeFromTarkov_Data/Managed

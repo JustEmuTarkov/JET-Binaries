@@ -28,7 +28,6 @@ namespace ServerLib.Network.Bots
                     InventoryHashSum = base.Inventory.CreateInventoryHashSum()
                 }
             });
-
             base.Execute(operation, x =>
             {
                 _player.AddInventoryCommand(new GStruct116

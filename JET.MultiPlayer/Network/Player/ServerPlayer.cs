@@ -74,7 +74,7 @@ namespace ServerLib.Network.Player
 
             await Singleton<AssetsPool>.Instance.LoadBundlesAndCreatePools(
                 AssetsPool.PoolsCategory.Raid, AssetsPool.AssemblyType.Local,
-                profile.GetAllPrefabPaths().ToArray(), // hope its good one ... profile.GetAllPrefabPaths().ToArray(),
+                profile.Inventory.GetAllInventoryPrefabs(),//profile.GetAllPrefabPaths().ToArray(), // hope its good one ... profile.GetAllPrefabPaths().ToArray(),
                 GClass593.General
             );
 
@@ -130,7 +130,7 @@ namespace ServerLib.Network.Player
 
         private void ProceedCallBackFromQueue(string error, int errorCode)
         {
-            Console.WriteLine("ERROR!!!!! ServerPlayer.ProceedCallBackFromQueue()");
+            Console.WriteLine($"ERROR!!!!! ServerPlayer.ProceedCallBackFromQueue(): {_confirmQueue.Count}");
             if (_confirmQueue.Count <= 0)
             {
                 Console.WriteLine(
@@ -167,7 +167,7 @@ namespace ServerLib.Network.Player
 
         public override GClass995 ApplyShot(GStruct202 damageInfo, EBodyPart bodyPartType, GStruct201 shotId)
         {
-            Console.WriteLine($"ServerPlayer shotApply");
+            Console.WriteLine($"ServerPlayer shotApply: {damageInfo.Weapon.Name.Localized()} - {damageInfo.Player.Profile.Info.Nickname} || {bodyPartType}");
             return base.ApplyShot(damageInfo, bodyPartType, shotId);
         }
 
@@ -550,7 +550,7 @@ namespace ServerLib.Network.Player
         {
             var setInHandsOperation = ((item != null) ? base.method_62(item) : null);
             setInHandsOperation?.Confirm();
-
+            Console.WriteLine($"HandsController: {this.HandsController}");
             if (this.HandsController != null)
             {
                 AbstractHandsController handsController = this.HandsController;
@@ -564,7 +564,8 @@ namespace ServerLib.Network.Player
                 this.HandsController = null;
             }
 
-            base.SpawnController(controllerFactory(), () =>
+            Console.WriteLine($"HandsController: {this.HandsController}");
+           base.SpawnController(controllerFactory(), () =>
             {
                 setInHandsOperation?.Dispose();
                 ProceedCallBackFromQueue(String.Empty, 0);

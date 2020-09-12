@@ -5,8 +5,8 @@ namespace JET.Launcher
 {
 	public static class RequestHandler
 	{
-		private static Request request = new Request(null, "");
-		private static StaticData staticData = new StaticData();
+		private static readonly Request request = new Request(null, "");
+		private static readonly StaticData staticData = new StaticData();
 		public static string GetBackendUrl()
 		{
 			return request.RemoteEndPoint;
@@ -22,7 +22,7 @@ namespace JET.Launcher
             request.Session = session;
         }
 
-        public static string RequestConnect()
+		public static string RequestConnect()
 		{
 			return request.GetJson(staticData.URL.l_serverConnect);
 		}

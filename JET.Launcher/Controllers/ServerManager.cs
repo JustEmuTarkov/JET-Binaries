@@ -6,16 +6,14 @@ namespace JET.Launcher
 {
 	public class ServerManager
 	{
-		public List<ServerInfo> AvailableServers { get; private set; }
-		public ServerInfo SelectedServer { get; private set; }
+		public static List<ServerInfo> AvailableServers = new List<ServerInfo>();
+		public static ServerInfo SelectedServer = new ServerInfo();
 
-		public ServerManager()
+		/*public ServerManager()
 		{
-			SelectedServer = null;
-			AvailableServers = new List<ServerInfo>();
-		}
-
-		public void SelectServer(int index)
+		}*/
+		public static bool requestSended = false;
+		public static void SelectServer(int index)
 		{
 			if (index < 0 || index >= AvailableServers.Count)
 			{
@@ -25,11 +23,10 @@ namespace JET.Launcher
 			SelectedServer = AvailableServers[index];
 		}
 
-		public void LoadServer(string backendUrl)
+		public static void LoadServer(string backendUrl)
 		{
-			string json = "";
-
-			try
+            string json;
+            try
 			{
 				RequestHandler.ChangeBackendUrl(backendUrl);
 				json = RequestHandler.RequestConnect();
@@ -42,7 +39,7 @@ namespace JET.Launcher
 			AvailableServers.Add(Json.Deserialize<ServerInfo>(json));
 		}
 
-		public void LoadServers(string[] servers)
+		public static void LoadServers(string[] servers)
 		{
 			AvailableServers.Clear();
 
@@ -50,6 +47,7 @@ namespace JET.Launcher
 			{
 				LoadServer(backendUrl);
 			}
+			requestSended = false;
 		}
 	}
 }

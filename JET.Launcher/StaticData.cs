@@ -88,8 +88,8 @@ namespace JET.Launcher
             public string l_profileChangeWipe = "/launcher/profile/change/wipe";
         }
         public class LOG_c {
-            public string logs = "Logs";
-            public string logs_ext = ".LOG";
+            public string logs = "Launcher_Logs";
+            public string logs_ext = ".log";
             public string debug = "[Debug]";
             public string info = "[Info]";
             public string warning = "[Warning]";

@@ -23,11 +23,8 @@ namespace ServerLib.Network.Messages
         }
 
         internal string ProfileId;
-
         internal int TaskId;
-
         internal float ProgressValue;
-
         public const short MessageId = 190;
     }
 }

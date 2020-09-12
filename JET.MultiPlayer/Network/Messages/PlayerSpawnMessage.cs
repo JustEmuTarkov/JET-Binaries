@@ -29,12 +29,12 @@ namespace ServerLib.Network.Messages
             IsInPronePose = reader.ReadBoolean();
             PoseLevel = reader.ReadSingle();
 
-            reader.ReadBytesAndSize();
-            /*using (var memoryStream = new MemoryStream(reader.ReadBytesAndSize()))
+            //reader.ReadBytesAndSize();
+            using (var memoryStream = new MemoryStream(reader.ReadBytesAndSize()))
             {
                 using var binaryReader = new BinaryReader(memoryStream);
                 Inventory = binaryReader.DeserializeInventory();
-            }*/
+            }
 
             Profile = SimpleZlib.Decompress(reader.ReadBytesAndSize()).ParseJsonTo<Profile>();
             SearchableInfo = reader.DeSerializeSearchableInfo();
@@ -254,9 +254,9 @@ namespace ServerLib.Network.Messages
             spawnMessage.IsAlive = player.HealthController.IsAlive;
 
             var previousHealthState = spawnMessage.HealthState;
-            spawnMessage.HealthState = (player.HealthController as GClass1264)?.SerializeState();
+            spawnMessage.HealthState = (player.HealthController as GClass1263)?.SerializeState();
             if (spawnMessage.HealthState == null)
-                spawnMessage.HealthState = (player.HealthController as GClass1264)?.SerializeState(); // not sure about that it should be 1265??
+                spawnMessage.HealthState = (player.HealthController as GClass1264)?.SerializeState(); // this is one above the one 1263 from 2 lines above
             if (spawnMessage.HealthState == null)
                 spawnMessage.HealthState = previousHealthState;
             return spawnMessage;

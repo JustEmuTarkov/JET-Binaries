@@ -78,7 +78,7 @@ namespace ServerLib
                 // Interchange: "Interchange",
                 // RezervBase: "RezervBase"
 
-                var mapId = "factory4_day";
+                var mapId = "factory4_day"; // it need to be loaded from file or something
                 mapSettings = GameUtils.StartLocalGame(mapId,
                     new GStruct77(true, true)
                 );
@@ -192,7 +192,7 @@ namespace ServerLib
             var id = ++NextChanelId;
             NextChanelId = (id % 2 == 0) ? ++id : id;
 
-            Console.Write($"The new chanel Id is {id}      ");
+            Console.WriteLine($"Created New Channel ID:{id}");
             return id;
         }
 

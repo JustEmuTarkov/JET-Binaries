@@ -133,13 +133,13 @@ namespace ServerLib.Network
         // Token: 0x06003E57 RID: 15959 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_16(int seconds)
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call command from client. vm-16");
         }
 
         // Token: 0x06003E58 RID: 15960 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_17(Vector3 position, int exfiltrationId, string spawnAreaName, string entryPoint)
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call command from client. vm-17");
         }
 
         // Token: 0x06003E59 RID: 15961 RVA: 0x000A20B4 File Offset: 0x000A02B4
@@ -151,62 +151,62 @@ namespace ServerLib.Network
         // Token: 0x06003E5A RID: 15962 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_19()
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call command from client. vm-19");
         }
 
         // Token: 0x06003E5B RID: 15963 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_20()
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call command from client. vm-20");
         }
 
         // Token: 0x06003E5C RID: 15964 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_21(ExitStatus exitStatus, int playTime)
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call command from client. vm-21");
         }
 
         // Token: 0x06003E5D RID: 15965 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_22()
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call command from client. vm-22");
         }
 
         // Token: 0x06003E5E RID: 15966 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_23(long time)
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call command from client. vm-23");
         }
 
         // Token: 0x06003E5F RID: 15967 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_24(byte[] data)
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call command from client. vm-24");
         }
 
         // Token: 0x06003E60 RID: 15968 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_25(EPlayerSide side, int instanceId)
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call command from client. vm-25");
         }
 
         // Token: 0x06003E61 RID: 15969 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_26(int escapeSeconds)
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call command from client. vm-26");
         }
 
         // Token: 0x06003E62 RID: 15970 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_27(int disconnectionCode, string additionalInfo, string technicalMessage)
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call command from client. vm-27 - DisconnectProcedure");
             RpcStartDisconnectionProcedure(disconnectionCode, additionalInfo, technicalMessage);
         }
 
         // Token: 0x06003E64 RID: 15972 RVA: 0x000A20B4 File Offset: 0x000A02B4
         private void method_1()
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call command from client. vm-28");
         }
 
         // Token: 0x06003E65 RID: 15973 RVA: 0x000C6FEB File Offset: 0x000C51EB
@@ -214,10 +214,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("Command CmdSpawn called on client.");
                 return;
             }
 
+            Console.WriteLine("Command CmdSpawn called on client.");
             ((AbstractGameSession) obj).CmdSpawn();
         }
 
@@ -226,10 +226,9 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("Command CmdRespawn called on client.");
                 return;
             }
-
+            Console.WriteLine("Command CmdRespawn called on client.");
             ((AbstractGameSession) obj).CmdReSpawn();
         }
 
@@ -238,10 +237,9 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("Command CmdStartGame called on client.");
                 return;
             }
-
+            Console.WriteLine("Command CmdStartGame called on client.");
             ((AbstractGameSession) obj).CmdStartGame();
         }
 
@@ -250,10 +248,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("Command CmdStartGameAfterTeleport called on client.");
                 return;
             }
 
+            Console.WriteLine("Command CmdStartGameAfterTeleport called on client.");
             ((AbstractGameSession) obj).CmdStartGameAfterTeleport();
         }
 
@@ -261,10 +259,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("Command CmdRestartGameInitiate called on client.");
                 return;
             }
 
+            Console.WriteLine("Command CmdRestartGameInitiate called on client.");
             ((AbstractGameSession) obj).CmdRestartGameInitiate();
         }
 
@@ -272,10 +270,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("Command CmdRestartGame called on client.");
                 return;
             }
 
+            Console.WriteLine("Command CmdRestartGame called on client.");
             ((AbstractGameSession) obj).CmdRestartGame();
         }
 
@@ -283,10 +281,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("Command CmdStopGame called on client.");
                 return;
             }
 
+            Console.WriteLine("Command CmdStopGame called on client.");
             ((AbstractGameSession) obj).CmdStopGame();
         }
 
@@ -294,10 +292,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("Command CmdSyncGameTime called on client.");
                 return;
             }
 
+            Console.WriteLine("Command CmdSyncGameTime called on client.");
             ((AbstractGameSession) obj).CmdSyncGameTime();
         }
 
@@ -305,10 +303,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("Command CmdDevelopRequestBot called on client.");
                 return;
             }
 
+            Console.WriteLine("Command CmdDevelopRequestBot called on client.");
             ((AbstractGameSession) obj).CmdDevelopRequestBot();
         }
 
@@ -316,10 +314,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("Command CmdDevelopmentSpawnBotRequest called on client.");
                 return;
             }
 
+            Console.WriteLine("Command CmdDevelopmentSpawnBotRequest called on client.");
             ((AbstractGameSession) obj).CmdDevelopmentSpawnBotRequest((EPlayerSide) reader.ReadInt32());
         }
 
@@ -327,10 +325,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("Command CmdDevelopmentSpawnBotOnServer called on client.");
                 return;
             }
 
+            Console.WriteLine("Command CmdDevelopmentSpawnBotOnServer called on client.");
             ((AbstractGameSession) obj).CmdDevelopmentSpawnBotOnServer((EPlayerSide) reader.ReadInt32());
         }
 
@@ -338,10 +336,9 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("Command CmdDevelopmentSpawnBotOnClient called on client.");
                 return;
             }
-
+            Console.WriteLine("Command CmdDevelopmentSpawnBotOnClient called on client.");
             ((AbstractGameSession) obj).CmdDevelopmentSpawnBotOnClient((EPlayerSide) reader.ReadInt32(),
                 (int) reader.ReadPackedUInt32());
         }
@@ -350,10 +347,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("Command CmdDisconnectAcceptedOnClient called on client.");
                 return;
             }
 
+            Console.WriteLine("Command CmdDisconnectAcceptedOnClient called on client.");
             ((AbstractGameSession) obj).CmdDisconnectAcceptedOnClient();
         }
 
@@ -361,10 +358,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("Command CmdSpawnConfirm called on client.");
                 return;
             }
 
+            Console.WriteLine("Command CmdSpawnConfirm called on client.");
             ((AbstractGameSession) obj).CmdSpawnConfirm((int) reader.ReadPackedUInt32());
         }
 
@@ -372,16 +369,17 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("Command function CmdSpawn called on server.");
                 return;
             }
 
             if (isServer)
             {
+                Console.WriteLine("Command function CmdSpawn called on server.");
                 CmdSpawn();
                 return;
             }
 
+            Console.WriteLine("Command internal CmdSpawn called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -396,16 +394,17 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("Command function CmdRespawn called on server.");
                 return;
             }
 
             if (isServer)
             {
+                Console.WriteLine("Command function CmdRespawn called on server.");
                 CmdReSpawn();
                 return;
             }
 
+            Console.WriteLine("Command function CmdRespawn called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -420,16 +419,17 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("Command function CmdStartGame called on server.");
                 return;
             }
 
             if (isServer)
             {
+                Console.WriteLine("Command function CmdStartGame called on server.");
                 CmdStartGame();
                 return;
             }
 
+            Console.WriteLine("Command function CmdStartGame called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -444,16 +444,17 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("Command function CmdStartGameAfterTeleport called on server.");
                 return;
             }
 
             if (isServer)
             {
+                Console.WriteLine("Command function CmdStartGameAfterTeleport called on server.");
                 CmdStartGameAfterTeleport();
                 return;
             }
 
+            Console.WriteLine("Command function CmdStartGameAfterTeleport called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -468,16 +469,17 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("Command function CmdRestartGameInitiate called on server.");
                 return;
             }
 
             if (isServer)
             {
+                Console.WriteLine("Command function CmdRestartGameInitiate called on server.");
                 CmdRestartGameInitiate();
                 return;
             }
 
+            Console.WriteLine("Command function CmdRestartGameInitiate called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -492,16 +494,17 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("Command function CmdRestartGame called on server.");
                 return;
             }
 
             if (isServer)
             {
+                Console.WriteLine("Command function CmdRestartGame called on server.");
                 CmdRestartGame();
                 return;
             }
 
+            Console.WriteLine("Command function CmdRestartGame called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -516,16 +519,17 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("Command function CmdStopGame called on server.");
                 return;
             }
 
             if (isServer)
             {
+                Console.WriteLine("Command function CmdStopGame called on server.");
                 CmdStopGame();
                 return;
             }
 
+            Console.WriteLine("Command function CmdStopGame called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -540,16 +544,17 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("Command function CmdSyncGameTime called on server.");
                 return;
             }
 
             if (isServer)
             {
+                Console.WriteLine("Command function CmdSyncGameTime called on server.");
                 CmdSyncGameTime();
                 return;
             }
 
+            Console.WriteLine("Command function CmdSyncGameTime called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -564,16 +569,17 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("Command function CmdDevelopRequestBot called on server.");
                 return;
             }
 
             if (isServer)
             {
+                Console.WriteLine("Command function CmdDevelopRequestBot called on server.");
                 CmdDevelopRequestBot();
                 return;
             }
 
+            Console.WriteLine("Command function CmdDevelopRequestBot called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -588,16 +594,17 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("Command function CmdDevelopmentSpawnBotRequest called on server.");
                 return;
             }
 
             if (isServer)
             {
+                Console.WriteLine("Command function CmdDevelopmentSpawnBotRequest called on server.");
                 CmdDevelopmentSpawnBotRequest(side);
                 return;
             }
 
+            Console.WriteLine("Command function CmdDevelopmentSpawnBotRequest called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -613,16 +620,17 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("Command function CmdDevelopmentSpawnBotOnServer called on server.");
                 return;
             }
 
             if (isServer)
             {
+                Console.WriteLine("Command function CmdDevelopmentSpawnBotOnServer called on server.");
                 CmdDevelopmentSpawnBotOnServer(side);
                 return;
             }
 
+            Console.WriteLine("Command function CmdDevelopmentSpawnBotOnServer called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -638,16 +646,17 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("Command function CmdDevelopmentSpawnBotOnClient called on server.");
                 return;
             }
 
             if (isServer)
             {
+                Console.WriteLine("Command function CmdDevelopmentSpawnBotOnClient called on server.");
                 CmdDevelopmentSpawnBotOnClient(side, instanceId);
                 return;
             }
 
+            Console.WriteLine("Command function CmdDevelopmentSpawnBotOnClient called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -664,16 +673,17 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("Command function CmdDisconnectAcceptedOnClient called on server.");
                 return;
             }
 
             if (isServer)
             {
+                Console.WriteLine("Command function CmdDisconnectAcceptedOnClient called on server.");
                 CmdDisconnectAcceptedOnClient();
                 return;
             }
 
+            Console.WriteLine("Command function CmdDisconnectAcceptedOnClient called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -688,16 +698,17 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("Command function CmdSpawnConfirm called on server.");
                 return;
             }
 
             if (isServer)
             {
+                Console.WriteLine("Command function CmdSpawnConfirm called on server.");
                 CmdSpawnConfirm(playerId);
                 return;
             }
 
+            Console.WriteLine("Command function CmdSpawnConfirm called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -713,10 +724,10 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("RPC RpcGameSpawned called on server.");
                 return;
             }
 
+            Console.WriteLine("RPC RpcGameSpawned called on server.");
             ((AbstractGameSession) obj).vmethod_14();
         }
 
@@ -724,10 +735,10 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("RPC RpcGameMatching called on server.");
                 return;
             }
 
+            Console.WriteLine("RPC RpcGameMatching called on server.");
             ((AbstractGameSession) obj).vmethod_15((ushort) reader.ReadPackedUInt32(),
                 (ushort) reader.ReadPackedUInt32(), (int) reader.ReadPackedUInt32());
         }
@@ -736,10 +747,10 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("RPC RpcGameStarting called on server.");
                 return;
             }
 
+            Console.WriteLine("RPC RpcGameStarting called on server.");
             ((AbstractGameSession) obj).vmethod_16((int) reader.ReadPackedUInt32());
         }
 
@@ -747,10 +758,10 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("RPC RpcGameStartingWithTeleport called on server.");
                 return;
             }
 
+            Console.WriteLine("RPC RpcGameStartingWithTeleport called on server.");
             ((AbstractGameSession) obj).vmethod_17(reader.ReadVector3(), (int) reader.ReadPackedUInt32(),
                 reader.ReadString(), reader.ReadString());
         }
@@ -759,10 +770,10 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("RPC RpcGameStarted called on server.");
                 return;
             }
 
+            Console.WriteLine("RPC RpcGameStarted called on server.");
             ((AbstractGameSession) obj).vmethod_18(reader.ReadSingle(), (int) reader.ReadPackedUInt32());
         }
 
@@ -770,10 +781,10 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("RPC RpcGameRestarting called on server.");
                 return;
             }
 
+            Console.WriteLine("RPC RpcGameRestarting called on server.");
             ((AbstractGameSession) obj).vmethod_19();
         }
 
@@ -781,10 +792,10 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("RPC RpcGameRestarted called on server.");
                 return;
             }
 
+            Console.WriteLine("RPC RpcGameRestarted called on server.");
             ((AbstractGameSession) obj).vmethod_20();
         }
 
@@ -792,10 +803,10 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("RPC RpcGameStopping called on server.");
                 return;
             }
 
+            Console.WriteLine("RPC RpcGameStopping called on server.");
             ((AbstractGameSession) obj).vmethod_21((ExitStatus) reader.ReadInt32(), (int) reader.ReadPackedUInt32());
         }
 
@@ -803,10 +814,10 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("RPC RpcGameStopped called on server.");
                 return;
             }
 
+            Console.WriteLine("RPC RpcGameStopped called on server.");
             ((AbstractGameSession) obj).vmethod_22();
         }
 
@@ -814,10 +825,10 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("RPC RpcSyncGameTime called on server.");
                 return;
             }
 
+            Console.WriteLine("RPC RpcSyncGameTime called on server.");
             ((AbstractGameSession) obj).vmethod_23((long) reader.ReadPackedUInt64());
         }
 
@@ -825,10 +836,10 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("RPC RpcDevelopSendBotData called on server.");
                 return;
             }
 
+            Console.WriteLine("RPC RpcDevelopSendBotData called on server.");
             ((AbstractGameSession) obj).vmethod_24(reader.ReadBytesAndSize());
         }
 
@@ -836,10 +847,10 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("RPC RpcDevelopmentSpawnBotResponse called on server.");
                 return;
             }
 
+            Console.WriteLine("RPC RpcDevelopmentSpawnBotResponse called on server.");
             ((AbstractGameSession) obj).vmethod_25((EPlayerSide) reader.ReadInt32(), (int) reader.ReadPackedUInt32());
         }
 
@@ -847,10 +858,10 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("RPC RpcSoftStopNotification called on server.");
                 return;
             }
 
+            Console.WriteLine("RPC RpcSoftStopNotification called on server.");
             ((AbstractGameSession) obj).vmethod_26((int) reader.ReadPackedUInt32());
         }
 
@@ -858,10 +869,10 @@ namespace ServerLib.Network
         {
             if (!NetworkClient.active)
             {
-                Console.WriteLine("RPC RpcStartDisconnectionProcedure called on server.");
                 return;
             }
 
+            Console.WriteLine("RPC RpcStartDisconnectionProcedure called on server.");
             ((AbstractGameSession) obj).vmethod_27((int) reader.ReadPackedUInt32(), reader.ReadString(),
                 reader.ReadString());
         }
@@ -870,10 +881,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("RPC Function RpcGameSpawned called on client.");
                 return;
             }
 
+            Console.WriteLine("RPC Function RpcGameSpawned called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -889,10 +900,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("RPC Function RpcGameMatching called on client.");
                 return;
             }
 
+            Console.WriteLine("RPC Function RpcGameMatching called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -910,10 +921,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("RPC Function RpcGameStarting called on client.");
                 return;
             }
 
+            Console.WriteLine("RPC Function RpcGameStarting called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -930,10 +941,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("RPC Function RpcGameStartingWithTeleport called on client.");
                 return;
             }
 
+            Console.WriteLine("RPC Function RpcGameStartingWithTeleport called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -952,10 +963,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("RPC Function RpcGameStarted called on client.");
                 return;
             }
 
+            Console.WriteLine("RPC Function RpcGameStarted called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -972,10 +983,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("RPC Function RpcGameRestarting called on client.");
                 return;
             }
 
+            Console.WriteLine("RPC Function RpcGameRestarting called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -990,10 +1001,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("RPC Function RpcGameRestarted called on client.");
                 return;
             }
 
+            Console.WriteLine("RPC Function RpcGameRestarted called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -1008,10 +1019,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("RPC Function RpcGameStopping called on client.");
                 return;
             }
 
+            Console.WriteLine("RPC Function RpcGameStopping called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -1028,10 +1039,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("RPC Function RpcGameStopped called on client.");
                 return;
             }
 
+            Console.WriteLine("RPC Function RpcGameStopped called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -1046,10 +1057,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("RPC Function RpcSyncGameTime called on client.");
                 return;
             }
 
+            Console.WriteLine("RPC Function RpcSyncGameTime called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -1065,10 +1076,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("RPC Function RpcDevelopSendBotData called on client.");
                 return;
             }
 
+            Console.WriteLine("RPC Function RpcDevelopSendBotData called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -1084,10 +1095,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("RPC Function RpcDevelopmentSpawnBotResponse called on client.");
                 return;
             }
 
+            Console.WriteLine("RPC Function RpcDevelopmentSpawnBotResponse called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -1105,10 +1116,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("RPC Function RpcSoftStopNotification called on client.");
                 return;
             }
 
+            Console.WriteLine("RPC Function RpcSoftStopNotification called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -1126,10 +1137,10 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("RPC Function RpcStartDisconnectionProcedure called on client.");
                 return;
             }
 
+            Console.WriteLine("RPC Function RpcStartDisconnectionProcedure called on client.");
             var networkWriter = new NetworkWriter();
             networkWriter.Write((byte) 0);
             networkWriter.Write((byte) 0);
@@ -1147,7 +1158,7 @@ namespace ServerLib.Network
         {
             if (!NetworkServer.active)
             {
-                Console.WriteLine("Command CmdGameStarted called on client.");
+                Console.WriteLine("Command CmdGameStarted - server not active");
                 return;
             }
 

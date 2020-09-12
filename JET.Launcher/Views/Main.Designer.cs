@@ -53,7 +53,7 @@
             this.LBL_LoginAs = new System.Windows.Forms.Label();
             this.BTN_GenLaunchArgs = new System.Windows.Forms.Button();
             this.Text_LaunchArgs = new System.Windows.Forms.TextBox();
-            this.Update = new System.Windows.Forms.Timer(this.components);
+            this.UpdateTick = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -364,9 +364,10 @@
             this.Text_LaunchArgs.Size = new System.Drawing.Size(131, 45);
             this.Text_LaunchArgs.TabIndex = 52;
             // 
-            // Update
+            // UpdateTick
             // 
-            this.Update.Tick += new System.EventHandler(this.FormUpdate);
+            this.UpdateTick.Interval = 250;
+            this.UpdateTick.Tick += new System.EventHandler(this.FormUpdate);
             // 
             // Main
             // 
@@ -423,7 +424,7 @@
         private System.Windows.Forms.Label LBL_LoginAs;
         private System.Windows.Forms.Button BTN_GenLaunchArgs;
         private System.Windows.Forms.TextBox Text_LaunchArgs;
-        private System.Windows.Forms.Timer Update;
+        private System.Windows.Forms.Timer UpdateTick;
     }
 }
 
