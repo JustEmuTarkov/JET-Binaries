@@ -67,7 +67,7 @@ namespace ServerLib
             if (!_gameStarted && GameUtils.GameReadyForStart())
             {
                 _gameStarted = true;
-                // EnableLogs();
+                EnableLogs();
 
                 // develop: "develop",
                 // Woods: "Woods",

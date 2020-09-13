@@ -33,7 +33,7 @@ namespace ServerLib.Utils.Game
             var botSpawner = PrivateValueAccessor.GetPrivateFieldValue(
                 game.BotsController.GetType(), "gclass875_0", game.BotsController
             ) as BotSpawner;
-
+            botSpawner.Stop(); // stop spawning bots
             return botSpawner;
         }
 

@@ -14,7 +14,8 @@ namespace ServerLib.Network.Bots
 
         internal override void Execute(GClass1591 operation, Callback callback)
         {
-            using MemoryStream memoryStream = new MemoryStream();
+            /* this is crashing game client not server
+            using MemoryStream memoryStream = new MemoryStream(new byte[1350]);
             using BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
 
             binaryWriter.WritePolymorph(GClass980.FromInventoryOperation(operation));
@@ -43,7 +44,7 @@ namespace ServerLib.Network.Bots
                     }
                 });
                 callback?.Invoke(x);
-            });
+            });*/
         }
     }
 }
