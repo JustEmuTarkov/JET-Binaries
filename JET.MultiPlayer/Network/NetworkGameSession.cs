@@ -48,7 +48,7 @@ namespace ServerLib.Network
                 return;
             }
 
-            RpcGameMatching(5, 1, 10);
+            CallRpcGameMatching(5, 1, 10);
         }
 
         private void UpdatePerTenSec()
@@ -117,21 +117,21 @@ namespace ServerLib.Network
 
             if (playerIsSpawned && !gameSpawnedIsSent)
             {
-                RpcGameSpawned();
+                CallRpcGameSpawned();
                 gameSpawnedIsSent = true;
                 return;
             }
 
             if (gameSpawnedIsSent && !gameStartingIsSent)
             {
-                RpcGameStarting(5);
+                CallRpcGameStarting(5);
                 gameStartingIsSent = true;
                 return;
             }
 
             if (gameStartingIsSent && !gameStartedIsSent)
             {
-                RpcGameStarted(1, 3322);
+                CallRpcGameStarted(1, 3322);
                 gameStartedIsSent = true;
 
                 player.InventoryController.SetExamined(true);
@@ -153,7 +153,7 @@ namespace ServerLib.Network
             }
         }
 
-        protected override void CmdSpawnConfirm(int spawnedChannel)
+        protected override void vmCmdSpawnConfirm(int spawnedChannel)
         {
             var serverInstance = Singleton<ServerInstance>.Instance;
             var allBots = BotsMonitor.AllBots;
@@ -205,7 +205,7 @@ namespace ServerLib.Network
                 }
             }
 
-            RpcSyncGameTime(DateTime.UtcNow.ToBinary());
+            CallRpcSyncGameTime(DateTime.UtcNow.ToBinary());
             Singleton<ServerWorld>.Instance.AddInteractiveObjectsStatusPacket();
         }
     }

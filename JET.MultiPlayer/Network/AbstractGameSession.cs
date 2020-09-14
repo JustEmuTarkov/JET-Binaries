@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using EFT;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -9,12 +13,10 @@ namespace ServerLib.Network
 {
     public class AbstractGameSession : AbstractSession
     {
-        // TODO: need to be rewrited again
-
-        public static T Create<T>(Transform parent, string name, string profileId) where T : AbstractGameSession
+        internal static T Create<T>(Transform parent, string name, string profileId) where T : AbstractGameSession
         {
-            var t = Instantiate<T>(parent, name, profileId);
-            t.GetOrAddComponent<NetworkIdentity>().localPlayerAuthority = true;
+            T t = Instantiate<T>(parent, name, profileId);
+            t.GetComponent<NetworkIdentity>().localPlayerAuthority = true;
             return t;
         }
 
@@ -25,1213 +27,1132 @@ namespace ServerLib.Network
 
         public override int GetNetworkChannel()
         {
-            Console.WriteLine("trying to get GetNetworkChannel");
-            return 0;
+            return 0; // always return 0 // (int)Class783.Byte_0;
+                      // make sure its avaliable cause that class is internal static
         }
 
-        protected virtual void CmdSpawn()
+        #region vm Calls [command] [clientrpc]
+        [Command]
+        protected virtual void vmCmdSpawn()
         {
-            Console.WriteLine("Call CmdSpawn from client.");
-
+            Console.WriteLine("Call command <CmdSpawn> from client.");
             sessionIsSpawned = true;
         }
 
-        protected virtual void CmdReSpawn()
+        [Command]
+        protected virtual void vmCmdRespawn()
         {
-            Console.WriteLine("Call CmdReSpawn from client.");
+            Console.WriteLine("Call command <CmdRespawn> from client.");
         }
 
-        protected virtual void CmdStartGame()
+        [Command]
+        protected virtual void vmCmdStartGame()
         {
-            Console.WriteLine("Call CmdStartGame CmdStartGame from client.");
+            Console.WriteLine("Call command <CmdStartGame> from client.");
         }
 
-        protected virtual void CmdStartGameAfterTeleport()
+        [Command]
+        protected virtual void vmCmdStartGameAfterTeleport()
         {
-            Console.WriteLine("Call CmdStartGameAfterTeleport from client.");
+            Console.WriteLine("Call command <CmdStartGameAfterTeleport> from client.");
         }
 
-        protected virtual void CmdRestartGameInitiate()
+        [Command]
+        protected virtual void vmCmdRestartGameInitiate()
         {
-            Console.WriteLine("Call CmdRestartGameInitiate from client.");
+            Console.WriteLine("Call command <CmdRestartGameInitiate> from client.");
         }
 
-        protected virtual void CmdRestartGame()
+        [Command]
+        protected virtual void vmCmdRestartGame()
         {
-            Console.WriteLine("Call CmdRestartGame from client.");
+            Console.WriteLine("Call command <CmdRestartGame> from client.");
         }
 
-        protected virtual void CmdStopGame()
+        [Command]
+        protected virtual void vmCmdGameStarted()
         {
-            Console.WriteLine("Call CmdStopGame command from client.");
-            RpcSoftStopNotification(5);
-            RpcGameStopped();
+            Console.WriteLine("Call command <CmdGameStarted> from client.");
         }
 
-        protected virtual void CmdSyncGameTime()
+        [Command]
+        protected virtual void vmCmdStopGame()
         {
-            Console.WriteLine("Call CmdSyncGameTime CmdSyncGameTime from client.");
-            RpcSyncGameTime(DateTime.UtcNow.ToBinary());
+            Console.WriteLine("Call command <CmdStopGame> from client.");
+            CallRpcSoftStopNotification(5);
+            CallRpcGameStopped(ExitStatus.Left, 0);
+        }
+
+        [Command]
+        protected virtual void vmCmdSyncGameTime()
+        {
+            Console.WriteLine("Call command <CmdSyncGameTime> from client.");
+            CallRpcSyncGameTime(DateTime.UtcNow.ToBinary());
             gameSyncTimeIsSent = true;
         }
 
-        protected virtual void CmdDevelopRequestBot()
+        [Command]
+        protected virtual void vmCmdDevelopRequestBot()
         {
-            Console.WriteLine("Call CmdDevelopRequestBot from client.");
+            Console.WriteLine("Call command <CmdDevelopRequestBot> from client.");
         }
 
-        protected virtual void CmdDevelopmentSpawnBotRequest(EPlayerSide side)
+        [Command]
+        protected virtual void vmCmdDevelopmentSpawnBotRequest(EPlayerSide side)
         {
-            Console.WriteLine("Call CmdDevelopmentSpawnBotRequest from client.");
+            Console.WriteLine("Call command <CmdDevelopmentSpawnBotRequest> from client.");
         }
 
-        protected virtual void CmdDevelopmentSpawnBotOnServer(EPlayerSide side)
+        [Command]
+        protected virtual void vmCmdDevelopmentSpawnBotOnServer(EPlayerSide side)
         {
-            Console.WriteLine("Call CmdDevelopmentSpawnBotOnServer from client.");
+            Console.WriteLine("Call command <CmdDevelopmentSpawnBotOnServer> from client.");
         }
 
-        protected virtual void CmdDevelopmentSpawnBotOnClient(EPlayerSide side, int instanceId)
+        [Command]
+        protected virtual void vmCmdDevelopmentSpawnBotOnClient(EPlayerSide side, int instanceId)
         {
-            Console.WriteLine("Call CmdDevelopmentSpawnBotOnClient from client.");
+            Console.WriteLine("Call command <CmdDevelopmentSpawnBotOnClient> from client.");
         }
 
-        protected virtual void CmdDisconnectAcceptedOnClient()
+        [Command]
+        protected virtual void vmCmdDisconnectAcceptedOnClient()
         {
-            Console.WriteLine("Call CmdDisconnectAcceptedOnClient from client.");
+            Console.WriteLine("Call command <CmdDisconnectAcceptedOnClient> from client.");
         }
 
-        protected virtual void CmdSpawnConfirm(int playerId)
+        [Command]
+        protected virtual void vmCmdSpawnConfirm(int playerId)
         {
-            Console.WriteLine("Call CmdSpawnConfirm from client.");
+            Console.WriteLine("Call command <CmdSpawnConfirm> from client.");
         }
 
-        protected virtual void vmethod_14()
+        [ClientRpc]
+        protected virtual void vmRpcGameSpawned()
         {
-            Console.WriteLine("Call RpcGameSpawned from client.");
+            Console.WriteLine("Call command <RpcGameSpawned> from client.");
         }
 
-        protected virtual void vmethod_15(ushort activitiesCounter, ushort minCounter, int seconds)
+        [ClientRpc]
+        protected virtual void vmRpcGameMatching(ushort activitiesCounter, ushort minCounter, int seconds)
         {
-            Console.WriteLine("Call RpcGameMatching from client.");
+            Console.WriteLine("Call command <RpcGameMatching> from client.");
         }
 
-        protected virtual void vmethod_16(int seconds)
+        [ClientRpc]
+        protected virtual void vmRpcGameStarting(int seconds)
         {
-            Console.WriteLine("Call RpcGameStarting from client. vm-16");
+            Console.WriteLine("Call command <RpcGameStarting> from client.");
         }
 
-        protected virtual void vmethod_17(Vector3 position, int exfiltrationId, string spawnAreaName, string entryPoint)
+        [ClientRpc]
+        protected virtual void vmRpcGameStartingWithTeleport(Vector3 position, int exfiltrationId, string spawnAreaName, string entryPoint)
         {
-            Console.WriteLine("Call RpcGameStartingWithTeleport from client. vm-17");
+            Console.WriteLine("Call command <RpcGameStartingWithTeleport> from client.");
         }
 
-        protected virtual void vmethod_18(float pastTime, int escapeSeconds)
+        [ClientRpc]
+        protected virtual void vmRpcGameStarted(float pastTime, int escapeSeconds)
         {
-            Console.WriteLine("Call RpcGameStarted from client.");
+            Console.WriteLine("Call command <RpcGameStarted> from client.");
         }
 
-        protected virtual void vmethod_19()
+        [ClientRpc]
+        protected virtual void vmRpcGameRestarting()
         {
-            Console.WriteLine("Call RpcGameRestarting from client. vm-19");
+            Console.WriteLine("Call command <RpcGameRestarting> from client.");
         }
 
-        protected virtual void vmethod_20()
+        [ClientRpc]
+        protected virtual void vmRpcGameRestarted()
         {
-            Console.WriteLine("Call RpcGameRestarted from client. vm-20");
+            Console.WriteLine("Call command <RpcGameRestarted> from client.");
         }
 
-        protected virtual void vmethod_21(ExitStatus exitStatus, int playTime)
+        [ClientRpc]
+        protected virtual void vmRpcGameStopping()
         {
-            Console.WriteLine("Call RpcGameStopped from client. vm-21");
+            Console.WriteLine("Call command <RpcGameStopping> from client.");
         }
 
-        protected virtual void vmethod_22()
+        [ClientRpc]
+        protected virtual void vmRpcGameStopped(ExitStatus exitStatus, int playTime)
         {
-            Console.WriteLine("Call RpcGameStopping from client. vm-22");
+            Console.WriteLine("Call command <RpcGameStopped> from client.");
         }
 
-        protected virtual void vmethod_23(long time)
+        [ClientRpc]
+        protected virtual void vmRpcSyncGameTime(long time)
         {
-            Console.WriteLine("Call RpcSyncGameTime from client. vm-23");
+            Console.WriteLine("Call command <RpcSyncGameTime> from client.");
         }
 
-        protected virtual void vmethod_24(byte[] data)
+        [ClientRpc]
+        protected virtual void vmRpcDevelopSendBotData(byte[] data)
         {
-            Console.WriteLine("Call RpcDevelopSendBotData from client. vm-24");
+            Console.WriteLine("Call command <RpcDevelopSendBotData> from client.");
         }
 
-        protected virtual void vmethod_25(EPlayerSide side, int instanceId)
+        [ClientRpc]
+        protected virtual void vmRpcDevelopmentSpawnBotResponse(EPlayerSide side, int instanceId)
         {
-            Console.WriteLine("Call RpcDevelopmentSpawnBotResponse from client. vm-25");
+            Console.WriteLine("Call command <RpcDevelopmentSpawnBotResponse> from client.");
         }
 
-        protected virtual void vmethod_26(int escapeSeconds)
+        [ClientRpc]
+        protected virtual void vmRpcSoftStopNotification(int escapeSeconds)
         {
-            Console.WriteLine("Call RpcSoftStopNotification from client. vm-26");
+            Console.WriteLine("Call command <RpcSoftStopNotification> from client.");
         }
 
-        protected virtual void vmethod_27(int disconnectionCode, string additionalInfo, string technicalMessage)
+        [ClientRpc]
+        protected virtual void vmRpcStartDisconnectionProcedure(int disconnectionCode, string additionalInfo, string technicalMessage)
         {
-            Console.WriteLine("Call RpcStartDisconnectionProcedure from client.");
-            RpcStartDisconnectionProcedure(disconnectionCode, additionalInfo, technicalMessage);
+            Console.WriteLine("Call command <RpcStartDisconnectionProcedure> from client.");
+            CallRpcStartDisconnectionProcedure(disconnectionCode, additionalInfo, technicalMessage);
         }
 
-        // EFT.AbstractGameSession // Token: 0x06003F41 RID: 16193 RVA: 0x000A1F19 File Offset: 0x000A0119
+        #endregion
+
         private void method_1()
         {
-            Console.WriteLine("Call command from client. vm-28");
+            Console.WriteLine("Call command <method_1> from client.");
         }
 
-        protected static void CmdSpawn(NetworkBehaviour obj, NetworkReader reader)
+        #region sm Calls
+        protected static void smCmdSpawn(NetworkBehaviour obj, NetworkReader reader)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("Command CmdSpawn called on client.");
                 return;
             }
-
-            Console.WriteLine("Command CmdSpawn called on client.");
-            ((AbstractGameSession) obj).CmdSpawn();
+            ((AbstractGameSession) obj).vmCmdSpawn();
         }
 
-        protected static void CmdRespawn(NetworkBehaviour obj, NetworkReader reader)
+        protected static void smCmdRespawn(NetworkBehaviour obj, NetworkReader reader)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("Command CmdRespawn called on client.");
                 return;
             }
-            Console.WriteLine("Command CmdRespawn called on client.");
-            ((AbstractGameSession) obj).CmdReSpawn();
+            ((AbstractGameSession) obj).vmCmdRespawn();
         }
 
-        protected static void CmdStartGame(NetworkBehaviour obj, NetworkReader reader)
+        protected static void smCmdStartGame(NetworkBehaviour obj, NetworkReader reader)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("Command CmdStartGame called on client.");
                 return;
             }
-            Console.WriteLine("Command CmdStartGame called on client.");
-            ((AbstractGameSession) obj).CmdStartGame();
+            ((AbstractGameSession) obj).vmCmdStartGame();
         }
 
-        protected static void CmdStartGameAfterTeleport(NetworkBehaviour obj, NetworkReader reader)
+        protected static void smCmdStartGameAfterTeleport(NetworkBehaviour obj, NetworkReader reader)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("Command CmdStartGameAfterTeleport called on client.");
                 return;
             }
-
-            Console.WriteLine("Command CmdStartGameAfterTeleport called on client.");
-            ((AbstractGameSession) obj).CmdStartGameAfterTeleport();
+            ((AbstractGameSession) obj).vmCmdStartGameAfterTeleport();
         }
 
-        protected static void CmdRestartGameInitiate(NetworkBehaviour obj, NetworkReader reader)
+        protected static void smCmdRestartGameInitiate(NetworkBehaviour obj, NetworkReader reader)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("Command CmdRestartGameInitiate called on client.");
                 return;
             }
-
-            Console.WriteLine("Command CmdRestartGameInitiate called on client.");
-            ((AbstractGameSession) obj).CmdRestartGameInitiate();
+            ((AbstractGameSession) obj).vmCmdRestartGameInitiate();
         }
 
-        protected static void CmdRestartGame(NetworkBehaviour obj, NetworkReader reader)
+        protected static void smCmdRestartGame(NetworkBehaviour obj, NetworkReader reader)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("Command CmdRestartGame called on client.");
                 return;
             }
-
-            Console.WriteLine("Command CmdRestartGame called on client.");
-            ((AbstractGameSession) obj).CmdRestartGame();
+            ((AbstractGameSession) obj).vmCmdRestartGame();
         }
 
-        protected static void CmdStopGame(NetworkBehaviour obj, NetworkReader reader)
+        protected static void smCmdGameStarted(NetworkBehaviour obj, NetworkReader reader)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("Command CmdGameStarted called on client.");
                 return;
             }
-
-            Console.WriteLine("Command CmdStopGame called on client.");
-            ((AbstractGameSession) obj).CmdStopGame();
+            ((AbstractGameSession) obj).vmCmdGameStarted();
         }
 
-        protected static void CmdSyncGameTime(NetworkBehaviour obj, NetworkReader reader)
+        protected static void smCmdStopGame(NetworkBehaviour obj, NetworkReader reader)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("Command CmdStopGame called on client.");
                 return;
             }
-
-            Console.WriteLine("Command CmdSyncGameTime called on client.");
-            ((AbstractGameSession) obj).CmdSyncGameTime();
+            ((AbstractGameSession) obj).vmCmdStopGame();
         }
 
-        protected static void CmdDevelopRequestBot(NetworkBehaviour obj, NetworkReader reader)
+        protected static void smCmdSyncGameTime(NetworkBehaviour obj, NetworkReader reader)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("Command CmdSyncGameTime called on client.");
                 return;
             }
-
-            Console.WriteLine("Command CmdDevelopRequestBot called on client.");
-            ((AbstractGameSession) obj).CmdDevelopRequestBot();
+            ((AbstractGameSession) obj).vmCmdSyncGameTime();
         }
 
-        protected static void CmdDevelopmentSpawnBotRequest(NetworkBehaviour obj, NetworkReader reader)
+        protected static void smCmdDevelopRequestBot(NetworkBehaviour obj, NetworkReader reader)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("Command CmdDevelopRequestBot called on client.");
                 return;
             }
-
-            Console.WriteLine("Command CmdDevelopmentSpawnBotRequest called on client.");
-            ((AbstractGameSession) obj).CmdDevelopmentSpawnBotRequest((EPlayerSide) reader.ReadInt32());
+            ((AbstractGameSession) obj).vmCmdDevelopRequestBot();
         }
 
-        protected static void CmdDevelopmentSpawnBotOnServer(NetworkBehaviour obj, NetworkReader reader)
+        protected static void smCmdDevelopmentSpawnBotRequest(NetworkBehaviour obj, NetworkReader reader)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("Command CmdDevelopmentSpawnBotRequest called on client.");
                 return;
             }
-
-            Console.WriteLine("Command CmdDevelopmentSpawnBotOnServer called on client.");
-            ((AbstractGameSession) obj).CmdDevelopmentSpawnBotOnServer((EPlayerSide) reader.ReadInt32());
+            ((AbstractGameSession) obj).vmCmdDevelopmentSpawnBotRequest((EPlayerSide) reader.ReadInt32());
         }
 
-        protected static void CmdDevelopmentSpawnBotOnClient(NetworkBehaviour obj, NetworkReader reader)
+        protected static void smCmdDevelopmentSpawnBotOnServer(NetworkBehaviour obj, NetworkReader reader)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("Command CmdDevelopmentSpawnBotOnServer called on client.");
                 return;
             }
-            Console.WriteLine("Command CmdDevelopmentSpawnBotOnClient called on client.");
-            ((AbstractGameSession) obj).CmdDevelopmentSpawnBotOnClient((EPlayerSide) reader.ReadInt32(),
-                (int) reader.ReadPackedUInt32());
+            ((AbstractGameSession) obj).vmCmdDevelopmentSpawnBotOnServer((EPlayerSide) reader.ReadInt32());
         }
 
-        protected static void CmdDisconnectAcceptedOnClient(NetworkBehaviour obj, NetworkReader reader)
+        protected static void smCmdDevelopmentSpawnBotOnClient(NetworkBehaviour obj, NetworkReader reader)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("Command CmdDevelopmentSpawnBotOnClient called on client.");
                 return;
             }
-
-            Console.WriteLine("Command CmdDisconnectAcceptedOnClient called on client.");
-            ((AbstractGameSession) obj).CmdDisconnectAcceptedOnClient();
+            ((AbstractGameSession) obj).vmCmdDevelopmentSpawnBotOnClient((EPlayerSide) reader.ReadInt32(), (int) reader.ReadPackedUInt32());
         }
 
-        protected static void CmdSpawnConfirm(NetworkBehaviour obj, NetworkReader reader)
+        protected static void smCmdDisconnectAcceptedOnClient(NetworkBehaviour obj, NetworkReader reader)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("Command CmdDisconnectAcceptedOnClient called on client.");
                 return;
             }
-
-            Console.WriteLine("Command CmdSpawnConfirm called on client.");
-            ((AbstractGameSession) obj).CmdSpawnConfirm((int) reader.ReadPackedUInt32());
+            ((AbstractGameSession) obj).vmCmdDisconnectAcceptedOnClient();
         }
 
+        protected static void smCmdSpawnConfirm(NetworkBehaviour obj, NetworkReader reader)
+        {
+            if (!NetworkServer.active)
+            {
+                Console.WriteLine("Command CmdSpawnConfirm called on client.");
+                return;
+            }
+            ((AbstractGameSession) obj).vmCmdSpawnConfirm((int) reader.ReadPackedUInt32());
+        }
+
+        protected static void smRpcGameSpawned(NetworkBehaviour obj, NetworkReader reader)
+        {
+            if (!NetworkClient.active)
+            {
+                Console.WriteLine("RPC RpcGameSpawned called on server.");
+                return;
+            }
+            ((AbstractGameSession) obj).vmRpcGameSpawned();
+        }
+
+        protected static void smRpcGameMatching(NetworkBehaviour obj, NetworkReader reader)
+        {
+            if (!NetworkClient.active)
+            {
+                Console.WriteLine("RPC RpcGameMatching called on server.");
+                return;
+            }
+            ((AbstractGameSession) obj).vmRpcGameMatching((ushort) reader.ReadPackedUInt32(), (ushort) reader.ReadPackedUInt32(), (int) reader.ReadPackedUInt32());
+        }
+
+        protected static void smRpcGameStarting(NetworkBehaviour obj, NetworkReader reader)
+        {
+            if (!NetworkClient.active)
+            {
+                Console.WriteLine("RPC RpcGameStarting called on server.");
+                return;
+            }
+            ((AbstractGameSession) obj).vmRpcGameStarting((int) reader.ReadPackedUInt32());
+        }
+
+        protected static void smRpcGameStartingWithTeleport(NetworkBehaviour obj, NetworkReader reader)
+        {
+            if (!NetworkClient.active)
+            {
+                Console.WriteLine("RPC RpcGameStartingWithTeleport called on server.");
+                return;
+            }
+            ((AbstractGameSession) obj).vmRpcGameStartingWithTeleport(reader.ReadVector3(), (int) reader.ReadPackedUInt32(), reader.ReadString(), reader.ReadString());
+        }
+
+        protected static void smRpcGameStarted(NetworkBehaviour obj, NetworkReader reader)
+        {
+            if (!NetworkClient.active)
+            {
+                Console.WriteLine("RPC RpcGameStarted called on server.");
+                return;
+            }
+            ((AbstractGameSession) obj).vmRpcGameStarted(reader.ReadSingle(), (int) reader.ReadPackedUInt32());
+        }
+
+        protected static void smRpcGameRestarting(NetworkBehaviour obj, NetworkReader reader)
+        {
+            if (!NetworkClient.active)
+            {
+                Console.WriteLine("RPC RpcGameRestarting called on server.");
+                return;
+            }
+            ((AbstractGameSession) obj).vmRpcGameRestarting();
+        }
+
+        protected static void smRpcGameRestarted(NetworkBehaviour obj, NetworkReader reader)
+        {
+            if (!NetworkClient.active)
+            {
+                Console.WriteLine("RPC RpcGameRestarted called on server.");
+                return;
+            }
+            ((AbstractGameSession) obj).vmRpcGameRestarted();
+        }
+
+        protected static void smRpcGameStopping(NetworkBehaviour obj, NetworkReader reader)
+        {
+            if (!NetworkClient.active)
+            {
+                Console.WriteLine("RPC RpcGameStopping called on server.");
+                return;
+            }
+            ((AbstractGameSession) obj).vmRpcGameStopping();
+        }
+
+        protected static void smRpcGameStopped(NetworkBehaviour obj, NetworkReader reader)
+        {
+            if (!NetworkClient.active)
+            {
+                Console.WriteLine("RPC RpcGameStopped called on server.");
+                return;
+            }
+            ((AbstractGameSession) obj).vmRpcGameStopped((ExitStatus) reader.ReadInt32(), (int) reader.ReadPackedUInt32());
+        }
+
+        protected static void smRpcSyncGameTime(NetworkBehaviour obj, NetworkReader reader)
+        {
+            if (!NetworkClient.active)
+            {
+                Console.WriteLine("RPC RpcSyncGameTime called on server.");
+                return;
+            }
+            ((AbstractGameSession) obj).vmRpcSyncGameTime((long) reader.ReadPackedUInt64());
+        }
+
+        protected static void smRpcDevelopSendBotData(NetworkBehaviour obj, NetworkReader reader)
+        {
+            if (!NetworkClient.active)
+            {
+                Console.WriteLine("RPC RpcDevelopSendBotData called on server.");
+                return;
+            }
+            ((AbstractGameSession) obj).vmRpcDevelopSendBotData(reader.ReadBytesAndSize());
+        }
+
+        protected static void smRpcDevelopmentSpawnBotResponse(NetworkBehaviour obj, NetworkReader reader)
+        {
+            if (!NetworkClient.active)
+            {
+                Console.WriteLine("RPC RpcDevelopmentSpawnBotResponse called on server.");
+                return;
+            }
+            ((AbstractGameSession) obj).vmRpcDevelopmentSpawnBotResponse((EPlayerSide) reader.ReadInt32(), (int) reader.ReadPackedUInt32());
+        }
+
+        protected static void smRpcSoftStopNotification(NetworkBehaviour obj, NetworkReader reader)
+        {
+            if (!NetworkClient.active)
+            {
+                Console.WriteLine("RPC RpcSoftStopNotification called on server.");
+                return;
+            }
+            ((AbstractGameSession) obj).vmRpcSoftStopNotification((int) reader.ReadPackedUInt32());
+        }
+
+        protected static void smRpcStartDisconnectionProcedure(NetworkBehaviour obj, NetworkReader reader)
+        {
+            if (!NetworkClient.active)
+            {
+                Console.WriteLine("RPC RpcStartDisconnectionProcedure called on server.");
+                return;
+            }
+            ((AbstractGameSession) obj).vmRpcStartDisconnectionProcedure((int) reader.ReadPackedUInt32(), reader.ReadString(), reader.ReadString());
+        }
+        #endregion
+
+        #region Call Cmd & Rpc
         public void CallCmdSpawn()
         {
             if (!NetworkClient.active)
             {
-                return;
-            }
-
-            if (isServer)
-            {
                 Console.WriteLine("Command function CmdSpawn called on server.");
-                CmdSpawn();
                 return;
             }
-
-            Console.WriteLine("Command internal CmdSpawn called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 5);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_0);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
-            SendCommandInternal(networkWriter, 0, "CmdSpawn");
+            if (base.isServer)
+            {
+                this.vmCmdSpawn();
+                return;
+            }
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(5);
+            networkWriter.WritePackedUInt32((uint) iCmdSpawn);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
+            base.SendCommandInternal(networkWriter, 0, "CmdSpawn");
         }
-
-        public void CallCmdReSpawn()
+        public void CallCmdRespawn()
         {
             if (!NetworkClient.active)
             {
-                return;
-            }
-
-            if (isServer)
-            {
                 Console.WriteLine("Command function CmdRespawn called on server.");
-                CmdReSpawn();
                 return;
             }
-
-            Console.WriteLine("Command function CmdRespawn called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 5);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_1);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
-            SendCommandInternal(networkWriter, 0, "CmdRespawn");
+            if (base.isServer)
+            {
+                this.vmCmdRespawn();
+                return;
+            }
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(5);
+            networkWriter.WritePackedUInt32((uint) iCmdRespawn);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
+            base.SendCommandInternal(networkWriter, 0, "CmdRespawn");
         }
-
         public void CallCmdStartGame()
         {
             if (!NetworkClient.active)
             {
-                return;
-            }
-
-            if (isServer)
-            {
                 Console.WriteLine("Command function CmdStartGame called on server.");
-                CmdStartGame();
                 return;
             }
-
-            Console.WriteLine("Command function CmdStartGame called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 5);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_2);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
-            SendCommandInternal(networkWriter, 0, "CmdStartGame");
+            if (base.isServer)
+            {
+                this.vmCmdStartGame();
+                return;
+            }
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(5);
+            networkWriter.WritePackedUInt32((uint) iCmdStartGame);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
+            base.SendCommandInternal(networkWriter, 0, "CmdStartGame");
         }
-
         public void CallCmdStartGameAfterTeleport()
         {
             if (!NetworkClient.active)
             {
-                return;
-            }
-
-            if (isServer)
-            {
                 Console.WriteLine("Command function CmdStartGameAfterTeleport called on server.");
-                CmdStartGameAfterTeleport();
                 return;
             }
-
-            Console.WriteLine("Command function CmdStartGameAfterTeleport called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 5);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_3);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
-            SendCommandInternal(networkWriter, 0, "CmdStartGameAfterTeleport");
+            if (base.isServer)
+            {
+                this.vmCmdStartGameAfterTeleport();
+                return;
+            }
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(5);
+            networkWriter.WritePackedUInt32((uint) iCmdStartGameAfterTeleport);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
+            base.SendCommandInternal(networkWriter, 0, "CmdStartGameAfterTeleport");
         }
-
         public void CallCmdRestartGameInitiate()
         {
             if (!NetworkClient.active)
             {
-                return;
-            }
-
-            if (isServer)
-            {
                 Console.WriteLine("Command function CmdRestartGameInitiate called on server.");
-                CmdRestartGameInitiate();
                 return;
             }
-
-            Console.WriteLine("Command function CmdRestartGameInitiate called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 5);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_4);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
-            SendCommandInternal(networkWriter, 0, "CmdRestartGameInitiate");
+            if (base.isServer)
+            {
+                this.vmCmdRestartGameInitiate();
+                return;
+            }
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(5);
+            networkWriter.WritePackedUInt32((uint) iCmdRestartGameInitiate);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
+            base.SendCommandInternal(networkWriter, 0, "CmdRestartGameInitiate");
         }
-
         public void CallCmdRestartGame()
         {
             if (!NetworkClient.active)
             {
-                return;
-            }
-
-            if (isServer)
-            {
                 Console.WriteLine("Command function CmdRestartGame called on server.");
-                CmdRestartGame();
                 return;
             }
-
-            Console.WriteLine("Command function CmdRestartGame called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 5);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_5);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
-            SendCommandInternal(networkWriter, 0, "CmdRestartGame");
+            if (base.isServer)
+            {
+                this.vmCmdRestartGame();
+                return;
+            }
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(5);
+            networkWriter.WritePackedUInt32((uint) iCmdRestartGame);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
+            base.SendCommandInternal(networkWriter, 0, "CmdRestartGame");
         }
-
+        public void CallCmdGameStarted()
+        {
+            if (!NetworkClient.active)
+            {
+                Console.WriteLine("Command function CmdGameStarted called on server.");
+                return;
+            }
+            if (base.isServer)
+            {
+                this.vmCmdGameStarted();
+                return;
+            }
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(5);
+            networkWriter.WritePackedUInt32((uint) iCmdGameStarted);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
+            base.SendCommandInternal(networkWriter, 0, "CmdGameStarted");
+        }
         public void CallCmdStopGame()
         {
             if (!NetworkClient.active)
             {
-                return;
-            }
-
-            if (isServer)
-            {
                 Console.WriteLine("Command function CmdStopGame called on server.");
-                CmdStopGame();
                 return;
             }
-
-            Console.WriteLine("Command function CmdStopGame called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 5);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_6);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
-            SendCommandInternal(networkWriter, 0, "CmdStopGame");
+            if (base.isServer)
+            {
+                this.vmCmdStopGame();
+                return;
+            }
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(5);
+            networkWriter.WritePackedUInt32((uint) iCmdStopGame);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
+            base.SendCommandInternal(networkWriter, 0, "CmdStopGame");
         }
-
         public void CallCmdSyncGameTime()
         {
             if (!NetworkClient.active)
             {
-                return;
-            }
-
-            if (isServer)
-            {
                 Console.WriteLine("Command function CmdSyncGameTime called on server.");
-                CmdSyncGameTime();
                 return;
             }
-
-            Console.WriteLine("Command function CmdSyncGameTime called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 5);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_7);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
-            SendCommandInternal(networkWriter, 0, "CmdSyncGameTime");
+            if (base.isServer)
+            {
+                this.vmCmdSyncGameTime();
+                return;
+            }
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(5);
+            networkWriter.WritePackedUInt32((uint) iCmdSyncGameTime);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
+            base.SendCommandInternal(networkWriter, 0, "CmdSyncGameTime");
         }
-
         public void CallCmdDevelopRequestBot()
         {
             if (!NetworkClient.active)
             {
-                return;
-            }
-
-            if (isServer)
-            {
                 Console.WriteLine("Command function CmdDevelopRequestBot called on server.");
-                CmdDevelopRequestBot();
                 return;
             }
-
-            Console.WriteLine("Command function CmdDevelopRequestBot called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 5);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_8);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
-            SendCommandInternal(networkWriter, 0, "CmdDevelopRequestBot");
+            if (base.isServer)
+            {
+                this.vmCmdDevelopRequestBot();
+                return;
+            }
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(5);
+            networkWriter.WritePackedUInt32((uint) iCmdDevelopRequestBot);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
+            base.SendCommandInternal(networkWriter, 0, "CmdDevelopRequestBot");
         }
-
         public void CallCmdDevelopmentSpawnBotRequest(EPlayerSide side)
         {
             if (!NetworkClient.active)
             {
-                return;
-            }
-
-            if (isServer)
-            {
                 Console.WriteLine("Command function CmdDevelopmentSpawnBotRequest called on server.");
-                CmdDevelopmentSpawnBotRequest(side);
                 return;
             }
-
-            Console.WriteLine("Command function CmdDevelopmentSpawnBotRequest called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 5);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_9);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
+            if (base.isServer)
+            {
+                this.vmCmdDevelopmentSpawnBotRequest(side);
+                return;
+            }
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(5);
+            networkWriter.WritePackedUInt32((uint) iCmdDevelopmentSpawnBotRequest);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
             networkWriter.Write((int) side);
-            SendCommandInternal(networkWriter, 0, "CmdDevelopmentSpawnBotRequest");
+            base.SendCommandInternal(networkWriter, 0, "CmdDevelopmentSpawnBotRequest");
         }
-
         public void CallCmdDevelopmentSpawnBotOnServer(EPlayerSide side)
         {
             if (!NetworkClient.active)
             {
-                return;
-            }
-
-            if (isServer)
-            {
                 Console.WriteLine("Command function CmdDevelopmentSpawnBotOnServer called on server.");
-                CmdDevelopmentSpawnBotOnServer(side);
                 return;
             }
-
-            Console.WriteLine("Command function CmdDevelopmentSpawnBotOnServer called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 5);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_10);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
+            if (base.isServer)
+            {
+                this.vmCmdDevelopmentSpawnBotOnServer(side);
+                return;
+            }
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(5);
+            networkWriter.WritePackedUInt32((uint) iCmdDevelopmentSpawnBotOnServer);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
             networkWriter.Write((int) side);
-            SendCommandInternal(networkWriter, 0, "CmdDevelopmentSpawnBotOnServer");
+            base.SendCommandInternal(networkWriter, 0, "CmdDevelopmentSpawnBotOnServer");
         }
-
         public void CallCmdDevelopmentSpawnBotOnClient(EPlayerSide side, int instanceId)
         {
             if (!NetworkClient.active)
             {
-                return;
-            }
-
-            if (isServer)
-            {
                 Console.WriteLine("Command function CmdDevelopmentSpawnBotOnClient called on server.");
-                CmdDevelopmentSpawnBotOnClient(side, instanceId);
                 return;
             }
-
-            Console.WriteLine("Command function CmdDevelopmentSpawnBotOnClient called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 5);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_11);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
+            if (base.isServer)
+            {
+                this.vmCmdDevelopmentSpawnBotOnClient(side, instanceId);
+                return;
+            }
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(5);
+            networkWriter.WritePackedUInt32((uint) iCmdDevelopmentSpawnBotOnClient);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
             networkWriter.Write((int) side);
             networkWriter.WritePackedUInt32((uint) instanceId);
-            SendCommandInternal(networkWriter, 0, "CmdDevelopmentSpawnBotOnClient");
+            base.SendCommandInternal(networkWriter, 0, "CmdDevelopmentSpawnBotOnClient");
         }
-
         public void CallCmdDisconnectAcceptedOnClient()
         {
             if (!NetworkClient.active)
             {
-                return;
-            }
-
-            if (isServer)
-            {
                 Console.WriteLine("Command function CmdDisconnectAcceptedOnClient called on server.");
-                CmdDisconnectAcceptedOnClient();
                 return;
             }
-
-            Console.WriteLine("Command function CmdDisconnectAcceptedOnClient called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 5);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_12);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
-            SendCommandInternal(networkWriter, 0, "CmdDisconnectAcceptedOnClient");
+            if (base.isServer)
+            {
+                this.vmCmdDisconnectAcceptedOnClient();
+                return;
+            }
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(5);
+            networkWriter.WritePackedUInt32((uint) iCmdDisconnectAcceptedOnClient);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
+            base.SendCommandInternal(networkWriter, 0, "CmdDisconnectAcceptedOnClient");
         }
-
         public void CallCmdSpawnConfirm(int playerId)
         {
             if (!NetworkClient.active)
             {
-                return;
-            }
-
-            if (isServer)
-            {
                 Console.WriteLine("Command function CmdSpawnConfirm called on server.");
-                CmdSpawnConfirm(playerId);
                 return;
             }
-
-            Console.WriteLine("Command function CmdSpawnConfirm called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 5);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_13);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
+            if (base.isServer)
+            {
+                this.vmCmdSpawnConfirm(playerId);
+                return;
+            }
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(5);
+            networkWriter.WritePackedUInt32((uint) iCmdSpawnConfirm);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
             networkWriter.WritePackedUInt32((uint) playerId);
-            SendCommandInternal(networkWriter, 0, "CmdSpawnConfirm");
+            base.SendCommandInternal(networkWriter, 0, "CmdSpawnConfirm");
         }
-
-        protected static void smethod_16(NetworkBehaviour obj, NetworkReader reader)
-        {
-            if (!NetworkClient.active)
-            {
-                return;
-            }
-
-            Console.WriteLine("RPC RpcGameSpawned called on server.");
-            ((AbstractGameSession) obj).vmethod_14();
-        }
-
-        protected static void smethod_17(NetworkBehaviour obj, NetworkReader reader)
-        {
-            if (!NetworkClient.active)
-            {
-                return;
-            }
-
-            Console.WriteLine("RPC RpcGameMatching called on server.");
-            ((AbstractGameSession) obj).vmethod_15((ushort) reader.ReadPackedUInt32(),
-                (ushort) reader.ReadPackedUInt32(), (int) reader.ReadPackedUInt32());
-        }
-
-        protected static void smethod_18(NetworkBehaviour obj, NetworkReader reader)
-        {
-            if (!NetworkClient.active)
-            {
-                return;
-            }
-
-            Console.WriteLine("RPC RpcGameStarting called on server.");
-            ((AbstractGameSession) obj).vmethod_16((int) reader.ReadPackedUInt32());
-        }
-
-        protected static void smethod_19(NetworkBehaviour obj, NetworkReader reader)
-        {
-            if (!NetworkClient.active)
-            {
-                return;
-            }
-
-            Console.WriteLine("RPC RpcGameStartingWithTeleport called on server.");
-            ((AbstractGameSession) obj).vmethod_17(reader.ReadVector3(), (int) reader.ReadPackedUInt32(),
-                reader.ReadString(), reader.ReadString());
-        }
-
-        protected static void smethod_20(NetworkBehaviour obj, NetworkReader reader)
-        {
-            if (!NetworkClient.active)
-            {
-                return;
-            }
-
-            Console.WriteLine("RPC RpcGameStarted called on server.");
-            ((AbstractGameSession) obj).vmethod_18(reader.ReadSingle(), (int) reader.ReadPackedUInt32());
-        }
-
-        protected static void smethod_21(NetworkBehaviour obj, NetworkReader reader)
-        {
-            if (!NetworkClient.active)
-            {
-                return;
-            }
-
-            Console.WriteLine("RPC RpcGameRestarting called on server.");
-            ((AbstractGameSession) obj).vmethod_19();
-        }
-
-        protected static void smethod_22(NetworkBehaviour obj, NetworkReader reader)
-        {
-            if (!NetworkClient.active)
-            {
-                return;
-            }
-
-            Console.WriteLine("RPC RpcGameRestarted called on server.");
-            ((AbstractGameSession) obj).vmethod_20();
-        }
-
-        protected static void smethod_23(NetworkBehaviour obj, NetworkReader reader)
-        {
-            if (!NetworkClient.active)
-            {
-                return;
-            }
-
-            Console.WriteLine("RPC RpcGameStopping called on server.");
-            ((AbstractGameSession) obj).vmethod_21((ExitStatus) reader.ReadInt32(), (int) reader.ReadPackedUInt32());
-        }
-
-        protected static void smethod_24(NetworkBehaviour obj, NetworkReader reader)
-        {
-            if (!NetworkClient.active)
-            {
-                return;
-            }
-
-            Console.WriteLine("RPC RpcGameStopped called on server.");
-            ((AbstractGameSession) obj).vmethod_22();
-        }
-
-        protected static void smethod_25(NetworkBehaviour obj, NetworkReader reader)
-        {
-            if (!NetworkClient.active)
-            {
-                return;
-            }
-
-            Console.WriteLine("RPC RpcSyncGameTime called on server.");
-            ((AbstractGameSession) obj).vmethod_23((long) reader.ReadPackedUInt64());
-        }
-
-        protected static void smethod_26(NetworkBehaviour obj, NetworkReader reader)
-        {
-            if (!NetworkClient.active)
-            {
-                return;
-            }
-
-            Console.WriteLine("RPC RpcDevelopSendBotData called on server.");
-            ((AbstractGameSession) obj).vmethod_24(reader.ReadBytesAndSize());
-        }
-
-        protected static void smethod_27(NetworkBehaviour obj, NetworkReader reader)
-        {
-            if (!NetworkClient.active)
-            {
-                return;
-            }
-
-            Console.WriteLine("RPC RpcDevelopmentSpawnBotResponse called on server.");
-            ((AbstractGameSession) obj).vmethod_25((EPlayerSide) reader.ReadInt32(), (int) reader.ReadPackedUInt32());
-        }
-
-        protected static void smethod_28(NetworkBehaviour obj, NetworkReader reader)
-        {
-            if (!NetworkClient.active)
-            {
-                return;
-            }
-
-            Console.WriteLine("RPC RpcSoftStopNotification called on server.");
-            ((AbstractGameSession) obj).vmethod_26((int) reader.ReadPackedUInt32());
-        }
-
-        protected static void smethod_29(NetworkBehaviour obj, NetworkReader reader)
-        {
-            if (!NetworkClient.active)
-            {
-                return;
-            }
-
-            Console.WriteLine("RPC RpcStartDisconnectionProcedure called on server.");
-            ((AbstractGameSession) obj).vmethod_27((int) reader.ReadPackedUInt32(), reader.ReadString(),
-                reader.ReadString());
-        }
-
-        public void RpcGameSpawned()
+        public void CallRpcGameSpawned()
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("RPC Function RpcGameSpawned called on client.");
                 return;
             }
-
-            Console.WriteLine("RPC Function RpcGameSpawned called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 2);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_14);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
-
-            SendTargetRPCInternal(connection, networkWriter, chanelId, "RpcGameSpawned");
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(2);
+            networkWriter.WritePackedUInt32((uint) iRpcGameSpawned);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
+            this.SendRPCInternal(networkWriter, 0, "RpcGameSpawned");
         }
-
-        public void RpcGameMatching(ushort activitiesCounter, ushort minCounter, int seconds)
+        public void CallRpcGameMatching(ushort activitiesCounter, ushort minCounter, int seconds)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("RPC Function RpcGameMatching called on client.");
                 return;
             }
-
-            Console.WriteLine("RPC Function RpcGameMatching called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 2);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_15);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(2);
+            networkWriter.WritePackedUInt32((uint) iRpcGameMatching);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
             networkWriter.WritePackedUInt32((uint) activitiesCounter);
             networkWriter.WritePackedUInt32((uint) minCounter);
             networkWriter.WritePackedUInt32((uint) seconds);
-            SendTargetRPCInternal(connection, networkWriter, chanelId, "RpcGameMatching");
+            this.SendRPCInternal(networkWriter, 0, "RpcGameMatching");
         }
-
-        public void RpcGameStarting(int seconds)
+        public void CallRpcGameStarting(int seconds)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("RPC Function RpcGameStarting called on client.");
                 return;
             }
-
-            Console.WriteLine("RPC Function RpcGameStarting called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 2);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_16);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(2);
+            networkWriter.WritePackedUInt32((uint) iRpcGameStarting);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
             networkWriter.WritePackedUInt32((uint) seconds);
-            SendTargetRPCInternal(connection, networkWriter, chanelId, "RpcGameStarting");
+            this.SendRPCInternal(networkWriter, 0, "RpcGameStarting");
         }
-
-        public void RpcGameStartingWithTeleport(Vector3 position, int exfiltrationId, string spawnAreaName,
-            string entryPoint)
+        public void CallRpcGameStartingWithTeleport(Vector3 position, int exfiltrationId, string spawnAreaName, string entryPoint)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("RPC Function RpcGameStartingWithTeleport called on client.");
                 return;
             }
-
-            Console.WriteLine("RPC Function RpcGameStartingWithTeleport called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 2);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_17);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(2);
+            networkWriter.WritePackedUInt32((uint) iRpcGameStartingWithTeleport);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
             networkWriter.Write(position);
             networkWriter.WritePackedUInt32((uint) exfiltrationId);
             networkWriter.Write(spawnAreaName);
             networkWriter.Write(entryPoint);
-            SendTargetRPCInternal(connection, networkWriter, chanelId, "RpcGameStartingWithTeleport");
+            this.SendRPCInternal(networkWriter, 0, "RpcGameStartingWithTeleport");
         }
-
-        public void RpcGameStarted(float pastTime, int escapeSeconds)
+        public void CallRpcGameStarted(float pastTime, int escapeSeconds)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("RPC Function RpcGameStarted called on client.");
                 return;
             }
-
-            Console.WriteLine("RPC Function RpcGameStarted called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 2);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_18);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(2);
+            networkWriter.WritePackedUInt32((uint) iRpcGameStarted);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
             networkWriter.Write(pastTime);
             networkWriter.WritePackedUInt32((uint) escapeSeconds);
-            SendTargetRPCInternal(connection, networkWriter, chanelId, "RpcGameStarted");
+            this.SendRPCInternal(networkWriter, 0, "RpcGameStarted");
         }
-
-        public void RpcGameRestarting()
+        public void CallRpcGameRestarting()
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("RPC Function RpcGameRestarting called on client.");
                 return;
             }
-
-            Console.WriteLine("RPC Function RpcGameRestarting called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 2);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_19);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
-            SendTargetRPCInternal(connection, networkWriter, chanelId, "RpcGameRestarting");
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(2);
+            networkWriter.WritePackedUInt32((uint) iRpcGameRestarting);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
+            this.SendRPCInternal(networkWriter, 0, "RpcGameRestarting");
         }
-
-        public void RpcGameRestarted()
+        public void CallRpcGameRestarted()
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("RPC Function RpcGameRestarted called on client.");
                 return;
             }
-
-            Console.WriteLine("RPC Function RpcGameRestarted called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 2);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_20);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
-            SendTargetRPCInternal(connection, networkWriter, chanelId, "RpcGameRestarted");
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(2);
+            networkWriter.WritePackedUInt32((uint) iRpcGameRestarted);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
+            this.SendRPCInternal(networkWriter, 0, "RpcGameRestarted");
         }
-
-        public void RpcGameStopping(ExitStatus exitStatus, int playTime)
+        public void CallRpcGameStopping()
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("RPC Function RpcGameStopping called on client.");
                 return;
             }
-
-            Console.WriteLine("RPC Function RpcGameStopping called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 2);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_21);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(2);
+            networkWriter.WritePackedUInt32((uint) iRpcGameStoppin);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
+            this.SendRPCInternal(networkWriter, 0, "RpcGameStopping");
+        }
+        public void CallRpcGameStopped(ExitStatus exitStatus, int playTime)
+        {
+            if (!NetworkServer.active)
+            {
+                Console.WriteLine("RPC Function RpcGameStopped called on client.");
+                return;
+            }
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(2);
+            networkWriter.WritePackedUInt32((uint) iRpcGameStopped);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
             networkWriter.Write((int) exitStatus);
             networkWriter.WritePackedUInt32((uint) playTime);
-            SendTargetRPCInternal(connection, networkWriter, chanelId, "RpcGameStopping");
+            this.SendRPCInternal(networkWriter, 0, "RpcGameStopped");
         }
-
-        public void RpcGameStopped()
+        public void CallRpcSyncGameTime(long time)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("RPC Function RpcSyncGameTime called on client.");
                 return;
             }
-
-            Console.WriteLine("RPC Function RpcGameStopped called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 2);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_22);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
-            SendTargetRPCInternal(connection, networkWriter, chanelId, "RpcGameStopped");
-        }
-
-        public void RpcSyncGameTime(long time)
-        {
-            if (!NetworkServer.active)
-            {
-                return;
-            }
-
-            Console.WriteLine("RPC Function RpcSyncGameTime called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 2);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_23);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(2);
+            networkWriter.WritePackedUInt32((uint) iRpcSyncGameTime);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
             networkWriter.WritePackedUInt64((ulong) time);
-            SendTargetRPCInternal(connection, networkWriter, chanelId, "RpcSyncGameTime");
+            this.SendRPCInternal(networkWriter, 0, "RpcSyncGameTime");
         }
-
-        public void RpcDevelopSendBotData(byte[] data)
+        public void CallRpcDevelopSendBotData(byte[] data)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("RPC Function RpcDevelopSendBotData called on client.");
                 return;
             }
-
-            Console.WriteLine("RPC Function RpcDevelopSendBotData called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 2);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_24);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(2);
+            networkWriter.WritePackedUInt32((uint) iRpcDevelopSendBotData);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
             networkWriter.WriteBytesFull(data);
-            SendTargetRPCInternal(connection, networkWriter, chanelId, "RpcDevelopSendBotData");
+            this.SendRPCInternal(networkWriter, 0, "RpcDevelopSendBotData");
         }
-
-        public void RpcDevelopmentSpawnBotResponse(EPlayerSide side, int instanceId)
+        public void CallRpcDevelopmentSpawnBotResponse(EPlayerSide side, int instanceId)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("RPC Function RpcDevelopmentSpawnBotResponse called on client.");
                 return;
             }
-
-            Console.WriteLine("RPC Function RpcDevelopmentSpawnBotResponse called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 2);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_25);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(2);
+            networkWriter.WritePackedUInt32((uint) iRpcDevelopmentSpawnBotResponse);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
             networkWriter.Write((int) side);
             networkWriter.WritePackedUInt32((uint) instanceId);
-            SendTargetRPCInternal(connection, networkWriter, chanelId, "RpcDevelopmentSpawnBotResponse");
+            this.SendRPCInternal(networkWriter, 0, "RpcDevelopmentSpawnBotResponse");
         }
-
-        // Token: 0x06003E9B RID: 16027 RVA: 0x0021EF98 File Offset: 0x0021D198
-        public void RpcSoftStopNotification(int escapeSeconds)
+        public void CallRpcSoftStopNotification(int escapeSeconds)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("RPC Function RpcSoftStopNotification called on client.");
                 return;
             }
-
-            Console.WriteLine("RPC Function RpcSoftStopNotification called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 2);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_26);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(2);
+            networkWriter.WritePackedUInt32((uint) iRpcSoftStopNotification);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
             networkWriter.WritePackedUInt32((uint) escapeSeconds);
-            SendTargetRPCInternal(connection, networkWriter, chanelId, "RpcSoftStopNotification");
+            this.SendRPCInternal(networkWriter, 0, "RpcSoftStopNotification");
         }
-
-        // Token: 0x06003E9C RID: 16028 RVA: 0x0021EFFC File Offset: 0x0021D1FC
-        public void RpcStartDisconnectionProcedure(int disconnectionCode, string additionalInfo,
-            string technicalMessage)
+        public void CallRpcStartDisconnectionProcedure(int disconnectionCode, string additionalInfo, string technicalMessage)
         {
             if (!NetworkServer.active)
             {
+                Console.WriteLine("RPC Function RpcStartDisconnectionProcedure called on client.");
                 return;
             }
-
-            Console.WriteLine("RPC Function RpcStartDisconnectionProcedure called on client.");
-            var networkWriter = new NetworkWriter();
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 0);
-            networkWriter.Write((byte) 2);
-            networkWriter.Write((byte) 0);
-            networkWriter.WritePackedUInt32((uint) int_27);
-            networkWriter.Write(GetComponent<NetworkIdentity>().netId);
+            NetworkWriter networkWriter = new NetworkWriter();
+            networkWriter.Write(0);
+            networkWriter.Write(2);
+            networkWriter.WritePackedUInt32((uint) iRpcStartDisconnectionProcedure);
+            networkWriter.Write(base.GetComponent<NetworkIdentity>().netId);
             networkWriter.WritePackedUInt32((uint) disconnectionCode);
             networkWriter.Write(additionalInfo);
             networkWriter.Write(technicalMessage);
-            SendTargetRPCInternal(connection, networkWriter, chanelId, "RpcStartDisconnectionProcedure");
+            this.SendRPCInternal(networkWriter, 0, "RpcStartDisconnectionProcedure");
         }
+        #endregion
 
-        protected static void smethod_8(NetworkBehaviour obj, NetworkReader reader)
-        {
-            if (!NetworkServer.active)
-            {
-                Console.WriteLine("Command CmdGameStarted - server not active");
-                return;
-            }
-
-            Console.WriteLine("Command CmdGameStarted called from client.");
-        }
-
-        // Token: 0x06003E9D RID: 16029 RVA: 0x0021F070 File Offset: 0x0021D270
+        #region Inicialization
         static AbstractGameSession()
         {
-            RegisterCommandDelegate(typeof(AbstractGameSession), int_0, CmdSpawn);
-            int_1 = 740792038;
-            RegisterCommandDelegate(typeof(AbstractGameSession), int_1, CmdRespawn);
-            int_2 = -1220356686; //FB B2 D5 42 B7‬ ‭1081037111991‬
-            RegisterCommandDelegate(typeof(AbstractGameSession), int_2, CmdStartGame);
-            int_3 = 1792897173;
-            RegisterCommandDelegate(typeof(AbstractGameSession), int_3, CmdStartGameAfterTeleport);
-            int_4 = 273195288;
-            RegisterCommandDelegate(typeof(AbstractGameSession), int_4, CmdRestartGameInitiate);
-            int_5 = -1501005473; // FB 5F 79 88 A6‬ ‭1079638591654‬
-            RegisterCommandDelegate(typeof(AbstractGameSession), int_5, CmdRestartGame);
-            int_6 = -750099178; // FB 16 65 4A D3 ‬‭1078412528339‬
-            RegisterCommandDelegate(typeof(AbstractGameSession), int_6, CmdStopGame);
-            int_7 = 463608476;
-            RegisterCommandDelegate(typeof(AbstractGameSession), int_7, CmdSyncGameTime);
-            int_8 = -1035840717; // FB 33 53 42 C2 ‬‭1078897885890‬
-            RegisterCommandDelegate(typeof(AbstractGameSession), int_8, CmdDevelopRequestBot);
-            int_9 = -1581543574; // FB 6A 8F BB A1 ‬‭1079824595873‬
-            RegisterCommandDelegate(typeof(AbstractGameSession), int_9, CmdDevelopmentSpawnBotRequest);
-            int_10 = 102630535;
-            RegisterCommandDelegate(typeof(AbstractGameSession), int_10, CmdDevelopmentSpawnBotOnServer);
-            int_11 = -349255409; // FB 0F C9 2E EB‬ ‭1078301634283‬
-            RegisterCommandDelegate(typeof(AbstractGameSession), int_11, CmdDevelopmentSpawnBotOnClient);
-            int_12 = -1733636721; // FB 8F CD AA 98 ‬‭1080449411736‬
-            RegisterCommandDelegate(typeof(AbstractGameSession), int_12, CmdDisconnectAcceptedOnClient);
-            int_13 = -1317447737; // FB C7 57 79 B1‬ ‭1081381190065‬
-            RegisterCommandDelegate(typeof(AbstractGameSession), int_13, CmdSpawnConfirm);
-            int_14 = -1952818640; // FB 30 5A 9A 8B ‬‭1078848035467‬
-            RegisterRpcDelegate(typeof(AbstractGameSession), int_14, smethod_16);
-            int_15 = 2117859815;
-            RegisterRpcDelegate(typeof(AbstractGameSession), int_15, smethod_17);
-            int_16 = -1157222870; // FB 2A 2E 06 BB ‭1078744450747‬
-            RegisterRpcDelegate(typeof(AbstractGameSession), int_16, smethod_18);
-            int_17 = 1572370779;
-            RegisterRpcDelegate(typeof(AbstractGameSession), int_17, smethod_19);
-            int_18 = -1838445225; // FB 57 8D 6B 92 ‬‭1079505677202‬
-            RegisterRpcDelegate(typeof(AbstractGameSession), int_18, smethod_20);
-            int_19 = 94275293;
-            RegisterRpcDelegate(typeof(AbstractGameSession), int_19, smethod_21);
-            int_20 = -1243884988; // FB 44 D2 DB B5 ‬‭1079191460789‬
-            RegisterRpcDelegate(typeof(AbstractGameSession), int_20, smethod_22);
-            int_21 = -758380962; // FB 5E 06 CC D2‬ ‭1079614295250‬
-            RegisterRpcDelegate(typeof(AbstractGameSession), int_21, smethod_23);
-            int_22 = -1825579357; // FB A3 DE 2F 93 ‬‭1080786038675‬
-            RegisterRpcDelegate(typeof(AbstractGameSession), int_22, smethod_24);
-            int_23 = 547040626;
-            RegisterRpcDelegate(typeof(AbstractGameSession), int_23, smethod_25);
-            int_24 = 1152897188;
-            RegisterRpcDelegate(typeof(AbstractGameSession), int_24, smethod_26);
-            int_25 = -1269941968; // FB 30 39 4E B4‬ ‭1078845853364‬
-            RegisterRpcDelegate(typeof(AbstractGameSession), int_25, smethod_27);
-            int_26 = -435294673; // FB 2F EE 0D E6‬ ‭1078840921574‬
-            RegisterRpcDelegate(typeof(AbstractGameSession), int_26, smethod_28);
-            int_27 = 1124901489;
-            RegisterRpcDelegate(typeof(AbstractGameSession), int_27, smethod_29);
-            int_28 = -40021267;
-            RegisterCommandDelegate(typeof(AbstractGameSession), int_28, smethod_8);
+            RegisterCommandDelegate(typeof(AbstractGameSession), iCmdSpawn, smCmdSpawn);
+            iCmdRespawn = 740792038;
+            RegisterCommandDelegate(typeof(AbstractGameSession), iCmdRespawn, smCmdRespawn);
+            iCmdStartGame = -1220356686;
+            RegisterCommandDelegate(typeof(AbstractGameSession), iCmdStartGame, smCmdStartGame);
+            iCmdStartGameAfterTeleport = 1792897173;
+            RegisterCommandDelegate(typeof(AbstractGameSession), iCmdStartGameAfterTeleport, smCmdStartGameAfterTeleport);
+            iCmdRestartGameInitiate = 273195288;
+            RegisterCommandDelegate(typeof(AbstractGameSession), iCmdRestartGameInitiate, smCmdRestartGameInitiate);
+            iCmdRestartGame = -1501005473;
+            RegisterCommandDelegate(typeof(AbstractGameSession), iCmdRestartGame, smCmdRestartGame);
+            iCmdGameStarted = -40021267;
+            RegisterCommandDelegate(typeof(AbstractGameSession), iCmdGameStarted, smCmdGameStarted);
+            iCmdStopGame = -750099178;
+            RegisterCommandDelegate(typeof(AbstractGameSession), iCmdStopGame, smCmdStopGame);
+            iCmdSyncGameTime = 463608476;
+            RegisterCommandDelegate(typeof(AbstractGameSession), iCmdSyncGameTime, smCmdSyncGameTime);
+            iCmdDevelopRequestBot = -1035840717;
+            RegisterCommandDelegate(typeof(AbstractGameSession), iCmdDevelopRequestBot, smCmdDevelopRequestBot);
+            iCmdDevelopmentSpawnBotRequest = -1581543574;
+            RegisterCommandDelegate(typeof(AbstractGameSession), iCmdDevelopmentSpawnBotRequest, smCmdDevelopmentSpawnBotRequest);
+            iCmdDevelopmentSpawnBotOnServer = 102630535;
+            RegisterCommandDelegate(typeof(AbstractGameSession), iCmdDevelopmentSpawnBotOnServer, smCmdDevelopmentSpawnBotOnServer);
+            iCmdDevelopmentSpawnBotOnClient = -349255409;
+            RegisterCommandDelegate(typeof(AbstractGameSession), iCmdDevelopmentSpawnBotOnClient, smCmdDevelopmentSpawnBotOnClient);
+            iCmdDisconnectAcceptedOnClient = -1733636721;
+            RegisterCommandDelegate(typeof(AbstractGameSession), iCmdDisconnectAcceptedOnClient, smCmdDisconnectAcceptedOnClient);
+            iCmdSpawnConfirm = -1317447737;
+            RegisterCommandDelegate(typeof(AbstractGameSession), iCmdSpawnConfirm, smCmdSpawnConfirm);
+            iRpcGameSpawned = -1952818640;
+            RegisterRpcDelegate(typeof(AbstractGameSession), iRpcGameSpawned, smRpcGameSpawned);
+            iRpcGameMatching = 2117859815;
+            RegisterRpcDelegate(typeof(AbstractGameSession), iRpcGameMatching, smRpcGameMatching);
+            iRpcGameStarting = -1157222870;
+            RegisterRpcDelegate(typeof(AbstractGameSession), iRpcGameStarting, smRpcGameStarting);
+            iRpcGameStartingWithTeleport = 1572370779;
+            RegisterRpcDelegate(typeof(AbstractGameSession), iRpcGameStartingWithTeleport, smRpcGameStartingWithTeleport);
+            iRpcGameStarted = -1838445225;
+            RegisterRpcDelegate(typeof(AbstractGameSession), iRpcGameStarted, smRpcGameStarted);
+            iRpcGameRestarting = 94275293;
+            RegisterRpcDelegate(typeof(AbstractGameSession), iRpcGameRestarting, smRpcGameRestarting);
+            iRpcGameRestarted = -1243884988;
+            RegisterRpcDelegate(typeof(AbstractGameSession), iRpcGameRestarted, smRpcGameRestarted);
+            iRpcGameStoppin = -758380962;
+            RegisterRpcDelegate(typeof(AbstractGameSession), iRpcGameStoppin, smRpcGameStopping);
+            iRpcGameStopped = -1825579357;
+            RegisterRpcDelegate(typeof(AbstractGameSession), iRpcGameStopped, smRpcGameStopped);
+            iRpcSyncGameTime = 547040626;
+            RegisterRpcDelegate(typeof(AbstractGameSession), iRpcSyncGameTime, smRpcSyncGameTime);
+            iRpcDevelopSendBotData = 1152897188;
+            RegisterRpcDelegate(typeof(AbstractGameSession), iRpcDevelopSendBotData, smRpcDevelopSendBotData);
+            iRpcDevelopmentSpawnBotResponse = -1269941968;
+            RegisterRpcDelegate(typeof(AbstractGameSession), iRpcDevelopmentSpawnBotResponse, smRpcDevelopmentSpawnBotResponse);
+            iRpcSoftStopNotification = -435294673;
+            RegisterRpcDelegate(typeof(AbstractGameSession), iRpcSoftStopNotification, smRpcSoftStopNotification);
+            iRpcStartDisconnectionProcedure = 1124901489;
+            RegisterRpcDelegate(typeof(AbstractGameSession), iRpcStartDisconnectionProcedure, smRpcStartDisconnectionProcedure);
             NetworkCRC.RegisterBehaviour("AbstractGameSession", 0);
         }
-
+        #endregion
+        #region Serialize Deserialize
         public override bool OnSerialize(NetworkWriter writer, bool forceAll)
         {
-            var flag = base.OnSerialize(writer, forceAll);
+            bool flag = base.OnSerialize(writer, forceAll);
             return false || flag;
         }
 
-        private static int int_0 = -1723132743;
-        private static int int_1;
-        private static int int_2;
-        private static int int_3;
-        private static int int_4;
-        private static int int_5;
-        private static int int_6;
-        private static int int_7;
-        private static int int_8;
-        private static int int_9;
-        private static int int_10;
-        private static int int_11;
-        private static int int_12;
-        private static int int_13;
-        private static int int_14;
-        private static int int_15;
-        private static int int_16;
-        private static int int_17;
-        private static int int_18;
-        private static int int_19;
-        private static int int_20;
-        private static int int_21;
-        private static int int_22;
-        private static int int_23;
-        private static int int_24;
-        private static int int_25;
-        private static int int_26;
-        private static int int_27;
-        private static int int_28;
+        public override void OnDeserialize(NetworkReader reader, bool initialState)
+        {
+            base.OnDeserialize(reader, initialState);
+        }
+        #endregion
+        #region Variables
+        private static int iCmdSpawn = -1723132743;
+
+        private static int iCmdRespawn;
+
+        private static int iCmdStartGame;
+
+        private static int iCmdStartGameAfterTeleport;
+
+        private static int iCmdRestartGameInitiate;
+
+        private static int iCmdRestartGame;
+
+        private static int iCmdGameStarted;
+
+        private static int iCmdStopGame;
+
+        private static int iCmdSyncGameTime;
+
+        private static int iCmdDevelopRequestBot;
+
+        private static int iCmdDevelopmentSpawnBotRequest;
+
+        private static int iCmdDevelopmentSpawnBotOnServer;
+
+        private static int iCmdDevelopmentSpawnBotOnClient;
+
+        private static int iCmdDisconnectAcceptedOnClient;
+
+        private static int iCmdSpawnConfirm;
+
+        private static int iRpcGameSpawned;
+
+        private static int iRpcGameMatching;
+
+        private static int iRpcGameStarting;
+
+        private static int iRpcGameStartingWithTeleport;
+
+        private static int iRpcGameStarted;
+
+        private static int iRpcGameRestarting;
+
+        private static int iRpcGameRestarted;
+
+        private static int iRpcGameStoppin;
+
+        private static int iRpcGameStopped;
+
+        private static int iRpcSyncGameTime;
+
+        private static int iRpcDevelopSendBotData;
+
+        private static int iRpcDevelopmentSpawnBotResponse;
+
+        private static int iRpcSoftStopNotification;
+
+        private static int iRpcStartDisconnectionProcedure;
 
         public bool gameSyncTimeIsSent;
         public bool worldMessageIsSent;
@@ -1245,7 +1166,243 @@ namespace ServerLib.Network
         public bool playerIsSpawned;
 
         public bool sessionIsSpawned;
+		#endregion
+        #region Classes
+        internal sealed class Class577 : MessageBase
+        {
+            public override void Deserialize(NetworkReader reader)
+            {
+                this.string_0 = reader.ReadString();
+                this.bool_0 = reader.ReadBoolean();
+                base.Deserialize(reader);
+            }
 
-        // public ChannelCombined ChannelCombined;
+            public override void Serialize(NetworkWriter writer)
+            {
+                writer.Write(this.string_0);
+                writer.Write(this.bool_0);
+                base.Serialize(writer);
+            }
+
+            internal string string_0;
+
+            internal bool bool_0;
+        }
+
+        internal class Class578 : MessageBase
+        {
+            public override void Deserialize(NetworkReader reader)
+            {
+                this.TracerId = reader.ReadByte();
+                byte b = reader.ReadByte();
+                if (b > 0)
+                {
+                    this.Context = new string[(int) b];
+                    for (int i = 0; i < (int) b; i++)
+                    {
+                        this.Context[i] = reader.ReadString();
+                    }
+                }
+            }
+
+            public override void Serialize(NetworkWriter writer)
+            {
+                writer.Write(this.TracerId);
+                string[] context = this.Context;
+                int num = (context != null) ? context.Length : 0;
+                writer.Write(num);
+                for (int i = 0; i < num; i++)
+                {
+                    writer.Write(this.Context[i] ?? "");
+                }
+            }
+
+            public byte TracerId;
+
+            public string[] Context;
+        }
+
+        internal sealed class Class579 : AbstractGameSession.Class578
+        {
+            public override void Deserialize(NetworkReader reader)
+            {
+                this.Message = reader.ReadString();
+                base.Deserialize(reader);
+            }
+
+            public override void Serialize(NetworkWriter writer)
+            {
+                writer.Write(this.Message);
+                base.Serialize(writer);
+            }
+
+            public string Message;
+        }
+
+        internal sealed class Class580 : AbstractGameSession.Class578
+        {
+            public override void Deserialize(NetworkReader reader)
+            {
+                this.Code = (ETraceCode) reader.ReadByte();
+                base.Deserialize(reader);
+            }
+
+            public override void Serialize(NetworkWriter writer)
+            {
+                writer.Write((byte) this.Code);
+                base.Serialize(writer);
+            }
+
+            public ETraceCode Code;
+        }
+
+        internal sealed class Class581 : MessageBase
+        {
+            public override void Deserialize(NetworkReader reader)
+            {
+                this.byte_0 = reader.ReadByte();
+                this.gclass878_0 = GClass878.Deserialize(reader);
+                this.byte_1 = reader.ReadBytesAndSize();
+                this.byte_2 = reader.ReadBytesAndSize();
+                this.bool_0 = reader.ReadBoolean();
+                this.ememberCategory_0 = (EMemberCategory) reader.ReadInt32();
+                this.float_0 = reader.ReadSingle();
+                this.byte_3 = reader.ReadBytesAndSize();
+                this.byte_4 = reader.ReadBytesAndSize();
+                Vector3 min = reader.ReadVector3();
+                Vector3 max = reader.ReadVector3();
+                this.bounds_0 = new Bounds
+                {
+                    min = min,
+                    max = max
+                };
+                this.ushort_0 = reader.ReadUInt16();
+                this.enetLogsLevel_0 = (ENetLogsLevel) reader.ReadByte();
+                base.Deserialize(reader);
+            }
+
+            public override void Serialize(NetworkWriter writer)
+            {
+                writer.Write(this.byte_0);
+                this.gclass878_0.Serialize(writer, true);
+                writer.WriteBytesFull(this.byte_1);
+                writer.WriteBytesFull(this.byte_2);
+                writer.Write(this.bool_0);
+                writer.Write((int) this.ememberCategory_0);
+                writer.Write(this.float_0);
+                writer.WriteBytesFull(this.byte_3);
+                writer.WriteBytesFull(this.byte_4);
+                writer.Write(this.bounds_0.min);
+                writer.Write(this.bounds_0.max);
+                writer.Write(this.ushort_0);
+                writer.Write((byte) this.enetLogsLevel_0);
+                base.Serialize(writer);
+            }
+
+            internal byte byte_0;
+
+            internal GClass878 gclass878_0;
+
+            internal byte[] byte_1;
+
+            internal byte[] byte_2;
+
+            internal bool bool_0;
+
+            internal EMemberCategory ememberCategory_0;
+
+            internal float float_0;
+
+            internal byte[] byte_3;
+
+            internal byte[] byte_4;
+
+            internal Bounds bounds_0;
+
+            internal ushort ushort_0;
+
+            internal ENetLogsLevel enetLogsLevel_0;
+        }
+
+        internal sealed class Class582 : MessageBase
+        {
+            public override void Deserialize(NetworkReader reader)
+            {
+                this.float_0 = reader.ReadSingle();
+                base.Deserialize(reader);
+            }
+
+            public override void Serialize(NetworkWriter writer)
+            {
+                writer.Write(this.float_0);
+                base.Serialize(writer);
+            }
+
+            internal float float_0;
+        }
+
+        internal sealed class Class583 : MessageBase
+        {
+            public override void Serialize(NetworkWriter writer)
+            {
+                writer.WriteBytesFull(this.byte_0);
+                base.Serialize(writer);
+            }
+
+            public override void Deserialize(NetworkReader reader)
+            {
+                this.byte_0 = reader.ReadBytesAndSize();
+                base.Deserialize(reader);
+            }
+
+            internal byte[] byte_0;
+        }
+
+        internal sealed class Class584 : MessageBase
+        {
+            public override void Deserialize(NetworkReader reader)
+            {
+                this.int_0 = reader.ReadInt32();
+                this.byte_0 = reader.ReadBytesAndSize();
+                base.Deserialize(reader);
+            }
+
+            public override void Serialize(NetworkWriter writer)
+            {
+                writer.Write(this.int_0);
+                writer.WriteBytesAndSize(this.byte_0, this.byte_0.Length);
+                base.Serialize(writer);
+            }
+
+            internal int int_0;
+
+            internal byte[] byte_0;
+        }
+
+        internal sealed class Class585 : MessageBase
+        {
+            public override void Deserialize(NetworkReader reader)
+            {
+                this.string_0 = reader.ReadString();
+                this.int_0 = reader.ReadInt32();
+                this.float_0 = reader.ReadSingle();
+                base.Deserialize(reader);
+            }
+
+            public override void Serialize(NetworkWriter writer)
+            {
+                writer.Write(this.string_0);
+                writer.Write(this.int_0);
+                writer.Write(this.float_0);
+                base.Serialize(writer);
+            }
+
+            internal string string_0;
+
+            internal int int_0;
+
+            internal float float_0;
+        }
+        #endregion
     }
 }

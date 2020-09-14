@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Comfort.Common;
 using EFT;
 
@@ -10,11 +11,13 @@ namespace ServerLib.Network.Bots
 
         internal BotInventoryController(EFT.Player player, Profile profile) : base(player, profile, 0, true)
         {
+            Console.WriteLine($"Called: BotInventoryController - {player.Profile.Info.Nickname}/{profile.Info.Nickname}");
         }
 
         internal override void Execute(GClass1591 operation, Callback callback)
         {
-            /* this is crashing game client not server
+            Console.WriteLine($"Called: BotInventoryController.Execute - {operation.string_0} / {callback.Target} / {callback.Method.Name}");
+            /* this is crashing game client not server * /
             using MemoryStream memoryStream = new MemoryStream(new byte[1350]);
             using BinaryWriter binaryWriter = new BinaryWriter(memoryStream);
 

@@ -74,7 +74,7 @@ namespace ServerLib.Network.Bots
             }
 
             player._handsController = EmptyHandsController.smethod_5<ClientEmptyHandsController>(player);
-            player._handsController.Spawn(1f, () => { Console.WriteLine("BotPLayer has been spawned"); });
+            player._handsController.Spawn(1f, () => { Console.WriteLine("BotPlayer has been spawned"); });
 
             player.AIData = new GClass204(null, player);
             player.PlacingBeacon = false;

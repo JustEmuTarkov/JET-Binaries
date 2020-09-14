@@ -130,7 +130,7 @@ namespace ServerLib.Network.Player
 
         private void ProceedCallBackFromQueue(string error, int errorCode)
         {
-            Console.WriteLine($"ERROR!!!!! ServerPlayer.ProceedCallBackFromQueue(): {_confirmQueue.Count}");
+            Console.WriteLine($"ServerPlayer.ProceedCallBackFromQueue(): {_confirmQueue.Count}");
             if (_confirmQueue.Count <= 0)
             {
                 Console.WriteLine(
@@ -195,6 +195,7 @@ namespace ServerLib.Network.Player
             clientPacket.FirearmPacket.FiredShotInfos = null;
 
             var handsPacket = clientPacket.HandsChangePacket;
+            
             var itemId = handsPacket.ItemId;
             switch (handsPacket.OperationType)
             {
@@ -317,7 +318,7 @@ namespace ServerLib.Network.Player
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
+            Console.WriteLine($"HandsTypePacket: {clientPacket.HandsTypePacket}");
             clientPacket.HandsChangePacket.OperationType = GStruct103.EOperationType.None;
 
             var frame = new GStruct127(
@@ -550,9 +551,9 @@ namespace ServerLib.Network.Player
         {
             var setInHandsOperation = ((item != null) ? base.method_62(item) : null);
             setInHandsOperation?.Confirm();
-            Console.WriteLine($"HandsController: {this.HandsController}");
             if (this.HandsController != null)
             {
+                Console.WriteLine($"HandsController: {this.HandsController.name}");
                 AbstractHandsController handsController = this.HandsController;
                 this.HandsController.FastForwardCurrentState();
                 if (this.HandsController != handsController && this.HandsController != null)
@@ -563,9 +564,11 @@ namespace ServerLib.Network.Player
                 this.HandsController.Destroy();
                 this.HandsController = null;
             }
-
-            Console.WriteLine($"HandsController: {this.HandsController}");
-           base.SpawnController(controllerFactory(), () =>
+            else
+            {
+                Console.WriteLine($"HandsController: null");
+            }
+            base.SpawnController(controllerFactory(), () =>
             {
                 setInHandsOperation?.Dispose();
                 ProceedCallBackFromQueue(String.Empty, 0);

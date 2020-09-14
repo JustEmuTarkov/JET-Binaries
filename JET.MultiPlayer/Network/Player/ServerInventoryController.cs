@@ -24,6 +24,7 @@ namespace ServerLib.Network.Player
 
         internal override void Execute(GClass1591 operation, Callback callback)
         {
+            Console.WriteLine($"Called Operation: {operation.string_0}");
             if (operation == null)
             {
                 callback?.Invoke("operation is null");

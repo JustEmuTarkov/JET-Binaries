@@ -23,6 +23,7 @@ namespace ServerLib.Network.Bots
         public void Start()
         {
             Singleton<BotsMonitor>.Create(this);
+            _botSpawner.Stop(); return;
             _botSpawner = LocalGameUtils.GetBotSpawner();
             _botSpawner.OnBotCreated += OnBotCreated;
             _botSpawner.OnBotRemoved += OnBotRemoved;
