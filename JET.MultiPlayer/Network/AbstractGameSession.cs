@@ -7,9 +7,10 @@ using UnityEngine.Networking;
 
 namespace ServerLib.Network
 {
-    // Token: 0x02000AC3 RID: 2755
     public class AbstractGameSession : AbstractSession
     {
+        // TODO: need to be rewrited again
+
         public static T Create<T>(Transform parent, string name, string profileId) where T : AbstractGameSession
         {
             var t = Instantiate<T>(parent, name, profileId);
@@ -17,57 +18,49 @@ namespace ServerLib.Network
             return t;
         }
 
-        // Token: 0x06003E45 RID: 15941 RVA: 0x000B7B8C File Offset: 0x000B5D8C
         public override float GetNetworkSendInterval()
         {
             return 0f;
         }
 
-        // Token: 0x06003E46 RID: 15942 RVA: 0x000C6FDC File Offset: 0x000C51DC
         public override int GetNetworkChannel()
         {
+            Console.WriteLine("trying to get GetNetworkChannel");
             return 0;
         }
 
-        // Token: 0x06003E47 RID: 15943 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void CmdSpawn()
         {
-            Console.WriteLine("Call command CmdSpawn from client.");
+            Console.WriteLine("Call CmdSpawn from client.");
 
             sessionIsSpawned = true;
         }
 
-        // Token: 0x06003E48 RID: 15944 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void CmdReSpawn()
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call CmdReSpawn from client.");
         }
 
-        // Token: 0x06003E49 RID: 15945 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void CmdStartGame()
         {
-            Console.WriteLine("Call command CmdStartGame from client.");
+            Console.WriteLine("Call CmdStartGame CmdStartGame from client.");
         }
 
-        // Token: 0x06003E4A RID: 15946 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void CmdStartGameAfterTeleport()
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call CmdStartGameAfterTeleport from client.");
         }
 
-        // Token: 0x06003E4B RID: 15947 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void CmdRestartGameInitiate()
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call CmdRestartGameInitiate from client.");
         }
 
-        // Token: 0x06003E4C RID: 15948 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void CmdRestartGame()
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call CmdRestartGame from client.");
         }
 
-        // Token: 0x06003E4D RID: 15949 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void CmdStopGame()
         {
             Console.WriteLine("Call CmdStopGame command from client.");
@@ -75,141 +68,120 @@ namespace ServerLib.Network
             RpcGameStopped();
         }
 
-        // Token: 0x06003E4E RID: 15950 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void CmdSyncGameTime()
         {
-            Console.WriteLine("Call command CmdSyncGameTime from client.");
+            Console.WriteLine("Call CmdSyncGameTime CmdSyncGameTime from client.");
             RpcSyncGameTime(DateTime.UtcNow.ToBinary());
             gameSyncTimeIsSent = true;
         }
 
-        // Token: 0x06003E4F RID: 15951 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void CmdDevelopRequestBot()
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call CmdDevelopRequestBot from client.");
         }
 
-        // Token: 0x06003E50 RID: 15952 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void CmdDevelopmentSpawnBotRequest(EPlayerSide side)
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call CmdDevelopmentSpawnBotRequest from client.");
         }
 
-        // Token: 0x06003E51 RID: 15953 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void CmdDevelopmentSpawnBotOnServer(EPlayerSide side)
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call CmdDevelopmentSpawnBotOnServer from client.");
         }
 
-        // Token: 0x06003E52 RID: 15954 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void CmdDevelopmentSpawnBotOnClient(EPlayerSide side, int instanceId)
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call CmdDevelopmentSpawnBotOnClient from client.");
         }
 
-        // Token: 0x06003E53 RID: 15955 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void CmdDisconnectAcceptedOnClient()
         {
-            Console.WriteLine("Call command from client.");
+            Console.WriteLine("Call CmdDisconnectAcceptedOnClient from client.");
         }
 
-        // Token: 0x06003E54 RID: 15956 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void CmdSpawnConfirm(int playerId)
         {
+            Console.WriteLine("Call CmdSpawnConfirm from client.");
         }
 
-        // Token: 0x06003E55 RID: 15957 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_14()
         {
-            Console.WriteLine("Call command RpcGameSpawned from client.");
+            Console.WriteLine("Call RpcGameSpawned from client.");
         }
 
-        // Token: 0x06003E56 RID: 15958 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_15(ushort activitiesCounter, ushort minCounter, int seconds)
         {
-            Console.WriteLine("Call RpcGameMatching command from client.");
+            Console.WriteLine("Call RpcGameMatching from client.");
         }
 
-        // Token: 0x06003E57 RID: 15959 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_16(int seconds)
         {
-            Console.WriteLine("Call command from client. vm-16");
+            Console.WriteLine("Call RpcGameStarting from client. vm-16");
         }
 
-        // Token: 0x06003E58 RID: 15960 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_17(Vector3 position, int exfiltrationId, string spawnAreaName, string entryPoint)
         {
-            Console.WriteLine("Call command from client. vm-17");
+            Console.WriteLine("Call RpcGameStartingWithTeleport from client. vm-17");
         }
 
-        // Token: 0x06003E59 RID: 15961 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_18(float pastTime, int escapeSeconds)
         {
-            Console.WriteLine("Call command RpcGameStarted from client.");
+            Console.WriteLine("Call RpcGameStarted from client.");
         }
 
-        // Token: 0x06003E5A RID: 15962 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_19()
         {
-            Console.WriteLine("Call command from client. vm-19");
+            Console.WriteLine("Call RpcGameRestarting from client. vm-19");
         }
 
-        // Token: 0x06003E5B RID: 15963 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_20()
         {
-            Console.WriteLine("Call command from client. vm-20");
+            Console.WriteLine("Call RpcGameRestarted from client. vm-20");
         }
 
-        // Token: 0x06003E5C RID: 15964 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_21(ExitStatus exitStatus, int playTime)
         {
-            Console.WriteLine("Call command from client. vm-21");
+            Console.WriteLine("Call RpcGameStopped from client. vm-21");
         }
 
-        // Token: 0x06003E5D RID: 15965 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_22()
         {
-            Console.WriteLine("Call command from client. vm-22");
+            Console.WriteLine("Call RpcGameStopping from client. vm-22");
         }
 
-        // Token: 0x06003E5E RID: 15966 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_23(long time)
         {
-            Console.WriteLine("Call command from client. vm-23");
+            Console.WriteLine("Call RpcSyncGameTime from client. vm-23");
         }
 
-        // Token: 0x06003E5F RID: 15967 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_24(byte[] data)
         {
-            Console.WriteLine("Call command from client. vm-24");
+            Console.WriteLine("Call RpcDevelopSendBotData from client. vm-24");
         }
 
-        // Token: 0x06003E60 RID: 15968 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_25(EPlayerSide side, int instanceId)
         {
-            Console.WriteLine("Call command from client. vm-25");
+            Console.WriteLine("Call RpcDevelopmentSpawnBotResponse from client. vm-25");
         }
 
-        // Token: 0x06003E61 RID: 15969 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_26(int escapeSeconds)
         {
-            Console.WriteLine("Call command from client. vm-26");
+            Console.WriteLine("Call RpcSoftStopNotification from client. vm-26");
         }
 
-        // Token: 0x06003E62 RID: 15970 RVA: 0x000A20B4 File Offset: 0x000A02B4
         protected virtual void vmethod_27(int disconnectionCode, string additionalInfo, string technicalMessage)
         {
-            Console.WriteLine("Call command from client. vm-27 - DisconnectProcedure");
+            Console.WriteLine("Call RpcStartDisconnectionProcedure from client.");
             RpcStartDisconnectionProcedure(disconnectionCode, additionalInfo, technicalMessage);
         }
 
-        // Token: 0x06003E64 RID: 15972 RVA: 0x000A20B4 File Offset: 0x000A02B4
+        // EFT.AbstractGameSession // Token: 0x06003F41 RID: 16193 RVA: 0x000A1F19 File Offset: 0x000A0119
         private void method_1()
         {
             Console.WriteLine("Call command from client. vm-28");
         }
 
-        // Token: 0x06003E65 RID: 15973 RVA: 0x000C6FEB File Offset: 0x000C51EB
         protected static void CmdSpawn(NetworkBehaviour obj, NetworkReader reader)
         {
             if (!NetworkServer.active)
@@ -221,7 +193,6 @@ namespace ServerLib.Network
             ((AbstractGameSession) obj).CmdSpawn();
         }
 
-        // Token: 0x06003E66 RID: 15974 RVA: 0x000C700A File Offset: 0x000C520A
         protected static void CmdRespawn(NetworkBehaviour obj, NetworkReader reader)
         {
             if (!NetworkServer.active)
@@ -232,7 +203,6 @@ namespace ServerLib.Network
             ((AbstractGameSession) obj).CmdReSpawn();
         }
 
-        // Token: 0x06003E67 RID: 15975 RVA: 0x000C7029 File Offset: 0x000C5229
         protected static void CmdStartGame(NetworkBehaviour obj, NetworkReader reader)
         {
             if (!NetworkServer.active)
@@ -243,7 +213,6 @@ namespace ServerLib.Network
             ((AbstractGameSession) obj).CmdStartGame();
         }
 
-        // Token: 0x06003E68 RID: 15976 RVA: 0x000C7048 File Offset: 0x000C5248
         protected static void CmdStartGameAfterTeleport(NetworkBehaviour obj, NetworkReader reader)
         {
             if (!NetworkServer.active)

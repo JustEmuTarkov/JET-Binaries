@@ -16,7 +16,12 @@ namespace ServerLib.Network
 
         public EMemberCategory MemberCategory
         {
-            get => EMemberCategory.Developer;
+            get
+            {
+                if(_memberCategory == EMemberCategory.UnitTest)
+                    _memberCategory = EMemberCategory.Developer;
+                return _memberCategory;
+            }
             set => _memberCategory = value;
         }
 
@@ -72,6 +77,6 @@ namespace ServerLib.Network
         internal const short Short13 = 165;
         internal const short Short14 = 167;
         internal const short Short15 = 168;
-        private EMemberCategory _memberCategory;
+        private EMemberCategory _memberCategory = EMemberCategory.UnitTest;
     }
 }

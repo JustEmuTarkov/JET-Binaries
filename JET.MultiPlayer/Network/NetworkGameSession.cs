@@ -29,9 +29,11 @@ namespace ServerLib.Network
 
         private void Start()
         {
-            Console.WriteLine($"NetworkGameSession started, con id: {connection.connectionId}");
-            Console.WriteLine($"NetworkGameSession started, channel id: {chanelId}");
-            Console.WriteLine($"NetworkGameSession started, channel index: {chanelIndex}");
+            Console.WriteLine(
+                $"NetworkGameSession started, con_id: {connection.connectionId}," +
+                $" {connection.address}, " +
+                $"channel id: {chanelId}, " +
+                $"channel index: {chanelIndex}");
         }
 
         private void FixedUpdate()

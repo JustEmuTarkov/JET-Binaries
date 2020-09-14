@@ -140,13 +140,15 @@ namespace ServerLib.Network.Messages
                 switch (HandsEController)
                 {
                     case EController.None:
-                        Debug.LogError("No hands controllers");
+                        Console.WriteLine("No hands controllers");
                         return;
 
                     case EController.Empty:
+                        Console.WriteLine("Empty hands controllers");
                         break;
 
                     case EController.Firearm:
+                        Console.WriteLine("Firearm hands controllers");
                         writer.Write(IsInSpawnOperation);
                         MisFireInfo.Serialize(writer);
                         JamInfo.Serialize(writer);
@@ -156,22 +158,27 @@ namespace ServerLib.Network.Messages
                         break;
 
                     case EController.Meds:
+                        Console.WriteLine("Meds hands controllers");
                         writer.Write(ItemId);
                         break;
 
                     case EController.Grenade:
+                        Console.WriteLine("Grenade hands controllers");
                         writer.Write(ItemId);
                         break;
 
                     case EController.Knife:
+                        Console.WriteLine("Knife hands controllers");
                         writer.Write(ItemId);
                         break;
 
                     case EController.QuickGrenade:
+                        Console.WriteLine("QuickGrenade hands controllers");
                         writer.Write(ItemId);
                         break;
 
                     case EController.QuickKnife:
+                        Console.WriteLine("QuickKnife hands controllers");
                         writer.Write(ItemId);
                         break;
 
@@ -250,7 +257,7 @@ namespace ServerLib.Network.Messages
                     spawnMessage.MisFireInfo = firearmController.GetMisfireRandomsSetupInfo();
                 }
             }
-
+            Console.WriteLine(player.Profile.Info.Nickname + ": " + controller.ToString());
             spawnMessage.IsAlive = player.HealthController.IsAlive;
 
             var previousHealthState = spawnMessage.HealthState;
