@@ -8,11 +8,11 @@ using UnityEngine;
 using Comfort.Common;
 using EFT;
 using JET.Common.Utils.Patching;
-using WaveInfo = GClass872;
-using BotsPresets = GClass292;// 291 / 292
+using WaveInfo = GClass867;
+using BotsPresets = GClass293;// 291 / 292
 using BotData = GInterface13;
-using PoolManager = GClass1088;
-using JobPriority = GClass592;
+using PoolManager = GClass1082;
+using JobPriority = GClass593;
 
 //TODO: for .7294 - this can break game if it will just disable this shit
 namespace JET.SinglePlayer.Patches.Bots
@@ -107,7 +107,7 @@ namespace JET.SinglePlayer.Patches.Bots
                 Task loadTask = Singleton<PoolManager>.Instance
                     .LoadBundlesAndCreatePools(PoolManager.PoolsCategory.Raid, 
                                                PoolManager.AssemblyType.Local, 
-                                               Profile.GetAllPrefabPaths(false).ToArray(), 
+                                               Profile.GetAllPrefabPaths().ToArray(), 
                                                JobPriority.General, 
                                                null, 
                                                default(CancellationToken));

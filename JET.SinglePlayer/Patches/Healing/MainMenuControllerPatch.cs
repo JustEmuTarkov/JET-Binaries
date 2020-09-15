@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using JET.Common.Utils.Patching;
-using MainMenuController = GClass1115;
-using IHealthController = GInterface141;
+using MainMenuController = GClass1109;
+using IHealthController = GInterface140;
 
 namespace JET.SinglePlayer.Patches.Healing
 {

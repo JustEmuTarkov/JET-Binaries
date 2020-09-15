@@ -2,8 +2,8 @@
 using System.Reflection;
 using JET.Common.Utils.Patching;
 using JET.SinglePlayer.Utils;
-using WaveInfo = GClass872;
-using BotsPresets = GClass292; // 292 or 291
+using WaveInfo = GClass867;
+using BotsPresets = GClass293;
 
 namespace JET.SinglePlayer.Patches.Bots
 {

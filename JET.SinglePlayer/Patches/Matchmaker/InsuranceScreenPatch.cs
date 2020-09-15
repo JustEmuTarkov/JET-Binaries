@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Reflection;
 using JET.Common.Utils.Patching;
-using MainMenuController = GClass1115;
+using MainMenuController = GClass1109;
 
 namespace JET.SinglePlayer.Patches.Matchmaker
 {

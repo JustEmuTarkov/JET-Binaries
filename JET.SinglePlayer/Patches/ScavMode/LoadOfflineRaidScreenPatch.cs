@@ -9,10 +9,11 @@ using EFT.UI.Matchmaker;
 using EFT.UI.Screens;
 using JET.Common.Utils.Patching;
 using JET.SinglePlayer.Utils.Reflection;
-using MenuController = GClass1115;
-using WeatherSettings = GStruct78;
-using BotsSettings = GStruct197;
-using WavesSettings = GStruct79;
+using MenuController = GClass1109;
+// for this 3 search for `Action OnShowReadyScreen`
+using WeatherSettings = GStruct77;
+using BotsSettings = GStruct195;
+using WavesSettings = GStruct78;
 
 namespace JET.SinglePlayer.Patches.ScavMode
 {
@@ -20,14 +21,14 @@ namespace JET.SinglePlayer.Patches.ScavMode
 
     public class LoadOfflineRaidScreenPatch : GenericPatch<LoadOfflineRaidScreenPatch>
     {
-        private static readonly string kBotsSettingsFieldName = "gstruct219_0";
-        private static readonly string kWeatherSettingsFieldName = "gstruct86_0";
-        private static readonly string kWavesSettingsFieldName = "gstruct87_0";
+        private static readonly string kBotsSettingsFieldName = "gstruct195_0";
+        private static readonly string kWeatherSettingsFieldName = "gstruct77_0";
+        private static readonly string kWavesSettingsFieldName = "gstruct78_0";
 
-        private const string kMainControllerFieldName = "gclass1144_0";
+        private const string kMainControllerFieldName = "gclass1109_0";
         private const string kMenuControllerInnerType = "Class781";
         private const string kTargetMethodName = "method_2";
-        private const string kLoadReadyScreenMethodName = "method_36";
+        private const string kLoadReadyScreenMethodName = "method_29"; // method with gclass.ShowScreen(true)
         private const string kReadyMethodName = "method_54";
 
         public LoadOfflineRaidScreenPatch() : base(transpiler: nameof(PatchTranspiler)) { }
@@ -82,10 +83,10 @@ namespace JET.SinglePlayer.Patches.ScavMode
         {
             MenuController menuController = GetMenuController();
 
-            MatchmakerOfflineRaid.GClass1836 gclass = new MatchmakerOfflineRaid.GClass1836();
+            MatchmakerOfflineRaid.GClass1811 gclass = new MatchmakerOfflineRaid.GClass1811();
             gclass.OnShowNextScreen += LoadOfflineRaidNextScreen;
             gclass.OnShowReadyScreen += (OfflineRaidAction)Delegate.CreateDelegate(typeof(OfflineRaidAction), (object)menuController, kReadyMethodName);
-            gclass.ShowScreen(EScreenState.Queued);
+            gclass.ShowScreen(true); //EFT.UI.Screens.EScreenState.Queued
         }
 
         private static void SetMenuControllerFieldValue(MenuController instance, string fieldName, object value)

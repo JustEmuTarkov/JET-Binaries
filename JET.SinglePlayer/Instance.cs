@@ -8,18 +8,38 @@ using JET.SinglePlayer.Patches.RaidFix;
 using JET.SinglePlayer.Patches.ScavMode;
 using JET.SinglePlayer.Utils;
 using System.Reflection;
+using JET.Common.Utils.HTTP;
+using JET.Common.Utils.App;
 
 namespace JET.SinglePlayer
 {
     public class Instance : MonoBehaviour
     {
         [ObfuscationAttribute(Exclude = true)]
+        public class OfflineMode {
+            public bool Offline = true;
+        }
+        private bool _offlineMode;
+        [ObfuscationAttribute(Exclude = true)]
         private void Start()
 		{
-            Debug.LogError("JET.SinglePlayer: Loaded");
+            new Settings(null, Utils.Config.BackendUrl);
 
-			// todo: find a way to get php session id
-			//new Settings(null, Utils.Config.BackendUrl);
+            var request = new Request(Utils.Config.BackEndSession.GetPhpSessionId(), Utils.Config.BackendUrl);
+            var json = request.GetJson("/mode/offline/");
+            try
+            {
+
+                OfflineMode __offlineClass = Json.Deserialize<OfflineMode>(json);
+                _offlineMode = __offlineClass.Offline;
+
+            } catch { // if somehow this fails load offline anyway
+                _offlineMode = true;
+            }
+            if (!_offlineMode)
+                return;
+
+            Debug.LogError("JET.SinglePlayer: Loaded");
 
 			PatcherUtil.PatchPrefix<OfflineLootPatch>();
 			PatcherUtil.PatchPrefix<OfflineSaveProfilePatch>();
@@ -49,7 +69,7 @@ namespace JET.SinglePlayer
             PatcherUtil.PatchPrefix<BeaconPatch>();
 			PatcherUtil.PatchPostfix<DogtagPatch>();
 
-           // PatcherUtil.Patch<LoadOfflineRaidScreenPatch>();
+            PatcherUtil.Patch<LoadOfflineRaidScreenPatch>();
             PatcherUtil.Patch<ScavPrefabLoadPatch>();
             PatcherUtil.Patch<ScavProfileLoadPatch>();
             PatcherUtil.Patch<ScavSpawnPointPatch>();
