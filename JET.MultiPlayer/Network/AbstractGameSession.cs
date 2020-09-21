@@ -1134,7 +1134,7 @@ namespace ServerLib.Network
         }
         #endregion
 
-        protected static void sm_CmdGameStarted(NetworkBehaviour obj, NetworkReader reader)
+        protected static void CmdGameStarted(NetworkBehaviour obj, NetworkReader reader)
         {
             if (!NetworkServer.active)
             {
@@ -1154,6 +1154,7 @@ namespace ServerLib.Network
             i_CmdStartGameAfterTeleport = 1792897173;
             i_CmdRestartGameInitiate = 273195288;
             i_CmdRestartGame = -1501005473; // FB 5F 79 88 A6‬ - ‭1079638591654‬
+            i_CmdGameStarted = -40021267;
             i_CmdStopGame = -750099178; // FB 16 65 4A D3 ‬‭10 - 78412528339‬
             i_CmdSyncGameTime = 463608476;
             i_CmdDevelopRequestBot = -1035840717; // FB 33 53 42 C2 - ‬‭1078897885890‬
@@ -1176,9 +1177,75 @@ namespace ServerLib.Network
             i_sm_RpcDevelopmentSpawnBotResponse = -1269941968; // FB 30 39 4E B4‬ - ‭1078845853364‬
             i_sm_RpcSoftStopNotification = -435294673; // FB 2F EE 0D E6 -‬ ‭1078840921574‬
             i_sm_RpcStartDisconnectionProcedure = 1124901489;
-            i_sm_CmdGameStarted = -40021267;
-        }
-        static AbstractGameSession()
+
+        #region backup
+        /*
+        i_CmdGameStarted = -40021267;
+        i_CmdSpawn = -1723132743;
+        i_CmdRespawn = 740792038;
+        i_CmdStartGame = -1220356686; //FB B2 D5 42 B7‬ - ‭1081037111991‬
+        i_CmdStartGameAfterTeleport = 1792897173;
+        i_CmdRestartGameInitiate = 273195288;
+        i_CmdRestartGame = -1501005473; // FB 5F 79 88 A6‬ - ‭1079638591654‬
+        i_CmdStopGame = -750099178; // FB 16 65 4A D3 ‬‭10 - 78412528339‬
+        i_CmdSyncGameTime = 463608476;
+        i_CmdDevelopRequestBot = -1035840717; // FB 33 53 42 C2 - ‬‭1078897885890‬
+        i_CmdDevelopmentSpawnBotRequest = -1581543574; // FB 6A 8F BB A1 - ‬‭1079824595873‬
+        i_CmdDevelopmentSpawnBotOnServer = 102630535;
+        i_CmdDevelopmentSpawnBotOnClient = -349255409; // FB 0F C9 2E EB -‬ ‭1078301634283‬
+        i_CmdDisconnectAcceptedOnClient = -1733636721; // FB 8F CD AA 98 - ‬‭1080449411736‬
+        i_CmdSpawnConfirm = -1317447737; // FB C7 57 79 B1‬ - ‭1081381190065‬
+        i_sm_RpcGameSpawned = -1952818640; // FB 30 5A 9A 8B - ‬‭1078848035467‬
+        i_sm_RpcGameMatching = 2117859815;
+        i_sm_RpcGameStarting = -1157222870; // FB 2A 2E 06 BB - ‭1078744450747‬
+        i_sm_RpcGameStartingWithTeleport = 1572370779;
+        i_sm_RpcGameStarted = -1838445225; // FB 57 8D 6B 92 - ‬‭1079505677202‬
+        i_sm_RpcGameRestarting = 94275293;
+        i_sm_RpcGameRestarted = -1243884988; // FB 44 D2 DB B5 - ‬‭1079191460789‬
+        i_sm_RpcGameStopping = -758380962; // FB 5E 06 CC D2 -‬ ‭1079614295250‬
+        i_sm_RpcGameStopped = -1825579357; // FB A3 DE 2F 93 - ‬‭1080786038675‬
+        i_sm_RpcSyncGameTime = 547040626;
+        i_sm_RpcDevelopSendBotData = 1152897188;
+        i_sm_RpcDevelopmentSpawnBotResponse = -1269941968; // FB 30 39 4E B4‬ - ‭1078845853364‬
+        i_sm_RpcSoftStopNotification = -435294673; // FB 2F EE 0D E6 -‬ ‭1078840921574‬
+        i_sm_RpcStartDisconnectionProcedure = 1124901489;
+        i_CmdGameStarted = -40021267;*/
+        #endregion
+        #region mapped cmd and rpc calls
+        /* **** CMD/RPC Channels for 0.12.4.6716 **** *\
+          -1723132743     CmdSpawn [c]                        - CmdSpawn
+          740792038       CmdRespawn [c]                      - CmdRespawn
+          -1220356686     CmdStartGame [c]                    - CmdStartGame
+          1792897173      CmdStartGameAfterTeleport [c]       - CmdStartGameAfterTeleport
+          273195288       CmdRestartGameInitiate [c]          - CmdRestartGameInitiate
+          -1501005473     CmdRestartGame [c]                  - CmdRestartGame
+          -40021267       CmdGameStarted [c]                  - CmdStopGame
+          -750099178      CmdStopGame [c]                     - CmdSyncGameTime
+          463608476       CmdSyncGameTime [c]                 - CmdDevelopRequestBot
+          -1035840717     CmdDevelopRequestBot [c]            - CmdDevelopmentSpawnBotRequest
+          -1581543574     CmdDevelopmentSpawnBotRequest [c]   - CmdDevelopmentSpawnBotOnServer
+          102630535       CmdDevelopmentSpawnBotOnServer [c]  - CmdDevelopmentSpawnBotOnClient
+          -349255409      CmdDevelopmentSpawnBotOnClient [c]  - CmdDisconnectAcceptedOnClient
+          -1733636721     CmdDisconnectAcceptedOnClient [c]   - CmdSpawnConfirm
+          -1317447737     CmdSpawnConfirm [c]                 - sm_RpcGameSpawned
+          -1952818640     RpcGameSpawned [s]                  - sm_RpcGameMatching
+          2117859815      RpcGameMatching [s]                 - sm_RpcGameStarting
+          -1157222870     RpcGameStarting [s]                 - sm_RpcGameStartingWithTeleport
+          1572370779      RpcGameStartingWithTeleport [s]     - sm_RpcGameStarted
+          -1838445225     RpcGameStarted [s]                  - sm_RpcGameRestarting
+          94275293        RpcGameRestarting [s]               - sm_RpcGameRestarted
+          -1243884988     RpcGameRestarted [s]                - sm_RpcGameStopping
+          -758380962      RpcGameStopping [s]                 - sm_RpcGameStopped
+          -1825579357     RpcGameStopped [s]                  - sm_RpcSyncGameTime
+          547040626       RpcSyncGameTime [s]                 - sm_RpcDevelopSendBotData
+          1152897188      RpcDevelopSendBotData [s]           - sm_RpcDevelopmentSpawnBotResponse
+          -1269941968     RpcDevelopmentSpawnBotResponse [s]  - sm_RpcSoftStopNotification
+          -435294673      RpcSoftStopNotification [s]         - sm_RpcStartDisconnectionProcedure
+          1124901489      RpcStartDisconnectionProcedure [s]  - sm_CmdGameStarted
+        \*/
+        #endregion
+    }
+    static AbstractGameSession()
         {
             Type invokedType = typeof(AbstractGameSession);
             OverrideInitCodes();
@@ -1188,6 +1255,7 @@ namespace ServerLib.Network
             RegisterCommandDelegate(invokedType, i_CmdStartGameAfterTeleport, CmdStartGameAfterTeleport);
             RegisterCommandDelegate(invokedType, i_CmdRestartGameInitiate, CmdRestartGameInitiate);
             RegisterCommandDelegate(invokedType, i_CmdRestartGame, CmdRestartGame);
+            RegisterCommandDelegate(invokedType, i_CmdGameStarted, CmdGameStarted);
             RegisterCommandDelegate(invokedType, i_CmdStopGame, CmdStopGame);
             RegisterCommandDelegate(invokedType, i_CmdSyncGameTime, CmdSyncGameTime);
             RegisterCommandDelegate(invokedType, i_CmdDevelopRequestBot, CmdDevelopRequestBot);
@@ -1210,7 +1278,6 @@ namespace ServerLib.Network
             RegisterRpcDelegate(invokedType, i_sm_RpcDevelopmentSpawnBotResponse, sm_RpcDevelopmentSpawnBotResponse);
             RegisterRpcDelegate(invokedType, i_sm_RpcSoftStopNotification, sm_RpcSoftStopNotification);
             RegisterRpcDelegate(invokedType, i_sm_RpcStartDisconnectionProcedure, sm_RpcStartDisconnectionProcedure);
-            RegisterCommandDelegate(invokedType, i_sm_CmdGameStarted, sm_CmdGameStarted);
             NetworkCRC.RegisterBehaviour("AbstractGameSession", 0);
         }
         #endregion
@@ -1250,7 +1317,7 @@ namespace ServerLib.Network
         private static int i_sm_RpcDevelopmentSpawnBotResponse = -1269941968;
         private static int i_sm_RpcSoftStopNotification = -435294673;
         private static int i_sm_RpcStartDisconnectionProcedure = 1124901489;
-        private static int i_sm_CmdGameStarted = -40021267;
+        private static int i_CmdGameStarted = -40021267;
         #endregion
 
         public bool gameSyncTimeIsSent;

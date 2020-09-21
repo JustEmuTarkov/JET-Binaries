@@ -318,7 +318,7 @@ namespace ServerLib.Network.Player
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            Console.WriteLine($"HandsTypePacket: {clientPacket.HandsTypePacket}");
+            //Console.WriteLine($"HandsTypePacket: {clientPacket.HandsTypePacket}");
             clientPacket.HandsChangePacket.OperationType = GStruct103.EOperationType.None;
 
             var frame = new GStruct127(
