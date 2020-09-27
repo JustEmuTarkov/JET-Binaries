@@ -22,6 +22,7 @@ All dependencies are provided, no additional setup required.
 
 ## Credits
 - TheMaoci
+- Apofis (MultiPlayer)
 
 ## Disclaimer
 This repository is for research purposes only, the use of this code is your responsibility.  
