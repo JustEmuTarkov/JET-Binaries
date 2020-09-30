@@ -4,3 +4,9 @@ E:\MAOCI\Github\JET-Binaries\JET.SinglePlayer\obj\Release\JET.SinglePlayer.cspro
 E:\MAOCI\Github\JET-Binaries\JET.SinglePlayer\obj\Release\JET.SinglePlayer.csproj.CoreCompileInputs.cache
 E:\MAOCI\Github\JET-Binaries\JET.SinglePlayer\obj\Release\NLog.JET.SinglePlayer.dll
 E:\MAOCI\Github\JET-Binaries\JET.SinglePlayer\obj\Release\NLog.JET.SinglePlayer.pdb
+J:\_git\JET-Binaries\JET-Binaries\JET.SinglePlayer\bin\Release\NLog.JET.SinglePlayer.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.SinglePlayer\bin\Release\NLog.JET.SinglePlayer.pdb
+J:\_git\JET-Binaries\JET-Binaries\JET.SinglePlayer\obj\Release\JET.SinglePlayer.csprojAssemblyReference.cache
+J:\_git\JET-Binaries\JET-Binaries\JET.SinglePlayer\obj\Release\JET.SinglePlayer.csproj.CoreCompileInputs.cache
+J:\_git\JET-Binaries\JET-Binaries\JET.SinglePlayer\obj\Release\NLog.JET.SinglePlayer.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.SinglePlayer\obj\Release\NLog.JET.SinglePlayer.pdb
