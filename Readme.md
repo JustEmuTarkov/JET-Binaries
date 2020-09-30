@@ -4,7 +4,8 @@ Client-side runtime patches to alter the client's behaviour.
 ## Modules
 - JET.Common: utilities used across modules.
 - JET.Core: required patches for the game to run.
-- JET.SinglePlayer: simulating online game offline.
+- JET.SinglePlayer: simulating online game as offline.
+- JET.MultiPlayer: simulating full online game server.
 - JET.Launcher: a custom game launcher allows the game to be launched offline.
 - JET.RuntimeBundles: reponsible for loading custom asset bundles.
 
