@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using IHealthController = GInterface140;//GInterface157;
+using IHealthController = GInterface157;//GInterface157;
 //using StDamage = GStruct204;//GStruct226;
-using IEffect = GInterface108;
+using Effect = GStruct227;
+using IEffect = GInterface122;
 using JET.Common.Utils.HTTP;
 using UnityEngine;
+using EFT;
 using EFT.HealthSystem;
 
 namespace JET.SinglePlayer.Utils.Player
@@ -123,7 +125,7 @@ namespace JET.SinglePlayer.Utils.Player
             CurrentHealth.IsAlive = false;
         }
 
-        public void OnHealthChangedEvent(EBodyPart bodyPart, float diff, IEffect effect)
+        public void OnHealthChangedEvent(EBodyPart bodyPart, float diff, Effect effect)
         {
             CurrentHealth.Health[bodyPart].ChangeHealth(diff);
 

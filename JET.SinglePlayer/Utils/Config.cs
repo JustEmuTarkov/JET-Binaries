@@ -1,7 +1,7 @@
 ﻿using Comfort.Common;
 using EFT;
-using ISession = GInterface23;
-using ClientConfig = GClass266;
+using ISession = GInterface25;
+using ClientConfig = GClass310;
 
 namespace JET.SinglePlayer.Utils
 {

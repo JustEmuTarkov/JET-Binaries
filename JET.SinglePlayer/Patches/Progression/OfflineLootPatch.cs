@@ -4,7 +4,7 @@ using UnityEngine;
 using JET.Common.Utils.App;
 using JET.Common.Utils.HTTP;
 using JET.Common.Utils.Patching;
-using LocationInfo = GClass735.GClass737;
+using LocationInfo = GClass757.GClass759;
 
 namespace JET.SinglePlayer.Patches.Progression
 {

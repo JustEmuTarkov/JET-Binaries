@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using JET.Common.Utils.Patching;
 using JET.SinglePlayer.Utils;
-using BotDifficultyHandler = GClass236;
+using BotDifficultyHandler = GClass280;
 
 namespace JET.SinglePlayer.Patches.Bots
 {

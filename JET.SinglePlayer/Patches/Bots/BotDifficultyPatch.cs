@@ -3,7 +3,7 @@ using EFT;
 using JET.Common.Utils.Patching;
 using JET.SinglePlayer.Utils;
 using JET.SinglePlayer.Utils.Bots;
-using BotDifficultyHandler = GClass236;
+using BotDifficultyHandler = GClass280;
 
 namespace JET.SinglePlayer.Patches.Bots
 {

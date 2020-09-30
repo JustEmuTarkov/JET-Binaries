@@ -36,8 +36,11 @@ namespace JET.SinglePlayer
             } catch { // if somehow this fails load offline anyway
                 _offlineMode = true;
             }
-            if (!_offlineMode)
+            if (!_offlineMode) {
+                Debug.LogError("JET.SinglePlayer: NotLoaded");
                 return;
+            }
+                
 
             Debug.LogError("JET.SinglePlayer: Loaded");
 
@@ -58,7 +61,7 @@ namespace JET.SinglePlayer
 			PatcherUtil.PatchPostfix<BotTemplateLimitPatch>();
             PatcherUtil.PatchPrefix<GetNewBotTemplatesPatch>();
             PatcherUtil.PatchPrefix<RemoveUsedBotProfilePatch>();
-           // PatcherUtil.PatchPrefix<SpawnPmcPatch>(); // PMC Simulation
+            PatcherUtil.PatchPrefix<SpawnPmcPatch>(); // PMC Simulation
 			PatcherUtil.PatchPrefix<CoreDifficultyPatch>();
 			PatcherUtil.PatchPrefix<BotDifficultyPatch>();
             

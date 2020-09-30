@@ -8,11 +8,11 @@ using UnityEngine;
 using Comfort.Common;
 using EFT;
 using JET.Common.Utils.Patching;
-using WaveInfo = GClass867;
-using BotsPresets = GClass293;// 291 / 292
+using WaveInfo = GClass897;
+using BotsPresets = GClass334;// 291 / 292
 using BotData = GInterface13;
-using PoolManager = GClass1082;
-using JobPriority = GClass593;
+using PoolManager = GClass1120;
+using JobPriority = GClass2026;
 
 //TODO: for .7294 - this can break game if it will just disable this shit
 namespace JET.SinglePlayer.Patches.Bots

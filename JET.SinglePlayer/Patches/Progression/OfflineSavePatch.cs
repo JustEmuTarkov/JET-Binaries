@@ -4,14 +4,14 @@ using Comfort.Common;
 using EFT;
 using JET.Common.Utils.Patching;
 using JET.SinglePlayer.Utils.Player;
-using ClientMetrics = GClass1222;
+using ClientMetrics = GClass1304;
 
 // will need to disable this if multiplayer is ON
 namespace JET.SinglePlayer.Patches.Progression
 {
     class OfflineSaveProfilePatch : AbstractPatch
     {
-        private readonly string overridedMethod = "method_37";
+        private readonly string overridedMethod = "method_38";
         static OfflineSaveProfilePatch()
         {
             // compile-time check

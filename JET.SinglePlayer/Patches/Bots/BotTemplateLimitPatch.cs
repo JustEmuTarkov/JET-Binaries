@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using JET.Common.Utils.HTTP;
 using JET.Common.Utils.Patching;
 using JET.SinglePlayer.Utils;
-using WaveInfo = GClass867;
-using BotsPresets = GClass293;
+using WaveInfo = GClass897;
+using BotsPresets = GClass334;
+using UnityEngine;
+using System;
 
 namespace JET.SinglePlayer.Patches.Bots
 {
@@ -34,7 +37,7 @@ namespace JET.SinglePlayer.Patches.Bots
             
             foreach (WaveInfo wave in __result)
             {
-				wave.Limit = Settings.Limits[wave.Role];
+                wave.Limit = Settings.Limits[wave.Role];
             }
         }
     }

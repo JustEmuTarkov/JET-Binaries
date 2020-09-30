@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 using JET.Common.Utils.Patching;
 using UnityEngine.Networking;
@@ -11,15 +12,14 @@ namespace JET.Core.Patches
 
 		protected override MethodBase GetTargetMethod()
 		{
-			return PatcherConstants.TargetAssembly
-				.GetTypes().Single(x => x.BaseType == typeof(CertificateHandler))
-				.GetMethod("ValidateCertificate", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+			return PatcherConstants.TargetAssembly.GetTypes()
+				.Single((Type x) => x.BaseType == typeof(CertificateHandler))
+				.GetMethod("ValidateCertificate", BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.NonPublic);
 		}
 
 		static bool PatchPrefix(ref bool __result)
 		{
 			__result = true;
-
 			return false;
 		}
 	}

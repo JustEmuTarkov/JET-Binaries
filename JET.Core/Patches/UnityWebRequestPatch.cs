@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using UnityEngine.Networking;
 using JET.Common.Utils.Patching;
+using System;
 
 namespace JET.Core.Patches
 {
@@ -12,7 +13,7 @@ namespace JET.Core.Patches
 
         protected override MethodBase GetTargetMethod()
         {
-            return typeof(UnityWebRequestTexture).GetMethod(nameof(UnityWebRequestTexture.GetTexture), new[] { typeof(string) });
+            return typeof(UnityWebRequestTexture).GetMethod("GetTexture", new Type[] { typeof(string) });
         }
 
         static void PatchPostfix(UnityWebRequest __result)

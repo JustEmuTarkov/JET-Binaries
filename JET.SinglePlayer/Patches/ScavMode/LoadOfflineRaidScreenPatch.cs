@@ -9,11 +9,11 @@ using EFT.UI.Matchmaker;
 using EFT.UI.Screens;
 using JET.Common.Utils.Patching;
 using JET.SinglePlayer.Utils.Reflection;
-using MenuController = GClass1109;
+using MenuController = GClass1144;
 // for this 3 search for `Action OnShowReadyScreen`
-using WeatherSettings = GStruct77;
-using BotsSettings = GStruct195;
-using WavesSettings = GStruct78;
+using WeatherSettings = GStruct87;
+using BotsSettings = GStruct220;
+using WavesSettings = GStruct88;
 
 namespace JET.SinglePlayer.Patches.ScavMode
 {
@@ -21,16 +21,6 @@ namespace JET.SinglePlayer.Patches.ScavMode
 
     public class LoadOfflineRaidScreenPatch : GenericPatch<LoadOfflineRaidScreenPatch>
     {
-        private static readonly string kBotsSettingsFieldName = "gstruct195_0";
-        private static readonly string kWeatherSettingsFieldName = "gstruct77_0";
-        private static readonly string kWavesSettingsFieldName = "gstruct78_0";
-
-        private const string kMainControllerFieldName = "gclass1109_0";
-        private const string kMenuControllerInnerType = "Class781";
-        private const string kTargetMethodName = "method_2";
-        private const string kLoadReadyScreenMethodName = "method_29"; // method with gclass.ShowScreen(true)
-        private const string kReadyMethodName = "method_54";
-
         public LoadOfflineRaidScreenPatch() : base(transpiler: nameof(PatchTranspiler)) { }
 
         protected override MethodBase GetTargetMethod()
@@ -45,7 +35,7 @@ namespace JET.SinglePlayer.Patches.ScavMode
 
             var codes = new List<CodeInstruction>(instructions);
 
-            int index = 29;
+            int index = 26;
 
             var callCode = new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(LoadOfflineRaidScreenPatch), "LoadOfflineRaidScreenForScav"));
             codes[index].opcode = OpCodes.Nop;
@@ -81,17 +71,25 @@ namespace JET.SinglePlayer.Patches.ScavMode
 
         public static void LoadOfflineRaidScreenForScav()
         {
-            MenuController menuController = GetMenuController();
+            object menuController = GetMenuController();
 
-            MatchmakerOfflineRaid.GClass1811 gclass = new MatchmakerOfflineRaid.GClass1811();
+            MatchmakerOfflineRaid.GClass1912 gclass = new MatchmakerOfflineRaid.GClass1912();
             gclass.OnShowNextScreen += LoadOfflineRaidNextScreen;
-            gclass.OnShowReadyScreen += (OfflineRaidAction)Delegate.CreateDelegate(typeof(OfflineRaidAction), (object)menuController, kReadyMethodName);
-            gclass.ShowScreen(true); //EFT.UI.Screens.EScreenState.Queued
+            gclass.OnShowReadyScreen += (OfflineRaidAction)Delegate.CreateDelegate(typeof(OfflineRaidAction), menuController, kReadyMethodName);
+            gclass.ShowScreen(EScreenState.Queued); //EFT.UI.Screens.EScreenState.Queued
         }
 
         private static void SetMenuControllerFieldValue(MenuController instance, string fieldName, object value)
         {
             PrivateValueAccessor.SetPrivateFieldValue(typeof(MenuController), fieldName, instance, value);
         }
+        private static readonly string kBotsSettingsFieldName = "gstruct220_0";
+        private static readonly string kWeatherSettingsFieldName = "gstruct87_0";
+        private static readonly string kWavesSettingsFieldName = "gstruct88_0";
+        private const string kMainControllerFieldName = "gclass1144_0";
+        private const string kMenuControllerInnerType = "Class782";
+        private const string kTargetMethodName = "method_2";
+        private const string kLoadReadyScreenMethodName = "method_36";
+        private const string kReadyMethodName = "method_54";
     }
 }
