@@ -23,13 +23,15 @@ namespace JET.SinglePlayer
         [ObfuscationAttribute(Exclude = true)]
         private void Start()
 		{
+            while (Utils.Config.BackendUrl.Length > 0) { 
+                
+            }
+            Debug.LogError("... " + Utils.Config.BackendUrl);
             new Settings(null, Utils.Config.BackendUrl);
-
-            var request = new Request(Utils.Config.BackEndSession.GetPhpSessionId(), Utils.Config.BackendUrl);
-            var json = request.GetJson("/mode/offline/");
             try
             {
-
+                var request = new Request(null, Utils.Config.BackendUrl);
+                var json = request.GetJson("/mode/offline/");
                 OfflineMode __offlineClass = Json.Deserialize<OfflineMode>(json);
                 _offlineMode = __offlineClass.Offline;
 

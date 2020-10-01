@@ -18,8 +18,8 @@ namespace JET.Launcher
         private string bsg_name = "Battlestate Games";
         public string logged_as = "Logged as: ";
 
-        public string getExecutableArguments(string account, string id) {
-            return $"-bC5vLmcuaS5u={account} -token={id}";
+        public string getExecutableArguments(string account, string id, string config) {
+            return $"-bC5vLmcuaS5u={account} -token={id} -config={config}";
         }
 
         public string[] install_GetFilesToDelete {

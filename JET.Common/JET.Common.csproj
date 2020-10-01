@@ -34,37 +34,29 @@
   <ItemGroup>
     <Reference Include="0Harmony, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Shared\References_8989\0Harmony.dll</HintPath>
+      <HintPath>..\Shared\References\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\Shared\References_8989\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\Shared\References\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\Shared\References_8989\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\Shared\References\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
-      <HintPath>..\Shared\References_8989\NLog.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\Shared\References\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="UnityEngine">
-      <HintPath>..\Shared\References_8989\UnityEngine.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\Shared\References\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Shared\References_8989\UnityEngine.CoreModule.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\Shared\References\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.ImageConversionModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Shared\References_8989\UnityEngine.ImageConversionModule.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>..\Shared\References\UnityEngine.ImageConversionModule.dll</HintPath>
     </Reference>
-    <Reference Include="zlib.net, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Shared\References_8989\zlib.net.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="zlib.net">
+      <HintPath>..\Shared\References\zlib.net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -71,28 +71,25 @@ namespace JET.Core.Patches
         */
         static IEnumerable<CodeInstruction> PatchTranspiler(IEnumerable<CodeInstruction> instructions)
         {
-            List<CodeInstruction> list = new List<CodeInstruction>(instructions);
-            int index = 0;
-            for (int i = 0; i < list.Count<CodeInstruction>(); i++)
+            var codes = new List<CodeInstruction>(instructions);
+
+            var index = 129;
+            var dupCode = new CodeInstruction(OpCodes.Dup);
+
+            var certificateHandlerType = PatcherConstants.TargetAssembly.GetTypes().Single(x => x.BaseType == typeof(CertificateHandler));
+            var newObjCode = new CodeInstruction(OpCodes.Newobj, AccessTools.Constructor(certificateHandlerType));
+            var callVirtCode = new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(UnityWebRequest), "set_certificateHandler"));
+
+            var insertCodes = new List<CodeInstruction>()
             {
-                if (list[i].ToString().Contains("170994"))
-                {
-                    index = i + 3;
-                    break;
-                }
-            }
-            CodeInstruction item = new CodeInstruction(OpCodes.Dup, null);
-            Type type = PatcherConstants.TargetAssembly.GetTypes().Single((Type x) => x.BaseType == typeof(CertificateHandler));
-            CodeInstruction item2 = new CodeInstruction(OpCodes.Newobj, AccessTools.Constructor(type, null, false));
-            CodeInstruction item3 = new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(UnityWebRequest), "set_certificateHandler", null, null));
-            List<CodeInstruction> collection = new List<CodeInstruction>
-            {
-                item,
-                item2,
-                item3
+                dupCode,
+                newObjCode,
+                callVirtCode
             };
-            list.InsertRange(index, collection);
-            return list.AsEnumerable<CodeInstruction>();
+            codes.InsertRange(index, insertCodes);
+
+            return codes.AsEnumerable();
+
         }
     }
 }
