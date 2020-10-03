@@ -18,13 +18,13 @@ namespace JET.Launcher
                 MessageBox.Show("No ConsistancyInfo file, assuming we are not in the game directory", "ConsistantyInfo Check Failed!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
                 return;
-            }
+            }*/
             if (!File.Exists(Path.Combine(Environment.CurrentDirectory, "EscapeFromTarkov.exe")))
             {
                 MessageBox.Show("No game files found, assuming we are not in the game directory", "Check Failed!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
                 return;
-            }*/
+            }
 
             // set rendering
             Application.EnableVisualStyles();

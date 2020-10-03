@@ -29,7 +29,6 @@ namespace JET.Launcher
                 {
                     Path.Combine(Environment.CurrentDirectory, "BattlEye"),
                     Path.Combine(Environment.CurrentDirectory, "Logs"),
-                    Path.Combine(Environment.CurrentDirectory, "ConsistencyInfo"),
                     Path.Combine(Environment.CurrentDirectory, "EscapeFromTarkov_BE.exe"),
                     Path.Combine(Environment.CurrentDirectory, "Uninstall.exe"),
                     Path.Combine(Environment.CurrentDirectory, "UnityCrashHandler64.exe")
