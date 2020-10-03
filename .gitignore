@@ -24,3 +24,4 @@ JET.Core/bin/debug
 *.log
 *.7z
 Build/EscapeFromTarkov_Data/Managed
+JET.SinglePlayer/obj/Release/JET.SinglePlayer.csprojAssemblyReference.cache

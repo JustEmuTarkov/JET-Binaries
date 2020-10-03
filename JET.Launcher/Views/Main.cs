@@ -506,7 +506,7 @@ namespace JET.Launcher
 				if (accountManager.SelectedAccount != null) 
 				{
 					var account = accountManager.SelectedAccount;
-					Text_LaunchArgs.Text = sD.getExecutableArguments($"{Json.Serialize(new LoginToken(account.email, account.password))}=", account.id, Json.Serialize(new ClientConfig(server.backendUrl)));
+					Text_LaunchArgs.Text = sD.getExecutableArguments($"{Json.Serialize(new LoginToken(account.email, account.password))}=", account.id, Json.Serialize(new ClientConfig(ServerManager.SelectedServer.backendUrl)));
 				}
 			}
 		}

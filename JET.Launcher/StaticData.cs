@@ -18,7 +18,8 @@ namespace JET.Launcher
         private string bsg_name = "Battlestate Games";
         public string logged_as = "Logged as: ";
 
-        public string getExecutableArguments(string account, string id, string config) {
+        public string getExecutableArguments(string account, string id, string backendUrl) {
+            string config = "{\"BackendUrl\":\"" + backendUrl + "\",\"Version\":\"live\"}";
             return $"-bC5vLmcuaS5u={account} -token={id} -config={config}";
         }
 

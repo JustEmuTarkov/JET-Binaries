@@ -38,7 +38,7 @@ namespace JET.Launcher
 
             ProcessStartInfo clientProcess = new ProcessStartInfo(staticData.GetExecutableFile)
             {
-                Arguments = staticData.getExecutableArguments(GenerateToken(account), account.id, Json.Serialize(new ClientConfig(ServerManager.SelectedServer.backendUrl))),
+                Arguments = staticData.getExecutableArguments(GenerateToken(account), account.id, ServerManager.SelectedServer.backendUrl),
                 UseShellExecute = false,
                 WorkingDirectory = Environment.CurrentDirectory
             };
