@@ -93,15 +93,19 @@ namespace JET.Launcher
         {
             foreach (string file in staticData.install_GetFilesToDelete)
             {
-                if (Directory.Exists(file))
+                try
                 {
-                    Directory.Delete(file, true);
-                }
+                    if (Directory.Exists(file))
+                    {
+                        Directory.Delete(file, true);
+                    }
 
-                if (File.Exists(file))
-                {
-                    File.Delete(file);
+                    if (File.Exists(file))
+                    {
+                        File.Delete(file);
+                    }
                 }
+                catch (Exception) { MessageBox.Show("Something got fucked up. I could not delete a file:\r\n" + file, "Deletion Failed!", MessageBoxButtons.OK, MessageBoxIcon.Information); }
             }
         }
 

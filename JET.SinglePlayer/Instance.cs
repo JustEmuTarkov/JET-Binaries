@@ -23,56 +23,56 @@ namespace JET.SinglePlayer
         [ObfuscationAttribute(Exclude = true)]
         private void Start()
 		{
-            while (Utils.Config.BackendUrl.Length > 0) { 
-                
-            }
-            Debug.LogError("... " + Utils.Config.BackendUrl);
-            new Settings(null, Utils.Config.BackendUrl);
+            
             try
             {
                 var request = new Request(null, Utils.Config.BackendUrl);
                 var json = request.GetJson("/mode/offline/");
                 OfflineMode __offlineClass = Json.Deserialize<OfflineMode>(json);
                 _offlineMode = __offlineClass.Offline;
-
             } catch { // if somehow this fails load offline anyway
                 _offlineMode = true;
             }
+
             if (!_offlineMode) {
                 Debug.LogError("JET.SinglePlayer: NotLoaded");
                 return;
             }
-                
-
-            Debug.LogError("JET.SinglePlayer: Loaded");
-
-			PatcherUtil.PatchPrefix<OfflineLootPatch>();
-			PatcherUtil.PatchPrefix<OfflineSaveProfilePatch>();
+            if (_offlineMode)
+            {
+                PatchRoutines();
+            }
+        }
+        protected void PatchRoutines() 
+        {
+            new Settings(null, Utils.Config.BackendUrl);
+            PatcherUtil.PatchPrefix<OfflineLootPatch>();
+            PatcherUtil.PatchPrefix<OfflineSaveProfilePatch>();
             PatcherUtil.PatchPrefix<OfflineSpawnPointPatch>();
             PatcherUtil.PatchPostfix<WeaponDurabilityPatch>();
             PatcherUtil.PatchPostfix<SingleModeJamPatch>();
-            
-            PatcherUtil.Patch<Patches.Healing.MainMenuControllerPatch>();
-			PatcherUtil.Patch<Patches.Healing.PlayerPatch>();
 
-			PatcherUtil.PatchPostfix<MatchmakerOfflineRaidPatch>(); // offline buttons
-			PatcherUtil.PatchPostfix<MatchMakerSelectionLocationScreenPatch>();
-			PatcherUtil.Patch<InsuranceScreenPatch>();
+            PatcherUtil.Patch<Patches.Healing.MainMenuControllerPatch>();
+            PatcherUtil.Patch<Patches.Healing.PlayerPatch>();
+
+            PatcherUtil.PatchPostfix<MatchmakerOfflineRaidPatch>(); // offline buttons
+            PatcherUtil.PatchPostfix<MatchMakerSelectionLocationScreenPatch>();
+            PatcherUtil.Patch<InsuranceScreenPatch>();
 
             PatcherUtil.Patch<BossSpawnChancePatch>();
-			PatcherUtil.PatchPostfix<BotTemplateLimitPatch>();
+            PatcherUtil.PatchPostfix<BotTemplateLimitPatch>();
             PatcherUtil.PatchPrefix<GetNewBotTemplatesPatch>();
             PatcherUtil.PatchPrefix<RemoveUsedBotProfilePatch>();
             PatcherUtil.PatchPrefix<SpawnPmcPatch>(); // PMC Simulation
-			PatcherUtil.PatchPrefix<CoreDifficultyPatch>();
-			PatcherUtil.PatchPrefix<BotDifficultyPatch>();
-            
+            PatcherUtil.PatchPrefix<CoreDifficultyPatch>();
+            PatcherUtil.PatchPrefix<BotDifficultyPatch>();
+
             PatcherUtil.Patch<OnDeadPatch>();
             PatcherUtil.Patch<OnShellEjectEventPatch>();
             PatcherUtil.Patch<BotStationaryWeaponPatch>();
 
             PatcherUtil.PatchPrefix<BeaconPatch>();
-			PatcherUtil.PatchPostfix<DogtagPatch>();
+            PatcherUtil.PatchPostfix<DogtagPatch>();
 
             PatcherUtil.Patch<LoadOfflineRaidScreenPatch>();
             PatcherUtil.Patch<ScavPrefabLoadPatch>();
@@ -81,6 +81,7 @@ namespace JET.SinglePlayer
             PatcherUtil.Patch<ScavExfilPatch>();
 
             PatcherUtil.Patch<EndByTimerPatch>();
+            Debug.LogError("JET.SinglePlayer: Loaded");
         }
     }
 }

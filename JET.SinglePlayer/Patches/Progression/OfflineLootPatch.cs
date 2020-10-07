@@ -5,6 +5,7 @@ using JET.Common.Utils.App;
 using JET.Common.Utils.HTTP;
 using JET.Common.Utils.Patching;
 using LocationInfo = GClass757.GClass759;
+using System;
 
 namespace JET.SinglePlayer.Patches.Progression
 {
@@ -44,26 +45,25 @@ namespace JET.SinglePlayer.Patches.Progression
 				Debug.LogError("OfflineLootPatch > Online match?!");
 				return true;
 			}
-
-			var location = (LocationInfo)_property.GetValue(__instance);
-			var request = new Request(Utils.Config.BackEndSession.GetPhpSessionId(), backendUrl);
-			var json = request.GetJson("/api/location/" + location.Id);
-
-			// some magic here. do not change =)
-			var locationLoot = json.ParseJsonTo<LocationInfo>();
-
-			request.PostJson("/raid/map/name", Json.Serialize(new LocationName(location.Id)));
-
-            if (locationLoot == null)
+			try
 			{
-				// failed to download loot
-				Debug.LogError("OfflineLootPatch > Failed to download loot, using fallback");
-				return true;
+				var location = (LocationInfo)_property.GetValue(__instance);
+				var request = new Request("", backendUrl);
+				var json = request.GetJson("/api/location/" + location.Id);
+				// some magic here. do not change =)
+				var locationLoot = json.ParseJsonTo<LocationInfo>();
+				request.PostJson("/raid/map/name", Json.Serialize(new LocationName(location.Id)));
+				if (locationLoot == null)
+				{
+					// failed to download loot
+					Debug.LogError("OfflineLootPatch > Failed to download loot, using fallback");
+					return true;
+				}
+				Debug.LogError("OfflineLootPatch > Successfully received loot from server");
+				__result = Task.FromResult(locationLoot);
+
 			}
-
-			Debug.LogError("OfflineLootPatch > Successfully received loot from server");
-			__result = Task.FromResult(locationLoot);
-
+			catch (Exception e1) { Debug.LogError(e1); return true; }
 			return false;
 		}
 
