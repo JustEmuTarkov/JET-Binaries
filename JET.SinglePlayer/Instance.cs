@@ -27,7 +27,7 @@ namespace JET.SinglePlayer
             try
             {
                 var request = new Request(null, Utils.Config.BackendUrl);
-                var json = request.GetJson("/mode/offline/");
+                var json = request.GetJson("/mode/offline");
                 OfflineMode __offlineClass = Json.Deserialize<OfflineMode>(json);
                 _offlineMode = __offlineClass.Offline;
             } catch { // if somehow this fails load offline anyway
