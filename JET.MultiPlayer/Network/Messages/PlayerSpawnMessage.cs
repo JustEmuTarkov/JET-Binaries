@@ -18,17 +18,17 @@ namespace ServerLib.Network.Messages
     {
         public override void Deserialize(NetworkReader reader)
         {
-            PlayerId = reader.ReadInt32();
+            // correct order for 9018
             ChanelId = reader.ReadByte();
-            Position = reader.ReadVector3();
-
-            ChanelIndex = reader.ReadByte();
             IsAlive = reader.ReadBoolean();
-            SpawnPosition = reader.ReadVector3();
+            Position = reader.ReadVector3();
             Rotation = reader.ReadQuaternion();
             IsInPronePose = reader.ReadBoolean();
             PoseLevel = reader.ReadSingle();
 
+            //PlayerId = reader.ReadInt32();
+            //ChanelIndex = reader.ReadByte();
+            //SpawnPosition = reader.ReadVector3();
             //reader.ReadBytesAndSize();
             using (var memoryStream = new MemoryStream(reader.ReadBytesAndSize()))
             {
@@ -44,6 +44,7 @@ namespace ServerLib.Network.Messages
             if (!IsAlive)
                 return;
 
+            reader.ReadBoolean();
             ScavExfilMask = reader.ReadInt32();
             HealthState = reader.ReadBytesAndSize();
             AnimationVariant = reader.ReadInt32();

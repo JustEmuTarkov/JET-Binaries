@@ -13,6 +13,7 @@ namespace ServerLib.Network.Messages
         {
             Id = reader.ReadInt32();
             LootItems = SimpleZlib.Decompress(reader.ReadBytesAndSize()).ParseJsonTo<ResourceKey[]>();
+            bytes = reader.ReadBytesAndSize();
             base.Deserialize(reader);
         }
 
@@ -21,6 +22,7 @@ namespace ServerLib.Network.Messages
             writer.Write(Id);
             byte[] bundlesBytes = SimpleZlib.CompressToBytes(LootItems.ToJson(), 9);
             writer.WriteBytesAndSize(bundlesBytes, bundlesBytes.Length);
+            writer.WriteBytesAndSize(bytes, bytes.Length);
             base.Serialize(writer);
         }
 
@@ -43,6 +45,7 @@ namespace ServerLib.Network.Messages
 
         internal int Id;
         internal ResourceKey[] LootItems;
+        internal byte[] bytes;
         public const short MessageId = 188;
         public const int BundlesQueue = 5000;
     }
