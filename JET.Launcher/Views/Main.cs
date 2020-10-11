@@ -290,6 +290,9 @@ namespace JET.Launcher
 				case -3:
 					MessageBox.Show(sD.ERROR_MSG.startNotFromGameDir);
 					return;
+				case -4:
+				default:
+					return;
 			}
 		}
 		private void _ProfileWipe() {

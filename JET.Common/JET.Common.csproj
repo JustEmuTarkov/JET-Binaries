@@ -41,19 +41,24 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Shared\References\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="NLog">
       <HintPath>..\Shared\References\NLog.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="UnityEngine">
       <HintPath>..\Shared\References\UnityEngine.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\Shared\References\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.ImageConversionModule">
       <HintPath>..\Shared\References\UnityEngine.ImageConversionModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="zlib.net">
       <HintPath>..\Shared\References\zlib.net.dll</HintPath>
@@ -88,10 +93,10 @@
     </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>
-      xcopy /Y /I "$(TargetDir)*.dll" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
-      xcopy /Y /I "$(SolutionDir)\Shared\References\Assembly-CSharp.dll" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
-      xcopy /Y /I "$(SolutionDir)\Shared\Resources\NLog.dll.nlog" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
+    <PostBuildEvent>xcopy /Y /I "$(TargetDir)NLog.JET.Common.dll" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
+xcopy /Y /I "$(TargetDir)0Harmony.dll" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
+xcopy /Y /I "$(SolutionDir)\Shared\References\Assembly-CSharp.dll" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
+xcopy /Y /I "$(SolutionDir)\Shared\Resources\NLog.dll.nlog" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

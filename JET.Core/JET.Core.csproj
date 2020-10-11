@@ -48,7 +48,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System">
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\Shared\References\UnityEngine.dll</HintPath>
@@ -93,8 +93,7 @@
     </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>
-      xcopy /Y /I "$(TargetDir)*.dll" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
+    <PostBuildEvent>xcopy /Y /I "$(TargetDir)NLog.JET.Core.dll" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

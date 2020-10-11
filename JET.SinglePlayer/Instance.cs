@@ -23,7 +23,6 @@ namespace JET.SinglePlayer
         [ObfuscationAttribute(Exclude = true)]
         private void Start()
 		{
-            
             try
             {
                 var request = new Request(null, Utils.Config.BackendUrl);

@@ -20,10 +20,49 @@ namespace JET.Launcher
 
             SetupGameFiles();
 
-            /*if (IsPiratedCopy() > 1)
+            // TODO: check if files exists in game directory
+            /*
+                \EscapeFromTarkov_Data\Managed\0Harmony.dll
+                \EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll
+                \EscapeFromTarkov_Data\Managed\NLog.dll.nlog
+                \EscapeFromTarkov_Data\Managed\NLog.JET.Common.dll
+                \EscapeFromTarkov_Data\Managed\NLog.JET.Core.dll
+                \EscapeFromTarkov_Data\Managed\NLog.JET.SinglePlayer.dll
+             */
+            // quick check
+            bool isFilesMissing = false;
+            if (!File.Exists($"EscapeFromTarkov_Data/Managed/0Harmony.dll"))
             {
-                return -2;
-            }*/
+                isFilesMissing = true;
+                MessageBox.Show("Missing file: EscapeFromTarkov_Data/Managed/0Harmony.dll", "Missing Files!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            if (!File.Exists($"EscapeFromTarkov_Data/Managed/Assembly-CSharp.dll"))
+            {
+                isFilesMissing = true;
+                MessageBox.Show("Missing file: EscapeFromTarkov_Data/Managed/Assembly-CSharp.dll", "Missing Files!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            if (!File.Exists($"EscapeFromTarkov_Data/Managed/NLog.dll.nlog"))
+            {
+                isFilesMissing = true;
+                MessageBox.Show("Missing file: EscapeFromTarkov_Data/Managed/NLog.dll.nlog", "Missing Files!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            if (!File.Exists($"EscapeFromTarkov_Data/Managed/NLog.JET.Common.dll"))
+            {
+                isFilesMissing = true;
+                MessageBox.Show("Missing file: EscapeFromTarkov_Data/Managed/NLog.JET.Common.dll", "Missing Files!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            if (!File.Exists($"EscapeFromTarkov_Data/Managed/NLog.JET.Core.dll"))
+            {
+                isFilesMissing = true;
+                MessageBox.Show("Missing file: EscapeFromTarkov_Data/Managed/NLog.JET.Core.dll", "Missing Files!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            if (!File.Exists($"EscapeFromTarkov_Data/Managed/NLog.JET.SinglePlayer.dll"))
+            {
+                isFilesMissing = true;
+                MessageBox.Show("Missing file: EscapeFromTarkov_Data/Managed/NLog.JET.SinglePlayer.dll", "Missing Files!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            if (isFilesMissing)
+                return -4;
 
             if (account.wipe)
             {

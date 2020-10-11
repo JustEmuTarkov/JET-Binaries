@@ -130,6 +130,7 @@
     <ProjectReference Include="..\JET.Common\JET.Common.csproj">
       <Project>{7584f43a-5937-417e-abf4-c5f680f300fb}</Project>
       <Name>JET.Common</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -142,10 +143,8 @@
     </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>
-      xcopy /Y /I "$(TargetDir)*.exe" "$(SolutionDir)\Build\"
-      xcopy /Y /I "$(SolutionDir)\Shared\Resources\client.config.json" "$(SolutionDir)\Build\"
-      xcopy /Y /I "$(SolutionDir)\Shared\Resources\launcher.config.json" "$(SolutionDir)\Build\"</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y /I "$(TargetDir)*.exe" "$(SolutionDir)\Build\"
+xcopy /Y /I "$(SolutionDir)\Shared\Resources\launcher.config.json" "$(SolutionDir)\Build\"</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

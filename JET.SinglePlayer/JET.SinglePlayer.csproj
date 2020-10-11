@@ -130,8 +130,6 @@
     </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>
-      xcopy /Y /I "$(TargetDir)*.dll" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
-</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y /I "$(TargetDir)NLog.JET.SinglePlayer.dll" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"</PostBuildEvent>
   </PropertyGroup>
 </Project>
