@@ -66,7 +66,7 @@ namespace JET.SinglePlayer.Patches.RaidFix
                             lastCallIndex = i;
                             break;
                         default:
-                            Debug.LogError("Mismatched callvirt instruction count.");
+                            Debug.Log("Mismatched callvirt instruction count.");
                             break;
                     }
                     searchIndex = i;

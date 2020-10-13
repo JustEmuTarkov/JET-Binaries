@@ -21,7 +21,7 @@ namespace JET.SinglePlayer.Patches.ScavMode
 
     public class LoadOfflineRaidScreenPatch : GenericPatch<LoadOfflineRaidScreenPatch>
     {
-        public LoadOfflineRaidScreenPatch() : base(transpiler: nameof(PatchTranspiler)) { }
+        public LoadOfflineRaidScreenPatch() : base(transpiler: "PatchTranspiler") { }
 
         protected override MethodBase GetTargetMethod()
         {
@@ -32,7 +32,6 @@ namespace JET.SinglePlayer.Patches.ScavMode
 
         static IEnumerable<CodeInstruction> PatchTranspiler(IEnumerable<CodeInstruction> instructions)
         {
-
             var codes = new List<CodeInstruction>(instructions);
 
             int index = 26;
@@ -66,7 +65,7 @@ namespace JET.SinglePlayer.Patches.ScavMode
             SetMenuControllerFieldValue(menuController, kWavesSettingsFieldName, wavesSettings);
             SetMenuControllerFieldValue(menuController, kWeatherSettingsFieldName, weatherSettings);
 
-            typeof(MenuController).GetMethod(kLoadReadyScreenMethodName, BindingFlags.NonPublic | BindingFlags.Instance).Invoke(menuController, null);
+            typeof(MenuController).GetMethod(kLoadReadyScreenMethodName, BindingFlags.Instance | BindingFlags.NonPublic).Invoke(menuController, null);
         }
 
         public static void LoadOfflineRaidScreenForScav()
@@ -84,8 +83,8 @@ namespace JET.SinglePlayer.Patches.ScavMode
             PrivateValueAccessor.SetPrivateFieldValue(typeof(MenuController), fieldName, instance, value);
         }
         private static readonly string kBotsSettingsFieldName = "gstruct220_0";
-        private static readonly string kWeatherSettingsFieldName = "gstruct87_0";
         private static readonly string kWavesSettingsFieldName = "gstruct88_0";
+        private static readonly string kWeatherSettingsFieldName = "gstruct87_0";
         private const string kMainControllerFieldName = "gclass1144_0";
         private const string kMenuControllerInnerType = "Class782";
         private const string kTargetMethodName = "method_2";

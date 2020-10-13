@@ -21,16 +21,14 @@ namespace JET.SinglePlayer.Patches.Progression
 
 		public OfflineLootPatch()
 		{
-			methodName = "method_5";
-			flags = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly;
 		}
 
 		public override MethodInfo TargetMethod()
 		{
 			var localGameBaseType = PatcherConstants.LocalGameType.BaseType;
 
-			_property = localGameBaseType.GetProperty($"{nameof(LocationInfo)}_0", BindingFlags.NonPublic | BindingFlags.Instance);
-			return localGameBaseType.GetMethod(methodName, flags);
+			_property = localGameBaseType.GetProperty("GClass759_0", BindingFlags.NonPublic | BindingFlags.Instance);
+			return localGameBaseType.GetMethod("method_5", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
 		}
 
 		/// <summary>
@@ -42,7 +40,7 @@ namespace JET.SinglePlayer.Patches.Progression
 			if (__instance.GetType() != PatcherConstants.LocalGameType)
 			{
 				// online match
-				Debug.LogError("OfflineLootPatch > Online match?!");
+				Debug.Log("OfflineLootPatch > Online match?!");
 				return true;
 			}
 			try
@@ -51,19 +49,19 @@ namespace JET.SinglePlayer.Patches.Progression
 				var request = new Request("", backendUrl);
 				var json = request.GetJson("/api/location/" + location.Id);
 				// some magic here. do not change =)
-				var locationLoot = json.ParseJsonTo<LocationInfo>();
+				var locationLoot = Json.Deserialize<LocationInfo>(json);
 				request.PostJson("/raid/map/name", Json.Serialize(new LocationName(location.Id)));
 				if (locationLoot == null)
 				{
 					// failed to download loot
-					Debug.LogError("OfflineLootPatch > Failed to download loot, using fallback");
+					Debug.Log("OfflineLootPatch > Failed to download loot, using fallback");
 					return true;
 				}
-				Debug.LogError("OfflineLootPatch > Successfully received loot from server");
+				Debug.Log("OfflineLootPatch > Successfully received loot from server");
 				__result = Task.FromResult(locationLoot);
 
 			}
-			catch (Exception e1) { Debug.LogError(e1); return true; }
+			catch (Exception e1) { Debug.LogError("=========OfflineLootPatch Failed=========="); Debug.LogError(e1); Debug.LogError("==============================="); return true; }
 			return false;
 		}
 

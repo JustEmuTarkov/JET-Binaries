@@ -22,13 +22,13 @@ namespace JET.Common.Utils.Patching
 		public static void PatchPrefix<T>() where T : AbstractPatch, new()
         {
 			harmony.Patch(new T().TargetMethod(), prefix: new HarmonyMethod(typeof(T).GetMethod("Prefix")));
-			Debug.LogError("JET.Common: Applied prefix patch " + typeof(T).Name);
+			Debug.Log("JET.Common: Applied prefix patch " + typeof(T).Name);
 		}
 
 		public static void PatchPostfix<T>() where T : AbstractPatch, new()
         {
 			harmony.Patch(new T().TargetMethod(), postfix: new HarmonyMethod(typeof(T).GetMethod("Postfix")));
-			Debug.LogError("JET.Common: Applied postfix patch " + typeof(T).Name);
+			Debug.Log("JET.Common: Applied postfix patch " + typeof(T).Name);
 		}
 
 		public static void Patch<T>() where T : GenericPatch<T>, new()
@@ -44,11 +44,11 @@ namespace JET.Common.Utils.Patching
 							  postfix: patch.Postfix.ToHarmonyMethod(),
 							  transpiler: patch.Transpiler.ToHarmonyMethod(),
 							  finalizer: patch.Finalizer.ToHarmonyMethod());
-				Debug.LogError("JET.Common: Applied patch " + typeof(T).Name);
+				Debug.Log("JET.Common: Applied patch " + typeof(T).Name);
 			}
 			catch (Exception ex)
 			{
-				Debug.LogError($"JET.Common: Error in patch {typeof(T).Name}{Environment.NewLine}{ex}");
+				Debug.Log($"JET.Common: Error in patch {typeof(T).Name}{Environment.NewLine}{ex}");
 			}
 		}
 	}

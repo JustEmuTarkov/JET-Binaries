@@ -6,7 +6,7 @@ namespace JET.Common
 	{
 		private void Start()
 		{
-			Debug.LogError("JET.Common: Loaded");
+			Debug.Log("JET.Common: Loaded");
 		}
 	}
 }

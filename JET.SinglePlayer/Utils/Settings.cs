@@ -73,11 +73,11 @@ namespace JET.SinglePlayer.Utils
 
 			if (string.IsNullOrEmpty(json))
 			{
-				Debug.LogError("JET.SinglePlayer: Received bot " + role.ToString() + " limit data is NULL, using fallback");
+				Debug.Log("JET.SinglePlayer: Received bot " + role.ToString() + " limit data is NULL, using fallback");
 				return;
 			}
 
-			Debug.LogError("JET.SinglePlayer: Successfully received bot " + role.ToString() + " limit data");
+			Debug.Log("JET.SinglePlayer: Successfully received bot " + role.ToString() + " limit data");
 			Limits[role] = Convert.ToInt32(json);
 		}
 
@@ -87,11 +87,11 @@ namespace JET.SinglePlayer.Utils
 
 			if (string.IsNullOrEmpty(json))
 			{
-				Debug.LogError("JET.SinglePlayer: Received bot " + role.ToString() + " " + botDifficulty.ToString() + " difficulty data is NULL, using fallback");
+				Debug.Log("JET.SinglePlayer: Received bot " + role.ToString() + " " + botDifficulty.ToString() + " difficulty data is NULL, using fallback");
 				return null;
 			}
 
-			Debug.LogError("JET.SinglePlayer: Successfully received bot " + role.ToString() + " " + botDifficulty.ToString() + " difficulty data");
+			Debug.Log("JET.SinglePlayer: Successfully received bot " + role.ToString() + " " + botDifficulty.ToString() + " difficulty data");
 			difficulty.Json = json;
 			return difficulty;
 		}
@@ -102,18 +102,18 @@ namespace JET.SinglePlayer.Utils
 
             if (string.IsNullOrEmpty(json))
             {
-                Debug.LogError("JET.SinglePlayer: Received NULL response for DefaultRaidSettings. Defaulting to fallback.");
+                Debug.Log("JET.SinglePlayer: Received NULL response for DefaultRaidSettings. Defaulting to fallback.");
                 return;
             }
 
-            Debug.LogError("JET.SinglePlayer: Successfully received DefaultRaidSettings");
+            Debug.Log("JET.SinglePlayer: Successfully received DefaultRaidSettings");
             try
             {
                 DefaultRaidSettings = JsonConvert.DeserializeObject<DefaultRaidSettings>(json);
             }
             catch (Exception exception)
             {
-                Debug.LogError("JET.SinglePlayer: Failed to deserialize DefaultRaidSettings from server. Check your gameplay.json config in your server. Defaulting to fallback. Exception: " + exception);
+                Debug.Log("JET.SinglePlayer: Failed to deserialize DefaultRaidSettings from server. Check your gameplay.json config in your server. Defaulting to fallback. Exception: " + exception);
             }
         }
 
@@ -123,11 +123,11 @@ namespace JET.SinglePlayer.Utils
 
 			if (string.IsNullOrEmpty(json))
 			{
-				Debug.LogError("JET.SinglePlayer: Received core bot difficulty data is NULL, using fallback");
+				Debug.Log("JET.SinglePlayer: Received core bot difficulty data is NULL, using fallback");
 				return;
 			}
 
-			Debug.LogError("JET.SinglePlayer: Successfully received core bot difficulty data");
+			Debug.Log("JET.SinglePlayer: Successfully received core bot difficulty data");
 			CoreDifficulty = json;
 		}
 
@@ -137,11 +137,11 @@ namespace JET.SinglePlayer.Utils
 
             if (string.IsNullOrEmpty(json))
             {
-                Debug.LogError("JET.SinglePlayer: Received weapon durability state data is NULL, using fallback");
+                Debug.Log("JET.SinglePlayer: Received weapon durability state data is NULL, using fallback");
                 return;
             }
 
-            Debug.LogError("JET.SinglePlayer: Successfully received weapon durability state");
+            Debug.Log("JET.SinglePlayer: Successfully received weapon durability state");
             WeaponDurabilityEnabled = Convert.ToBoolean(json);
         }
     }

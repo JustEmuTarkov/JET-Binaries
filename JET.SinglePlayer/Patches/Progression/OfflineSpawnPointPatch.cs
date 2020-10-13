@@ -36,7 +36,7 @@ namespace JET.SinglePlayer.Patches.Progression
             SpawnArea.SpawnAreaSettings spawnAreaSettings = ___spawnAreaSettings_0.Where(spawnAreaSettingHelper.isSpawnAreaSetting).RandomElement<SpawnArea.SpawnAreaSettings>();
             if (spawnAreaSettings == null)
             {
-                Debug.LogError(string.Concat(new object[]
+                Debug.Log(string.Concat(new object[]
                 {
                 "No spawn points for ",
                 side,

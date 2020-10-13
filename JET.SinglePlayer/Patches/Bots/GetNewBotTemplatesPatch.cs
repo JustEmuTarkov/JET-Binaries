@@ -65,14 +65,14 @@ namespace JET.SinglePlayer.Patches.Bots
             if (profile == null)
             {
                 // load from server
-                Debug.LogError("JET.SinglePlayer: Loading bot profile from server");
+                Debug.Log("JET.SinglePlayer: Loading bot profile from server");
                 List<WaveInfo> source = data.PrepareToLoadBackend(1).ToList();
                 taskAwaiter = session.LoadBots(source).ContinueWith(GetFirstResult, taskScheduler);
             }
             else
             {
                 // return cached profile
-                Debug.LogError("JET.SinglePlayer: Loading bot profile from cache");
+                Debug.Log("JET.SinglePlayer: Loading bot profile from cache");
                 taskAwaiter = Task.FromResult(profile);
             }
 

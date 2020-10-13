@@ -61,7 +61,7 @@ namespace JET.SinglePlayer.Patches.RaidFix
 
             if (!labelFound)
             {
-                Debug.LogError("Label not found.");
+                Debug.Log("Label not found.");
                 return instructions;
             }
 

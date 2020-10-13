@@ -65,7 +65,7 @@ namespace JET.Common.Utils.HTTP
 			}
 			catch (Exception e)
 			{
-				Debug.LogError(e);
+				Debug.Log(e);
 			}
 
 			return null;

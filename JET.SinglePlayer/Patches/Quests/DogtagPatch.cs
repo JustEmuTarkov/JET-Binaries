@@ -43,7 +43,7 @@ namespace JET.SinglePlayer.Patches.Quests
 
             if (dogtagItem == null)
             {
-                Debug.LogError("DogtagPatch error > DogTag slot item is null somehow.");
+                Debug.Log("DogtagPatch error > DogTag slot item is null somehow.");
                 return;
             }
 
@@ -51,7 +51,7 @@ namespace JET.SinglePlayer.Patches.Quests
 
             if (itemComponent == null)
             {
-                Debug.LogError("DogtagPatch error > DogTagComponent on dog tag slot is null. Something went horrifically wrong!");
+                Debug.Log("DogtagPatch error > DogTagComponent on dog tag slot is null. Something went horrifically wrong!");
                 return;
             }
 
