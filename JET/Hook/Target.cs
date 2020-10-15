@@ -1,9 +1,9 @@
 ﻿using NLog.Targets;
 using JET.Utilities.Hook;
 
-namespace JET.SinglePlayer.Hook
+namespace JET.Hook
 {
-	[Target("JET.SinglePlayer")]
+	[Target("JET")]
 	public sealed class Target : TargetWithLayout
 	{
 		public Target()

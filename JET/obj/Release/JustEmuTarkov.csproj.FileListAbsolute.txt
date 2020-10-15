@@ -10,3 +10,15 @@ E:\MAOCI\Github\JET-Binaries\JET\obj\Release\JustEmuTarkov.csproj.CoreCompileInp
 E:\MAOCI\Github\JET-Binaries\JET\obj\Release\JustEmuTarkov.csproj.CopyComplete
 E:\MAOCI\Github\JET-Binaries\JET\obj\Release\NLog.JET.dll
 E:\MAOCI\Github\JET-Binaries\JET\obj\Release\NLog.JET.pdb
+J:\_git\JET-Binaries\JET-Binaries\JET\bin\Release\NLog.JET.dll
+J:\_git\JET-Binaries\JET-Binaries\JET\bin\Release\NLog.JET.pdb
+J:\_git\JET-Binaries\JET-Binaries\JET\bin\Release\Newtonsoft.Json.dll
+J:\_git\JET-Binaries\JET-Binaries\JET\bin\Release\UnityEngine.AssetBundleModule.dll
+J:\_git\JET-Binaries\JET-Binaries\JET\bin\Release\UnityEngine.ImageConversionModule.dll
+J:\_git\JET-Binaries\JET-Binaries\JET\bin\Release\UnityEngine.UI.dll
+J:\_git\JET-Binaries\JET-Binaries\JET\bin\Release\UnityEngine.UnityWebRequestAssetBundleModule.dll
+J:\_git\JET-Binaries\JET-Binaries\JET\bin\Release\zlib.net.dll
+J:\_git\JET-Binaries\JET-Binaries\JET\obj\Release\JustEmuTarkov.csproj.CoreCompileInputs.cache
+J:\_git\JET-Binaries\JET-Binaries\JET\obj\Release\JustEmuTarkov.csproj.CopyComplete
+J:\_git\JET-Binaries\JET-Binaries\JET\obj\Release\NLog.JET.dll
+J:\_git\JET-Binaries\JET-Binaries\JET\obj\Release\NLog.JET.pdb
