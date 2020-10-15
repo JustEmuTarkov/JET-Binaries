@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using JET.Common.Utils.App;
+using JET.Utilities.App;
 
 namespace JET.Launcher
 {

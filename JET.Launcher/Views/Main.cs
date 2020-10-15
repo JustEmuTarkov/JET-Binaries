@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using JET.Common.Utils.App;
+using JET.Utilities.App;
 
 namespace JET.Launcher
 {
@@ -557,7 +557,6 @@ namespace JET.Launcher
 						}
 					}
 				}
-
 			}
 		}
 	}

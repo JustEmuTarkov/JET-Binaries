@@ -12,16 +12,9 @@ namespace JET.Launcher
 		[STAThread]
 		private static void Main()
 		{
-            
-            /*if (!File.Exists(Path.Combine(Environment.CurrentDirectory, "ConsistencyInfo")))
-            {
-                MessageBox.Show("No ConsistancyInfo file, assuming we are not in the game directory", "ConsistantyInfo Check Failed!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
-                return;
-            }*/
             if (!File.Exists(Path.Combine(Environment.CurrentDirectory, "EscapeFromTarkov.exe")))
             {
-                MessageBox.Show("No game files found, assuming we are not in the game directory", "Check Failed!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(staticText.ERROR_MSG.noGameFound, staticText.ERROR_MSG.checkFailed, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
                 return;
             }
@@ -75,7 +68,7 @@ namespace JET.Launcher
             }
             catch (Exception) 
             {
-                MessageBox.Show($"Cannot find a file named:\r\n{filename}\r\nApplication will close after pressing OK.","No File Found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Cannot find a file named:\r\n{filename}\r\nApplication will close after pressing OK.","File not found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
             return null;

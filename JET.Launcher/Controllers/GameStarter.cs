@@ -3,7 +3,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using JET.Common.Utils.App;
+using JET.Utilities.App;
 using System.Windows.Forms;
 
 namespace JET.Launcher
@@ -20,16 +20,7 @@ namespace JET.Launcher
 
             SetupGameFiles();
 
-            // TODO: check if files exists in game directory
-            /*
-                \EscapeFromTarkov_Data\Managed\0Harmony.dll
-                \EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll
-                \EscapeFromTarkov_Data\Managed\NLog.dll.nlog
-                \EscapeFromTarkov_Data\Managed\NLog.JET.Common.dll
-                \EscapeFromTarkov_Data\Managed\NLog.JET.Core.dll
-                \EscapeFromTarkov_Data\Managed\NLog.JET.SinglePlayer.dll
-             */
-            // quick check
+            // TODO: check if files exists in game directory; in less retarded way
             bool isFilesMissing = false;
             if (!File.Exists($"EscapeFromTarkov_Data/Managed/0Harmony.dll"))
             {
@@ -46,20 +37,10 @@ namespace JET.Launcher
                 isFilesMissing = true;
                 MessageBox.Show("Missing file: EscapeFromTarkov_Data/Managed/NLog.dll.nlog", "Missing Files!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            if (!File.Exists($"EscapeFromTarkov_Data/Managed/NLog.JET.Common.dll"))
+            if (!File.Exists($"EscapeFromTarkov_Data/Managed/NLog.JET.dll"))
             {
                 isFilesMissing = true;
-                MessageBox.Show("Missing file: EscapeFromTarkov_Data/Managed/NLog.JET.Common.dll", "Missing Files!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            if (!File.Exists($"EscapeFromTarkov_Data/Managed/NLog.JET.Core.dll"))
-            {
-                isFilesMissing = true;
-                MessageBox.Show("Missing file: EscapeFromTarkov_Data/Managed/NLog.JET.Core.dll", "Missing Files!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            if (!File.Exists($"EscapeFromTarkov_Data/Managed/NLog.JET.SinglePlayer.dll"))
-            {
-                isFilesMissing = true;
-                MessageBox.Show("Missing file: EscapeFromTarkov_Data/Managed/NLog.JET.SinglePlayer.dll", "Missing Files!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Missing file: EscapeFromTarkov_Data/Managed/NLog.JET.dll", "Missing Files!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             if (isFilesMissing)
                 return -4;
@@ -102,9 +83,7 @@ namespace JET.Launcher
                     new FileInfo(value2.Replace(value3.Name, @"JET Launcher.exe")),
                     new FileInfo(value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\0Harmony.dll")),
                     new FileInfo(value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\NLog.dll.nlog")),
-                    new FileInfo(value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\Nlog.JET.Common.dll")),
-                    new FileInfo(value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\Nlog.JET.Core.dll")),
-                    new FileInfo(value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\Nlog.JET.SinglePlayer.dll")),
+                    new FileInfo(value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\Nlog.JET.dll"))
                 };
 
                 foreach (var value in value4)

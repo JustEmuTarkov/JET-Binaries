@@ -55,7 +55,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>..\Shared\Resources\icon.ico</ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -127,11 +127,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JET.Common\JET.Common.csproj">
-      <Project>{7584f43a-5937-417e-abf4-c5f680f300fb}</Project>
-      <Name>JET.Common</Name>
-      <Private>False</Private>
+    <ProjectReference Include="..\JET\JustEmuTarkov.csproj">
+      <Project>{ac9adc41-6007-4392-9d52-2bd850506052}</Project>
+      <Name>JustEmuTarkov</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

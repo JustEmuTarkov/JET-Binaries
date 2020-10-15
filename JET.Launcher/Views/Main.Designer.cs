@@ -366,7 +366,7 @@
             // 
             // UpdateTick
             // 
-            this.UpdateTick.Interval = 250;
+            this.UpdateTick.Interval = 50;
             this.UpdateTick.Tick += new System.EventHandler(this.FormUpdate);
             // 
             // Main

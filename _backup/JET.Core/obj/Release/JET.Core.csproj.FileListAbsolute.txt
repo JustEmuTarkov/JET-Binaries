@@ -1,0 +1,6 @@
+E:\MAOCI\Github\JET-Binaries\JET.Core\bin\Release\NLog.JET.Core.dll
+E:\MAOCI\Github\JET-Binaries\JET.Core\bin\Release\NLog.JET.Core.pdb
+E:\MAOCI\Github\JET-Binaries\JET.Core\obj\Release\JET.Core.csprojAssemblyReference.cache
+E:\MAOCI\Github\JET-Binaries\JET.Core\obj\Release\JET.Core.csproj.CoreCompileInputs.cache
+E:\MAOCI\Github\JET-Binaries\JET.Core\obj\Release\NLog.JET.Core.dll
+E:\MAOCI\Github\JET-Binaries\JET.Core\obj\Release\NLog.JET.Core.pdb

@@ -1,0 +1,12 @@
+E:\MAOCI\Github\JET-Binaries\JET\bin\Release\NLog.JET.dll
+E:\MAOCI\Github\JET-Binaries\JET\bin\Release\NLog.JET.pdb
+E:\MAOCI\Github\JET-Binaries\JET\bin\Release\Newtonsoft.Json.dll
+E:\MAOCI\Github\JET-Binaries\JET\bin\Release\UnityEngine.AssetBundleModule.dll
+E:\MAOCI\Github\JET-Binaries\JET\bin\Release\UnityEngine.ImageConversionModule.dll
+E:\MAOCI\Github\JET-Binaries\JET\bin\Release\UnityEngine.UI.dll
+E:\MAOCI\Github\JET-Binaries\JET\bin\Release\UnityEngine.UnityWebRequestAssetBundleModule.dll
+E:\MAOCI\Github\JET-Binaries\JET\bin\Release\zlib.net.dll
+E:\MAOCI\Github\JET-Binaries\JET\obj\Release\JustEmuTarkov.csproj.CoreCompileInputs.cache
+E:\MAOCI\Github\JET-Binaries\JET\obj\Release\JustEmuTarkov.csproj.CopyComplete
+E:\MAOCI\Github\JET-Binaries\JET\obj\Release\NLog.JET.dll
+E:\MAOCI\Github\JET-Binaries\JET\obj\Release\NLog.JET.pdb

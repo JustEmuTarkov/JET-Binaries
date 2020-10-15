@@ -4,13 +4,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("JET Launcher")]
+[assembly: AssemblyTitle("JustEmuTarkov Launcher")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("JET")]
-[assembly: AssemblyProduct("Launcher Application")]
+[assembly: AssemblyProduct("JustEmuTarkov Launcher Application")]
 [assembly: AssemblyCopyright("Copyright © JET 2020")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("JustEmuTarkov")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("4af372e6-fac5-4d96-b833-7a26b43c037b")]
+[assembly: Guid("d90e6798-3810-4d55-a53e-28748c6bfc69")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("12.5.7295.1")]
-[assembly: AssemblyFileVersion("12.5.7295.1")]
+[assembly: AssemblyVersion("0.12.7.9018")]
+[assembly: AssemblyFileVersion("0.1.0.0")]

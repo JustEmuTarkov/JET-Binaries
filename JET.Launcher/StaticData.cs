@@ -128,6 +128,8 @@ namespace JET.Launcher
             public string serverAlreadyExist = "Server already exists";
             public string accountAlreadyExist = "Account already exists";
             public string noServers = "No servers available";
+            public string checkFailed = "Check Failed!";
+            public string noGameFound = "No game files found, assuming we are not in the game directory";
         }
         #endregion
     }

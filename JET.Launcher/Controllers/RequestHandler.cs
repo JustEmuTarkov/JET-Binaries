@@ -1,5 +1,5 @@
-﻿using JET.Common.Utils.App;
-using JET.Common.Utils.HTTP;
+﻿using JET.Utilities.App;
+using JET.Utilities.HTTP;
 
 namespace JET.Launcher
 {
