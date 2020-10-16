@@ -9,12 +9,15 @@ using JET.Patches.Bots;
 using JET.Patches.RaidFix;
 using JET.Patches.Quests;
 using JET.Patches.ScavMode;
+using System.Reflection;
 
 namespace JET
 {
-	public class Instance : MonoBehaviour
+    [ObfuscationAttribute(Exclude = true)]
+    public class Instance : MonoBehaviour
 	{
-		private void Start()
+        [ObfuscationAttribute(Exclude = true)]
+        private void Start()
 		{
             Debug.Log("Core: Loaded");
 

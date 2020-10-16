@@ -4,7 +4,7 @@ namespace JET.Utilities.Hook
 {
 	public class Loader<T> where T : MonoBehaviour
 	{
-		public static GameObject HookObject
+		private static GameObject HookObject
 		{
 			get
 			{
@@ -12,7 +12,7 @@ namespace JET.Utilities.Hook
 
 				if (result == null)
 				{
-					result = new GameObject("JET Common Instance");
+					result = new GameObject("JET Instance");
 					Object.DontDestroyOnLoad(result);
 				}
 
