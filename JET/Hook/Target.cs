@@ -1,11 +1,9 @@
 ﻿using NLog.Targets;
 using JET.Utilities.Hook;
-using System.Reflection;
 
-namespace JET.SinglePlayer.Hook
+namespace JET.Hook
 {
-	[ObfuscationAttribute(Exclude = true)]
-	[Target("JET.SinglePlayer")]
+	[Target("JET")]
 	public sealed class Target : TargetWithLayout
 	{
 		public Target()
