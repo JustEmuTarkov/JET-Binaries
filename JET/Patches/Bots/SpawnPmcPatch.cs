@@ -41,11 +41,8 @@ namespace JET.Patches.Bots
                 return false;
             }
 
-            var fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance);
-
-            if (!fields.Any(x => x.FieldType == typeof(BotDifficulty) && x.Name == "BotDifficulty")
-            || !fields.Any(x => x.FieldType == typeof(EPlayerSide) && x.Name == "Side")
-            || !fields.Any(x => x.FieldType == typeof(WildSpawnType) && x.Name == "Type"))
+            var fields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
+            if (!fields.Any(f => f.FieldType == typeof(WildSpawnType)) || !fields.Any(f => f.FieldType == typeof(BotDifficulty)))
             {
                 return false;
             }

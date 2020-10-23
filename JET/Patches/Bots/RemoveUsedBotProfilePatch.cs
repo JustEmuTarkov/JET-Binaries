@@ -5,7 +5,7 @@ using System.Reflection;
 using HarmonyLib;
 using EFT;
 using JET.Utilities.Patching;
-using BotData = GInterface13;
+using BotData = GInterface14;
 
 namespace JET.Patches.Bots
 {

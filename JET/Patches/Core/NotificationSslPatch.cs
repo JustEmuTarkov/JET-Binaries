@@ -69,17 +69,25 @@ namespace JET.Patches
         */
         static IEnumerable<CodeInstruction> PatchTranspiler(IEnumerable<CodeInstruction> instructions)
         {
-
+            //FileLog.Log("NotificationSslPatch");
+            //var builder = new StringBuilder();
             var codes = new List<CodeInstruction>(instructions);
             var index = 0;
-            
+
             for (var i = 0; i < codes.Count(); i++)
             {
-                if (codes[i].ToString().Contains("170994"))
+                //builder.AppendLine(codes[i].ToString());
+                if (codes[i].ToString().Contains("UnityEngine.Networking.UnityWebRequest::.ctor"))
                 {
-                    index = i + 3;
+                    index = i + 1;
                     break;
                 }
+            }
+            //FileLog.Log(builder.ToString());
+
+            if (index == 0)
+            {
+                index = 139;
             }
 
             var dupCode = new CodeInstruction(OpCodes.Dup);

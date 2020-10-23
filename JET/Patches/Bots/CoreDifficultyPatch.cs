@@ -3,7 +3,7 @@ using UnityEngine;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
 using JET.Utilities;
-using BotDifficultyHandler = GClass280;
+using BotDifficultyHandler = GClass283;
 
 namespace JET.Patches.Bots
 {

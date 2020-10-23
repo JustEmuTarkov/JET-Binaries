@@ -6,8 +6,8 @@ using EFT;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
 using JET.Utilities;
-using WaveInfo = GClass897;
-using BotsPresets = GClass334;
+using WaveInfo = GClass904;
+using BotsPresets = GClass337;
 
 namespace JET.Patches.Bots
 {
