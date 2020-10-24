@@ -1,76 +1,42 @@
-
-using System.Reflection;
-using EFT;
-using EFT.Interactive;
-using JET.Utilities.Patching;
-using UnityEngine;
-using System.Linq;
 using System;
+using System.Linq;
+using System.Reflection;
+using UnityEngine;
+using EFT;
+using EFT.Game.Spawning;
+using JET.Utilities.Patching;
 
 namespace JET.Patches.Progression
 {
     class OfflineSpawnPointPatch : GenericPatch<OfflineSpawnPointPatch>
     {
-        public OfflineSpawnPointPatch() : base(prefix: nameof(PatchPrefix))
-        {
-        }
+        public OfflineSpawnPointPatch() : base(prefix: nameof(PatchPrefix)) { }
 
         protected override MethodBase GetTargetMethod()
         {
-            var targetType = PatcherConstants.TargetAssembly.GetTypes().Single(IsTargetType);
-            return targetType.GetMethod("SelectSpawnPoint", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            return PatcherConstants.TargetAssembly.GetTypes().First(IsTargetType).GetMethods(PatcherConstants.DefaultBindingFlags).First(m => m.Name.Contains("SelectSpawnPoint"));
         }
 
         private static bool IsTargetType(Type type)
         {
-            var methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-
-            if (!methods.Any(x => x.Name == "CheckFarthestFromOtherPlayers"))
-            {
+            if (!type.GetMethods(PatcherConstants.DefaultBindingFlags).Any(x => x.Name.IndexOf("CheckFarthestFromOtherPlayers", StringComparison.OrdinalIgnoreCase) != -1))
                 return false;
-            }
 
-            return true;
+            return !type.IsInterface;
         }
 
-        public static bool PatchPrefix(SpawnArea.SpawnAreaSettings[] ___spawnAreaSettings_0, EPlayerSide side, out Vector3 position, out Quaternion rotation, string spawnPointFilter = null, string infiltrationZone = null)
+        public static bool PatchPrefix(ref ISpawnPoint __result, GInterface208 ___ginterface208_0, ESpawnCategory category, EPlayerSide side, string infiltration)
         {
-            var spawnAreaSettingHelper = new SpawnAreaSettingHelper(side, spawnPointFilter, infiltrationZone);
-            var spawnAreaSettings = ___spawnAreaSettings_0.Where(spawnAreaSettingHelper.isSpawnAreaSetting).RandomElement();
+            var spawnPoints = Enumerable.ToList(___ginterface208_0);
 
-            if (spawnAreaSettings == null)
-            {
-                Debug.Log("No spawn points for " + side + " found! Spawn points count: " +  ___spawnAreaSettings_0.Length);
-                position = Vector3.zero;
-                rotation = Quaternion.identity;
-                return false;
-            }
+            spawnPoints = spawnPoints.Where(sp => sp.Sides.Contain(side) && sp.Categories.Contain(category)).ToList();
+            var infils = spawnPoints.Select(sp => sp.Infiltration).Distinct();
 
-            position = spawnAreaSettings.Position;
-            rotation = Quaternion.Euler(0f, spawnAreaSettings.Orientation, 0f);
+            Debug.LogError($"PatchPrefix SelectSpawnPoint: {spawnPoints.Count} | {String.Join(", ", infils)}");
 
+            __result = spawnPoints.Where(sp => sp.Infiltration.Equals(infiltration)).RandomElement();
+            Debug.LogError($"Selected Spawn Point: {__result.Id}");
             return false;
-        }
-    }
-
-    public class SpawnAreaSettingHelper
-    {
-        private readonly EPlayerSide side;
-        private readonly string spawnPointFilter;
-        private readonly string infiltrationZone;
-
-        public SpawnAreaSettingHelper(EPlayerSide side, string spawnPointFilter, string infiltrationZone)
-        {
-            this.side = side;
-            this.spawnPointFilter = spawnPointFilter;
-            this.infiltrationZone = infiltrationZone;
-        }
-
-        public bool isSpawnAreaSetting(SpawnArea.SpawnAreaSettings x)
-        {
-            return x.Sides.Contains(side)
-                && (string.IsNullOrWhiteSpace(infiltrationZone) || x.InfiltrationZone == infiltrationZone)
-                && (string.IsNullOrWhiteSpace(spawnPointFilter) || spawnPointFilter.Contains(x.Id));
         }
     }
 }

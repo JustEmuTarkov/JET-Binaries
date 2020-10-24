@@ -24,7 +24,7 @@ namespace JET.Patches.Progression
         {
 			var localGameBaseType = PatcherConstants.LocalGameType.BaseType;
 
-			_property = localGameBaseType.GetProperty($"{nameof(LocationInfo)}_0", BindingFlags.NonPublic | BindingFlags.Instance);
+			_property = localGameBaseType.GetProperty($"{nameof(GClass759.GClass761)}_0", BindingFlags.NonPublic | BindingFlags.Instance);
 			return localGameBaseType.GetMethod("method_5", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
 		}
 

@@ -19,23 +19,29 @@ namespace JET
         [ObfuscationAttribute(Exclude = true)]
         private void Start()
 		{
-            Debug.Log("Core: Loaded");
 
             PatcherUtil.Patch<BattleEyePatch>();
             PatcherUtil.Patch<SslCertificatePatch>();
             PatcherUtil.Patch<UnityWebRequestPatch>();
             PatcherUtil.Patch<NotificationSslPatch>();
+            Debug.Log("Core: Loaded");
 
             new Settings(null, Config.BackendUrl);
             
-            Debug.Log("RuntimeBundles: Loaded");
-
             PatcherUtil.Patch<EasyAssetsPatch>();
             PatcherUtil.Patch<EasyBundlePatch>();
             PatcherUtil.Patch<BundleLoadPatch>();
+            Debug.Log("RuntimeBundles: Loaded");
 
-            Debug.Log("SinglePlayer: Loaded");
+            if (Offline.IsEnabled())
+            {
+                OfflineModePatchRoutes();
+                return;
+            }
+            Debug.Log("SinglePlayer: Disabled");
+        }
 
+        private void OfflineModePatchRoutes() {
             PatcherUtil.Patch<OfflineLootPatch>();
             PatcherUtil.Patch<OfflineSaveProfilePatch>();
             PatcherUtil.Patch<OfflineSpawnPointPatch>();
@@ -71,6 +77,8 @@ namespace JET
             PatcherUtil.Patch<ScavExfilPatch>();
 
             PatcherUtil.Patch<EndByTimerPatch>();
+
+            Debug.Log("SinglePlayer: Loaded");
         }
 	}
 }

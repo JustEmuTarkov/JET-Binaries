@@ -133,6 +133,7 @@
     <Compile Include="Utilities\EasyBundleHelper.cs" />
     <Compile Include="Utilities\Hook\Loader.cs" />
     <Compile Include="Utilities\HTTP\Request.cs" />
+    <Compile Include="Utilities\Offline.cs" />
     <Compile Include="Utilities\Patching\AbstractPatch.cs" />
     <Compile Include="Utilities\Patching\GenericPatch.cs" />
     <Compile Include="Utilities\Patching\PatcherConstants.cs" />
