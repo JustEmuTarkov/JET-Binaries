@@ -151,7 +151,9 @@
     <Compile Include="Utilities\Reflection\PrivateValueAccessor.cs" />
     <Compile Include="Utilities\Settings.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="CodeMap.dgml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent Condition="'$(OS)' != 'Unix'">

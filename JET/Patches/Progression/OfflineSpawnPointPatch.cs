@@ -32,10 +32,10 @@ namespace JET.Patches.Progression
             spawnPoints = spawnPoints.Where(sp => sp.Sides.Contain(side) && sp.Categories.Contain(category)).ToList();
             var infils = spawnPoints.Select(sp => sp.Infiltration).Distinct();
 
-            Debug.LogError($"PatchPrefix SelectSpawnPoint: {spawnPoints.Count} | {String.Join(", ", infils)}");
+            Debug.Log($"PatchPrefix SelectSpawnPoint: {spawnPoints.Count} | {String.Join(", ", infils)}");
 
             __result = spawnPoints.Where(sp => sp.Infiltration.Equals(infiltration)).RandomElement();
-            Debug.LogError($"Selected Spawn Point: {__result.Id}");
+            Debug.Log($"Selected Spawn Point: {__result.Id}");
             return false;
         }
     }
