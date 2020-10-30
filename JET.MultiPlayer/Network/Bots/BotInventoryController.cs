@@ -14,7 +14,7 @@ namespace ServerLib.Network.Bots
             Console.WriteLine($"Called: BotInventoryController - {player.Profile.Info.Nickname}/{profile.Info.Nickname}");
         }
 
-        internal override void Execute(GClass1591 operation, Callback callback)
+        internal override void Execute(GClass1700 operation, Callback callback)
         {
             Console.WriteLine($"Called: BotInventoryController.Execute - {operation.string_0} / {callback.Target} / {callback.Method.Name}");
             /* this is crashing game client not server * /

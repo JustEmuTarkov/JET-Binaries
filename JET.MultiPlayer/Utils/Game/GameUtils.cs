@@ -35,21 +35,20 @@ namespace ServerLib.Utils.Game
 
         public static bool GameReadyForStart()
         {
-            return GetMainApp()?.gclass1109_0 != null;
+            return GetMainApp()?.gclass1149_0 != null;
         }
 
-        public static GClass735.GClass737 StartLocalGame(string locationId, GStruct77 timeAndWeather)
+        public static GClass760.GClass762 StartLocalGame(string locationId, GStruct87 timeAndWeather)
         {
             var mainApp = GetMainApp();
             if (mainApp == null) return null;
 
             int num = UnityEngine.Random.Range(1, 6);
-            var localLoot = GClass405.Load<TextAsset>("LocalLoot/" + locationId + num).text
-                .ParseJsonTo<GClass735.GClass736>();
-            var location = localLoot.Location.ParseJsonTo<GClass735.GClass737>();
+            var localLoot = GClass482.Load<TextAsset>("LocalLoot/" + locationId + num).text.ParseJsonTo<GClass760.GClass761>();
+            var location = localLoot.Location.ParseJsonTo<GClass760.GClass762>();
 
             SetIsLocal();
-            mainApp.method_28(location, timeAndWeather, "");
+            mainApp.method_29(location, timeAndWeather, "");
 
             return location;
         }

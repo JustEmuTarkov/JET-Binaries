@@ -14,15 +14,15 @@ using ServerLib.Utils.Game;
 using UnityEngine;
 using UnityEngine.Networking;
 using NetworkGameSession = ServerLib.Network.NetworkGameSession;
-using LocationSettings = GClass735.GClass737;
-using WeatherNodes = GClass1210;
+using LocationSettings = GClass760.GClass762;
+using WeatherNodes = GClass1286;
 
 // warning CS0618: 'NetworkManager' is obsolete: 'The high level API classes are deprecated and will be removed in the future.'
 #pragma warning disable 618
 
 namespace ServerLib
 {
-    public class ServerInstance : NetworkManager, GInterface48
+    public class ServerInstance : NetworkManager, GInterface60
     {
         const int ShortPort = 5000;
         const int MaxConnections = 20;
@@ -80,7 +80,7 @@ namespace ServerLib
 
                 var mapId = "factory4_day"; // it need to be loaded from file or something
                 mapSettings = GameUtils.StartLocalGame(mapId,
-                    new GStruct77(true, true)
+                    new GStruct87(true, true)
                 );
             }
 
@@ -110,7 +110,7 @@ namespace ServerLib
             if (!NetworkServer.active)
             {
                 StartLocalServer();
-                World.smethod_0<ServerWorld>(null, null);
+                World.smethod_0<ServerWorld>(null, null, false);
                 // Server started LevelBounds Center: (152.0, 0.0, -10.0), Extents: (600.0, 200.0, 270.0)
                 // rezerv Center: (152.0, -71.7, -10.0), Extents: (700.0, 163.6, 350.0)
             }
@@ -119,11 +119,11 @@ namespace ServerLib
             if (game == null)
                 return;
 
-            var levelPhysicsSettings = GClass387.GetAllComponentsOfType<LevelPhysicsSettings>(false);
+            var levelPhysicsSettings = GClass464.GetAllComponentsOfType<LevelPhysicsSettings>(false);
             Console.WriteLine($"LevelPhysicsSettings count: {levelPhysicsSettings.Count}");
-            GClass806.SetupPositionQuantizer(levelPhysicsSettings.ToArray()[0].GetGlobalBounds());
+            GClass836.SetupPositionQuantizer(levelPhysicsSettings.ToArray()[0].GetGlobalBounds());
 
-            game.PlayerOwner.Player.GClass1544_0.SetExamined(true); // !!!!
+            game.PlayerOwner.Player.GClass1652_0.SetExamined(true); // search for setExamined
             game.BotsController.DestroyInfo(game.PlayerOwner.Player);
             Singleton<GameWorld>.Instance.UnregisterPlayer(game.PlayerOwner.Player);
         }

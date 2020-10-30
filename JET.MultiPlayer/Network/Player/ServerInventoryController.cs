@@ -22,18 +22,18 @@ namespace ServerLib.Network.Player
             Console.WriteLine($"ServerInventoryController Execute GClass1613 operation {operation.gclass1486_0.Id}");
         }
 
-        internal override void Execute(GClass1591 operation, Callback callback)
+        internal override void Execute(GClass1700 operation, Callback callback)
         {
             Console.WriteLine($"Called Operation: {operation.string_0}");
             if (operation == null)
             {
                 callback?.Invoke("operation is null");
-                Console.WriteLine("ServerInventoryController Execute GClass1591 operation null");
+                Console.WriteLine("ServerInventoryController Execute GClass1700 operation null");
                 return;
             }
 
             base.Execute(operation, callback);
-            Console.WriteLine($"ServerInventoryController Execute GClass1591 operation {operation.string_0}");
+            Console.WriteLine($"ServerInventoryController Execute GClass1700 operation {operation.string_0}");
         }
 
         public override void StartSearchingAction(GClass1486 item)

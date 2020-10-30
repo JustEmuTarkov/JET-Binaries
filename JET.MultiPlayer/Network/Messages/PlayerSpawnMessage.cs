@@ -262,9 +262,9 @@ namespace ServerLib.Network.Messages
             spawnMessage.IsAlive = player.HealthController.IsAlive;
 
             var previousHealthState = spawnMessage.HealthState;
-            spawnMessage.HealthState = (player.HealthController as GClass1263)?.SerializeState();
+            spawnMessage.HealthState = (player.HealthController as GClass1367)?.SerializeState();
             if (spawnMessage.HealthState == null)
-                spawnMessage.HealthState = (player.HealthController as GClass1264)?.SerializeState(); // this is one above the one 1263 from 2 lines above
+                spawnMessage.HealthState = (player.HealthController as GClass1368)?.SerializeState(); // this is one above the one 1263 from 2 lines above
             if (spawnMessage.HealthState == null)
                 spawnMessage.HealthState = previousHealthState;
             return spawnMessage;
@@ -290,7 +290,7 @@ namespace ServerLib.Network.Messages
         public int AnimationVariant;
         public Profile Profile = new Profile();
         public Inventory Inventory = new Inventory();
-        public GClass804[] SearchableInfo = new GClass804[0];
+        public GClass1424[] SearchableInfo = new GClass1424[0];
         public int IdGeneratorId;
         public int ScavExfilMask;
         public byte[] HealthState = new byte[0];

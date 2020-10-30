@@ -23,9 +23,9 @@ namespace ServerLib.Utils.Reflection
             writer.Write(InventorySerializer.SerializeInventory(inventory));
         }
 
-        public static GClass804[] DeSerializeSearchableInfo(this NetworkReader reader)
+        public static GClass1424[] DeSerializeSearchableInfo(this NetworkReader reader)
         {
-            return GClass803.Deserialize(reader.ReadBytesAndSize());
+            return GClass1423.Deserialize(reader.ReadBytesAndSize());
         }
 
         public static void SerializeSearchableInfo(this NetworkWriter writer, GClass804[] searchableInfo)

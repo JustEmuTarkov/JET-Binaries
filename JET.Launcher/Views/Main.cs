@@ -103,7 +103,6 @@ namespace JET.Launcher
 					_AddServer();
 					break;
 				case 2:
-					_processedAction = 4;
 					_Login();
 					break;
 				case 3:
@@ -251,17 +250,17 @@ namespace JET.Launcher
 			switch (status)
 			{
 				case 1:
+					_processedAction = 4;
 					return;
 
 				case -1:
 					MessageBox.Show(sD.ERROR_MSG.wrongEmailPassword);
-					_processedAction = 2;
 					return;
 
 				case -2:
 					MessageBox.Show(sD.ERROR_MSG.connectionLost);
-					_processedAction = 2;
 					return;
+				default: return;
 			}
 		}
 		private void _StartGame() {

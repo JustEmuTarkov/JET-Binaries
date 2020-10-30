@@ -12,7 +12,7 @@ using ServerLib.Utils.Game;
 using UnityEngine;
 using UnityEngine.Networking;
 using DateTimeClass = GClass878;
-using WeatherClass = GClass1210;
+using WeatherClass = GClass1286;
 #pragma warning disable 618
 
 namespace ServerLib.Network.Messages

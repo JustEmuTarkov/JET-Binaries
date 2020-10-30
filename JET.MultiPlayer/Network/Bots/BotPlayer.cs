@@ -16,13 +16,13 @@ namespace ServerLib.Network.Bots
 {
     public class BotPlayer : NetworkPlayer
     {
-        public GClass1000 movementContext;
+        public GClass1036 movementContext;
         public override byte ChannelIndex { get; }
-        public GStruct99 lootInteractionPacket;
+        public GStruct105 lootInteractionPacket;
         public List<GStruct116> inventoryCommands;
-        public GStruct103 handsChangePacket;
-        public GStruct95 interactWithDoorPacket;
-        public GStruct165? syncHealthPacket;
+        public GStruct134 handsChangePacket;
+        public GStruct105 interactWithDoorPacket;
+        public GStruct190? syncHealthPacket;
         public PhraseCommandPacket phraseCommandPacket;
         public GStruct94 lastMovementContext;
 
@@ -44,17 +44,17 @@ namespace ServerLib.Network.Bots
         {
             int playerId = ServerInstance.GetNextChannelId();
             EUpdateMode armsUpdateMode = EUpdateMode.Auto;
-            if (GClass266.Config.UseHandsFastAnimator)
+            if (GClass310.Config.UseHandsFastAnimator)
             {
                 armsUpdateMode = EUpdateMode.Manual;
             }
 
             var player = smethod_2<BotPlayer>(
-                GClass801.PLAYER_BUNDLE_NAME, playerId,
+                GClass829.PLAYER_BUNDLE_NAME, playerId,
                 Vector3.zero, "Player",
                 Singleton<ServerInstance>.Instance,
                 LocalGameUtils.Get().UpdateQueue,
-                armsUpdateMode, EUpdateMode.Auto, GClass266.Config.CharacterController.BotPlayerMode,
+                armsUpdateMode, EUpdateMode.Auto, GClass310.Config.CharacterController.BotPlayerMode,
                 () => 1f,
                 () => 1f
             );
@@ -62,11 +62,11 @@ namespace ServerLib.Network.Bots
             await player.Init(Quaternion.identity, "Player", EPointOfView.ThirdPerson, profile,
                 () => new BotInventoryController(player, profile),
                 () => new BotHeathController(profile.Health, player, true),
-                new GClass1075(),
+                new GClass1121(),
                 null, false
             );
 
-            foreach (GClass1477 magazine in player.Inventory.NonQuestItems.OfType<GClass1477>())
+            foreach (GClass1585 magazine in player.Inventory.NonQuestItems.OfType<GClass1477>())
             {
                 player._inventoryController.StrictCheckMagazine(
                     magazine, true, player.Profile.MagDrillsMastering, false, false
@@ -136,9 +136,9 @@ namespace ServerLib.Network.Bots
             this.interactWithDoorPacket.Execute = EInteractionStage.Ignore;
         }
 
-        public override GClass334 CreatePhysical()
+        public override GClass395 CreatePhysical()
         {
-            return new GClass335();
+            return new GClass396();
         }
 
         internal override void vmethod_1(WorldInteractiveObject door, GClass1673 interactionResult, Action callback)
