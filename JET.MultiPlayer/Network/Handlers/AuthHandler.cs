@@ -38,8 +38,8 @@ namespace ServerLib.Network.Handlers
                 player.channelIndex = (byte) channelId;
                 serverInstance.NetworkClients.TryAdd(message.conn.connectionId, player);
 
-                var playerPrefabs = profile.Inventory.GetAllInventoryPrefabs();
-                serverInstance.AllPrefabs.AddRange(playerPrefabs);
+                var playerPrefabs = profile.Inventory.GetAllEquipmentItems();//.GetAllInventoryPrefabs();
+                serverInstance.AllPrefabs.AddRange(playerPrefabs); // TODO: this need a rewrite !!!!!!
 
                 var msg = new SomeBundleMessage { LootItems = playerPrefabs.ToArray(), Id = SomeBundleMessage.BundlesQueue };
                 foreach (var gameSession in serverInstance.GameSessions.Values)

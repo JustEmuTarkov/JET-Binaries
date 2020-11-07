@@ -19,31 +19,32 @@ namespace ServerLib.Network.Player
     public class ServerPlayer : ObservedPlayer
     {
         public GStruct128 currentPacket;
-        public GClass1544 InventoryController => base._inventoryController;
+        public GClass1652 InventoryController => base._inventoryController;
         private Queue<uint> _confirmQueue = new Queue<uint>();
 
-        public static ServerPlayer Create(int playerId, Vector3 position, GInterface48 frameIndexer)
+        public static ServerPlayer Create(int playerId, Vector3 position, GInterface60 frameIndexer)
         {
             var player = smethod_2<ServerPlayer>(
-                GClass801.PLAYER_BUNDLE_NAME,
+                GClass829.PLAYER_BUNDLE_NAME,
                 playerId, position,
                 "Observed_",
                 frameIndexer,
                 EUpdateQueue.Update, EUpdateMode.Manual, EUpdateMode.Auto,
-                GClass266.Config.CharacterController.ObservedPlayerMode,
+                GClass310.Config.CharacterController.ObservedPlayerMode,
                 () => 1f, () => 1f
             );
 
             player.EnabledAnimators = 0;
             if (player._triggerColliderSearcher != null)
             {
-                player._triggerColliderSearcher.OnEnter += player.method_99;
-                player._triggerColliderSearcher.OnExit += player.method_100;
+                player._triggerColliderSearcher.OnEnter += player.method_100;
+                player._triggerColliderSearcher.OnExit += player.method_101;
             }
 
             player._armsUpdateQueue = EUpdateQueue.FixedUpdate;
-            player.ginterface90_0 = new GClass1128(player);
-            player.method_82();
+            // im leaving all traces and unneeded things to easier track that functions
+            player.ginterface103_0 = new ObservedPlayer.GClass1191(player); 
+            player.method_83(); // VERIFIED!! - ObservedPlayer : NetworkPlayer -> smethod_4() inside method_83 is called
 
             method_4(player);
 
@@ -62,7 +63,7 @@ namespace ServerLib.Network.Player
                 }
 
                 Collider collider2 = player.CharacterControllerCommon.GetCollider();
-                GClass306.IgnoreCollision(collider, collider2, true);
+                GClass367.IgnoreCollision(collider, collider2, true);
             }
         }
 

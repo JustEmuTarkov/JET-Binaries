@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Comfort.Common;
 using UnityEngine.Networking;
-using Inventory = GClass1529;
+using Inventory = GClass1637;
 using InventorySerializer = GClass907;
 using ItemsFactory = GClass879;
 

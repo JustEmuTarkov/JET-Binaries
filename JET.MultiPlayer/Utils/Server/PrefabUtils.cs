@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using EFT;
 using EFT.InventoryLogic;
-using Inventory = GClass1529;
+using Inventory = GClass1637;
 
 namespace ServerLib.Utils.Server
 {

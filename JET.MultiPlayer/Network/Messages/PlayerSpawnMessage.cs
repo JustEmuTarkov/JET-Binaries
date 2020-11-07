@@ -7,8 +7,8 @@ using ServerLib.Network.Player;
 using ServerLib.Utils.Reflection;
 using UnityEngine;
 using UnityEngine.Networking;
-using Inventory = GClass1529;
-using SetupInfo = GClass1652;
+using Inventory = GClass1637;
+using SetupInfo = GClass1764;
 
 #pragma warning disable 618
 
@@ -215,7 +215,7 @@ namespace ServerLib.Network.Messages
             spawnMessage.Inventory = profile.Inventory;
 
             spawnMessage.HandsEController = EController.Empty;
-            spawnMessage.SearchableInfo = GClass803.ExtractSearchInfo(spawnMessage.Inventory.AllPlayerItems).ToArray();
+            spawnMessage.SearchableInfo = GClass803.ExtractSearchInfo(spawnMessage.Inventory.AllPlayerItems).ToArray(); // TODO: cannot find !!!!
             //spawnMessage.Position = SpawnUtils.GetRandomSpawnPoint().Position;
             //spawnMessage.SpawnPosition = spawnMessage.Position;
             spawnMessage.IsAlive = true;
