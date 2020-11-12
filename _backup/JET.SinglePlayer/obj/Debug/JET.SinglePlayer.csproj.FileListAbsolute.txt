@@ -1,8 +1,0 @@
-J:\_git\JustEmuTarkov-Base\Module\JET.SinglePlayer\bin\Debug\NLog.JET.SinglePlayer.dll
-J:\_git\JustEmuTarkov-Base\Module\JET.SinglePlayer\bin\Debug\NLog.JET.SinglePlayer.pdb
-J:\_git\JustEmuTarkov-Base\Module\JET.SinglePlayer\bin\Debug\PlayerEnums.dll
-J:\_git\JustEmuTarkov-Base\Module\JET.SinglePlayer\obj\Debug\JET.SinglePlayer.csprojAssemblyReference.cache
-J:\_git\JustEmuTarkov-Base\Module\JET.SinglePlayer\obj\Debug\JET.SinglePlayer.csproj.CoreCompileInputs.cache
-J:\_git\JustEmuTarkov-Base\Module\JET.SinglePlayer\obj\Debug\JET.SinglePlayer.csproj.CopyComplete
-J:\_git\JustEmuTarkov-Base\Module\JET.SinglePlayer\obj\Debug\NLog.JET.SinglePlayer.dll
-J:\_git\JustEmuTarkov-Base\Module\JET.SinglePlayer\obj\Debug\NLog.JET.SinglePlayer.pdb
