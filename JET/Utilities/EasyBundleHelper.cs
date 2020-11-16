@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using HarmonyLib;
 using IBundleLock = GInterface239; //Property: IsLocked
-using BindableState = GClass2097<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
+using BindableState = GClass2100<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
 
 namespace JET.Utilities
 {
