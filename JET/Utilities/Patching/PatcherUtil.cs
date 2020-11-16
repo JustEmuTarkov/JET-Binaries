@@ -11,7 +11,7 @@ namespace JET.Utilities.Patching
 
 		static PatcherUtil()
 		{
-			harmony = new Harmony("com.JET.common");
+			harmony = new Harmony("com.[JET]");
 		}
 
 		public static MethodInfo GetOriginalMethod<T>(string methodName)
@@ -22,13 +22,13 @@ namespace JET.Utilities.Patching
 		public static void PatchPrefix<T>() where T : AbstractPatch, new()
         {
 			harmony.Patch(new T().TargetMethod(), prefix: new HarmonyMethod(typeof(T).GetMethod("Prefix")));
-			Debug.Log("JET.Common: Applied prefix patch " + typeof(T).Name);
+			Debug.Log("[JET]: Applied prefix patch " + typeof(T).Name);
 		}
 
 		public static void PatchPostfix<T>() where T : AbstractPatch, new()
         {
 			harmony.Patch(new T().TargetMethod(), postfix: new HarmonyMethod(typeof(T).GetMethod("Postfix")));
-			Debug.Log("JET.Common: Applied postfix patch " + typeof(T).Name);
+			Debug.Log("[JET]: Applied postfix patch " + typeof(T).Name);
 		}
 
 		public static void Patch<T>() where T : GenericPatch<T>, new()
@@ -44,11 +44,11 @@ namespace JET.Utilities.Patching
 							  postfix: patch.Postfix.ToHarmonyMethod(),
 							  transpiler: patch.Transpiler.ToHarmonyMethod(),
 							  finalizer: patch.Finalizer.ToHarmonyMethod());
-				Debug.Log("JET.Common: Applied patch " + typeof(T).Name);
+				Debug.Log("[JET]: Applied patch " + typeof(T).Name);
 			}
 			catch (Exception ex)
 			{
-				Debug.Log($"JET.Common: Error in patch {typeof(T).Name}{Environment.NewLine}{ex}");
+				Debug.Log($"[JET]: Error in patch {typeof(T).Name}{Environment.NewLine}{ex}");
 			}
 		}
 	}

@@ -8,7 +8,9 @@ using JET.Utilities.Patching;
 using JET.Utilities;
 using IEasyBundle = GInterface238; //Property: SameNameAsset 
 using IBundleLock = GInterface239; //Property: IsLocked
-using BindableState = GClass2097<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
+// go to actual gclass and search for gclassXXXX<T> with initial value gparam_0 and base.method_0(value) call
+using BindableState = GClass2100<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue 
+
 
 namespace JET.Patches
 {

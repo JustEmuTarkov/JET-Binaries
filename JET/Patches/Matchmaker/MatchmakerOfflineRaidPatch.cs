@@ -51,11 +51,11 @@ namespace JET.Patches.Matchmaker
 
             if (string.IsNullOrWhiteSpace(json))
             {
-                Debug.Log("JET.SinglePlayer: Received NULL response for DefaultRaidSettings. Defaulting to fallback.");
+                Debug.Log("[JET]: Received NULL response for DefaultRaidSettings. Defaulting to fallback.");
                 return null;
             }
 
-            Debug.Log("JET.SinglePlayer: Successfully received DefaultRaidSettings");
+            Debug.Log("[JET]: Successfully received DefaultRaidSettings");
 
             try
             {
@@ -63,7 +63,7 @@ namespace JET.Patches.Matchmaker
             }
             catch (Exception exception)
             {
-                Debug.Log("JET.SinglePlayer: Failed to deserialize DefaultRaidSettings from server. Check your gameplay.json config in your server. Defaulting to fallback. Exception: " + exception);
+                Debug.Log("[JET]: Failed to deserialize DefaultRaidSettings from server. Check your gameplay.json config in your server. Defaulting to fallback. Exception: " + exception);
                 return null;
             }
         }

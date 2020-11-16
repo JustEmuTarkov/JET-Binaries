@@ -6,8 +6,8 @@ using EFT;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
 using JET.Utilities;
-using WaveInfo = GClass904;
-using BotsPresets = GClass337;
+using WaveInfo = GClass904; // Field: Role (choose first one displayed as "Role")
+using BotsPresets = GClass337; // Method: GetNewProfile (higher GClass number)
 
 namespace JET.Patches.Bots
 {
@@ -48,11 +48,11 @@ namespace JET.Patches.Bots
 
             if (string.IsNullOrWhiteSpace(json))
             {
-                Debug.Log("JET.SinglePlayer: Received bot " + role.ToString() + " limit data is NULL, using fallback");
+                Debug.Log("[JET]: Received bot " + role.ToString() + " limit data is NULL, using fallback");
                 return 30;
             }
 
-            Debug.Log("JET.SinglePlayer: Successfully received bot " + role.ToString() + " limit data");
+            Debug.Log("[JET]: Successfully received bot " + role.ToString() + " limit data");
             return Convert.ToInt32(json);
         }
     }

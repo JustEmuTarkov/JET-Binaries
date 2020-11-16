@@ -4,7 +4,7 @@ using UnityEngine;
 using EFT;
 using JET.Utilities.Patching;
 using JET.Utilities;
-using AmmoInfo = GClass1648;
+using AmmoInfo = GClass1649;
 
 namespace JET.Patches.Progression
 {

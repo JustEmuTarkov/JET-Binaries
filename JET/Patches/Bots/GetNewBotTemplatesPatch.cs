@@ -8,11 +8,11 @@ using UnityEngine;
 using Comfort.Common;
 using EFT;
 using JET.Utilities.Patching;
-using WaveInfo = GClass904;
-using BotsPresets = GClass337;
-using BotData = GInterface14;
-using PoolManager = GClass1133;
-using JobPriority = GClass2077;
+using WaveInfo = GClass904; // Field: Role (choose first one displayed as "Role")
+using BotsPresets = GClass337; // Method: GetNewProfile (higher GClass number)
+using BotData = GInterface14; // Method: ChooseProfile
+using PoolManager = GClass1133; // CancellationToken: PoolsCancellationToken
+using JobPriority = GClass2080; // Delegate: Immediate
 
 namespace JET.Patches.Bots
 {
@@ -64,14 +64,14 @@ namespace JET.Patches.Bots
             if (profile == null)
             {
                 // load from server
-                Debug.Log("JET.SinglePlayer: Loading bot profile from server");
+                Debug.Log("[JET]: Loading bot profile from server");
                 var source = data.PrepareToLoadBackend(1).ToList();
                 taskAwaiter = session.LoadBots(source).ContinueWith(GetFirstResult, taskScheduler);
             }
             else
             {
                 // return cached profile
-                Debug.Log("JET.SinglePlayer: Loading bot profile from cache");
+                Debug.Log("[JET]: Loading bot profile from cache");
                 taskAwaiter = Task.FromResult(profile);
             }
 

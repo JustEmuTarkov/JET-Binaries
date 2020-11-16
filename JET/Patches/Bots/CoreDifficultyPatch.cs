@@ -3,7 +3,7 @@ using UnityEngine;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
 using JET.Utilities;
-using BotDifficultyHandler = GClass283;
+using BotDifficultyHandler = GClass283; // Method: CheckOnExcude, LoadCoreByString
 
 namespace JET.Patches.Bots
 {
@@ -31,11 +31,11 @@ namespace JET.Patches.Bots
 
             if (string.IsNullOrWhiteSpace(json))
             {
-                Debug.Log("JET.SinglePlayer: Received core bot difficulty data is NULL, using fallback");
+                Debug.Log("[JET]: Received core bot difficulty data is NULL, using fallback");
                 return null;
             }
 
-            Debug.Log("JET.SinglePlayer: Successfully received core bot difficulty data");
+            Debug.Log("[JET]: Successfully received core bot difficulty data");
             return json;
         }
     }

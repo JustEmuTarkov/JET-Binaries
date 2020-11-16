@@ -82,11 +82,11 @@ namespace JET.Patches.Progression
 
             if (string.IsNullOrWhiteSpace(json))
             {
-                Debug.Log("JET.SinglePlayer: Received NULL response for DefaultRaidSettings. Defaulting to fallback.");
+                Debug.Log("[JET]: Received NULL response for DefaultRaidSettings. Defaulting to fallback.");
                 return false;
             }
 
-            Debug.Log("JET.SinglePlayer: Successfully received DefaultRaidSettings");
+            Debug.Log("[JET]: Successfully received DefaultRaidSettings");
             return Convert.ToBoolean(json);
         }
     }

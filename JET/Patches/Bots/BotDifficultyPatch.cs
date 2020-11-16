@@ -4,7 +4,7 @@ using EFT;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
 using JET.Utilities;
-using BotDifficultyHandler = GClass283;
+using BotDifficultyHandler = GClass283; // Method: CheckOnExcude, LoadDifficultyStringInternal
 
 namespace JET.Patches.Bots
 {
@@ -32,11 +32,11 @@ namespace JET.Patches.Bots
 
             if (string.IsNullOrWhiteSpace(json))
             {
-                Debug.Log("JET.SinglePlayer: Received bot " + role.ToString() + " " + botDifficulty.ToString() + " difficulty data is NULL, using fallback");
+                Debug.Log("[JET]: Received bot " + role.ToString() + " " + botDifficulty.ToString() + " difficulty data is NULL, using fallback");
                 return null;
             }
 
-            Debug.Log("JET.SinglePlayer: Successfully received bot " + role.ToString() + " " + botDifficulty.ToString() + " difficulty data");
+            Debug.Log("[JET]: Successfully received bot " + role.ToString() + " " + botDifficulty.ToString() + " difficulty data");
             return json;
         }
     }

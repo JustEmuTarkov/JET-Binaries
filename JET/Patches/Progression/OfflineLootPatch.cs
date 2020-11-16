@@ -56,7 +56,7 @@ namespace JET.Patches.Progression
 				return true;
 			}
 
-			Debug.Log("OfflineLootPatch > Successfully received loot from server");
+			Debug.Log("[JET]: OfflineLootPatch > Successfully received loot from server");
 			__result = Task.FromResult(locationLoot);
 
 			// get weapon durability
@@ -71,11 +71,11 @@ namespace JET.Patches.Progression
 
 			if (string.IsNullOrWhiteSpace(json))
 			{
-				Debug.Log("JET.SinglePlayer: Received weapon durability state data is NULL, using fallback");
+				Debug.Log("[JET]: Received weapon durability state data is NULL, using fallback");
 				return false;
 			}
 
-			Debug.Log("JET.SinglePlayer: Successfully received weapon durability state");
+			Debug.Log("[JET]: Successfully received weapon durability state");
 			return Convert.ToBoolean(json);
 		}
 
