@@ -82,7 +82,7 @@ namespace JET.Patches.Progression
 
             if (string.IsNullOrWhiteSpace(json))
             {
-                Debug.Log("[JET]: Received NULL response for DefaultRaidSettings. Defaulting to fallback.");
+                Debug.LogError("[JET]: Received NULL response for DefaultRaidSettings. Defaulting to fallback.");
                 return false;
             }
 

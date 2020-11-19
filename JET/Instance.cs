@@ -47,6 +47,7 @@ namespace JET
             PatcherUtil.Patch<OfflineSpawnPointPatch>();
             PatcherUtil.Patch<WeaponDurabilityPatch>();
             PatcherUtil.Patch<SingleModeJamPatch>();
+            PatcherUtil.Patch<ExperienceGainPatch>();
 
             PatcherUtil.Patch<MainMenuControllerPatch>();
             PatcherUtil.Patch<PlayerPatch>();
@@ -74,7 +75,7 @@ namespace JET
             PatcherUtil.Patch<ScavPrefabLoadPatch>();
             PatcherUtil.Patch<ScavProfileLoadPatch>();
             PatcherUtil.Patch<ScavSpawnPointPatch>();
-            PatcherUtil.Patch<ScavExfilPatch>();
+            PatcherUtil.Patch<ScavExfilPatch>(); // if its not required by players can be removed or moved into config loading patches
 
             PatcherUtil.Patch<EndByTimerPatch>();
 

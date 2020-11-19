@@ -1,0 +1,32 @@
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\JET Launcher.exe.config
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\JET Launcher.exe
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\JET Launcher.pdb
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\NLog.JET.Common.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\UnityEngine.CoreModule.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\0Harmony.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\NLog.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\Assembly-CSharp.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\zlib.net.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\UnityEngine.ImageConversionModule.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\Newtonsoft.Json.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\UnityEngine.PhysicsModule.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\Assembly-CSharp-firstpass.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\UnityEngine.UI.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\Comfort.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\UnityEngine.Networking.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\UnityEngine.UnityWebRequestModule.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\Comfort.Unity.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\UnityEngine.AssetBundleModule.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\UnityEngine.UNETModule.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\UnityEngine.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\UnityEngine.UnityWebRequestTextureModule.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\UnityEngine.UnityWebRequestAssetBundleModule.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\bin\debug\NLog.JET.Common.pdb
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\obj\Debug\JET.Launcher.csprojAssemblyReference.cache
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\obj\Debug\JET.Launcher.Properties.Resources.resources
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\obj\Debug\JET.Launcher.Main.resources
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\obj\Debug\JET.Launcher.csproj.GenerateResource.cache
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\obj\Debug\JET.Launcher.csproj.CoreCompileInputs.cache
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\obj\Debug\JET.Launcher.csproj.CopyComplete
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\obj\Debug\JET Launcher.exe
+J:\_git\JET-Binaries\JET-Binaries\JET.Launcher\obj\Debug\JET Launcher.pdb

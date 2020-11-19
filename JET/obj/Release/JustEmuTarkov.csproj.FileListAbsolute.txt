@@ -25,3 +25,4 @@ E:\MAOCI\Github\JET-Binaries\JET\obj\Release\JustEmuTarkov.csproj.CopyComplete
 E:\MAOCI\Github\JET-Binaries\JET\obj\Release\NLog.JET.dll
 E:\MAOCI\Github\JET-Binaries\JET\obj\Release\NLog.JET.pdb
 J:\_git\JET-Binaries\JET-Binaries\JET\bin\Release\ItemComponent.Types.dll
+J:\_git\JET-Binaries\JET-Binaries\JET\obj\Release\JustEmuTarkov.csprojAssemblyReference.cache

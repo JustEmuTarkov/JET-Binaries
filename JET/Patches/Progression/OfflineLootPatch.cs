@@ -52,7 +52,7 @@ namespace JET.Patches.Progression
             if (locationLoot == null)
 			{
 				// failed to download loot
-				Debug.Log("OfflineLootPatch > Failed to download loot, using fallback");
+				Debug.LogError("OfflineLootPatch > Failed to download loot, using fallback");
 				return true;
 			}
 
@@ -71,7 +71,7 @@ namespace JET.Patches.Progression
 
 			if (string.IsNullOrWhiteSpace(json))
 			{
-				Debug.Log("[JET]: Received weapon durability state data is NULL, using fallback");
+				Debug.LogError("[JET]: Received weapon durability state data is NULL, using fallback");
 				return false;
 			}
 

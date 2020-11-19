@@ -9,10 +9,10 @@ using EFT.UI.Matchmaker;
 using EFT.UI.Screens;
 using JET.Utilities.Patching;
 using JET.Utilities.Reflection;
-using MenuController = GClass1157;
-using WeatherSettings = GStruct88;
-using BotsSettings = GStruct225;
-using WavesSettings = GStruct89;
+using MenuController = GClass1157; // .SelectedKeyCard
+using WeatherSettings = GStruct88; // IsRandomTime and IsRandomWeather
+using BotsSettings = GStruct225; // IsScavWars and BotAmount
+using WavesSettings = GStruct89; // IsTaggedAndCursed and IsBosses
 
 namespace JET.Patches.ScavMode
 {
@@ -25,10 +25,10 @@ namespace JET.Patches.ScavMode
         private static readonly string kWavesSettingsFieldName = "gstruct89_0";
 
         private const string kMainControllerFieldName = "gclass1157_0";
-        private const string kMenuControllerInnerType = "Class803";
+        private const string kMenuControllerInnerType = "Class804";
         private const string kTargetMethodName = "method_2";
-        private const string kLoadReadyScreenMethodName = "method_36";
-        private const string kReadyMethodName = "method_54";
+        private const string kLoadReadyScreenMethodName = "method_37";
+        private const string kReadyMethodName = "method_53";
 
         public LoadOfflineRaidScreenPatch() : base(transpiler: nameof(PatchTranspiler)) { }
 

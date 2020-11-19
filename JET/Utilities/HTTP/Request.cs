@@ -11,8 +11,8 @@ namespace JET.Utilities.HTTP
 	{
 		public string Session;
 		public string RemoteEndPoint;
-
-		public Request(string session, string remoteEndPoint)
+		public bool isUnity;
+		public Request(string session, string remoteEndPoint, bool isUnity = true)
 		{
 			Session = session;
 			RemoteEndPoint = remoteEndPoint;
@@ -65,7 +65,8 @@ namespace JET.Utilities.HTTP
 			}
 			catch (Exception e)
 			{
-				Debug.Log(e);
+				if(isUnity)
+					Debug.Log(e);
 			}
 
 			return null;
@@ -82,6 +83,8 @@ namespace JET.Utilities.HTTP
 			{
 				using (MemoryStream ms = new MemoryStream())
 				{
+					if (stream == null)
+						return "";
 					stream.CopyTo(ms);
 					return SimpleZlib.Decompress(ms.ToArray(), null);
 				}
@@ -94,6 +97,8 @@ namespace JET.Utilities.HTTP
 			{
 				using (MemoryStream ms = new MemoryStream())
 				{
+					if (stream == null)
+						return "";
 					stream.CopyTo(ms);
 					return SimpleZlib.Decompress(ms.ToArray(), null);
 				}
@@ -106,6 +111,8 @@ namespace JET.Utilities.HTTP
 			{
 				using (MemoryStream ms = new MemoryStream())
 				{
+					if (stream == null)
+						return null;
 					Texture2D texture = new Texture2D(8, 8);
 
 					stream.CopyTo(ms);

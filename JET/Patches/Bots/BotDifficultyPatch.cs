@@ -32,7 +32,7 @@ namespace JET.Patches.Bots
 
             if (string.IsNullOrWhiteSpace(json))
             {
-                Debug.Log("[JET]: Received bot " + role.ToString() + " " + botDifficulty.ToString() + " difficulty data is NULL, using fallback");
+                Debug.LogError("[JET]: Received bot " + role.ToString() + " " + botDifficulty.ToString() + " difficulty data is NULL, using fallback");
                 return null;
             }
 

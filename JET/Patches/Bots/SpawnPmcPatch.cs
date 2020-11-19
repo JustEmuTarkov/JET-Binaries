@@ -20,8 +20,8 @@ namespace JET.Patches.Bots
         {
             targetInterface = PatcherConstants.TargetAssembly.GetTypes().Single(IsTargetInterface);
             targetType = PatcherConstants.TargetAssembly.GetTypes().Single(IsTargetType);
-            wildSpawnTypeField = AccessTools.FieldRefAccess<WildSpawnType>(targetType, "Type");
-            botDifficultyField = AccessTools.FieldRefAccess<BotDifficulty>(targetType, "BotDifficulty");
+            wildSpawnTypeField = AccessTools.FieldRefAccess<WildSpawnType>(targetType, "wildSpawnType_0"); // Type
+            botDifficultyField = AccessTools.FieldRefAccess<BotDifficulty>(targetType, "botDifficulty_0"); // BotDifficulty
         }
 
         private static bool IsTargetInterface(Type type)

@@ -107,6 +107,7 @@
     <Compile Include="Patches\Matchmaker\MatchMakerSelectionLocationScreenPatch.cs" />
     <Compile Include="Patches\Core\NotificationSslPatch.cs" />
     <Compile Include="Patches\Progression\EndByTimerPatch.cs" />
+    <Compile Include="Patches\Progression\ExperienceGainPatch.cs" />
     <Compile Include="Patches\Progression\OfflineLootPatch.cs" />
     <Compile Include="Patches\Progression\OfflineSavePatch.cs" />
     <Compile Include="Patches\Progression\OfflineSpawnPointPatch.cs" />

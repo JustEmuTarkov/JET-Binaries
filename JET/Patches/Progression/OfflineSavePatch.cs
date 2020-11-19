@@ -4,7 +4,7 @@ using Comfort.Common;
 using EFT;
 using JET.Utilities.Patching;
 using JET.Utilities.Player;
-using ClientMetrics = GClass1326; // GameUpdateBinMetricCollector (lower Gclass number)
+using ClientMetrics = GClass1325; // GameUpdateBinMetricCollector (lower Gclass number)
 
 namespace JET.Patches.Progression
 {
