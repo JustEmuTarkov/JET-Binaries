@@ -18,10 +18,10 @@ namespace JET.Launcher.Structures
 
 		public LauncherConfig()
 		{
-			Servers = new List<string>();
+			Servers = new List<string>() { "https://127.0.0.1:443" };
 			Email = "";
 			Password = "";
-			ServerPath = Path.Combine(Environment.CurrentDirectory, "../");
+			ServerPath = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "../"));
 			MinimizeToTray = true;
 			AutoStartServer = false;
 		}

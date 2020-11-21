@@ -15,8 +15,7 @@ namespace JET.Launcher
         FileManager __FileM = new FileManager();
         FormManager __FormM;
         ProcessManager __ProcM;
-        LauncherConfig _LauncherConfig = new LauncherConfig();
-        LauncherConfigLoader __LauncherConfigL = new LauncherConfigLoader();
+        internal LauncherConfigLoader __LauncherConfigL;
         public MainWindow()
         {
             /*if (!ProgramManager.isGameFilesFound()) {
@@ -27,25 +26,30 @@ namespace JET.Launcher
             AppDomain.CurrentDomain.UnhandledException += ProgramManager.CurrentDomainOnUnhandledException;
             // load missing assemblies from EFT's managed directory
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(ProgramManager.AssemblyResolveEvent);
-
-            __FileM.FindServerDirectory();
+            InitializeStartups();
             InitializeComponent();
             InitializeLauncherProps();
-            //if (_LauncherConfig.AutoStartServer)
-            //{
-                __StartStopServer.Content = "Stop Server";
-                __ProcM.StartConsoleInsideLauncher();
-            //}
         }
-
+        private void InitializeStartups() {
+            // initialize launcher config
+            __LauncherConfigL = new LauncherConfigLoader();
+            // confirm server location
+            __FileM.FindServerDirectory(__LauncherConfigL.GetServerLocation);
+            // did location of the server changed ?? then save it if yes
+            if(Global.ServerLocation != __LauncherConfigL.GetServerLocation)
+                __LauncherConfigL.ChangeServerLocation(Global.ServerLocation);
+        }
         private void InitializeLauncherProps()
         {
             __FormM = new FormManager(this); // initialize Form Manager
             __ProcM = new ProcessManager(this);
-            if (__LauncherConfigL.ConfigFileExists())
-                __LauncherConfigL.Load();
-            else
-                __LauncherConfigL.Save(_LauncherConfig);
+
+            //if (_LauncherConfig.AutoStartServer)
+            //{
+                __ProcM.StartConsoleInsideLauncher();
+            //}
+
+
             // set launcher title
             this.Title = Global.LauncherName + " " + Global.LauncherVersion;
             __FormM.UpdateApplyButton("connect");
@@ -93,6 +97,10 @@ namespace JET.Launcher
                 MessageBoxManager.Show($"Error occured on deleting files\r\nMessage: {deleteException.Message}", "Error:", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
             }
         }
+        private void bnt5_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("explorer.exe", Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, Global.PATH.ServerMods));
+        }
 
         private void __StartStopServer_Click(object sender, RoutedEventArgs e)
         {
@@ -105,9 +113,16 @@ namespace JET.Launcher
             else
             {
                 //Process not present
-                __StartStopServer.Content = "Stop Server";
+                __StartStopServer.Content = "Start Server";
+                ProcessManager.consoleProcessName = "";
                 __ProcM.Terminate();
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

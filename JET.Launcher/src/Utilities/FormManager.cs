@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace JET.Launcher.Utilities
@@ -72,49 +73,52 @@ namespace JET.Launcher.Utilities
         internal static DispatcherTimer TickUpdater = new DispatcherTimer();
         private ProcessManager __ProcM;
         internal void SetupIntervalUpdater(ProcessManager _procM) {
-            _procM = __ProcM;
+            __ProcM = _procM;
             TickUpdater.Tick += Updater_Tick;
             TickUpdater.Interval = new TimeSpan(0, 0, 0, 0, 1000);
             TickUpdater.Start();
         }
         private void Updater_Tick(object sender, EventArgs e)
         {
-            if (!RequestManager.ServerConnectedProperly) {
                 if (!RequestManager.OngoingRequest)
                 {
-                    if (mainWindow.__ServerList.Items.Count <= 0)
+                    if (ServerManager.AvailableServers.Count <= 0)
                     {
+                        Console.WriteLine("TryConnect using SavedList");
                         UpdateTick_TryConnect();
                     }
                     else
                     {
                         if (mainWindow.__ServerList.Items.Count <= 0)
                         {
+                            Console.WriteLine("Update View List");
                             UpdateTick_UpdateServerListView();
                         }
                     }
                 }
-            }
-            __ProcM.SetConsoleOutputText();
+            if(__ProcM != null)
+                __ProcM.SetConsoleOutputText();
             // code goes here
         }
         private void UpdateTick_TryConnect() {
             Task.Factory.StartNew(() => {
-                RequestManager.Busy();
-                mainWindow.__ApplyButton.IsEnabled = ServerManager.LoadServer(); // load actual selected server
-                RequestManager.Free();
+                ServerManager.LoadServers(mainWindow.__LauncherConfigL.GetServers()); // load actual selected server
             });
         }
         private void UpdateTick_UpdateServerListView() {
+            //
             mainWindow.__ServerList.Items.Clear();
-            mainWindow.__ServerList.Text = "";
+            //mainWindow.__ServerList.Text = "";
+
             foreach (RequestData.ServerInfo server in ServerManager.AvailableServers)
             {
+                Console.WriteLine(server.name);
                 mainWindow.__ServerList.Items.Add(server.name);
             }
-
             if (mainWindow.__ServerList.Items.Count > 0)
             {
+                mainWindow.__ServerTab.IsEnabled = true;
+                mainWindow.__ApplyButton.IsEnabled = true;
                 mainWindow.__ServerList.SelectedIndex = 0;
                 ServerManager.SelectServer(0);
             }

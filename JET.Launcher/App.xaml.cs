@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using JET.Launcher.Utilities;
+using System;
+using System.Diagnostics;
 using System.Windows;
 
 namespace JET.Launcher
@@ -13,5 +10,15 @@ namespace JET.Launcher
     /// </summary>
     public partial class App : Application
     {
+        /// <summary>
+        /// Application Exit - Event
+        /// </summary>
+
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+            ProcessManager.consoleProcessHandle.Kill();
+        }
     }
+
+    
 }

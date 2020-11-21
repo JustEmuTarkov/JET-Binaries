@@ -9,7 +9,6 @@ namespace JET.Launcher.Structures
 	public class AccountInfo
 	{
 		public string id;
-		public string nickname;
 		public string email;
 		public string password;
 		public bool wipe;
@@ -17,7 +16,6 @@ namespace JET.Launcher.Structures
 		public AccountInfo()
 		{
 			id = "";
-			nickname = "";
 			email = "";
 			password = "";
 			wipe = false;

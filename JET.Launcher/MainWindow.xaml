@@ -3,48 +3,66 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:JET.Launcher"
         mc:Ignorable="d"
-        Title="JustEmuTarkov Launcher" Height="368" Width="583" Background="Black" Foreground="White" FontFamily="BankGothic Lt BT">
+        Title="JustEmuTarkov Launcher" Height="400" Width="600" Background="Black" Foreground="White" FontFamily="BankGothic Lt BT" MinWidth="600" MinHeight="400" MaxWidth="600" MaxHeight="400" UseLayoutRounding="True">
     <Grid>
-        <TabControl Height="328" VerticalAlignment="Top" Background="Black" BorderBrush="White" Foreground="White" Margin="0">
+        <TabControl Height="369" VerticalAlignment="Top" Background="Black" BorderBrush="White" Foreground="White" Margin="0">
             <TabItem Header="Launcher" Foreground="White" BorderBrush="White" Background="Black" FontFamily="BankGothic Lt BT">
                 <Grid Background="Black" Margin="10,10,11,10">
                     <!-- info: new line "&#xA;"-->
                     <!-- Right Menu -->
-                    <Grid HorizontalAlignment="Left" Height="210" Margin="373,10,0,0" VerticalAlignment="Top" Width="172">
-                        <GroupBox Header=" Quick Menu " HorizontalAlignment="Left" Height="207" Margin="10,0,0,0" VerticalAlignment="Top" Width="152" BorderBrush="#FF4B4B4B" Foreground="#FFC7C7C7">
+                    <Grid HorizontalAlignment="Left" Height="210" Margin="415,0,-22,0" VerticalAlignment="Top" Width="172">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="55*"/>
+                            <ColumnDefinition Width="31*"/>
+                        </Grid.ColumnDefinitions>
+                        <GroupBox Header=" Quick Menu " HorizontalAlignment="Left" Height="207" VerticalAlignment="Top" Width="152" BorderBrush="#FF4B4B4B" Foreground="#FFC7C7C7" Grid.ColumnSpan="2">
                             <Grid HorizontalAlignment="Left" Height="192" VerticalAlignment="Top" Width="142" Margin="0,-3,-2,-2">
-                                <Button x:Name="bnt1" Content="Server Webpage" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="130" Margin="6,8,6,0" Height="20" Background="#FF1F1F1F" Foreground="#FFBDBDBD" BorderBrush="#FFB0B0B0" Click="bnt1_Click"/>
-                                <Button x:Name="bnt2" Content="Server Log's" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="130" Margin="6,32,6,0" Height="20" Background="#FF1F1F1F" Foreground="#FFBDBDBD" BorderBrush="#FFB0B0B0" Click="bnt2_Click"/>
-                                <Button x:Name="bnt3" Content="Game Log's" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="130" Margin="6,56,6,0" Height="20" Background="#FF1F1F1F" Foreground="#FFBDBDBD" BorderBrush="#FFB0B0B0" Click="bnt3_Click"/>
-                                <Button x:Name="bnt4" Content="Clear Server&#xA;     Cache" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="130" Margin="6,80,6,0" Height="33" Background="#FF1F1F1F" Foreground="#FFBDBDBD" BorderBrush="#FFB0B0B0" UseLayoutRounding="False" Click="bnt4_Click"/>
+                                <Button x:Name="bnt1" Content="Server Webpage" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="130" Margin="6,8,6,0" Height="20" Background="#FF1F1F1F" Foreground="#FFBDBDBD" BorderBrush="#FFB0B0B0" Click="bnt1_Click" Style="{DynamicResource FlatButton}"/>
+                                <Button x:Name="bnt2" Content="Server Log's" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="130" Margin="6,32,6,0" Height="20" Background="#FF1F1F1F" Foreground="#FFBDBDBD" BorderBrush="#FFB0B0B0" Click="bnt2_Click" Style="{DynamicResource FlatButton}"/>
+                                <Button x:Name="bnt3" Content="Game Log's" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="130" Margin="6,56,6,0" Height="20" Background="#FF1F1F1F" Foreground="#FFBDBDBD" BorderBrush="#FFB0B0B0" Click="bnt3_Click" Style="{DynamicResource FlatButton}"/>
+                                <Button x:Name="bnt4" Content="Clear Server&#xA;     Cache" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="130" Margin="6,80,6,0" Height="33" Background="#FF1F1F1F" Foreground="#FFBDBDBD" BorderBrush="#FFB0B0B0" UseLayoutRounding="False" Click="bnt4_Click" Style="{DynamicResource FlatButton}"/>
+                                <Button x:Name="bnt5" Content="Server Mods" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="130" Margin="6,117,6,0" Height="20" Background="#FF1F1F1F" Foreground="#FFBDBDBD" BorderBrush="#FFB0B0B0" Style="{DynamicResource FlatButton}" Click="bnt5_Click"/>
 
                             </Grid>
                         </GroupBox>
                     </Grid>
                     <!-- ApplyButton -->
-                    <Button Name="__ApplyButton" Content="Connect" HorizontalAlignment="Left" Margin="26,142,0,0" VerticalAlignment="Top" Width="120" Background="#FF1F1F1F" Foreground="#99FFFFFF" BorderBrush="White" Height="30" Click="__ApplyButton_Click" IsEnabled="False"/>
-                    <!-- ServerList -->
+                    <Button Name="__ApplyButton" Content="Connect" HorizontalAlignment="Left" Margin="34,137,0,0" VerticalAlignment="Top" Width="120" Background="#FF1F1F1F" Foreground="#99FFFFFF" BorderBrush="White" Height="30" Click="__ApplyButton_Click" IsEnabled="False" Style="{DynamicResource FlatButton}"/>
+                    <!-- Errors Messages -->
+                    <Label Name="__LauncherError" Content="ErrorMSG" HorizontalAlignment="Left" Width="565" BorderThickness="1" BorderBrush="#7FFF0000" Foreground="#99FF0000" Margin="0,298,0,0"/>
                     <!-- Login -->
                     <!-- Password -->
-                    <Label Name="__LauncherError" Content="ErrorMSG" HorizontalAlignment="Left" VerticalAlignment="Top" Width="373" BorderThickness="1" BorderBrush="#7FFF0000" Foreground="#99FF0000" Visibility="Hidden"/>
-                    <Grid Name="__Connect" HorizontalAlignment="Left" Height="68" Margin="16,69,0,0" VerticalAlignment="Top" Width="140">
-                        <Label Content="Server's List" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#99FFFFFF" Height="20" Width="120" Margin="7,6,0,0"/>
-                        <ComboBox x:Name="__ServerList" HorizontalAlignment="Left" Margin="10,25,0,0" VerticalAlignment="Top" Width="120" Foreground="White" Background="Black" Height="27" DataContextChanged="__ServerList_DataContextChanged"/>
+                    <Button Name="__StartStopServer" Content="Start Server" HorizontalAlignment="Left" Margin="34,180,0,0" VerticalAlignment="Top" Width="120" Height="25" Background="#FF323232" BorderBrush="#FFBDBDBD" Foreground="#99FFFFFF" Click="__StartStopServer_Click" Style="{DynamicResource FlatButton}"/>
+                    <GroupBox Header=" Add Server " HorizontalAlignment="Left" Height="64" Margin="215,0,0,0" VerticalAlignment="Top" Width="196" BorderBrush="#FF4B4B4B" Foreground="#FFC7C7C7">
+                        <Grid Margin="0">
+                            <TextBox x:Name="___NewServerBackend" HorizontalAlignment="Left" Height="16" Margin="7,4,0,0" TextWrapping="Wrap" Text="https://127.0.0.1:443" VerticalAlignment="Top" Width="171" Background="Black" Foreground="White"/>
+                            <Button Content="ADD" HorizontalAlignment="Left" Margin="68,24,0,2" Width="46" Style="{DynamicResource FlatButton}" FontSize="10" Click="Button_Click"/>
+                        </Grid>
+                    </GroupBox>
+                    <Grid HorizontalAlignment="Left" Height="118" VerticalAlignment="Top" Width="172" Margin="10,10,0,0">
+                        <Rectangle Fill="#00F4F4F5" Stroke="White"/>
+                        <Grid x:Name="__Login" HorizontalAlignment="Left" Height="109" Margin="0,2,0,0" VerticalAlignment="Top" Width="171">
+                            <Label Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#99FFFFFF" Height="20" Width="120" Margin="10,10,0,0"/>
+                            <TextBox HorizontalAlignment="Left" Height="20" Margin="10,30,-19,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="151" Background="Black" Foreground="White" BorderBrush="#FF8C8D8F" SelectionBrush="#FF760303" FontSize="16" TextDecorations="{x:Null}" IsEnabled="False"/>
+                            <Label Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#99FFFFFF" Height="20" Width="120" Margin="10,55,0,-7"/>
+                            <PasswordBox HorizontalAlignment="Left" PasswordChar="*" Height="20" Margin="10,75,-19,-27" VerticalAlignment="Top" Width="151" Background="Black" Foreground="White" BorderBrush="#FF8C8D8F" SelectionBrush="#FF760303" FontSize="16" IsEnabled="False"/>
+                        </Grid>
+                        <Grid x:Name="__LoggedIn" HorizontalAlignment="Left" Height="43" Margin="26,70,0,0" VerticalAlignment="Top" Width="120">
+                            <Label Content="Login as:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Foreground="#FF8C8C8C"/>
+                            <Label x:Name="__Label_LoggedAs" Content="email@jet.com" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Foreground="#FF8C8C8C" Margin="0,23,0,0" Height="13" Padding="5,0,0,0"/>
+                        </Grid>
+                        <Grid x:Name="__Connect" HorizontalAlignment="Left" Height="88" Margin="17,14,0,0" VerticalAlignment="Top" Width="140">
+                            <Label Content="Server's List" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#99FFFFFF" Height="20" Width="120" Margin="7,6,0,0"/>
+                            <ComboBox x:Name="__ServerList" HorizontalAlignment="Left" Margin="7,26,0,0" VerticalAlignment="Top" Width="120" Foreground="White" Background="Black" Height="27" DataContextChanged="__ServerList_DataContextChanged" Style="{DynamicResource ComboBoxFlatStyle}" />
+                            <Button Content="Delete Selected" HorizontalAlignment="Left" Margin="27,59,0,0" VerticalAlignment="Top" Width="100" FontSize="10" Height="16" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" BorderBrush="#FFB9B9B9" Foreground="Red" Background="#FF1F1F1F"/>
+                        </Grid>
                     </Grid>
-                    <Grid Name="__Login" HorizontalAlignment="Left" Height="109" Margin="0,28,0,0" VerticalAlignment="Top" Width="171">
-                        <Label Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#99FFFFFF" Height="20" Width="120" Margin="10,10,0,0"/>
-                        <TextBox HorizontalAlignment="Left" Height="20" Margin="10,30,-19,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="151" Background="Black" Foreground="White" BorderBrush="#FF8C8D8F" SelectionBrush="#FF760303" FontSize="16" TextDecorations="{x:Null}" IsEnabled="False"/>
-                        <Label Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#99FFFFFF" Height="20" Width="120" Margin="10,55,0,-7"/>
-                        <PasswordBox HorizontalAlignment="Left" PasswordChar="*" Height="20" Margin="10,75,-19,-27" VerticalAlignment="Top" Width="151" Background="Black" Foreground="White" BorderBrush="#FF8C8D8F" SelectionBrush="#FF760303" FontSize="16" IsEnabled="False"/>
-                    </Grid>
-                    <Button Name="__StartStopServer" Content="Start Server" HorizontalAlignment="Left" Margin="26,186,0,0" VerticalAlignment="Top" Width="120" Height="25" Background="#FF323232" BorderBrush="#FFBDBDBD" Foreground="#99FFFFFF" Click="__StartStopServer_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Server" Foreground="White" BorderBrush="Black" Background="Black">
+            <TabItem Name="__ServerTab" Header="Server" Foreground="White" BorderBrush="Black" Background="Black">
                 <Grid Margin="0">
-                    <TextBox Name="__ServerConsole" HorizontalAlignment="Center" Height="200" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Bottom" Width="766" Margin="10,0,10,10" BorderBrush="#FFAAAAAA" SelectionBrush="#FFAA1F11" Foreground="White" Background="Black"/>
+                    <TextBox Name="__ServerConsole" TextWrapping="Wrap" Margin="10" BorderBrush="#FFAAAAAA" SelectionBrush="#FFAA1F11" Foreground="#CCFFFFFF" Background="Black" Text="TestTextTo See what it loosk like [Error] [Info]" FontSize="11" FontFamily="Candara Light"/>
                 </Grid>
             </TabItem>
         </TabControl>

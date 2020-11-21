@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Microsoft.VisualBasic;
 
@@ -6,54 +7,74 @@ namespace JET.Launcher.Utilities
 {
     internal class FileManager
     {
-        internal string ScanToConfirmDirectory(string directory, string[] namesToFind, string[] foldersToFind)
+        private List<string> namesToFind = new List<string>()
+        {
+            "server.exe"
+        };
+        private List<string> foldersToFind = new List<string>()
+        {
+            "jet",
+            "justemutarkov",
+            "server"
+        };
+        internal string ScanToConfirmDirectory(string directory)
         {
             string[] filesInCurrentDirectory = Directory.GetFiles(directory);
             for (int i = 0; i < filesInCurrentDirectory.Length; i++)
             {
                 string folderName = filesInCurrentDirectory[i].ToLower();
-                for (int checkNo = 0; checkNo < namesToFind.Length; checkNo++)
+                for (int checkNo = 0; checkNo < namesToFind.Count; checkNo++)
                 {
                     if (folderName.Contains(namesToFind[checkNo]))
                         return directory;
                 }
-                for (int checkNo = 0; checkNo < namesToFind.Length; checkNo++)
+            }
+            for (int i = 0; i < filesInCurrentDirectory.Length; i++)
+            {
+                string folderName = filesInCurrentDirectory[i].ToLower();
+                for (int checkNo = 0; checkNo < foldersToFind.Count; checkNo++)
                 {
-                    if (folderName.Contains(namesToFind[checkNo]) && !folderName.Contains(".exe"))
+                    if (folderName.Contains(foldersToFind[checkNo]))
+                    {
+                        if (Directory.Exists(Path.Combine(directory, folderName)))
+                            return ScanToConfirmDirectory(Path.Combine(directory, folderName));
+                    }
+
+                }
+            }
+            return "Not found";
+        }
+        internal string CheckIfFileExistReturnDirectory(string directory)
+        {
+            string[] filesInCurrentDirectory = Directory.GetFiles(directory);
+            for (int i = 0; i < filesInCurrentDirectory.Length; i++)
+            {
+                for (int fileId = 0; i < namesToFind.Count; fileId++) {
+                    if (filesInCurrentDirectory[i] == namesToFind[fileId])
                         return directory;
                 }
             }
             return "Not found";
         }
-        internal string CheckIfFileExistReturnDirectory(string directory, string nameToConfirm)
+        internal void FindServerDirectory(string initialDirectory = "")
         {
-            string[] filesInCurrentDirectory = Directory.GetFiles(directory);
-            for (int i = 0; i < filesInCurrentDirectory.Length; i++)
+            if (initialDirectory != "")
             {
-                if (filesInCurrentDirectory[i] == nameToConfirm)
-                    return directory;
+                Global.ServerLocation = ScanToConfirmDirectory(initialDirectory);
+                if (Global.ServerLocation != "Not found") {
+                    return;
+                }
             }
-            return "Not found";
-        }
-        internal void FindServerDirectory()
-        {
             string LauncherDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
             // all lower case cause we lowercase() all names of files
-            string[] filesToMatch = new string[1] {
-                "server.exe"
-            };
-            string[] foldersToMatch = new string[2] {
-                "jet",
-                "justemutarkov"
-            };
             //check if folder exist in current directory
-            Global.ServerLocation = ScanToConfirmDirectory(LauncherDirectory, filesToMatch, foldersToMatch);
+            Global.ServerLocation = ScanToConfirmDirectory(LauncherDirectory);
 
             if (Global.ServerLocation == "Not found")
             {
                 // if not found search 1 folder up
                 LauncherDirectory = Path.GetFullPath(Path.Combine(LauncherDirectory, @"..\"));
-                Global.ServerLocation = ScanToConfirmDirectory(LauncherDirectory, filesToMatch, foldersToMatch);
+                Global.ServerLocation = ScanToConfirmDirectory(LauncherDirectory);
             }
 
             if (Global.ServerLocation == "Not found")
@@ -66,7 +87,7 @@ namespace JET.Launcher.Utilities
                         Global.ServerLocation = "Not found";
                         continue;
                     }
-                    Global.ServerLocation = ScanToConfirmDirectory(Global.ServerLocation, filesToMatch, foldersToMatch);
+                    Global.ServerLocation = ScanToConfirmDirectory(Global.ServerLocation);
                 }
                 // hangs start untill user specify server location
             }

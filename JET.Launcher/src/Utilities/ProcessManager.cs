@@ -38,6 +38,7 @@ namespace JET.Launcher.Utilities
 			consoleProcessHandle.BeginOutputReadLine();
 			consoleProcessHandle.OutputDataReceived += ServerOutputDataReceived;
 			consoleProcessName = consoleProcessHandle.ProcessName;
+			Console.WriteLine("Server started");
 		}
 		internal void Terminate() {
 			consoleProcessName = "";
@@ -48,19 +49,20 @@ namespace JET.Launcher.Utilities
 			// server closed what now ?
 		}
 		List<string> TagsToRemoveFromConsoleOutput = new List<string>() {
-			$"(\\e[[0-1];3[0-9])m",
-			$"[2J[0;0f",
-			$"\\[[0-4][0-7]m",
+			"(\\e\\[[0-1];3[0-9])m",
+			"\\[2J\\[0;0f",
+			"\\[[0-4][0-7]m",
+			"\\[0m",
+			"[┌│┐┘└─]"
+			//""
 		};
 		private void RemoveConsoleTags(ref string _ConsoleOutput) {
+			_ConsoleOutput = _ConsoleOutput.Replace($"", "");
 			var consoleEnum = TagsToRemoveFromConsoleOutput.GetEnumerator();
 			while (consoleEnum.MoveNext())
 			{
-				_ConsoleOutput.Replace(consoleEnum.Current, "");
+				_ConsoleOutput = Regex.Replace(_ConsoleOutput, consoleEnum.Current, "");
 			}
-			//_ConsoleOutput.Replace($"(\\e\[[0-1];3[0-9])m", "");
-			//_ConsoleOutput.Replace($"[2J[0;0f", "");
-			//Regex.Replace(_ConsoleOutput, $"\\[[0-4][0-7]m", "");
 		}
 		private void ServerOutputDataReceived(object sender, DataReceivedEventArgs e)
 		{
@@ -69,13 +71,12 @@ namespace JET.Launcher.Utilities
 				string tConsoleOutput = e.Data;
 				RemoveConsoleTags(ref tConsoleOutput);
 				//adding to the stack
-				_ConsoleOutput.Add(tConsoleOutput + Global.WPF_NewLine);
+				_ConsoleOutput.Add(tConsoleOutput + Environment.NewLine);
 				while (_ConsoleOutput.Count >= Global.LimitConsoleOutput)
 				{
 					_ConsoleOutput.RemoveAt(0);
 				}
 			}
-			//SetConsoleOutputText(); // threading problem
 		}
 		internal void SetConsoleOutputText()
 		{

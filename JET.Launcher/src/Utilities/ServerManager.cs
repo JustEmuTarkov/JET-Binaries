@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using JET.Launcher.Structures;
 using JET.Launcher.Utilities;
 using JET.Utilities.App;
@@ -23,12 +24,13 @@ namespace JET.Launcher.Utilities
 
         internal static bool LoadServer()
         {
+            RequestManager.Busy();
             string json = RequestManager.Connect();
             if (json == "")
                 return false;
             RequestData.ServerInfo serverInfo = Json.Deserialize<RequestData.ServerInfo>(json);
-
-            AvailableServers.Add(Json.Deserialize<RequestData.ServerInfo>(json));
+            AvailableServers.Add(serverInfo);
+            RequestManager.Free();
             return true;
         }
         internal static void LoadServerFromDiffrentBackend(string backend)
@@ -40,6 +42,11 @@ namespace JET.Launcher.Utilities
             RequestData.ServerInfo serverInfo = Json.Deserialize<RequestData.ServerInfo>(json);
 
             AvailableServers.Add(Json.Deserialize<RequestData.ServerInfo>(json));
+        }
+
+        internal static void LoadServers(List<string> ServerList)
+        {
+            
         }
     }
 }

@@ -18,6 +18,7 @@ namespace JET.Launcher
 
         public static class PATH {
             internal static string ServerCache = "user/cache";
+            internal static string ServerMods = "user/mods";
             internal static string GameLogs = "Logs";
         }
 
