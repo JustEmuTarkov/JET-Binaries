@@ -21,7 +21,14 @@ namespace JET.Launcher.Utilities
             }
             SelectedServer = AvailableServers[index];
         }
-
+        public static void SelectServer(string BackendName)
+        {
+            for (int i = 0; i < AvailableServers.Count; i++)
+            {
+                if(AvailableServers[i].backendUrl == BackendName)
+                    SelectedServer = AvailableServers[i];
+            }
+        }
         internal static bool LoadServer()
         {
             RequestManager.Busy();
@@ -42,11 +49,6 @@ namespace JET.Launcher.Utilities
             RequestData.ServerInfo serverInfo = Json.Deserialize<RequestData.ServerInfo>(json);
 
             AvailableServers.Add(Json.Deserialize<RequestData.ServerInfo>(json));
-        }
-
-        internal static void LoadServers(List<string> ServerList)
-        {
-            
         }
     }
 }

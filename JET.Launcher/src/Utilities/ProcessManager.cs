@@ -38,7 +38,6 @@ namespace JET.Launcher.Utilities
 			consoleProcessHandle.BeginOutputReadLine();
 			consoleProcessHandle.OutputDataReceived += ServerOutputDataReceived;
 			consoleProcessName = consoleProcessHandle.ProcessName;
-			Console.WriteLine("Server started");
 		}
 		internal void Terminate() {
 			consoleProcessName = "";
@@ -46,6 +45,7 @@ namespace JET.Launcher.Utilities
 		}
 		internal void ServerTerminated(object sender, EventArgs e)
 		{
+			Console.WriteLine("Server Closed");
 			// server closed what now ?
 		}
 		List<string> TagsToRemoveFromConsoleOutput = new List<string>() {

@@ -12,12 +12,14 @@ namespace JET.Launcher
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow Instance;
         FileManager __FileM = new FileManager();
         FormManager __FormM;
         ProcessManager __ProcM;
         internal LauncherConfigLoader __LauncherConfigL;
         public MainWindow()
         {
+            Instance = this;
             /*if (!ProgramManager.isGameFilesFound()) {
                 Application.Current.Shutdown();
                 return;
@@ -119,10 +121,16 @@ namespace JET.Launcher
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void __AddServer_Click(object sender, RoutedEventArgs e)
         {
-
+            string newServerBackend = ___NewServerBackend.Text;
+            __LauncherConfigL.AddServer(newServerBackend);
         }
 
+        private void __DeleteSelectedServer_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine(__ServerList.SelectedIndex);
+            __LauncherConfigL.RemoveServer(__ServerList.SelectedIndex);
+        }
     }
 }

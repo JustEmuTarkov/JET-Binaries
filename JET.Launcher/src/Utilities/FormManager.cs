@@ -21,14 +21,17 @@ namespace JET.Launcher.Utilities
                 case "Connect":
                     mainWindow.__Connect.Visibility = System.Windows.Visibility.Visible;
                     mainWindow.__Login.Visibility = System.Windows.Visibility.Hidden;
+                    mainWindow.__LoggedIn.Visibility = System.Windows.Visibility.Hidden;
                     break;
                 case "Login":
                     mainWindow.__Connect.Visibility = System.Windows.Visibility.Hidden;
                     mainWindow.__Login.Visibility = System.Windows.Visibility.Visible;
+                    mainWindow.__LoggedIn.Visibility = System.Windows.Visibility.Hidden;
                     break;
                 default:
                     mainWindow.__Connect.Visibility = System.Windows.Visibility.Hidden;
                     mainWindow.__Login.Visibility = System.Windows.Visibility.Hidden;
+                    mainWindow.__LoggedIn.Visibility = System.Windows.Visibility.Visible;
                     break;
             }
         }
@@ -63,12 +66,18 @@ namespace JET.Launcher.Utilities
             }
         }
         internal void ApplyButtonClickEvent(object sender, System.Windows.RoutedEventArgs e) {
-            if(ApplyButtonAction == "connect")
-                UpdateApplyButton("login");
-            // Check if can login
-            if(ApplyButtonAction == "login")
-                UpdateApplyButton("startgame");
 
+            switch (ApplyButtonAction) {
+                case "connect":
+                    UpdateApplyButton("login");
+                    break;
+                case "login":
+                    //if properly login then show start
+                    UpdateApplyButton("startgame");
+                    break;
+                case "startgame":
+                    break;
+            }
         }
         internal static DispatcherTimer TickUpdater = new DispatcherTimer();
         private ProcessManager __ProcM;
@@ -102,7 +111,7 @@ namespace JET.Launcher.Utilities
         }
         private void UpdateTick_TryConnect() {
             Task.Factory.StartNew(() => {
-                ServerManager.LoadServers(mainWindow.__LauncherConfigL.GetServers()); // load actual selected server
+                ServerManager.LoadServer(); // load actual selected server
             });
         }
         private void UpdateTick_UpdateServerListView() {
@@ -112,7 +121,7 @@ namespace JET.Launcher.Utilities
 
             foreach (RequestData.ServerInfo server in ServerManager.AvailableServers)
             {
-                Console.WriteLine(server.name);
+                //Console.WriteLine(server.name);
                 mainWindow.__ServerList.Items.Add(server.name);
             }
             if (mainWindow.__ServerList.Items.Count > 0)

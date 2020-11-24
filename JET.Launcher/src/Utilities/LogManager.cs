@@ -38,14 +38,3 @@ namespace JET.Launcher.Utilities
     }
     
 }
-namespace UnityEngine {
-    public class Debug
-    {
-        public static void Log(object message, Object context) { Log(message); }
-        public static void Log(object message) { Log((string)message.ToString()); }
-        public static void Log(string message)
-        {
-            LogManager.Instance.Info(message);
-        }
-    }
-}

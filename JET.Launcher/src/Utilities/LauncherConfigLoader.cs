@@ -15,9 +15,24 @@ namespace JET.Launcher.Utilities
 				Save(new LauncherConfig());
 		}
 		private LauncherConfig launcherConfig;
-        internal AccountInfo SelectedAccount { get; private set; }
 		internal string GetServerLocation { get { return launcherConfig.ServerPath; } }
 
+		internal string Email {
+			get { return launcherConfig.Email; }
+            set { 
+				launcherConfig.Email = value;
+				Save();
+			}
+		}
+		internal string Password
+		{
+			get { return launcherConfig.Password; }
+			set
+			{
+				launcherConfig.Password = value;
+				Save();
+			}
+		}
 		internal void ChangeServerLocation(string location) {
 			launcherConfig.ServerPath = location;
 			Save();
@@ -26,10 +41,12 @@ namespace JET.Launcher.Utilities
 			return launcherConfig.Servers;
 		}
 		internal void AddServer(string BackendUrl) {
-			launcherConfig.Servers.Add(BackendUrl);
+			if(!launcherConfig.Servers.Contains(BackendUrl))
+				launcherConfig.Servers.Add(BackendUrl);
 		}
 		internal void RemoveServer(int index) {
-			launcherConfig.Servers.RemoveAt(index);
+			if(launcherConfig.Servers.Count > 1)
+				launcherConfig.Servers.RemoveAt(index);
 		}
 		internal void RemoveServer(string BackendUrl) {
 			for (int i = 0; i < launcherConfig.Servers.Count; i++) {
