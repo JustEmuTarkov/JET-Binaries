@@ -28,14 +28,14 @@ namespace JET.Utilities
                 CleanCache();
             } catch
             {
-                Debug.Log("[JET]: The cache cleanup failed and will try again at the next game startup.");
+                Debug.LogError("[JET]: The cache cleanup failed and will try again at the next game startup.");
             }
             
             var json = new Request(Session, BackendUrl).GetJson("/singleplayer/bundles");
 
             if (string.IsNullOrWhiteSpace(json))
 			{
-				Debug.Log("[JET]: Bundles data is Null, using fallback");
+				Debug.LogError("[JET]: Bundles data is Null, using fallback");
 				return;
 			}
 
@@ -52,7 +52,7 @@ namespace JET.Utilities
                 }
             }
             
-            Debug.Log("[JET]: Successfully received Bundles");
+            Debug.LogError("[JET]: Successfully received Bundles");
 		}
 
         private void CleanCache()

@@ -86,7 +86,7 @@ namespace JET.Patches.Progression
                 return false;
             }
 
-            Debug.Log("[JET]: Successfully received DefaultRaidSettings");
+            Debug.LogError("[JET]: Successfully received DefaultRaidSettings");
             return Convert.ToBoolean(json);
         }
     }

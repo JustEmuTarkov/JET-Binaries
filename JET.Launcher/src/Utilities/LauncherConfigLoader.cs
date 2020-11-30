@@ -33,6 +33,20 @@ namespace JET.Launcher.Utilities
 				Save();
 			}
 		}
+		internal bool StartServerAtLaunch()
+		{
+			return launcherConfig.AutoStartServer;
+		}
+		internal void ChangeStartServerAtLaunch(bool set)
+		{
+			launcherConfig.AutoStartServer = set;
+			Save();
+		}
+		internal void ChangeServerAtLaunch(bool change)
+		{
+			launcherConfig.AutoStartServer = change;
+			Save();
+		}
 		internal void ChangeServerLocation(string location) {
 			launcherConfig.ServerPath = location;
 			Save();
@@ -40,13 +54,18 @@ namespace JET.Launcher.Utilities
 		internal List<string> GetServers() {
 			return launcherConfig.Servers;
 		}
+		internal int GetServersCount() {
+			return launcherConfig.Servers.Count;
+		}
 		internal void AddServer(string BackendUrl) {
 			if(!launcherConfig.Servers.Contains(BackendUrl))
 				launcherConfig.Servers.Add(BackendUrl);
+			Save();
 		}
 		internal void RemoveServer(int index) {
 			if(launcherConfig.Servers.Count > 1)
 				launcherConfig.Servers.RemoveAt(index);
+			Save();
 		}
 		internal void RemoveServer(string BackendUrl) {
 			for (int i = 0; i < launcherConfig.Servers.Count; i++) {
@@ -54,6 +73,7 @@ namespace JET.Launcher.Utilities
 					launcherConfig.Servers.RemoveAt(i);
 				}
 			}
+			Save();
 		}
 		internal bool ConfigFileExists() => File.Exists(Path.Combine(Environment.CurrentDirectory, "launcher.config.json"));
 		internal void Load()

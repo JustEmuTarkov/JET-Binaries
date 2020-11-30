@@ -19,6 +19,4 @@ namespace JET.Launcher
             ProcessManager.consoleProcessHandle.Kill();
         }
     }
-
-    
 }

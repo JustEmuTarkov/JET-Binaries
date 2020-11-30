@@ -73,7 +73,7 @@ namespace JET.Patches
                     }
                     else
                     {
-                        Debug.Log("cant load " + path + " because of error " + unityWebRequest.error);
+                        Debug.LogError("cant load " + path + " because of error " + unityWebRequest.error);
                     }
                 }
             }

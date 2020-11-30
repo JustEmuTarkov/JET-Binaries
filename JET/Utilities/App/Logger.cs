@@ -7,12 +7,12 @@ namespace JET.Utilities.App
     {
         private static void Log(string type, string text)
         {
-            Debug.Log($"{type} | {text}");
+            Debug.LogError($"{type} | {text}");
         }
 
         public static void LogData(string text)
         {
-            Debug.Log($"{text}");
+            Debug.LogError($"{text}");
         }
 
         public static void LogInfo(string text)

@@ -10,12 +10,14 @@ using JET.Patches.RaidFix;
 using JET.Patches.Quests;
 using JET.Patches.ScavMode;
 using System.Reflection;
+using System;
 
 namespace JET
 {
     [ObfuscationAttribute(Exclude = true)]
     public class Instance : MonoBehaviour
 	{
+        private string Watermark = "9767 | JET";
         [ObfuscationAttribute(Exclude = true)]
         private void Start()
 		{
@@ -24,19 +26,30 @@ namespace JET
             PatcherUtil.Patch<SslCertificatePatch>();
             PatcherUtil.Patch<UnityWebRequestPatch>();
             PatcherUtil.Patch<NotificationSslPatch>();
-            Debug.Log("Core: Loaded");
+            // allows to turn on and off the PreloaderUI.SetStreamMode(bool)
+            // PatcherUtil.Patch<Patches.Core.StreamerModePatch>(); 
+            // PatcherUtil.Patch<Patches.Core.FixChatOnDestroyPatch>(); 
+
+            Debug.LogError("Core: Loaded");
 
             new Settings(null, Config.BackendUrl);
             
             PatcherUtil.Patch<EasyAssetsPatch>();
             PatcherUtil.Patch<EasyBundlePatch>();
             PatcherUtil.Patch<BundleLoadPatch>();
-            Debug.Log("RuntimeBundles: Loaded");
+            Debug.LogError("RuntimeBundles: Loaded");
 
             OfflineModePatchRoutes(Offline.LoadModules());
             
+            WatermarkOverrider();
         }
 
+        private void WatermarkOverrider() {
+            var _barVariable = typeof(EFT.UI.PreloaderUI)
+                .GetField("_alphaVersionLabel", BindingFlags.NonPublic | BindingFlags.Instance)
+                .GetValue(MonoBehaviourSingleton<EFT.UI.PreloaderUI>.Instance) as EFT.UI.LocalizedText;
+            _barVariable.LocalizationKey = Watermark;
+        }
         private void OfflineModePatchRoutes(Offline.OfflineMode EnabledElements) {
             
             if(EnabledElements.OfflineLootPatch)
@@ -105,7 +118,7 @@ namespace JET
             if (EnabledElements.EndByTimerPatch)
                 PatcherUtil.Patch<EndByTimerPatch>();
 
-            Debug.Log("SinglePlayer: Loaded");
+            Debug.LogError("SinglePlayer: Loaded");
         }
 	}
 }

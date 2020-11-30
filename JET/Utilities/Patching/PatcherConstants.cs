@@ -13,6 +13,7 @@ namespace JET.Utilities.Patching
                                                | BindingFlags.DeclaredOnly;
 
         public static Assembly TargetAssembly = typeof(AbstractGame).Assembly;
+        public static Type PreloaderUIType = TargetAssembly.GetTypes().Single(x => x.Name == "PreloaderUI");
         public static Type MainApplicationType = TargetAssembly.GetTypes().Single(x => x.Name == "MainApplication");
         public static Type LocalGameType = TargetAssembly.GetTypes().Single(x => x.Name == "LocalGame");
         public static Type MatchmakerOfflineRaidType = TargetAssembly.GetTypes().Single(x => x.Name == "MatchmakerOfflineRaid");

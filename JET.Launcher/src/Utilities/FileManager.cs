@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Threading;
 using Microsoft.VisualBasic;
 
 namespace JET.Launcher.Utilities
@@ -17,6 +19,37 @@ namespace JET.Launcher.Utilities
             "justemutarkov",
             "server"
         };
+        internal static void OpenDirectory(string path)
+        {
+            if (Directory.Exists(path))
+            {
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    Arguments = path,
+                    FileName = "explorer.exe"
+                };
+                Process.Start(startInfo);
+            }
+        }
+        internal static bool DeleteDirectoryFiles(string path)
+        {
+            try
+            {
+                if (Directory.Exists(path))
+                {
+                    Directory.Delete(path, true);
+                    while (Directory.Exists(path)) Thread.Sleep(100);
+                    Directory.CreateDirectory(path);
+                    return true;
+                }
+            }
+            catch (Exception deleteException)
+            {
+                MessageBoxManager.Show($"Error occured on deleting files\r\nMessage: {deleteException.Message}", "Error:", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
+            }
+            return false;
+
+        }
         internal string ScanToConfirmDirectory(string directory)
         {
             string[] filesInCurrentDirectory = Directory.GetFiles(directory);

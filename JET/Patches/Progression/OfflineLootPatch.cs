@@ -56,7 +56,7 @@ namespace JET.Patches.Progression
 				return true;
 			}
 
-			Debug.Log("[JET]: OfflineLootPatch > Successfully received loot from server");
+			Debug.LogError("[JET]: OfflineLootPatch > Successfully received loot from server");
 			__result = Task.FromResult(locationLoot);
 
 			// get weapon durability
@@ -75,7 +75,7 @@ namespace JET.Patches.Progression
 				return false;
 			}
 
-			Debug.Log("[JET]: Successfully received weapon durability state");
+			Debug.LogError("[JET]: Successfully received weapon durability state");
 			return Convert.ToBoolean(json);
 		}
 

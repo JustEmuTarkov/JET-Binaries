@@ -36,7 +36,7 @@ namespace JET.Patches.Bots
                 return null;
             }
 
-            Debug.Log("[JET]: Successfully received bot " + role.ToString() + " " + botDifficulty.ToString() + " difficulty data");
+            Debug.LogError("[JET]: Successfully received bot " + role.ToString() + " " + botDifficulty.ToString() + " difficulty data");
             return json;
         }
     }

@@ -66,7 +66,7 @@ namespace JET.Utilities.HTTP
 			catch (Exception e)
 			{
 				if(isUnity)
-					Debug.Log(e);
+					Debug.LogError(e);
 			}
 
 			return null;

@@ -55,7 +55,7 @@ namespace JET.Patches.Matchmaker
                 return null;
             }
 
-            Debug.Log("[JET]: Successfully received DefaultRaidSettings");
+            Debug.LogError("[JET]: Successfully received DefaultRaidSettings");
 
             try
             {

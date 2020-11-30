@@ -1,0 +1,18 @@
+J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\bin\release\JET Launcher.exe.config
+J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\bin\release\JET Launcher.exe
+J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\bin\release\JET Launcher.pdb
+J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\bin\release\NLog.JET.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.AssetBundleModule.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\bin\release\Newtonsoft.Json.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\bin\release\zlib.net.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.ImageConversionModule.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.UI.dll
+J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\bin\release\NLog.JET.pdb
+J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csprojAssemblyReference.cache
+J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\obj\Release\JET.Launcher.Properties.Resources.resources
+J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.Main.resources
+J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csproj.GenerateResource.cache
+J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csproj.CoreCompileInputs.cache
+J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csproj.CopyComplete
+J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\obj\Release\JET Launcher.exe
+J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\obj\Release\JET Launcher.pdb

@@ -64,14 +64,14 @@ namespace JET.Patches.Bots
             if (profile == null)
             {
                 // load from server
-                Debug.Log("[JET]: Loading bot profile from server");
+                Debug.LogError("[JET]: Loading bot profile from server");
                 var source = data.PrepareToLoadBackend(1).ToList();
                 taskAwaiter = session.LoadBots(source).ContinueWith(GetFirstResult, taskScheduler);
             }
             else
             {
                 // return cached profile
-                Debug.Log("[JET]: Loading bot profile from cache");
+                Debug.LogError("[JET]: Loading bot profile from cache");
                 taskAwaiter = Task.FromResult(profile);
             }
 

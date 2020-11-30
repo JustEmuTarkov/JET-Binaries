@@ -16,9 +16,15 @@ namespace JET.Launcher
         internal static string WPF_NewLine = "&#xA;";
         internal static int LimitConsoleOutput = 30;
 
+        internal static string TarkovExecutable {
+            get {
+                return Path.Combine(System.IO.Directory.GetCurrentDirectory(), "EscapeFromTarkov.exe");
+            }
+        }
+
         public static class PATH {
-            internal static string ServerCache = "user/cache";
-            internal static string ServerMods = "user/mods";
+            internal static string ServerCache = @"user\cache";
+            internal static string ServerMods = @"user\mods";
             internal static string GameLogs = "Logs";
         }
 
@@ -34,13 +40,20 @@ namespace JET.Launcher
         }
 
         internal static class Server {
-            static string CacheFolderDir {
+            public static string ModsFolderDir {
+                get
+                {
+                    return Path.Combine(ServerLocation, PATH.ServerMods);
+                }
+            }
+
+            internal static string CacheFolderDir {
                 get 
                 {
-                    return Path.Combine(ServerLocation, "user\\cache");
+                    return Path.Combine(ServerLocation, PATH.ServerCache);
                 } 
             }
-            static string TempFolderDir_TarkovTemp
+            internal static string TempFolderDir_TarkovTemp
             {
                 get
                 {

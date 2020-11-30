@@ -100,6 +100,7 @@
     <Compile Include="Patches\Bundles\BundleLoadPatch.cs" />
     <Compile Include="Patches\Bundles\EasyAssetsPatch.cs" />
     <Compile Include="Patches\Bundles\EasyBundlePatch.cs" />
+    <Compile Include="Patches\Core\StreamerModePatch.cs" />
     <Compile Include="Patches\Healing\MainMenuControllerPatch.cs" />
     <Compile Include="Patches\Healing\PlayerPatch.cs" />
     <Compile Include="Patches\Matchmaker\InsuranceScreenPatch.cs" />

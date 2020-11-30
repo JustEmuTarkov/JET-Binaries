@@ -35,7 +35,7 @@ namespace JET.Patches.Bots
                 return null;
             }
 
-            Debug.Log("[JET]: Successfully received core bot difficulty data");
+            Debug.LogError("[JET]: Successfully received core bot difficulty data");
             return json;
         }
     }

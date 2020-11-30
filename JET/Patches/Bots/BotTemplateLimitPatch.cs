@@ -51,8 +51,8 @@ namespace JET.Patches.Bots
                 Debug.LogError("[JET]: Received bot " + role.ToString() + " limit data is NULL, using fallback");
                 return 30;
             }
-
-            Debug.Log("[JET]: Successfully received bot " + role.ToString() + " limit data");
+            Debug.LogError(json);
+            Debug.LogError("[JET]: Successfully received bot " + role.ToString() + " limit data");
             return Convert.ToInt32(json);
         }
     }

@@ -63,7 +63,7 @@ namespace JET.Patches.RaidFix
 
             if (!labelFound)
             {
-                Debug.Log("Label not found.");
+                Debug.LogError("Label not found.");
                 return instructions;
             }
 
