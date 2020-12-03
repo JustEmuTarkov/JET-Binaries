@@ -8,14 +8,15 @@ namespace JET.Patches.RaidFix
     {
         public OnShellEjectEventPatch() : base(prefix: nameof(PatchPrefix)) { }
 
-        protected override MethodBase GetTargetMethod()
-        {
-            return PatcherConstants.FirearmControllerType.GetMethod("OnShellEjectEvent");
-        }
+        protected override MethodBase GetTargetMethod() => PatcherConstants.FirearmControllerType
+            .GetMethod("OnShellEjectEvent");
 
         static bool PatchPrefix(object __instance)
         {
-            var weaponController = PrivateValueAccessor.GetPrivateFieldValue(PatcherConstants.FirearmControllerType, PatcherConstants.WeaponControllerFieldName, __instance);
+            var weaponController = PrivateValueAccessor.GetPrivateFieldValue(
+                PatcherConstants.FirearmControllerType, 
+                PatcherConstants.WeaponControllerFieldName, 
+                __instance);
             return (weaponController.GetType().GetField("RemoveFromChamberResult").GetValue(weaponController) == null) ? false : true;
         }
     }

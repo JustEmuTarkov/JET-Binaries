@@ -14,11 +14,9 @@ namespace JET.Patches.ScavMode
     {
         public ScavProfileLoadPatch() : base(transpiler: nameof(PatchTranspile)) { }
 
-        protected override MethodBase GetTargetMethod()
-        {
-            return typeof(MainApplication).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly)
-                .FirstOrDefault(IsTargetMethod);
-        }
+        protected override MethodBase GetTargetMethod() => typeof(MainApplication)
+            .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+            .FirstOrDefault(IsTargetMethod);
 
         static IEnumerable<CodeInstruction> PatchTranspile(ILGenerator generator, IEnumerable<CodeInstruction> instructions)
         {

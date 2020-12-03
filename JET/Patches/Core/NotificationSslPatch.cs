@@ -10,23 +10,20 @@ namespace JET.Patches
 {
     public class NotificationSslPatch : GenericPatch<NotificationSslPatch>
     {
-        public NotificationSslPatch() : base(transpiler: nameof(PatchTranspiler))
-        {
-        }
+        private string _MethodName = "SetUrlParam";
+        private string _MethodName_MoveNext = "MoveNext";
+        private static string _certificateHandler = "set_certificateHandler";
+        public NotificationSslPatch() : base(transpiler: nameof(PatchTranspiler)){}
 
         protected override MethodBase GetTargetMethod()
         {
             return PatcherConstants.TargetAssembly
-                .GetTypes().Single(x => x.GetMethod("SetUrlParam", BindingFlags.Public | BindingFlags.Instance) != null)
+                .GetTypes().Single(x => x.GetMethod(_MethodName, BindingFlags.Public | BindingFlags.Instance) != null)
                 .GetNestedTypes(BindingFlags.NonPublic).Single(y => y.GetConstructor(new[] { typeof(int)}) != null)
-                .GetMethod("MoveNext", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+                .GetMethod(_MethodName_MoveNext, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
         }
-
-        /* Note(PoloYolo): I'm making a big assumption here that no one else is really going to be touching this method (I don't think this
-           class warrants any other edits as far as JET is concerned), so I'm going to implement this transpiler to go off of code
-           index instead of looking for pattern. If, for some reason, someone wants to make further patches to this, let me know?
-           
-           So, what's going on here?
+        #region Info
+        /* what's going on here?
 
            GClass1182 has a nested class that is an IEnumerator. In its MoveNext method, there is a particular bit of code that creates
            a UnityWebRequest for a notification poll request. We want this to use a specific certificateHandler that we've already patched
@@ -67,6 +64,7 @@ namespace JET.Patches
             The codes prefixed by the asterisks (*) are the ones patched-in.
 
         */
+        #endregion
         static IEnumerable<CodeInstruction> PatchTranspiler(IEnumerable<CodeInstruction> instructions)
         {
             var codes = new List<CodeInstruction>(instructions);
@@ -90,7 +88,7 @@ namespace JET.Patches
 
             var certificateHandlerType = PatcherConstants.TargetAssembly.GetTypes().Single(x => x.BaseType == typeof(CertificateHandler));
             var newObjCode = new CodeInstruction(OpCodes.Newobj, AccessTools.Constructor(certificateHandlerType));
-            var callVirtCode = new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(UnityWebRequest), "set_certificateHandler"));
+            var callVirtCode = new CodeInstruction(OpCodes.Callvirt, AccessTools.Method(typeof(UnityWebRequest), _certificateHandler));
 
             var insertCodes = new List<CodeInstruction>()
             {

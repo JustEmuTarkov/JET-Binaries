@@ -15,10 +15,8 @@ namespace JET.Patches.RaidFix
     {
         public OnDeadPatch() : base(transpiler: nameof(PatchTranspile)) {}
 
-        protected override MethodBase GetTargetMethod()
-        {
-            return typeof(Player).GetMethod("OnDead", PatcherConstants.DefaultBindingFlags);
-        }
+        protected override MethodBase GetTargetMethod() => typeof(Player)
+            .GetMethod("OnDead", PatcherConstants.DefaultBindingFlags);
 
         static IEnumerable<CodeInstruction> PatchTranspile(ILGenerator generator, IEnumerable<CodeInstruction> instructions)
         {

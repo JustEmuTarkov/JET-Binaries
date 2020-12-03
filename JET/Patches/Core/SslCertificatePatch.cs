@@ -7,13 +7,14 @@ namespace JET.Patches
 {
 	public class SslCertificatePatch : GenericPatch<SslCertificatePatch>
 	{
+		private string _ValidateCertificate = "ValidateCertificate";
 		public SslCertificatePatch() : base(prefix: nameof(PatchPrefix)) {}
 
 		protected override MethodBase GetTargetMethod()
 		{
 			return PatcherConstants.TargetAssembly
 				.GetTypes().Single(x => x.BaseType == typeof(CertificateHandler))
-				.GetMethod("ValidateCertificate", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+				.GetMethod(_ValidateCertificate, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
 		}
 
 		static bool PatchPrefix(ref bool __result)

@@ -26,12 +26,7 @@ namespace JET.Patches.Bots
 
         private static bool IsTargetInterface(Type type)
         {
-            if (!type.IsInterface || type.GetMethod("ChooseProfile", new[] { typeof(List<Profile>), typeof(bool) }) == null)
-            {
-                return false;
-            }
-
-            return true;
+            return type.IsInterface && type.GetMethod("ChooseProfile", new[] { typeof(List<Profile>), typeof(bool) }) != null;
         }
 
         private bool IsTargetType(Type type)

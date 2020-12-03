@@ -22,7 +22,6 @@ namespace JET.Patches.Bots
         private static bool PatchPrefix(ref string __result, BotDifficulty botDifficulty, WildSpawnType role)
         {
             __result = Request(role, botDifficulty);
-
             return string.IsNullOrWhiteSpace(__result);
         }
 

@@ -25,10 +25,8 @@ namespace JET.Patches.Quests
                 .CreateDelegate(typeof(Func<Player, Equipment>)) as Func<Player, Equipment>;
         }
 
-        protected override MethodBase GetTargetMethod()
-        {
-            return typeof(Player).GetMethod("OnBeenKilledByAggressor", BindingFlags.NonPublic | BindingFlags.Instance);
-        }
+        protected override MethodBase GetTargetMethod() => typeof(Player)
+            .GetMethod("OnBeenKilledByAggressor", BindingFlags.NonPublic | BindingFlags.Instance);
 
         public static void PatchPostfix(Player __instance, Player aggressor, DamageInfo damageInfo)
         {

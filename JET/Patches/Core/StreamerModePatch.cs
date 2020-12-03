@@ -19,7 +19,7 @@ namespace JET.Patches.Core
 
         protected override MethodBase GetTargetMethod()
         {
-            return PatcherConstants.TargetAssembly.GetTypes().Single(x => x.GetMethod("StreamerMode") != null).GetMethod("StreamerMode");
+            return PatcherConstants.TargetAssembly.GetTypes().Single(x => x.GetMethod("SetStreamMode") != null).GetMethod("SetStreamMode");
         }
 
         static IEnumerable<CodeInstruction> PatchTranspile(IEnumerable<CodeInstruction> instructions)
@@ -38,7 +38,7 @@ namespace JET.Patches.Core
             }
 
             // Patch failed
-            if (Index == -1)
+            if (Index < 3)
             {
                 Debug.LogError("Patch Failed!!");
                 PatchLogger.LogTranspileSearchError(MethodBase.GetCurrentMethod());

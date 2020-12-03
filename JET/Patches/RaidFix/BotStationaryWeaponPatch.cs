@@ -18,10 +18,8 @@ namespace JET.Patches.RaidFix
 
         public BotStationaryWeaponPatch() : base(transpiler: nameof(PatchTranspile)) { }
 
-        protected override MethodBase GetTargetMethod()
-        {
-            return PatcherConstants.TargetAssembly.GetTypes().Single(x => x.GetMethod(kMethodName) != null).GetMethod(kMethodName);
-        }
+        protected override MethodBase GetTargetMethod() => PatcherConstants.TargetAssembly
+            .GetTypes().Single(x => x.GetMethod(kMethodName) != null).GetMethod(kMethodName);
 
         static IEnumerable<CodeInstruction> PatchTranspile(IEnumerable<CodeInstruction> instructions)
         {

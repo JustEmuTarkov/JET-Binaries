@@ -22,7 +22,7 @@ namespace JET.Patches.Progression
 
         protected override MethodBase GetTargetMethod()
         {
-			var localGameBaseType = PatcherConstants.LocalGameType.BaseType;
+			var localGameBaseType = PatcherConstants.BaseLocalGameType.BaseType;
 
 			_property = localGameBaseType.GetProperty($"{nameof(GClass759.GClass761)}_0", BindingFlags.NonPublic | BindingFlags.Instance);
 			return localGameBaseType.GetMethod("method_5", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
@@ -43,9 +43,13 @@ namespace JET.Patches.Progression
 			var location = (LocationInfo)_property.GetValue(__instance);
 			var request = new Request(Utilities.Config.BackEndSession.GetPhpSessionId(), backendUrl);
 			var json = request.GetJson("/api/location/" + location.Id);
+			
+			Debug.LogError(json);
 
 			// some magic here. do not change =)
-			var locationLoot = json.ParseJsonTo<LocationInfo>();
+			var locationLoot = Json.Deserialize<LocationInfo>(json);//.ParseJsonTo<LocationInfo>();
+
+			Debug.LogError(locationLoot.Name);
 
 			request.PostJson("/raid/map/name", Json.Serialize(new LocationName(location.Id)));
 

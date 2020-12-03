@@ -32,12 +32,9 @@ namespace JET.Patches.ScavMode
 
         public LoadOfflineRaidScreenPatch() : base(transpiler: nameof(PatchTranspiler)) { }
 
-        protected override MethodBase GetTargetMethod()
-        {
-            return typeof(MenuController).GetNestedTypes(BindingFlags.NonPublic)
+        protected override MethodBase GetTargetMethod() => typeof(MenuController).GetNestedTypes(BindingFlags.NonPublic)
                 .Single(x => x.Name == kMenuControllerInnerType)
                 .GetMethod(kTargetMethodName, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-        }
 
         static IEnumerable<CodeInstruction> PatchTranspiler(IEnumerable<CodeInstruction> instructions)
         {
@@ -52,12 +49,11 @@ namespace JET.Patches.ScavMode
             return codes.AsEnumerable();
         }
 
-        private static MenuController GetMenuController()
-        {
-            return PrivateValueAccessor.GetPrivateFieldValue(typeof(MainApplication), 
-                kMainControllerFieldName, ClientAppUtils.GetMainApp()) as MenuController;
-        }
-
+        private static MenuController GetMenuController() => PrivateValueAccessor
+            .GetPrivateFieldValue(
+                typeof(MainApplication), 
+                kMainControllerFieldName, 
+                ClientAppUtils.GetMainApp()) as MenuController;
 
         // Refer to MatchmakerOfflineRaid's subclass's OnShowNextScreen action definitions if these structs numbers change.
         public static void LoadOfflineRaidNextScreen(bool local, WeatherSettings weatherSettings, BotsSettings botsSettings, WavesSettings wavesSettings)

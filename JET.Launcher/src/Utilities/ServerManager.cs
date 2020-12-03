@@ -32,23 +32,41 @@ namespace JET.Launcher.Utilities
         internal static bool LoadServer()
         {
             RequestManager.Busy();
-            string json = RequestManager.Connect();
-            if (json == "")
-                return false;
-            RequestData.ServerInfo serverInfo = Json.Deserialize<RequestData.ServerInfo>(json);
-            AvailableServers.Add(serverInfo);
+            try
+            {
+                string json = RequestManager.Connect();
+                Console.WriteLine(json);
+                if (json == "")
+                {
+                    RequestManager.Free();
+                    return false;
+                }
+                RequestData.ServerInfo serverInfo = Json.Deserialize<RequestData.ServerInfo>(json);
+                AvailableServers.Add(serverInfo);
+            }
+            catch (Exception e) { Console.WriteLine(e); }
             RequestManager.Free();
             return true;
         }
-        internal static void LoadServerFromDiffrentBackend(string backend)
+        internal static bool LoadServerFromDiffrentBackend(string backend)
         {
-            RequestManager.ChangeBackendUrl(backend);
-            string json = RequestManager.Connect();
-            if (json == "")
-                return;
-            RequestData.ServerInfo serverInfo = Json.Deserialize<RequestData.ServerInfo>(json);
+            RequestManager.Busy();
+            try
+            {
+                RequestManager.ChangeBackendUrl(backend);
+                string json = RequestManager.Connect();
+                if (json == "")
+                {
+                    RequestManager.Free();
+                    return false;
+                }
+                RequestData.ServerInfo serverInfo = Json.Deserialize<RequestData.ServerInfo>(json);
 
-            AvailableServers.Add(Json.Deserialize<RequestData.ServerInfo>(json));
+                AvailableServers.Add(Json.Deserialize<RequestData.ServerInfo>(json));
+            }
+            catch (Exception e) { Console.WriteLine(e); }
+            RequestManager.Free();
+            return true;
         }
     }
 }

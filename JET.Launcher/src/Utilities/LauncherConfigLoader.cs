@@ -57,23 +57,37 @@ namespace JET.Launcher.Utilities
 		internal int GetServersCount() {
 			return launcherConfig.Servers.Count;
 		}
+		private bool CheckFor_LocalHost1 = false;
+		private bool CheckFor_LocalHost2 = false;
 		internal void AddServer(string BackendUrl) {
-			if(!launcherConfig.Servers.Contains(BackendUrl))
+			if (BackendUrl.Contains("localhost"))
+				for (int i = 0; i < launcherConfig.Servers.Count; i++)
+					if (launcherConfig.Servers[i].Contains("localhost"))
+						CheckFor_LocalHost1 = true;
+			if (BackendUrl.Contains("127.0.0.1"))
+				for (int i = 0; i < launcherConfig.Servers.Count; i++)
+					if (launcherConfig.Servers[i].Contains("127.0.0.1"))
+						CheckFor_LocalHost2 = true;
+			if (!launcherConfig.Servers.Contains(BackendUrl) && !CheckFor_LocalHost1 && !CheckFor_LocalHost2)
+			{
 				launcherConfig.Servers.Add(BackendUrl);
-			Save();
-		}
+				Save();
+			}
+        }
 		internal void RemoveServer(int index) {
-			if(launcherConfig.Servers.Count > 1)
+			if (launcherConfig.Servers.Count > 1)
+			{
 				launcherConfig.Servers.RemoveAt(index);
-			Save();
+				Save();
+			}
 		}
 		internal void RemoveServer(string BackendUrl) {
 			for (int i = 0; i < launcherConfig.Servers.Count; i++) {
 				if (launcherConfig.Servers[i] == BackendUrl) {
 					launcherConfig.Servers.RemoveAt(i);
+					Save();
 				}
 			}
-			Save();
 		}
 		internal bool ConfigFileExists() => File.Exists(Path.Combine(Environment.CurrentDirectory, "launcher.config.json"));
 		internal void Load()

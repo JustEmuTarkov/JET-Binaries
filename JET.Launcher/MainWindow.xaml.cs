@@ -30,21 +30,24 @@ namespace JET.Launcher
                 return;
             }
             #endif
-            
-
             Application.Current.DispatcherUnhandledException += (sender, args) => ProgramManager.HandleException(args.Exception);
             AppDomain.CurrentDomain.UnhandledException += ProgramManager.CurrentDomainOnUnhandledException;
+            
             // load missing assemblies from EFT's managed directory
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(ProgramManager.AssemblyResolveEvent);
             InitializeStartups();
             InitializeComponent();
             InitializeLauncherProps();
         }
+        #region Initialazers
         private void InitializeStartups() {
+
             // initialize launcher config
             __LauncherConfigL = new LauncherConfigLoader();
+
             // confirm server location
             __FileM.FindServerDirectory(__LauncherConfigL.GetServerLocation);
+
             // did location of the server changed ?? then save it if yes
             if(Global.ServerLocation != __LauncherConfigL.GetServerLocation)
                 __LauncherConfigL.ChangeServerLocation(Global.ServerLocation);
@@ -70,6 +73,7 @@ namespace JET.Launcher
             __FormM.UpdateApplyButton("connect");
             __FormM.SetupIntervalUpdater(__ProcM);
         }
+        #endregion
 
         /*
          * Managing Events for Objects in form below
@@ -80,6 +84,7 @@ namespace JET.Launcher
             ServerManager.SelectServer(__ServerList.SelectedIndex);
         }
         #endregion
+        #region Handle Clicking
         private void __ApplyButton_Click(object sender, RoutedEventArgs e)
         {
             __FormM.ApplyButtonClickEvent(sender, e);
@@ -124,16 +129,6 @@ namespace JET.Launcher
         {
             __LauncherConfigL.RemoveServer(__ServerList.SelectedIndex);
         }
-        private void TextChangedEventHandler(object sender, TextChangedEventArgs e)
-        {
-            var rtbox = sender as RichTextBox;
-            if (rtbox.Document == null)
-                return;
-            // content of server changed event !!!
-            //TextRange documentRange = new TextRange(rtbox.Document.ContentStart, rtbox.Document.ContentEnd);
-            //documentRange.ClearAllProperties();
-
-        }
         private void CreateShortcut_Click(object sender, RoutedEventArgs e)
         {
             ProcessManager.CreateShortcut();
@@ -152,6 +147,19 @@ namespace JET.Launcher
             __LauncherConfigL.ChangeStartServerAtLaunch(_AutoServerStart_RadioButton);
 
         }
+        #endregion
+        #region Server Text changed event
+        private void TextChangedEventHandler(object sender, TextChangedEventArgs e)
+        {
+            var rtbox = sender as RichTextBox;
+            if (rtbox.Document == null)
+                return;
+            // content of server changed event !!!
+            //TextRange documentRange = new TextRange(rtbox.Document.ContentStart, rtbox.Document.ContentEnd);
+            //documentRange.ClearAllProperties();
+
+        }
+        #endregion
 
     }
 }

@@ -8,14 +8,11 @@ namespace JET.Patches.Quests
 {
     public class BeaconPatch : GenericPatch<BeaconPatch>
     {
-        public BeaconPatch() : base(prefix: nameof(PatchPrefix))
-        {
-        }
+        public BeaconPatch() : base(prefix: nameof(PatchPrefix)){}
 
-        protected override MethodBase GetTargetMethod()
-        {
-            return typeof(Player).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly).Single(IsTargetMethod);
-        }
+        protected override MethodBase GetTargetMethod() => typeof(Player)
+            .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+            .Single(IsTargetMethod);
 
         private bool IsTargetMethod(MethodInfo method)
         {
