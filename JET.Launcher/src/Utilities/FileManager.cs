@@ -93,9 +93,13 @@ namespace JET.Launcher.Utilities
         {
             if (initialDirectory != "")
             {
-                Global.ServerLocation = ScanToConfirmDirectory(initialDirectory);
-                if (Global.ServerLocation != "Not found") {
-                    return;
+                if (Directory.Exists(initialDirectory))
+                {
+                    Global.ServerLocation = ScanToConfirmDirectory(initialDirectory);
+                    if (Global.ServerLocation != "Not found")
+                    {
+                        return;
+                    }
                 }
             }
             string LauncherDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
@@ -112,6 +116,7 @@ namespace JET.Launcher.Utilities
 
             if (Global.ServerLocation == "Not found")
             {
+
                 while (Global.ServerLocation == "Not found")
                 {
                     Global.ServerLocation = Interaction.InputBox("Type windows location where server is located.", "I was unable to find server *_*", @"F:\Pulpit\JET\JustEmuTarkov-Server-1.0.1");

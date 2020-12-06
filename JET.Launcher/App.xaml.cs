@@ -16,7 +16,8 @@ namespace JET.Launcher
 
         private void Application_Exit(object sender, ExitEventArgs e)
         {
-            ProcessManager.consoleProcessHandle.Kill();
+            if(ProcessManager.consoleProcessName != "")
+                ProcessManager.consoleProcessHandle.Kill();
         }
     }
 }

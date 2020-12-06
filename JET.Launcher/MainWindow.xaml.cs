@@ -51,7 +51,6 @@ namespace JET.Launcher
             // did location of the server changed ?? then save it if yes
             if(Global.ServerLocation != __LauncherConfigL.GetServerLocation)
                 __LauncherConfigL.ChangeServerLocation(Global.ServerLocation);
-
         }
         private void InitializeLauncherProps()
         {

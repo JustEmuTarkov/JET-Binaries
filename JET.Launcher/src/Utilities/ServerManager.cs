@@ -48,7 +48,7 @@ namespace JET.Launcher.Utilities
             RequestManager.Free();
             return true;
         }
-        internal static bool LoadServerFromDiffrentBackend(string backend)
+        internal static bool LoadServerFromDiffrentBackend(string backend, bool save = false)
         {
             RequestManager.Busy();
             try
@@ -61,8 +61,8 @@ namespace JET.Launcher.Utilities
                     return false;
                 }
                 RequestData.ServerInfo serverInfo = Json.Deserialize<RequestData.ServerInfo>(json);
-
-                AvailableServers.Add(Json.Deserialize<RequestData.ServerInfo>(json));
+                if(save)
+                    AvailableServers.Add(Json.Deserialize<RequestData.ServerInfo>(json));
             }
             catch (Exception e) { Console.WriteLine(e); }
             RequestManager.Free();

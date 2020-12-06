@@ -11,7 +11,7 @@ namespace JET.Launcher
     {
         internal static string LauncherName = "JET Launcher";
         internal static string LauncherVersion = "1.0.0";
-        internal static string ServerLocation = "NotFound";
+        internal static string ServerLocation = "Not Found";
         internal static string ServerName = "Server.exe";
         internal static string WPF_NewLine = "&#xA;";
         internal static int LimitConsoleOutput = 30;
