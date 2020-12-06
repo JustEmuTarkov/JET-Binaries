@@ -16,6 +16,7 @@ namespace JET
     [ObfuscationAttribute(Exclude = true)]
     public class Instance : MonoBehaviour
 	{
+        private string Watermark = "9506 | JET";
         [ObfuscationAttribute(Exclude = true)]
         private void Start()
 		{
@@ -33,52 +34,87 @@ namespace JET
             PatcherUtil.Patch<BundleLoadPatch>();
             Debug.Log("RuntimeBundles: Loaded");
 
-            if (Offline.IsEnabled())
-            {
-                OfflineModePatchRoutes();
-                return;
-            }
-            Debug.Log("SinglePlayer: Disabled");
+            OfflineModePatchRoutes(Offline.LoadModules());
+
+            WatermarkOverrider();
         }
-
-        private void OfflineModePatchRoutes() {
-            PatcherUtil.Patch<OfflineLootPatch>();
-            PatcherUtil.Patch<OfflineSaveProfilePatch>();
-            PatcherUtil.Patch<OfflineSpawnPointPatch>();
-            PatcherUtil.Patch<WeaponDurabilityPatch>();
-            PatcherUtil.Patch<SingleModeJamPatch>();
-
-            PatcherUtil.Patch<MainMenuControllerPatch>();
-            PatcherUtil.Patch<PlayerPatch>();
-
-            PatcherUtil.Patch<MatchmakerOfflineRaidPatch>();
-            PatcherUtil.Patch<MatchMakerSelectionLocationScreenPatch>();
-            PatcherUtil.Patch<InsuranceScreenPatch>();
-
-            PatcherUtil.Patch<BossSpawnChancePatch>();
-            PatcherUtil.Patch<BotTemplateLimitPatch>();
-            PatcherUtil.Patch<GetNewBotTemplatesPatch>();
-            PatcherUtil.Patch<RemoveUsedBotProfilePatch>();
-            PatcherUtil.Patch<SpawnPmcPatch>();
-            PatcherUtil.Patch<CoreDifficultyPatch>();
-            PatcherUtil.Patch<BotDifficultyPatch>();
-
-            PatcherUtil.Patch<OnDeadPatch>();
-            PatcherUtil.Patch<OnShellEjectEventPatch>();
-            PatcherUtil.Patch<BotStationaryWeaponPatch>();
-
-            PatcherUtil.Patch<BeaconPatch>();
-            PatcherUtil.Patch<DogtagPatch>();
-
-            PatcherUtil.Patch<LoadOfflineRaidScreenPatch>();
-            PatcherUtil.Patch<ScavPrefabLoadPatch>();
-            PatcherUtil.Patch<ScavProfileLoadPatch>();
-            PatcherUtil.Patch<ScavSpawnPointPatch>();
-            PatcherUtil.Patch<ScavExfilPatch>();
-
-            PatcherUtil.Patch<EndByTimerPatch>();
-
-            Debug.Log("SinglePlayer: Loaded");
+        private void WatermarkOverrider()
+        {
+            var _barVariable = typeof(EFT.UI.PreloaderUI)
+                .GetField("_alphaVersionLabel", BindingFlags.NonPublic | BindingFlags.Instance)
+                .GetValue(MonoBehaviourSingleton<EFT.UI.PreloaderUI>.Instance) as EFT.UI.LocalizedText;
+            _barVariable.LocalizationKey = Watermark;
         }
-	}
+        private void OfflineModePatchRoutes(Offline.OfflineMode EnabledElements)
+        {
+
+            if (EnabledElements.OfflineLootPatch)
+                PatcherUtil.Patch<OfflineLootPatch>();
+            if (EnabledElements.OfflineSaveProfilePatch)
+                PatcherUtil.Patch<OfflineSaveProfilePatch>();
+            if (EnabledElements.OfflineSpawnPointPatch)
+                PatcherUtil.Patch<OfflineSpawnPointPatch>();
+            if (EnabledElements.WeaponDurabilityPatch)
+                PatcherUtil.Patch<WeaponDurabilityPatch>();
+            if (EnabledElements.SingleModeJamPatch)
+                PatcherUtil.Patch<SingleModeJamPatch>();
+            //if (EnabledElements.ExperienceGainPatch)
+            //    PatcherUtil.Patch<ExperienceGainPatch>();
+
+            if (EnabledElements.MainMenuControllerPatch)
+                PatcherUtil.Patch<MainMenuControllerPatch>();
+            if (EnabledElements.PlayerPatch)
+                PatcherUtil.Patch<PlayerPatch>();
+
+            if (EnabledElements.MatchmakerOfflineRaidPatch)
+                PatcherUtil.Patch<MatchmakerOfflineRaidPatch>();
+            if (EnabledElements.MatchMakerSelectionLocationScreenPatch)
+                PatcherUtil.Patch<MatchMakerSelectionLocationScreenPatch>();
+            if (EnabledElements.InsuranceScreenPatch)
+                PatcherUtil.Patch<InsuranceScreenPatch>();
+
+            if (EnabledElements.BossSpawnChancePatch)
+                PatcherUtil.Patch<BossSpawnChancePatch>();
+            if (EnabledElements.BotTemplateLimitPatch)
+                PatcherUtil.Patch<BotTemplateLimitPatch>();
+            if (EnabledElements.GetNewBotTemplatesPatch)
+                PatcherUtil.Patch<GetNewBotTemplatesPatch>();
+            if (EnabledElements.RemoveUsedBotProfilePatch)
+                PatcherUtil.Patch<RemoveUsedBotProfilePatch>();
+            if (EnabledElements.SpawnPmcPatch)
+                PatcherUtil.Patch<SpawnPmcPatch>();
+            if (EnabledElements.CoreDifficultyPatch)
+                PatcherUtil.Patch<CoreDifficultyPatch>();
+            if (EnabledElements.BotDifficultyPatch)
+                PatcherUtil.Patch<BotDifficultyPatch>();
+
+            if (EnabledElements.OnDeadPatch)
+                PatcherUtil.Patch<OnDeadPatch>();
+            if (EnabledElements.OnShellEjectEventPatch)
+                PatcherUtil.Patch<OnShellEjectEventPatch>();
+            if (EnabledElements.BotStationaryWeaponPatch)
+                PatcherUtil.Patch<BotStationaryWeaponPatch>();
+
+            if (EnabledElements.BeaconPatch)
+                PatcherUtil.Patch<BeaconPatch>();
+            if (EnabledElements.DogtagPatch)
+                PatcherUtil.Patch<DogtagPatch>();
+
+            if (EnabledElements.LoadOfflineRaidScreenPatch)
+                PatcherUtil.Patch<LoadOfflineRaidScreenPatch>();
+            if (EnabledElements.ScavPrefabLoadPatch)
+                PatcherUtil.Patch<ScavPrefabLoadPatch>();
+            if (EnabledElements.ScavProfileLoadPatch)
+                PatcherUtil.Patch<ScavProfileLoadPatch>();
+            if (EnabledElements.ScavSpawnPointPatch)
+                PatcherUtil.Patch<ScavSpawnPointPatch>();
+            if (EnabledElements.ScavExfilPatch)
+                PatcherUtil.Patch<ScavExfilPatch>(); // if its not required by players can be removed or moved into config loading patches
+
+            if (EnabledElements.EndByTimerPatch)
+                PatcherUtil.Patch<EndByTimerPatch>();
+
+            Debug.LogError("SinglePlayer: Loaded");
+        }
+    }
 }
