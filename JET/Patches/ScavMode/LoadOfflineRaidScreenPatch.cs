@@ -9,26 +9,26 @@ using EFT.UI.Matchmaker;
 using EFT.UI.Screens;
 using JET.Utilities.Patching;
 using JET.Utilities.Reflection;
-using MenuController = GClass1157; // .SelectedKeyCard
-using WeatherSettings = GStruct88; // IsRandomTime and IsRandomWeather
-using BotsSettings = GStruct225; // IsScavWars and BotAmount
-using WavesSettings = GStruct89; // IsTaggedAndCursed and IsBosses
-
+using MenuController = GClass1144; // .SelectedKeyCard
+using WeatherSettings = GStruct87; // IsRandomTime and IsRandomWeather
+using BotsSettings = GStruct220; // IsScavWars and BotAmount
+using WavesSettings = GStruct88; // IsTaggedAndCursed and IsBosses
+using MatchMakerOfflineScreen = EFT.UI.Matchmaker.MatchmakerOfflineRaid.GClass1912;
 namespace JET.Patches.ScavMode
 {
     using OfflineRaidAction = Action<bool, WeatherSettings, BotsSettings, WavesSettings>;
 
     public class LoadOfflineRaidScreenPatch : GenericPatch<LoadOfflineRaidScreenPatch>
     {
-        private static readonly string kBotsSettingsFieldName = "gstruct225_0";
-        private static readonly string kWeatherSettingsFieldName = "gstruct88_0";
-        private static readonly string kWavesSettingsFieldName = "gstruct89_0";
+        private static readonly string kBotsSettingsFieldName = "gstruct220_0"; // typeof(BotsSettings).toLower() + "_0"
+        private static readonly string kWeatherSettingsFieldName = "gstruct87_0"; // typeof(WeatherSettings).toLower() + "_0"
+        private static readonly string kWavesSettingsFieldName = "gstruct88_0"; // typeof(WavesSettings).toLower() + "_0"
 
-        private const string kMainControllerFieldName = "gclass1157_0";
-        private const string kMenuControllerInnerType = "Class804";
+        private const string kMainControllerFieldName = "gclass1144_0"; // typeof(MenuController).toLower() + "_0"
+        private const string kMenuControllerInnerType = "Class782";
         private const string kTargetMethodName = "method_2";
-        private const string kLoadReadyScreenMethodName = "method_37";
-        private const string kReadyMethodName = "method_53";
+        private const string kLoadReadyScreenMethodName = "method_36";
+        private const string kReadyMethodName = "method_54";
 
         public LoadOfflineRaidScreenPatch() : base(transpiler: nameof(PatchTranspiler)) { }
 
@@ -76,16 +76,14 @@ namespace JET.Patches.ScavMode
         public static void LoadOfflineRaidScreenForScav()
         {
             var menuController = (object)GetMenuController();
-            var gclass = new MatchmakerOfflineRaid.GClass1963();
+            var gclass = new MatchMakerOfflineScreen();
 
             gclass.OnShowNextScreen += LoadOfflineRaidNextScreen;
             gclass.OnShowReadyScreen += (OfflineRaidAction)Delegate.CreateDelegate(typeof(OfflineRaidAction), menuController, kReadyMethodName);
             gclass.ShowScreen(EScreenState.Queued);
         }
 
-        private static void SetMenuControllerFieldValue(MenuController instance, string fieldName, object value)
-        {
-            PrivateValueAccessor.SetPrivateFieldValue(typeof(MenuController), fieldName, instance, value);
-        }
+        private static void SetMenuControllerFieldValue(MenuController instance, string fieldName, object value) => PrivateValueAccessor
+            .SetPrivateFieldValue(typeof(MenuController), fieldName, instance, value);
     }
 }

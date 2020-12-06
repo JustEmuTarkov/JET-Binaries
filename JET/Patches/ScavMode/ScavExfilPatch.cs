@@ -89,9 +89,10 @@ namespace JET.Patches.ScavMode
             return codes.AsEnumerable();
         }
 
-        private static bool IsTargetMethod(MethodInfo methodInfo)
-        {
-            return methodInfo.IsVirtual && methodInfo.GetParameters().Length == 0 && methodInfo.ReturnType == typeof(void) && methodInfo.GetMethodBody().LocalVariables.Count > 0;
-        }
+        private static bool IsTargetMethod(MethodInfo methodInfo) => methodInfo.IsVirtual && 
+            methodInfo.GetParameters().Length == 0 && 
+            methodInfo.ReturnType == typeof(void) && 
+            methodInfo.GetMethodBody().LocalVariables.Count > 0;
+
     }
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 using EFT;
 using EFT.InventoryLogic;
 using JET.Utilities.Patching;
-using Equipment = GClass1632;
-using DamageInfo = GStruct232;
+using Equipment = GClass1602;
+using DamageInfo = GStruct227;
 
 namespace JET.Patches.Quests
 {

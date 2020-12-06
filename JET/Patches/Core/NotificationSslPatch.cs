@@ -68,20 +68,15 @@ namespace JET.Patches
         static IEnumerable<CodeInstruction> PatchTranspiler(IEnumerable<CodeInstruction> instructions)
         {
             var codes = new List<CodeInstruction>(instructions);
-            var index = 0;
+            var index = 129;
 
-            for (var i = 0; i < codes.Count(); i++)
+            for (var i = 129; i < codes.Count(); i++)
             {
-                if (codes[i].ToString().Contains("UnityEngine.Networking.UnityWebRequest::.ctor"))
+                if (codes[i].ToString().Contains("GET"))
                 {
                     index = i + 1;
                     break;
                 }
-            }
-
-            if (index == 0)
-            {
-                index = 139;
             }
 
             var dupCode = new CodeInstruction(OpCodes.Dup);

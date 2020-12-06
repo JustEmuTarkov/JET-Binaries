@@ -14,13 +14,11 @@ namespace JET.Patches.ScavMode
     {
         public ScavPrefabLoadPatch() : base(transpiler: nameof(PatchTranspile)) {}
 
-        protected override MethodBase GetTargetMethod()
-        {
-            return typeof(MainApplication).GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly).
-                Single(x => x.GetField("entryPoint") != null && x.GetField("timeAndWeather") != null && x.Name.Contains("Struct"))
-                .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly)
-                .FirstOrDefault(x => x.Name == "MoveNext");
-        }
+        protected override MethodBase GetTargetMethod() => typeof(MainApplication)
+            .GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+            .Single(x => x.GetField("entryPoint") != null && x.GetField("timeAndWeather") != null && x.Name.Contains("Struct"))
+            .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+            .FirstOrDefault(x => x.Name == "MoveNext");
 
         static IEnumerable<CodeInstruction> PatchTranspile(ILGenerator generator, IEnumerable<CodeInstruction> instructions)
         {

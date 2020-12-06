@@ -20,8 +20,8 @@ namespace JET.Patches.Bots
         {
             targetInterface = PatcherConstants.TargetAssembly.GetTypes().Single(IsTargetInterface);
             targetType = PatcherConstants.TargetAssembly.GetTypes().Single(IsTargetType);
-            wildSpawnTypeField = AccessTools.FieldRefAccess<WildSpawnType>(targetType, "wildSpawnType_0"); // Type
-            botDifficultyField = AccessTools.FieldRefAccess<BotDifficulty>(targetType, "botDifficulty_0"); // BotDifficulty
+            wildSpawnTypeField = AccessTools.FieldRefAccess<WildSpawnType>(targetType, "Type"); // Type
+            botDifficultyField = AccessTools.FieldRefAccess<BotDifficulty>(targetType, "BotDifficulty"); // BotDifficulty
         }
 
         private static bool IsTargetInterface(Type type)
@@ -37,7 +37,9 @@ namespace JET.Patches.Bots
             }
 
             var fields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
-            if (!fields.Any(f => f.FieldType == typeof(WildSpawnType)) || !fields.Any(f => f.FieldType == typeof(BotDifficulty)))
+            if (!fields.Any(x => x.FieldType == typeof(BotDifficulty) && x.Name == "BotDifficulty")
+            || !fields.Any(x => x.FieldType == typeof(EPlayerSide) && x.Name == "Side")
+            || !fields.Any(x => x.FieldType == typeof(WildSpawnType) && x.Name == "Type"))
             {
                 return false;
             }

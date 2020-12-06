@@ -5,8 +5,9 @@ using EFT;
 using JET.Utilities.Patching;
 using System.Linq;
 using System;
-using EFT.Game.Spawning;
+//using EFT.Game.Spawning;
 using System.Collections.Generic;
+using EFT.Interactive;
 
 namespace JET.Patches.Progression
 {
@@ -30,48 +31,43 @@ namespace JET.Patches.Progression
             return !type.IsInterface;
         }
 
-        public static bool PatchPrefix(ref ISpawnPoint __result, GInterface208 ___ginterface, ESpawnCategory category, EPlayerSide side, string infiltration)
+        public static bool PatchPrefix(SpawnArea.SpawnAreaSettings[] ___spawnAreaSettings_0, EPlayerSide side, out Vector3 position, out Quaternion rotation, string spawnPointFilter = null, string infiltrationZone = null)
         {
-            var spawnPoints = ___ginterface.ToList();
-            var unfilteredSpawnPoints = spawnPoints.ToList();
-            var infils = spawnPoints.Select(sp => sp.Infiltration).Distinct();
-            Debug.LogError($"PatchPrefix SelectSpawnPoint Infiltrations: {spawnPoints.Count} | {String.Join(", ", infils)}");
+            var spawnAreaSettingHelper = new SpawnAreaSettingHelper(side, spawnPointFilter, infiltrationZone);
+            var spawnAreaSettings = ___spawnAreaSettings_0.Where(spawnAreaSettingHelper.isSpawnAreaSetting).RandomElement();
 
-            Debug.LogError($"Filter by Infiltration: {infiltration}");
-            spawnPoints = spawnPoints.Where(sp => sp != null && sp.Infiltration != null && (String.IsNullOrEmpty(infiltration) || sp.Infiltration.Equals(infiltration))).ToList();
-            if (spawnPoints.Count == 0)
+            if (spawnAreaSettings == null)
             {
-                __result = GetFallBackSpawnPoint(unfilteredSpawnPoints, category, side, infiltration);
+                Debug.LogError("No spawn points for " + side + " found! Spawn points count: " + ___spawnAreaSettings_0.Length);
+                position = Vector3.zero;
+                rotation = Quaternion.identity;
                 return false;
             }
 
-            Debug.LogError($"Filter by Categories: {category}");
-            spawnPoints = spawnPoints.Where(sp => sp.Categories.Contain(category)).ToList();
-            if (spawnPoints.Count == 0)
-            {
-                __result = GetFallBackSpawnPoint(unfilteredSpawnPoints, category, side, infiltration);
-                return false;
-            }
+            position = spawnAreaSettings.Position;
+            rotation = Quaternion.Euler(0f, spawnAreaSettings.Orientation, 0f);
 
-            Debug.LogError($"Filter by Side: {side}");
-            spawnPoints = spawnPoints.Where(sp => sp.Sides.Contain(side)).ToList();
-            if (spawnPoints.Count == 0)
-            {
-                __result = GetFallBackSpawnPoint(unfilteredSpawnPoints, category, side, infiltration);
-                return false;
-            }
-
-            __result = spawnPoints.RandomElement();
-            Debug.LogError($"PatchPrefix SelectSpawnPoint: {__result.Id}");
             return false;
         }
-
-        private static ISpawnPoint GetFallBackSpawnPoint(List<ISpawnPoint> spawnPoints, ESpawnCategory category, EPlayerSide side, string infiltration)
+        public class SpawnAreaSettingHelper
         {
-            Debug.LogError($"PatchPrefix SelectSpawnPoint: Couldn't find any spawn points for:  {category}  |  {side}  |  {infiltration}");
-            var spawn = spawnPoints.Where(sp => sp.Categories.Contain(ESpawnCategory.Player)).RandomElement();
-            Debug.LogError($"PatchPrefix SelectSpawnPoint: {spawn.Id}");
-            return spawn;
+            private readonly EPlayerSide side;
+            private readonly string spawnPointFilter;
+            private readonly string infiltrationZone;
+
+            public SpawnAreaSettingHelper(EPlayerSide side, string spawnPointFilter, string infiltrationZone)
+            {
+                this.side = side;
+                this.spawnPointFilter = spawnPointFilter;
+                this.infiltrationZone = infiltrationZone;
+            }
+
+            public bool isSpawnAreaSetting(SpawnArea.SpawnAreaSettings x)
+            {
+                return x.Sides.Contains(side)
+                    && (string.IsNullOrWhiteSpace(infiltrationZone) || x.InfiltrationZone == infiltrationZone)
+                    && (string.IsNullOrWhiteSpace(spawnPointFilter) || spawnPointFilter.Contains(x.Id));
+            }
         }
 
     }

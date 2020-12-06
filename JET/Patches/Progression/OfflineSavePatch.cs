@@ -4,7 +4,7 @@ using Comfort.Common;
 using EFT;
 using JET.Utilities.Patching;
 using JET.Utilities.Player;
-using ClientMetrics = GClass1325; // GameUpdateBinMetricCollector (lower Gclass number)
+using ClientMetrics = GClass1304; // GameUpdateBinMetricCollector (lower Gclass number)
 
 namespace JET.Patches.Progression
 {
@@ -18,7 +18,7 @@ namespace JET.Patches.Progression
 
         protected override MethodBase GetTargetMethod()
         {
-            return PatcherConstants.MainApplicationType.GetMethod("method_40", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            return PatcherConstants.MainApplicationType.GetMethod("method_38", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
         }
 
         public static void PatchPrefix(ESideType ___esideType_0, Result<ExitStatus, TimeSpan, ClientMetrics> result)
