@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -11,10 +10,10 @@ using Diz.Resources;
 using JetBrains.Annotations;
 using JET.Utilities.Patching;
 using JET.Utilities;
-using IEasyBundle = GInterface238; //Property: SameNameAsset 
-using IBundleLock = GInterface239; //Property: IsLocked
-using BundleLock = GClass2114; //Property: MaxConcurrentOperations
-using DependencyGraph = GClass2115<GInterface238>; // Method: GetDefaultNode() / Inside <T> goes IEasyBundle
+using IEasyBundle = GInterface249; //Property: SameNameAsset 
+using IBundleLock = GInterface250; //Property: IsLocked
+using BundleLock = GClass2174; //Property: MaxConcurrentOperations
+using DependencyGraph = GClass2175<GInterface249>; // Method: GetDefaultNode() / Inside <T> goes IEasyBundle
 
 namespace JET.Patches
 {

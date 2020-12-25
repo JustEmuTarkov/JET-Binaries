@@ -9,10 +9,10 @@ using EFT.UI.Matchmaker;
 using EFT.UI.Screens;
 using JET.Utilities.Patching;
 using JET.Utilities.Reflection;
-using MenuController = GClass1157; // .SelectedKeyCard
-using WeatherSettings = GStruct88; // IsRandomTime and IsRandomWeather
-using BotsSettings = GStruct225; // IsScavWars and BotAmount
-using WavesSettings = GStruct89; // IsTaggedAndCursed and IsBosses
+using MenuController = GClass1190; // .SelectedKeyCard
+using WeatherSettings = GStruct92; // IsRandomTime and IsRandomWeather
+using BotsSettings = GStruct232; // IsScavWars and BotAmount
+using WavesSettings = GStruct93; // IsTaggedAndCursed and IsBosses
 
 namespace JET.Patches.ScavMode
 {
@@ -20,15 +20,15 @@ namespace JET.Patches.ScavMode
 
     public class LoadOfflineRaidScreenPatch : GenericPatch<LoadOfflineRaidScreenPatch>
     {
-        private static readonly string kBotsSettingsFieldName = "gstruct225_0";
-        private static readonly string kWeatherSettingsFieldName = "gstruct88_0";
+        private static readonly string kBotsSettingsFieldName = "gstruct232_0";
+        private static readonly string kWeatherSettingsFieldName = "gstruct92_0";
         private static readonly string kWavesSettingsFieldName = "gstruct89_0";
 
-        private const string kMainControllerFieldName = "gclass1157_0";
-        private const string kMenuControllerInnerType = "Class804";
+        private const string kMainControllerFieldName = "gclass1190_0";
+        private const string kMenuControllerInnerType = "Class818";
         private const string kTargetMethodName = "method_2";
-        private const string kLoadReadyScreenMethodName = "method_37";
-        private const string kReadyMethodName = "method_53";
+        private const string kLoadReadyScreenMethodName = "method_35";
+        private const string kReadyMethodName = "method_50";
 
         public LoadOfflineRaidScreenPatch() : base(transpiler: nameof(PatchTranspiler)) { }
 
@@ -76,7 +76,7 @@ namespace JET.Patches.ScavMode
         public static void LoadOfflineRaidScreenForScav()
         {
             var menuController = (object)GetMenuController();
-            var gclass = new MatchmakerOfflineRaid.GClass1963();
+            var gclass = new MatchmakerOfflineRaid.GClass2022();
 
             gclass.OnShowNextScreen += LoadOfflineRaidNextScreen;
             gclass.OnShowReadyScreen += (OfflineRaidAction)Delegate.CreateDelegate(typeof(OfflineRaidAction), menuController, kReadyMethodName);

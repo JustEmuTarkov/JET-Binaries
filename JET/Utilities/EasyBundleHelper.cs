@@ -4,8 +4,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using HarmonyLib;
-using IBundleLock = GInterface239; //Property: IsLocked
-using BindableState = GClass2100<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
+using IBundleLock = GInterface250; //Property: IsLocked
+using BindableState = GClass2160<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
 
 namespace JET.Utilities
 {
@@ -16,7 +16,7 @@ namespace JET.Utilities
 
         private static readonly string _pathFieldName = "string_1";
         private static readonly string _keyWithoutExtensionFieldName = "string_0";
-        private static readonly string _bundleLockPropertyName = "ginterface239_0";
+        private static readonly string _bundleLockPropertyName = "ginterface250_0";
         private static readonly string _loadingJobPropertyName = "task_0";
         private static readonly string _dependencyKeysPropertyName = "DependencyKeys";
         private static readonly string _keyPropertyName = "Key";

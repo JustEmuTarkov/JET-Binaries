@@ -11,9 +11,9 @@ namespace JET.Patches.Matchmaker
         {
         }
 
-        public static void PatchPostfix(UIButtonSpawner ____readyButton)
+        public static void PatchPostfix(DefaultUIButton ____readyButton)
         {
-            ____readyButton.SpawnedObject.gameObject.SetActive(false);
+            ____readyButton.GameObject.SetActive(false);
         }
 
         protected override MethodBase GetTargetMethod()

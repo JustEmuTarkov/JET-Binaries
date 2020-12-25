@@ -4,7 +4,7 @@ using EFT;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
 using JET.Utilities;
-using BotDifficultyHandler = GClass283; // Method: CheckOnExcude, LoadDifficultyStringInternal
+using BotDifficultyHandler = GClass301; // Method: CheckOnExcude, LoadDifficultyStringInternal
 
 namespace JET.Patches.Bots
 {

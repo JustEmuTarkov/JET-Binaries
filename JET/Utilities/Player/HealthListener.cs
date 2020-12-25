@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using IHealthController = GInterface163;
-using StDamage = GStruct232;
-using IEffect = GInterface126;
+using IHealthController = GInterface169; // ActiveBuffsNames
+using StDamage = GStruct239; // BodyPartColliderType
+using IEffect = GInterface128; // AddWholeTime
 using UnityEngine;
 using JET.Utilities.HTTP;
 

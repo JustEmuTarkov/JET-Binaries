@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using JET.Utilities.Patching;
-using MainMenuController = GClass1157; // SelectedDateTime
-using IHealthController = GInterface163; // CarryingWeightAbsoluteModifier
+using MainMenuController = GClass1190; // SelectedDateTime
+using IHealthController = GInterface169; // CarryingWeightAbsoluteModifier
 
 namespace JET.Patches.Healing
 {

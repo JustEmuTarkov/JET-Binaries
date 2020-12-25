@@ -10,7 +10,7 @@ namespace JET.Patches
 {
     public class NotificationSslPatch : GenericPatch<NotificationSslPatch>
     {
-        private string _MethodName = "SetUrlParam";
+        private string _MethodName = "SetUriParam";
         private string _MethodName_MoveNext = "MoveNext";
         private static string _certificateHandler = "set_certificateHandler";
         public NotificationSslPatch() : base(transpiler: nameof(PatchTranspiler)){}

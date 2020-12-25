@@ -5,7 +5,7 @@ using JET.Utilities.App;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
 using JET.Utilities;
-using LocationInfo = GClass759.GClass761;
+using LocationInfo = GClass779.GClass781;
 using System;
 
 namespace JET.Patches.Progression
@@ -24,7 +24,7 @@ namespace JET.Patches.Progression
         {
 			var localGameBaseType = PatcherConstants.BaseLocalGameType.BaseType;
 
-			_property = localGameBaseType.GetProperty($"{nameof(GClass759.GClass761)}_0", BindingFlags.NonPublic | BindingFlags.Instance);
+			_property = localGameBaseType.GetProperty($"{nameof(GClass779.GClass781)}_0", BindingFlags.NonPublic | BindingFlags.Instance);
 			return localGameBaseType.GetMethod("method_5", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
 		}
 

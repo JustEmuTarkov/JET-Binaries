@@ -8,11 +8,11 @@ using UnityEngine;
 using Comfort.Common;
 using EFT;
 using JET.Utilities.Patching;
-using WaveInfo = GClass904; // Field: Role (choose first one displayed as "Role")
-using BotsPresets = GClass337; // Method: GetNewProfile (higher GClass number)
-using BotData = GInterface14; // Method: ChooseProfile
-using PoolManager = GClass1133; // CancellationToken: PoolsCancellationToken
-using JobPriority = GClass2080; // Delegate: Immediate
+using WaveInfo = GClass925; // Field: Role (choose first one displayed as "Role")
+using BotsPresets = GClass360; // Method: GetNewProfile (higher GClass number)
+using BotData = GInterface15; // Method: ChooseProfile
+using PoolManager = GClass1164; // CancellationToken: PoolsCancellationToken
+using JobPriority = GClass2140; // Delegate: Immediate
 
 namespace JET.Patches.Bots
 {

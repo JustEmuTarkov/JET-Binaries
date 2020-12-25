@@ -6,8 +6,8 @@ using EFT;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
 using JET.Utilities;
-using WaveInfo = GClass904; // Field: Role (choose first one displayed as "Role")
-using BotsPresets = GClass337; // Method: GetNewProfile (higher GClass number)
+using WaveInfo = GClass925; // Field: Role (choose first one displayed as "Role")
+using BotsPresets = GClass360; // Method: GetNewProfile (higher GClass number)
 
 namespace JET.Patches.Bots
 {

@@ -17,7 +17,7 @@ namespace JET
     [ObfuscationAttribute(Exclude = true)]
     public class Instance : MonoBehaviour
 	{
-        private string Watermark = "9767 | JET";
+        private string Watermark = "10423 | JET";
         [ObfuscationAttribute(Exclude = true)]
         private void Start()
 		{
@@ -110,8 +110,8 @@ namespace JET
                 PatcherUtil.Patch<ScavPrefabLoadPatch>();
             if (EnabledElements.ScavProfileLoadPatch)
                 PatcherUtil.Patch<ScavProfileLoadPatch>();
-            if (EnabledElements.ScavSpawnPointPatch)
-                PatcherUtil.Patch<ScavSpawnPointPatch>();
+            //if (EnabledElements.ScavSpawnPointPatch)
+            //    PatcherUtil.Patch<ScavSpawnPointPatch>();
             if (EnabledElements.ScavExfilPatch)
                 PatcherUtil.Patch<ScavExfilPatch>(); // if its not required by players can be removed or moved into config loading patches
 
