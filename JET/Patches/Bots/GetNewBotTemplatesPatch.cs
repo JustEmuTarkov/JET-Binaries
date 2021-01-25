@@ -12,7 +12,7 @@ using WaveInfo = GClass925; // Field: Role (choose first one displayed as "Role"
 using BotsPresets = GClass360; // Method: GetNewProfile (higher GClass number)
 using BotData = GInterface15; // Method: ChooseProfile
 using PoolManager = GClass1164; // CancellationToken: PoolsCancellationToken
-using JobPriority = GClass2140; // Delegate: Immediate
+using JobPriority = GClass2141; // Delegate: Immediate
 
 namespace JET.Patches.Bots
 {

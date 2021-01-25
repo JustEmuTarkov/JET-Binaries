@@ -1,4 +1,3 @@
-
 using System.Reflection;
 using UnityEngine;
 using EFT;
@@ -30,9 +29,9 @@ namespace JET.Patches.Progression
             return !type.IsInterface;
         }
 
-        public static bool PatchPrefix(ref ISpawnPoint __result, GInterface217 ___ginterface, ESpawnCategory category, EPlayerSide side, string infiltration)
+        public static bool PatchPrefix(ref ISpawnPoint __result, GInterface217 ___ginterface217_0, ESpawnCategory category, EPlayerSide side, string infiltration)
         {
-            var spawnPoints = ___ginterface.ToList();
+            var spawnPoints = ___ginterface217_0.ToList();
             var unfilteredSpawnPoints = spawnPoints.ToList();
             var infils = spawnPoints.Select(sp => sp.Infiltration).Distinct();
             Debug.LogError($"PatchPrefix SelectSpawnPoint Infiltrations: {spawnPoints.Count} | {String.Join(", ", infils)}");

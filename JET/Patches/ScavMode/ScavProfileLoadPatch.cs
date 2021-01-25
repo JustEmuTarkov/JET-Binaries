@@ -79,8 +79,7 @@ namespace JET.Patches.ScavMode
             || parameters[0].Name != "location"
             || parameters[1].Name != "timeAndWeather"
             || parameters[2].Name != "entryPoint"
-            || parameters[2].ParameterType != typeof(string)
-            || methodInfo.ReturnType != typeof(void))
+            || parameters[2].ParameterType != typeof(string))
             {
                 return false;
             }

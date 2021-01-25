@@ -9,17 +9,17 @@ using JET.Utilities;
 using IEasyBundle = GInterface249; //Property: SameNameAsset 
 using IBundleLock = GInterface250; //Property: IsLocked
 // go to actual gclass and search for gclassXXXX<T> with initial value gparam_0 and base.method_0(value) call
-using BindableState = GClass2160<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue 
+using BindableState = GClass2161<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue 
 
 
 namespace JET.Patches
 {
-	public class EasyBundlePatch : GenericPatch<EasyBundlePatch>
-	{
+    public class EasyBundlePatch : GenericPatch<EasyBundlePatch>
+    {
         public EasyBundlePatch() : base(prefix: nameof(PatchPrefix)) {}
 
-		protected override MethodBase GetTargetMethod()
-		{
+        protected override MethodBase GetTargetMethod()
+        {
             return PatcherConstants.TargetAssembly.GetTypes().Single(IsTargetType).GetConstructors()[0];
         }
 
@@ -29,7 +29,7 @@ namespace JET.Patches
         }
 
         static bool PatchPrefix(IEasyBundle __instance, string key, string rootPath, UnityEngine.AssetBundleManifest manifest, IBundleLock bundleLock)
-		{
+        {
             var easyBundle = new EasyBundleHelper(__instance);
             easyBundle.Key = key;
 
@@ -63,6 +63,6 @@ namespace JET.Patches
             easyBundle.BundleLock = bundleLock;
 
             return false;
-		}
-	}
+        }
+    }
 }

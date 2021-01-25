@@ -10,17 +10,23 @@ namespace JET.Patches
 {
     public class NotificationSslPatch : GenericPatch<NotificationSslPatch>
     {
-        private string _MethodName = "SetUriParam";
+        private string _MethodName = "get_UriParams";
         private string _MethodName_MoveNext = "MoveNext";
         private static string _certificateHandler = "set_certificateHandler";
         public NotificationSslPatch() : base(transpiler: nameof(PatchTranspiler)){}
 
         protected override MethodBase GetTargetMethod()
         {
-            return PatcherConstants.TargetAssembly
-                .GetTypes().Single(x => x.GetMethod(_MethodName, BindingFlags.Public | BindingFlags.Instance) != null)
-                .GetNestedTypes(BindingFlags.NonPublic).Single(y => y.GetConstructor(new[] { typeof(int)}) != null)
-                .GetMethod(_MethodName_MoveNext, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            //return PatcherConstants.TargetAssembly
+            //    .GetTypes().Single(x => x.GetMethod(_MethodName, BindingFlags.Public | BindingFlags.Instance) != null)
+            //    .GetNestedTypes(BindingFlags.NonPublic).Single(y => y.GetConstructor(new[] { typeof(int)}) != null)
+            //    .GetMethod(_MethodName_MoveNext, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            return PatcherConstants.TargetAssembly.GetTypes().First(x =>
+                    x.IsClass &&
+                    x.GetMethod(_MethodName, BindingFlags.Public | BindingFlags.Instance) != null)
+                .GetNestedTypes(BindingFlags.NonPublic)
+                .Single(y => y.GetConstructor(new[] { typeof(int) }) != null).GetMethod(_MethodName_MoveNext,
+                    BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
         }
         #region Info
         /* what's going on here?
@@ -32,19 +38,19 @@ namespace JET.Patches
 
            There is this little bit of code in the else statement:
                this.int_0 = -1;
-		       this.string_0 = gclass.method_1();
-		       this.unityWebRequest_0 = new UnityWebRequest(this.string_0, "GET");
-		       this.int_0 = -3;
-		       this.unityWebRequest_0.downloadHandler = new DownloadHandlerBuffer();
-		       if (gclass.dictionary_1 != null)
-		       {
+               this.string_0 = gclass.method_1();
+               this.unityWebRequest_0 = new UnityWebRequest(this.string_0, "GET");
+               this.int_0 = -3;
+               this.unityWebRequest_0.downloadHandler = new DownloadHandlerBuffer();
+               if (gclass.dictionary_1 != null)
+               {
                ...
 
            We want to add a little initializer to the third line so that it looks like this:
                 this.unityWebRequest_0 = new UnityWebRequest(this.string_0, "GET")
-			    {
-				    certificateHandler = new CertificateHandler()
-			    };
+                {
+                    certificateHandler = new CertificateHandler()
+                };
 
             As stated before, this CertificateHandler we've constructed has its ValidateCertificate method patched in SslCertificatePatch,
             so this should allow our notification requests to always be validated.

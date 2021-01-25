@@ -47,7 +47,7 @@ namespace JET.Patches.Bots
 
         protected override MethodBase GetTargetMethod()
         {
-            return targetType.GetMethod("method_0", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            return targetType.GetMethod("method_1", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
         }
 
         public static bool PatchPrefix(object __instance, ref bool __result, Profile x)

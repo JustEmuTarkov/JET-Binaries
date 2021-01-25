@@ -16,3 +16,21 @@ J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.cs
 J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csproj.CopyComplete
 J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\obj\Release\JET Launcher.exe
 J:\_git\JET-Binaries\JET-Binaries\JET.OldLauncher\obj\Release\JET Launcher.pdb
+C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\bin\release\JET Launcher.exe.config
+C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\bin\release\JET Launcher.exe
+C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\bin\release\JET Launcher.pdb
+C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\bin\release\NLog.JET.dll
+C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.AssetBundleModule.dll
+C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\bin\release\Newtonsoft.Json.dll
+C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\bin\release\zlib.net.dll
+C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.ImageConversionModule.dll
+C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.UI.dll
+C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\bin\release\NLog.JET.pdb
+C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csprojAssemblyReference.cache
+C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\obj\Release\JET.Launcher.Properties.Resources.resources
+C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.Main.resources
+C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csproj.GenerateResource.cache
+C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csproj.CoreCompileInputs.cache
+C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csproj.CopyComplete
+C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\obj\Release\JET Launcher.exe
+C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\obj\Release\JET Launcher.pdb

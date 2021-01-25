@@ -26,3 +26,16 @@ E:\MAOCI\Github\JET-Binaries\JET\obj\Release\NLog.JET.dll
 E:\MAOCI\Github\JET-Binaries\JET\obj\Release\NLog.JET.pdb
 J:\_git\JET-Binaries\JET-Binaries\JET\bin\Release\ItemComponent.Types.dll
 J:\_git\JET-Binaries\JET-Binaries\JET\obj\Release\JustEmuTarkov.csprojAssemblyReference.cache
+C:\Users\yolos\Source\Repos\JET-Binaries\JET\bin\Release\NLog.JET.dll
+C:\Users\yolos\Source\Repos\JET-Binaries\JET\bin\Release\NLog.JET.pdb
+C:\Users\yolos\Source\Repos\JET-Binaries\JET\bin\Release\ItemComponent.Types.dll
+C:\Users\yolos\Source\Repos\JET-Binaries\JET\bin\Release\Newtonsoft.Json.dll
+C:\Users\yolos\Source\Repos\JET-Binaries\JET\bin\Release\UnityEngine.AssetBundleModule.dll
+C:\Users\yolos\Source\Repos\JET-Binaries\JET\bin\Release\UnityEngine.ImageConversionModule.dll
+C:\Users\yolos\Source\Repos\JET-Binaries\JET\bin\Release\UnityEngine.UI.dll
+C:\Users\yolos\Source\Repos\JET-Binaries\JET\bin\Release\UnityEngine.UnityWebRequestAssetBundleModule.dll
+C:\Users\yolos\Source\Repos\JET-Binaries\JET\bin\Release\zlib.net.dll
+C:\Users\yolos\Source\Repos\JET-Binaries\JET\obj\Release\JustEmuTarkov.csproj.CoreCompileInputs.cache
+C:\Users\yolos\Source\Repos\JET-Binaries\JET\obj\Release\JustEmuTarkov.csproj.CopyComplete
+C:\Users\yolos\Source\Repos\JET-Binaries\JET\obj\Release\NLog.JET.dll
+C:\Users\yolos\Source\Repos\JET-Binaries\JET\obj\Release\NLog.JET.pdb
