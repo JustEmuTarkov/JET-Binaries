@@ -39,6 +39,9 @@
       <HintPath>..\Shared\References\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="bsg.componentace.compression.libs.zlib">
+      <HintPath>..\Shared\References\bsg.componentace.compression.libs.zlib.dll</HintPath>
+    </Reference>
     <Reference Include="Comfort">
       <HintPath>..\Shared\References\Comfort.dll</HintPath>
       <Private>False</Private>
@@ -81,9 +84,6 @@
     <Reference Include="UnityEngine.UnityWebRequestTextureModule">
       <HintPath>..\Shared\References\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
       <Private>False</Private>
-    </Reference>
-    <Reference Include="zlib.net">
-      <HintPath>..\Shared\References\zlib.net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

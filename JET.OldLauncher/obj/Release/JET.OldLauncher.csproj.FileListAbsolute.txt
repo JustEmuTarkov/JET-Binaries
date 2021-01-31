@@ -22,7 +22,7 @@ C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\bin\release\JET Launche
 C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\bin\release\NLog.JET.dll
 C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.AssetBundleModule.dll
 C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\bin\release\Newtonsoft.Json.dll
-C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\bin\release\zlib.net.dll
+C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\bin\release\bsg.componentace.compression.libs.zlib.dll
 C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.ImageConversionModule.dll
 C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.UI.dll
 C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\bin\release\NLog.JET.pdb
