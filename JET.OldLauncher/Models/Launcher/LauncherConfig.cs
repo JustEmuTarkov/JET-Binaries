@@ -16,7 +16,7 @@ namespace JET.OldLauncher
 			Servers = new List<string>();
 			Email = "";
 			Password = "";
-			GamePath = Environment.CurrentDirectory;
+			GamePath = new StaticData().working_dir;
 			MinimizeToTray = true;
 		}
 	}

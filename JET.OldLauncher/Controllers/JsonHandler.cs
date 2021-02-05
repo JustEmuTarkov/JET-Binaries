@@ -10,7 +10,7 @@ namespace JET.OldLauncher
 		private static StaticData staticData = new StaticData();
 		static JsonHandler()
 		{
-			filepath = Environment.CurrentDirectory;
+			filepath = staticData.working_dir;
 		}
 
 		public static LauncherConfig LoadLauncherConfig()

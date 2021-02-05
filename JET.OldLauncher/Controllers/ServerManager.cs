@@ -4,50 +4,50 @@ using JET.Utilities.App;
 
 namespace JET.OldLauncher
 {
-	public class ServerManager
-	{
-		public static List<ServerInfo> AvailableServers = new List<ServerInfo>();
-		public static ServerInfo SelectedServer = new ServerInfo();
+    public class ServerManager
+    {
+        public static List<ServerInfo> AvailableServers = new List<ServerInfo>();
+        public static ServerInfo SelectedServer = new ServerInfo();
 
-		/*public ServerManager()
-		{
-		}*/
-		public static bool requestSended = false;
-		public static void SelectServer(int index)
-		{
-			if (index < 0 || index >= AvailableServers.Count)
-			{
-				SelectedServer = null;
-				return;
-			}
-			SelectedServer = AvailableServers[index];
-		}
+        /*public ServerManager()
+        {
+        }*/
+        public static bool requestSended = false;
+        public static void SelectServer(int index)
+        {
+            if (index < 0 || index >= AvailableServers.Count)
+            {
+                SelectedServer = null;
+                return;
+            }
+            SelectedServer = AvailableServers[index];
+        }
 
-		public static void LoadServer(string backendUrl)
-		{
+        public static void LoadServer(string backendUrl)
+        {
             string json;
             try
-			{
-				RequestHandler.ChangeBackendUrl(backendUrl);
-				json = RequestHandler.RequestConnect();
-			}
-			catch
-			{
-				return;
-			}
+            {
+                RequestHandler.ChangeBackendUrl(backendUrl);
+                json = RequestHandler.RequestConnect();
+            }
+            catch
+            {
+                return;
+            }
+            if (!string.IsNullOrWhiteSpace(json))
+                AvailableServers.Add(Json.Deserialize<ServerInfo>(json));
+        }
 
-			AvailableServers.Add(Json.Deserialize<ServerInfo>(json));
-		}
+        public static void LoadServers(string[] servers)
+        {
+            AvailableServers.Clear();
 
-		public static void LoadServers(string[] servers)
-		{
-			AvailableServers.Clear();
-
-			foreach (string backendUrl in servers)
-			{
-				LoadServer(backendUrl);
-			}
-			requestSended = false;
-		}
-	}
+            foreach (string backendUrl in servers)
+            {
+                LoadServer(backendUrl);
+            }
+            requestSended = false;
+        }
+    }
 }

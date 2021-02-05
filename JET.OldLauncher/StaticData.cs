@@ -9,6 +9,11 @@ namespace JET.OldLauncher
 {
     class StaticData
     {
+#if DEBUG
+        public string working_dir = @"C:\Emu Tarkov\12.9\Client"; // Change for debugging purposes
+#else
+        public string working_dir = Environment.CurrentDirectory;
+#endif
         public string eft_managed = "EscapeFromTarkov_Data/Managed/";
         public string dll_ext = ".dll";
         public string exe_ext = ".exe";
@@ -27,11 +32,11 @@ namespace JET.OldLauncher
             get {
                 return new string[]
                 {
-                    Path.Combine(Environment.CurrentDirectory, "BattlEye"),
-                    Path.Combine(Environment.CurrentDirectory, "Logs"),
-                    Path.Combine(Environment.CurrentDirectory, "EscapeFromTarkov_BE.exe"),
-                    Path.Combine(Environment.CurrentDirectory, "Uninstall.exe"),
-                    Path.Combine(Environment.CurrentDirectory, "UnityCrashHandler64.exe")
+                    Path.Combine(working_dir, "BattlEye"),
+                    Path.Combine(working_dir, "Logs"),
+                    Path.Combine(working_dir, "EscapeFromTarkov_BE.exe"),
+                    Path.Combine(working_dir, "Uninstall.exe"),
+                    Path.Combine(working_dir, "UnityCrashHandler64.exe")
                 };
             }
         }
@@ -68,7 +73,7 @@ namespace JET.OldLauncher
         public ERROR_MSG_c ERROR_MSG = new ERROR_MSG_c();
         public FORM_c FORM = new FORM_c();
         public STATUS_c STATUS = new STATUS_c();
-        #region Classes
+#region Classes
         public class EXCEPTIONS_c {
             public string exception = "Exception";
             public string message = "Message"; 
@@ -131,6 +136,6 @@ namespace JET.OldLauncher
             public string checkFailed = "Check Failed!";
             public string noGameFound = "No game files found, assuming we are not in the game directory";
         }
-        #endregion
+#endregion
     }
 }

@@ -8,11 +8,11 @@ using System.Windows.Forms;
 
 namespace JET.OldLauncher
 {
-	public class GameStarter
-	{
+    public class GameStarter
+    {
         private StaticData staticData = new StaticData();
         public int LaunchGame(ServerInfo server, AccountInfo account)
-		{
+        {
             if (IsInstalledInLive())
             {
                 return -1;
@@ -52,127 +52,127 @@ namespace JET.OldLauncher
             }
 
             if (!File.Exists(staticData.GetExecutableFile))
-			{
-				return -3;
-			}
+            {
+                return -3;
+            }
 
             ProcessStartInfo clientProcess = new ProcessStartInfo(staticData.GetExecutableFile)
             {
                 Arguments = staticData.getExecutableArguments(GenerateToken(account), account.id, ServerManager.SelectedServer.backendUrl),
                 UseShellExecute = false,
-                WorkingDirectory = Environment.CurrentDirectory
-            };
+                WorkingDirectory = staticData.working_dir
+        };
 
-            Process.Start(clientProcess);
-			return 1;
-		}
+        Process.Start(clientProcess);
+            return 1;
+        }
 
-        private bool IsInstalledInLive()
+    private bool IsInstalledInLive()
+    {
+        // TODO: rework this shit
+
+        var value0 = false;
+
+        try
         {
-            // TODO: rework this shit
-
-            var value0 = false;
-
-            try
+            var value1 = Registry.LocalMachine.OpenSubKey(staticData.InstallInRegistry, false).GetValue("UninstallString");
+            var value2 = (value1 != null) ? value1.ToString() : "";
+            var value3 = new FileInfo(value2);
+            var value4 = new FileInfo[]
             {
-                var value1 = Registry.LocalMachine.OpenSubKey(staticData.InstallInRegistry, false).GetValue("UninstallString");
-                var value2 = (value1 != null) ? value1.ToString() : "";
-                var value3 = new FileInfo(value2);
-                var value4 = new FileInfo[]
-                {
                     new FileInfo(value2.Replace(value3.Name, @"JET Launcher.exe")),
                     new FileInfo(value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\0Harmony.dll")),
                     new FileInfo(value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\NLog.dll.nlog")),
                     new FileInfo(value2.Replace(value3.Name, @"EscapeFromTarkov_Data\Managed\Nlog.JET.dll"))
-                };
+            };
 
-                foreach (var value in value4)
-                {
-                    if (File.Exists(value.FullName))
-                    {
-                        File.Delete(value.FullName);
-                        value0 = true;
-                    }
-                }
-
-                if (value0)
-                {
-                    File.Delete(@"EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll");
-                }
-            }
-            catch
+            foreach (var value in value4)
             {
-            }
-
-            return value0;
-        }
-
-        private void SetupGameFiles()
-        {
-            foreach (string file in staticData.install_GetFilesToDelete)
-            {
-                try
+                if (File.Exists(value.FullName))
                 {
-                    if (Directory.Exists(file))
-                    {
-                        Directory.Delete(file, true);
-                    }
-
-                    if (File.Exists(file))
-                    {
-                        File.Delete(file);
-                    }
+                    File.Delete(value.FullName);
+                    value0 = true;
                 }
-                catch (Exception) { MessageBox.Show("Something got fucked up. I could not delete a file:\r\n" + file, "Deletion Failed!", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+            }
+
+            if (value0)
+            {
+                File.Delete(@"EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll");
             }
         }
-
-        private int IsPiratedCopy()
+        catch
         {
-            // THIS IS DUMB !!!!
-
-            return 0;
         }
 
-		private void RemoveRegisteryKeys()
-		{
-			try
-			{
-				RegistryKey key = Registry.CurrentUser.OpenSubKey(staticData.SettingsInRegistry, true);
+        return value0;
+    }
 
-				foreach (string value in key.GetValueNames())
-				{
-					key.DeleteValue(value);
-				}
-			}
-			catch
-			{
-			}
-		}
+    private void SetupGameFiles()
+    {
+        foreach (string file in staticData.install_GetFilesToDelete)
+        {
+            try
+            {
+                if (Directory.Exists(file))
+                {
+                    Directory.Delete(file, true);
+                }
 
-		private void CleanTempFiles()
-		{
-			DirectoryInfo directoryInfo = new DirectoryInfo(staticData.GetTempPath);
+                if (File.Exists(file))
+                {
+                    File.Delete(file);
+                }
+            }
+            catch (Exception) { MessageBox.Show("Something got fucked up. I could not delete a file:\r\n" + file, "Deletion Failed!", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+        }
+    }
 
-			if (!Directory.Exists(staticData.GetTempPath))
-			{
-				return;
-			}
+    private int IsPiratedCopy()
+    {
+        // THIS IS DUMB !!!!
 
-			foreach (FileInfo file in directoryInfo.GetFiles())
-			{
-				file.Delete();
-			}
+        return 0;
+    }
 
-			foreach (DirectoryInfo directory in directoryInfo.GetDirectories())
-			{
-				directory.Delete(true);
-			}
-		}
+    private void RemoveRegisteryKeys()
+    {
+        try
+        {
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(staticData.SettingsInRegistry, true);
 
-		private string GenerateToken(AccountInfo data)
-		{
-			return $"{Json.Serialize(new LoginToken(data.email, data.password))}=";
-		}
-	}
+            foreach (string value in key.GetValueNames())
+            {
+                key.DeleteValue(value);
+            }
+        }
+        catch
+        {
+        }
+    }
+
+    private void CleanTempFiles()
+    {
+        DirectoryInfo directoryInfo = new DirectoryInfo(staticData.GetTempPath);
+
+        if (!Directory.Exists(staticData.GetTempPath))
+        {
+            return;
+        }
+
+        foreach (FileInfo file in directoryInfo.GetFiles())
+        {
+            file.Delete();
+        }
+
+        foreach (DirectoryInfo directory in directoryInfo.GetDirectories())
+        {
+            directory.Delete(true);
+        }
+    }
+
+    private string GenerateToken(AccountInfo data)
+    {
+        return $"{Json.Serialize(new LoginToken(data.email, data.password))}=";
+    }
+}
 }

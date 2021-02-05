@@ -6,13 +6,13 @@ using JET.OldLauncher.Controllers;
 
 namespace JET.OldLauncher
 {
-	public static class Program
-	{
+    public static class Program
+    {
         private static readonly StaticData staticText = new StaticData();
-		[STAThread]
-		private static void Main()
-		{
-            if (!File.Exists(Path.Combine(Environment.CurrentDirectory, "EscapeFromTarkov.exe")))
+        [STAThread]
+        private static void Main()
+        {
+            if (!File.Exists(Path.Combine(staticText.working_dir, "EscapeFromTarkov.exe")))
             {
                 MessageBox.Show(staticText.ERROR_MSG.noGameFound, staticText.ERROR_MSG.checkFailed, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
@@ -48,8 +48,8 @@ namespace JET.OldLauncher
         private static void HandleException(Exception exception)
         {
             var text = $"{staticText.EXCEPTIONS.exception} {staticText.EXCEPTIONS.message}:{exception.Message}{Environment.NewLine}StackTrace:{exception.StackTrace}";
-			LogManager.Instance.Error(text);
-            MessageBox.Show(text, staticText.EXCEPTIONS.exception, MessageBoxButtons.OK,MessageBoxIcon.Error);
+            LogManager.Instance.Error(text);
+            MessageBox.Show(text, staticText.EXCEPTIONS.exception, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         private static string filename;
         private static Assembly AssemblyResolveEvent(object sender, ResolveEventArgs args)
@@ -57,7 +57,7 @@ namespace JET.OldLauncher
             try
             {
                 string assembly = new AssemblyName(args.Name).Name;
-                filename = Path.Combine(Environment.CurrentDirectory, $"{staticText.eft_managed}{assembly}{staticText.dll_ext}");
+                filename = Path.Combine(staticText.working_dir, $"{staticText.eft_managed}{assembly}{staticText.dll_ext}");
 
                 // resources are embedded inside assembly
                 if (filename.Contains("resources"))
@@ -66,9 +66,9 @@ namespace JET.OldLauncher
                 }
                 return Assembly.LoadFrom(filename);
             }
-            catch (Exception) 
+            catch (Exception)
             {
-                MessageBox.Show($"Cannot find a file named:\r\n{filename}\r\nApplication will close after pressing OK.","File not found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Cannot find a file named:\r\n{filename}\r\nApplication will close after pressing OK.", "File not found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
             return null;
