@@ -4,8 +4,26 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using HarmonyLib;
-using IBundleLock = GInterface250; //Property: IsLocked
-using BindableState = GClass2160<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
+using IBundleLock = GInterface251; //Property: IsLocked
+using BindableState = GClass2166<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
+
+#region Informations
+/* Maintenance Tips
+ * 
+ * This class is used to help change the behavior of the "Diz Plugings - Achievements System"
+ * There are convenience methods
+ * 
+ * Note: It looks like there was an attempt to abstract some of the hard coded class / interface dependances in the patches but this looks like WIP and not fully implemented.
+ * 
+ * Use dnSpy to find the correct GClass/GInterface/Property Name used within each patch.
+ * 
+ * dnSpy:
+ *   - Open the un-obfuscated EFT CSharp Assemply "\EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll"
+ *   - Within the Assembly Expoler Tress, select the "Assembly-CSharp (0.0.0.0) file
+ *   - Search for "IsLocked"      using Options Search For: "Property", "Selected Files" and update "IBundleLock" to the Interface found
+ *   - Search for "initialValue"  using Options Search For: "Parameter", "Selected Files" and update "BindableState" to the Class found
+ */
+#endregion
 
 namespace JET.Utilities
 {
@@ -16,13 +34,12 @@ namespace JET.Utilities
 
         private static readonly string _pathFieldName = "string_1";
         private static readonly string _keyWithoutExtensionFieldName = "string_0";
-        private static readonly string _bundleLockPropertyName = "ginterface250_0";
         private static readonly string _loadingJobPropertyName = "task_0";
         private static readonly string _dependencyKeysPropertyName = "DependencyKeys";
         private static readonly string _keyPropertyName = "Key";
         private static readonly string _loadStatePropertyName = "LoadState";
         private static readonly string _progressPropertyName = "Progress";
-        private static readonly string _bundlePropertyName = "Bundle";
+        private static readonly string _bundlePropertyName = "assetBundle_0";
         private static readonly string _loadingAssetOperationFieldName = "assetBundleRequest_0";
         private static readonly string _assetsPropertyName = "Assets";
         private static readonly string _sameNameAssetPropertyName = "SameNameAsset";
@@ -45,12 +62,12 @@ namespace JET.Utilities
         {
             get
             {
-                return _trav.Field<IBundleLock>(_bundleLockPropertyName).Value;
+                return _trav.Field<IBundleLock>($"{typeof(IBundleLock).Name.ToLower()}_0").Value;
             }
 
             set
             {
-                _trav.Field<IBundleLock>(_bundleLockPropertyName).Value = value;
+                _trav.Field<IBundleLock>($"{typeof(IBundleLock).Name.ToLower()}_0").Value = value;
             }
         }
 

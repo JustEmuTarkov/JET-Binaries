@@ -5,7 +5,7 @@ using JET.Utilities.App;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
 using JET.Utilities;
-using LocationInfo = GClass779.GClass781;
+using LocationInfo = GClass782.GClass784;
 using System;
 using Newtonsoft.Json;
 
@@ -48,7 +48,8 @@ namespace JET.Patches.Progression
             Debug.LogError(json);
 
             // some magic here. do not change =)
-            var locationLoot = JsonConvert.DeserializeObject<LocationInfo>(json, GClass908.Converters);//.ParseJsonTo<LocationInfo>();
+            var locationLoot = json.ParseJsonTo<LocationInfo>();
+            //var locationLoot = JsonConvert.DeserializeObject<LocationInfo>(json, GClass912.Converters);
 
             Debug.LogError(locationLoot.Name);
 

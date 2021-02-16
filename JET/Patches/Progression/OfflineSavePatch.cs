@@ -18,7 +18,7 @@ namespace JET.Patches.Progression
 
         protected override MethodBase GetTargetMethod()
         {
-            return PatcherConstants.MainApplicationType.GetMethod("method_40", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            return PatcherConstants.MainApplicationType.GetMethod("method_41", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
         }
 
         public static void PatchPrefix(ESideType ___esideType_0, Result<ExitStatus, TimeSpan, ClientMetrics> result)

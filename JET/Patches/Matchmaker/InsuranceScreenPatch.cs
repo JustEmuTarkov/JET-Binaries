@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Reflection;
 using JET.Utilities.Patching;
-using MainMenuController = GClass1190;  // SelectedDateTime
+using MainMenuController = GClass1194;  // SelectedDateTime
 
 namespace JET.Patches.Matchmaker
 {

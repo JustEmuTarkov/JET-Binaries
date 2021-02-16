@@ -6,11 +6,27 @@ using System.Reflection;
 using Diz.DependencyManager;
 using JET.Utilities.Patching;
 using JET.Utilities;
-using IEasyBundle = GInterface249; //Property: SameNameAsset 
-using IBundleLock = GInterface250; //Property: IsLocked
+using IEasyBundle = GInterface250; //Property: SameNameAsset 
+using IBundleLock = GInterface251; //Property: IsLocked
 // go to actual gclass and search for gclassXXXX<T> with initial value gparam_0 and base.method_0(value) call
-using BindableState = GClass2161<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue 
+using BindableState = GClass2166<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue 
 
+#region Informations
+/* Maintenance Tips
+ * 
+ * This patch is used to change behaivior of the "Diz Plugings - Achievements System"
+ * The target class is an implementation of the bundle class called "EasyBundle", this patch will replace portions of the existing class and will not run the original code after.
+ * 
+ * Use dnSpy to find the correct GClass/GInterface/Property Name used within each patch.
+ * 
+ * dnSpy:
+ *   - Open the un-obfuscated EFT CSharp Assemply "\EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll"
+ *   - Within the Assembly Expoler Tress, select the "Assembly-CSharp (0.0.0.0) file
+ *   - Search for "SameNameAsset" using Options Search For: "Property", "Selected Files" and update "IEasyBundle" to the Interface found
+ *   - Search for "IsLocked"      using Options Search For: "Property", "Selected Files" and update "IBundleLock" to the Interface found
+ *   - Search for "initialValue"  using Options Search For: "Parameter", "Selected Files" and update "BindableState" to the Class found
+ */
+#endregion
 
 namespace JET.Patches
 {

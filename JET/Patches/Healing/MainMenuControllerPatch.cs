@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using JET.Utilities.Patching;
-using MainMenuController = GClass1190; // SelectedDateTime
+using MainMenuController = GClass1194; // SelectedDateTime
 using IHealthController = GInterface169; // CarryingWeightAbsoluteModifier
 
 namespace JET.Patches.Healing

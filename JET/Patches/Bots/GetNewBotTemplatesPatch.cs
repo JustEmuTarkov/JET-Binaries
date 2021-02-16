@@ -8,11 +8,11 @@ using UnityEngine;
 using Comfort.Common;
 using EFT;
 using JET.Utilities.Patching;
-using WaveInfo = GClass925; // Field: Role (choose first one displayed as "Role")
-using BotsPresets = GClass360; // Method: GetNewProfile (higher GClass number)
+using WaveInfo = GClass930; // Field: Role (choose first one displayed as "Role")
+using BotsPresets = GClass362; // Method: GetNewProfile (higher GClass number)
 using BotData = GInterface15; // Method: ChooseProfile
-using PoolManager = GClass1164; // CancellationToken: PoolsCancellationToken
-using JobPriority = GClass2141; // Delegate: Immediate
+using PoolManager = GClass1168; // CancellationToken: PoolsCancellationToken
+using JobPriority = GClass2146; // Delegate: Immediate
 
 namespace JET.Patches.Bots
 {
@@ -54,7 +54,6 @@ namespace JET.Patches.Bots
                 then perform request to server and get only first value of resulting single element collection
             */
 
-            var session = Utilities.Config.BackEndSession;
             var taskScheduler = TaskScheduler.FromCurrentSynchronizationContext();
             var taskAwaiter = (Task<Profile>)null;
 
@@ -63,6 +62,7 @@ namespace JET.Patches.Bots
 
             if (profile == null)
             {
+                var session = Utilities.Config.BackEndSession;
                 // load from server
                 Debug.LogError("[JET]: Loading bot profile from server");
                 var source = data.PrepareToLoadBackend(1).ToList();
