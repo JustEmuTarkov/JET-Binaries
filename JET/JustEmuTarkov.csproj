@@ -33,14 +33,15 @@
   <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>..\Shared\References\0Harmony.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\Shared\References\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="bsg.componentace.compression.libs.zlib">
       <HintPath>..\Shared\References\bsg.componentace.compression.libs.zlib.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Comfort">
       <HintPath>..\Shared\References\Comfort.dll</HintPath>
@@ -48,6 +49,7 @@
     </Reference>
     <Reference Include="ItemComponent.Types">
       <HintPath>..\Shared\References\ItemComponent.Types.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Shared\References\Newtonsoft.Json.dll</HintPath>
@@ -63,6 +65,7 @@
     </Reference>
     <Reference Include="UnityEngine.AssetBundleModule">
       <HintPath>..\Shared\References\UnityEngine.AssetBundleModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\Shared\References\UnityEngine.CoreModule.dll</HintPath>
@@ -70,12 +73,15 @@
     </Reference>
     <Reference Include="UnityEngine.ImageConversionModule">
       <HintPath>..\Shared\References\UnityEngine.ImageConversionModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>..\Shared\References\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
       <HintPath>..\Shared\References\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestModule">
       <HintPath>..\Shared\References\UnityEngine.UnityWebRequestModule.dll</HintPath>
