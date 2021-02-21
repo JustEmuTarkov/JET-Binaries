@@ -39,3 +39,4 @@ C:\Users\yolos\Source\Repos\JET-Binaries\JET\obj\Release\JustEmuTarkov.csproj.Co
 C:\Users\yolos\Source\Repos\JET-Binaries\JET\obj\Release\JustEmuTarkov.csproj.CopyComplete
 C:\Users\yolos\Source\Repos\JET-Binaries\JET\obj\Release\NLog.JET.dll
 C:\Users\yolos\Source\Repos\JET-Binaries\JET\obj\Release\NLog.JET.pdb
+C:\Users\yolos\Source\Repos\JET-Binaries\JET\obj\Release\JustEmuTarkov.csprojAssemblyReference.cache
