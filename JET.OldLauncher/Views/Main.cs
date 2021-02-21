@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,20 +13,61 @@ namespace JET.OldLauncher
 {
     public partial class Main : Form
     {
+        private static Main Instance;
         private LauncherConfig launcherConfig;
         private ProcessMonitor monitor;
         private Account accountManager;
         private GameStarter gameStarter;
-        private readonly StaticData sD = new StaticData(); // considered as string translator
-        private int _processedAction = 0;
+        private static readonly StaticData sD = new StaticData(); // considered as string translator
+        private static int _processedAction = 0;
         #region INIT Functions
         public Main()
         {
+            Instance = this;
             InitializeComponent();
             InitializeLauncher();
             //UpdateTick.Enabled = true;
             UpdateTick.Start();
             //_processedAction = 0;
+
+            Closing += (sender, args) => JsonHandler.SaveLauncherConfig(launcherConfig);
+        }
+
+        public static void UpdateServerList()
+        {
+            var servers = ServerManager.AvailableServers;
+            if (Instance.Field_SelectServer.InvokeRequired)
+            {
+                Instance.Field_SelectServer.Invoke(new Action(UpdateServerList));
+                return;
+            }
+
+            var wasEmpty = Instance.Field_SelectServer.Items.Count <= 0;
+            var isEmpty = servers.Count <= 0;
+
+            var selected = Instance.Field_SelectServer.SelectedItem?.ToString();
+            var serverNames = servers.Select(x => x.name).ToArray();
+            var newSelectedIndex = -1;
+
+            if (serverNames.Contains(selected))
+                newSelectedIndex = Array.IndexOf(serverNames, selected);
+            else if (wasEmpty && !isEmpty)
+                newSelectedIndex = 0;
+
+
+            Instance.Field_SelectServer.Items.Clear();
+            Instance.Field_SelectServer.Items.AddRange(serverNames.ToArray<object>());
+            Instance.Field_SelectServer.SelectedIndex = newSelectedIndex;
+
+            if (isEmpty && _processedAction == 0)
+            {
+                Instance.Field_SelectServer.Text = sD.ERROR_MSG.noServers;
+                Instance.BTN_Process.Enabled = false;
+            }
+            else if (wasEmpty)
+                Instance.BTN_Process.Enabled = true;
+
+            ServerManager.SelectServer(newSelectedIndex);
         }
         private void InitializeLauncher()
         {
@@ -86,7 +129,8 @@ namespace JET.OldLauncher
         ///<summary>
         /// Processing Main Button Functionality depends on Scene we are in.
         ///</summary>
-        private void ProcessMainButtonFunction(object sender, EventArgs e) {
+        private void ProcessMainButtonFunction(object sender, EventArgs e)
+        {
             //var button = sender as Button;
             switch (_processedAction)
             {
@@ -101,6 +145,7 @@ namespace JET.OldLauncher
                 case 1:
                     _processedAction = 0;
                     _AddServer();
+                    _RefreshServerList();
                     break;
                 case 2:
                     _Login();
@@ -128,7 +173,7 @@ namespace JET.OldLauncher
                 default:
                     return;
             }
-            
+
         }
         private void SetLoggedAs(bool v)
         {
@@ -139,7 +184,7 @@ namespace JET.OldLauncher
                 BTN_GenLaunchArgs.Enabled = true;
                 Text_LaunchArgs.Enabled = true;
             }
-            else 
+            else
             {
                 BTN_GenLaunchArgs.Enabled = false;
                 Text_LaunchArgs.Enabled = false;
@@ -149,7 +194,8 @@ namespace JET.OldLauncher
         ///<summary>
         /// Set Names of Buttons (sub's and main one's)
         ///</summary>
-        private void ButtonNameAssigner() {
+        private void ButtonNameAssigner()
+        {
             switch (_processedAction)
             {
                 case 0:
@@ -186,7 +232,8 @@ namespace JET.OldLauncher
         ///<summary>
         /// Display Input/Select/Label Objects Visibility depends on SceneID
         ///</summary>
-        private void InputVisAssigner() {
+        private void InputVisAssigner()
+        {
             switch (_processedAction)
             {
                 case 0:
@@ -244,7 +291,8 @@ namespace JET.OldLauncher
         /*private void _Connect() { 
             // not used cause its embeded :)
         }*/
-        private void _Login() {
+        private void _Login()
+        {
             int status = accountManager.Login(Field_Email.Text, Field_Password.Text);
 
             switch (status)
@@ -263,7 +311,8 @@ namespace JET.OldLauncher
                 default: return;
             }
         }
-        private void _StartGame() {
+        private void _StartGame()
+        {
             int status = gameStarter.LaunchGame(ServerManager.SelectedServer, accountManager.SelectedAccount);
 
             switch (status)
@@ -294,7 +343,8 @@ namespace JET.OldLauncher
                     return;
             }
         }
-        private void _ProfileWipe() {
+        private void _ProfileWipe()
+        {
             int status = accountManager.Wipe((string)Field_SelectEdition.SelectedItem);
 
             switch (status)
@@ -311,7 +361,8 @@ namespace JET.OldLauncher
                     return;
             }
         }
-        private void _ProfileChangeEmail() {
+        private void _ProfileChangeEmail()
+        {
             int status = accountManager.ChangeEmail(Field_Email.Text);
 
             switch (status)
@@ -329,7 +380,8 @@ namespace JET.OldLauncher
                     return;
             }
         }
-        private void _ProfileChangePassword() {
+        private void _ProfileChangePassword()
+        {
             int status = accountManager.ChangePassword(Field_Password.Text);
 
             switch (status)
@@ -346,7 +398,8 @@ namespace JET.OldLauncher
                     return;
             }
         }
-        private void _AddServer() {
+        private void _AddServer()
+        {
             if (launcherConfig.Servers.Contains(Field_AddServer.Text))
             {
                 MessageBox.Show(sD.ERROR_MSG.serverAlreadyExist);
@@ -355,7 +408,8 @@ namespace JET.OldLauncher
 
             launcherConfig.Servers.Add(Field_AddServer.Text);
         }
-        private void _Register() {
+        private void _Register()
+        {
             int status = accountManager.Register(Field_Email.Text, Field_Password.Text, (string)Field_SelectEdition.SelectedItem);
             switch (status)
             {
@@ -378,7 +432,7 @@ namespace JET.OldLauncher
         private void _RefreshServerList()
         {
             ServerManager.requestSended = true;
-            ServerManager.LoadServers(launcherConfig.Servers.ToArray());
+            Task.Run(() => ServerManager.LoadServers(launcherConfig.Servers.ToArray()));
         }
         #endregion
         #region Side Buttons Helpers
@@ -387,12 +441,15 @@ namespace JET.OldLauncher
         /// </summary>
         private void SideButton_1_Click(object sender, EventArgs e)
         {
-            switch (_processedAction) {
+            switch (_processedAction)
+            {
                 case 0:
                     _RefreshServerList();
                     return;
                 case 1:
                     _processedAction = 0;
+                    if (ServerManager.AvailableServers.Count <= 0) // Disable connect button
+                        BTN_Process.Enabled = false;
                     // Back button
                     break;
                 case 2:
@@ -431,6 +488,7 @@ namespace JET.OldLauncher
             {
                 case 0:
                     _processedAction = 1;
+                    BTN_Process.Enabled = true; // Enable "Add Server" button
                     break;
                 case 2:
                     // maybe go back button ? to select server again ??
@@ -505,12 +563,12 @@ namespace JET.OldLauncher
         {
             if (accountManager != null)
             {
-                if (accountManager.SelectedAccount != null) 
+                if (accountManager.SelectedAccount != null)
                 {
                     var account = accountManager.SelectedAccount;
                     Text_LaunchArgs.Text = sD.getExecutableArguments(
-                        $"{Json.Serialize(new LoginToken(account.email, account.password))}=", 
-                        account.id, 
+                        $"{Json.Serialize(new LoginToken(account.email, account.password))}=",
+                        account.id,
                         ServerManager.SelectedServer.backendUrl);
                 }
             }
@@ -518,7 +576,8 @@ namespace JET.OldLauncher
         private int _previousAction = -1;
         private void FormUpdate(object sender, EventArgs e)
         {
-            if (_previousAction != _processedAction) {
+            if (_previousAction != _processedAction)
+            {
                 ButtonNameAssigner();
                 InputVisAssigner();
                 SetLoggedAs(_processedAction >= 4);
@@ -526,7 +585,8 @@ namespace JET.OldLauncher
             }
             ServerAutoCheck();
         }
-        private void ServerAutoCheck() {
+        private void ServerAutoCheck()
+        {
             if (!ServerManager.requestSended)
             {
                 if (ServerManager.AvailableServers.Count <= 0)

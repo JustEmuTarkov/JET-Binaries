@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using JET.Utilities.App;
 
 namespace JET.OldLauncher
 {
     public class ServerManager
     {
-        public static List<ServerInfo> AvailableServers = new List<ServerInfo>();
+        public static ObservableCollection<ServerInfo> AvailableServers = new ObservableCollection<ServerInfo>();
         public static ServerInfo SelectedServer = new ServerInfo();
 
-        /*public ServerManager()
+        static ServerManager()
         {
-        }*/
+            // Update UI list
+            AvailableServers.CollectionChanged += (sender, args) => Main.UpdateServerList();
+        }
         public static bool requestSended = false;
         public static void SelectServer(int index)
         {
