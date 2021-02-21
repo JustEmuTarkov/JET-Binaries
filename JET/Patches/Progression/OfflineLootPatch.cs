@@ -48,8 +48,7 @@ namespace JET.Patches.Progression
             Debug.LogError(json);
 
             // some magic here. do not change =)
-            var locationLoot = json.ParseJsonTo<LocationInfo>();
-            //var locationLoot = JsonConvert.DeserializeObject<LocationInfo>(json, GClass912.Converters);
+            var locationLoot = JsonConvert.DeserializeObject<LocationInfo>(json, GClass912.Converters);//.ParseJsonTo<LocationInfo>();
 
             Debug.LogError(locationLoot.Name);
 

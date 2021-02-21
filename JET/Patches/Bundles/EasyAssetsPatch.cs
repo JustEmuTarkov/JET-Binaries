@@ -15,29 +15,6 @@ using IBundleLock = GInterface251; //Property: IsLocked
 using BundleLock = GClass2180; //Property: MaxConcurrentOperations
 using DependencyGraph = GClass2181<GInterface250>; // Method: GetDefaultNode() / Inside <T> goes IEasyBundle
 
-#region Informations
-/* Maintenance Tips
- * 
- * This patch is used to change behaivior of the "Diz Plugings - Achievements System"
- * The target class is called "EasyAssets", this patch will replace portions of the existing class and will not run the original code after.
- * 
- * Use dnSpy to find the correct GClass/GInterface/Property Name used within each patch.
- * 
- * dnSpy:
- *   - Open the un-obfuscated EFT CSharp Assemply "\EscapeFromTarkov_Data\Managed\Assembly-CSharp.dll"
- *   - Within the Assembly Expoler Tress, select the "Assembly-CSharp (0.0.0.0) file
- *   - Search for "SameNameAsset"           using Options Search For: "Property", "Selected Files" and update "IEasyBundle" to the Interface found
- *   - Search for "IsLocked"                using Options Search For: "Property", "Selected Files" and update "IBundleLock" to the Interface found
- *   - Search for "MaxConcurrentOperations" using Options Search For: "Property", "Selected Files" and update "BundleLock" to the Class found
- *   - Search for "GetDefaultNode"          using Options Search For: "Method",   "Selected Files" and update "DependencyGraph" to the Class found
- *     - The DependencyGraph Class takes a Type that you need to determine.
- *       - Double click on the search result "GetDefaultNode", this will take you to the method within the Class you just noted
- *       - Scroll up and select the class name on the class definition line
- *       - Press Ctrl+Shift+R to Analyze the usage 
- *       - Expand the Used By list and look for an instantiation of this class with and interface and update the GInterface for the DependencyGraph above
- */
-#endregion
-
 namespace JET.Patches
 {
     public class EasyAssetsPatch : GenericPatch<EasyAssetsPatch>
@@ -61,6 +38,12 @@ namespace JET.Patches
 
         private static bool IsTargetType(Type type)
         {
+            //TODO: Development needs, to be deleted later
+            /*if (type == typeof(EasyAssets))
+            {
+                Debugger.Break();
+            }*/
+
             var fields = type.GetFields();
 
             if (fields.Length > 2)

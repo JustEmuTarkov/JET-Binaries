@@ -34,21 +34,3 @@ C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLaun
 C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csproj.CopyComplete
 C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\obj\Release\JET Launcher.exe
 C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\obj\Release\JET Launcher.pdb
-E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\JET Launcher.exe.config
-E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\JET Launcher.exe
-E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\JET Launcher.pdb
-E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\NLog.JET.dll
-E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.AssetBundleModule.dll
-E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\Newtonsoft.Json.dll
-E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\bsg.componentace.compression.libs.zlib.dll
-E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.ImageConversionModule.dll
-E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.UI.dll
-E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\NLog.JET.pdb
-E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csprojAssemblyReference.cache
-E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\obj\Release\JET.Launcher.Properties.Resources.resources
-E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.Main.resources
-E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csproj.GenerateResource.cache
-E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csproj.CoreCompileInputs.cache
-E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csproj.CopyComplete
-E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\obj\Release\JET Launcher.exe
-E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\obj\Release\JET Launcher.pdb

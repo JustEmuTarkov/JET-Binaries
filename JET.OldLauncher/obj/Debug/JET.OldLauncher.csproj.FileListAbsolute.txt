@@ -34,3 +34,117 @@ J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\obj\Debug\JET.OldLauncher.csproj
 J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\obj\Debug\JET.OldLauncher.csproj.CopyComplete
 J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\obj\Debug\JET Launcher.exe
 J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\obj\Debug\JET Launcher.pdb
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\obj\Debug\JET.OldLauncher.csprojAssemblyReference.cache
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\obj\Debug\JET.Launcher.Properties.Resources.resources
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\obj\Debug\JET.OldLauncher.Main.resources
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\obj\Debug\JET.OldLauncher.csproj.GenerateResource.cache
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\obj\Debug\JET.OldLauncher.csproj.CoreCompileInputs.cache
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\obj\Debug\JET Launcher.exe
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\obj\Debug\JET Launcher.pdb
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\JET Launcher.exe.config
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\JET Launcher.exe
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\JET Launcher.pdb
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\NLog.JET.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\Assembly-CSharp.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\0Harmony.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\Newtonsoft.Json.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.PhysicsModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\DecalSystem.Runtime.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\Assembly-CSharp-firstpass.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.UIModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\Sirenix.OdinInspector.Attributes.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.TerrainModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.AIModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\Boo.Lang.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.AnimationModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.Networking.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.IMGUIModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.VehiclesModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.AudioModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.Physics2DModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\Comfort.Unity.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.ParticleSystemModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\DOTween.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.TextRenderingModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\SteamAudio.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\Unity.TextMeshPro.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.UNETModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\Unity.Postprocessing.Runtime.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\Sirenix.Serialization.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.VideoModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\Cinemachine.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.ClothModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.VRModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.JSONSerializeModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\CommonExtensions.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\DOTween.Modules.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.TerrainPhysicsModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.ScreenCaptureModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\Sirenix.Utilities.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.WindModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.SharedInternalsModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\LibraryLoaderUtility.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.TextCoreModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\Sirenix.Serialization.Config.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.DirectorModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.Timeline.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\UnityEngine.XRModule.dll
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\bin\debug\NLog.JET.pdb
+C:\JET\6\JET-Binaries-12.9.10423\JET.OldLauncher\obj\Debug\JET.OldLauncher.csproj.CopyComplete
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\JET Launcher.exe.config
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\JET Launcher.exe
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\JET Launcher.pdb
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\NLog.JET.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\Assembly-CSharp.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\0Harmony.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\Newtonsoft.Json.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.PhysicsModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\DecalSystem.Runtime.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\Assembly-CSharp-firstpass.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.UIModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\Sirenix.OdinInspector.Attributes.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.TerrainModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.AIModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\Boo.Lang.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.AnimationModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.Networking.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.IMGUIModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.VehiclesModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.AudioModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.Physics2DModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\Comfort.Unity.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.ParticleSystemModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\DOTween.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.TextRenderingModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\SteamAudio.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\Unity.TextMeshPro.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.UNETModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\Unity.Postprocessing.Runtime.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\Sirenix.Serialization.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.VideoModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\Cinemachine.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.ClothModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.VRModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.JSONSerializeModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\CommonExtensions.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\DOTween.Modules.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.TerrainPhysicsModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.ScreenCaptureModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\Sirenix.Utilities.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.WindModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.SharedInternalsModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\LibraryLoaderUtility.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.TextCoreModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\Sirenix.Serialization.Config.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.DirectorModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.Timeline.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\UnityEngine.XRModule.dll
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\bin\debug\NLog.JET.pdb
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\obj\Debug\JET.OldLauncher.csprojAssemblyReference.cache
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\obj\Debug\JET.Launcher.Properties.Resources.resources
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\obj\Debug\JET.OldLauncher.Main.resources
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\obj\Debug\JET.OldLauncher.csproj.GenerateResource.cache
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\obj\Debug\JET.OldLauncher.csproj.CoreCompileInputs.cache
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\obj\Debug\JET.OldLauncher.csproj.CopyComplete
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\obj\Debug\JET Launcher.exe
+C:\JET\6\JET-Binaries-12.9.10988\JET.OldLauncher\obj\Debug\JET Launcher.pdb

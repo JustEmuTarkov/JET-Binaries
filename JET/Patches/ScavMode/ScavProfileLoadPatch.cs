@@ -14,9 +14,11 @@ namespace JET.Patches.ScavMode
     {
         public ScavProfileLoadPatch() : base(transpiler: nameof(PatchTranspile)) { }
 
-        protected override MethodBase GetTargetMethod() => typeof(MainApplication)
-            .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly)
-            .FirstOrDefault(IsTargetMethod);
+        protected override MethodBase GetTargetMethod()
+        {
+            return typeof(MainApplication).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+                .FirstOrDefault(IsTargetMethod);
+        }
 
         static IEnumerable<CodeInstruction> PatchTranspile(ILGenerator generator, IEnumerable<CodeInstruction> instructions)
         {
@@ -75,11 +77,13 @@ namespace JET.Patches.ScavMode
         {
             var parameters = methodInfo.GetParameters();
 
-            if (parameters.Length != 3
+            if (parameters.Length != 4
             || parameters[0].Name != "location"
             || parameters[1].Name != "timeAndWeather"
             || parameters[2].Name != "entryPoint"
-            || parameters[2].ParameterType != typeof(string))
+            || parameters[3].Name != "timeHasComeScreenController"
+            || parameters[2].ParameterType != typeof(string)
+            || methodInfo.ReturnType != typeof(void))
             {
                 return false;
             }

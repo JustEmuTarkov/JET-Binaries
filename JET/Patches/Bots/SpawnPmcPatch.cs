@@ -35,7 +35,7 @@ namespace JET.Patches.Bots
             {
                 return false;
             }
-            
+
             var fields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
             if (!fields.Any(f => f.FieldType == typeof(WildSpawnType)) || !fields.Any(f => f.FieldType == typeof(BotDifficulty)))
             {
