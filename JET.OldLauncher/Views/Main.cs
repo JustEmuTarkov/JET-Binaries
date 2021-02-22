@@ -205,7 +205,7 @@ namespace JET.OldLauncher
                     _SetButtonNames(sD.FORM.goBack, "", "", "", sD.FORM.addServer);
                     return;
                 case 2:
-                    _SetButtonNames(sD.FORM.createProfile, "", "", "", sD.FORM.login);
+                    _SetButtonNames(sD.FORM.createProfile, sD.FORM.goBack, "", "", sD.FORM.login);
                     BTN_GenLaunchArgs.Enabled = false;
                     return;
                 case 3:
@@ -491,6 +491,7 @@ namespace JET.OldLauncher
                     BTN_Process.Enabled = true; // Enable "Add Server" button
                     break;
                 case 2:
+                    _processedAction = 0;
                     // maybe go back button ? to select server again ??
                     return;
                 case 4:

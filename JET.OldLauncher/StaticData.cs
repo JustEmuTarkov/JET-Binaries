@@ -10,7 +10,7 @@ namespace JET.OldLauncher
     class StaticData
     {
 #if DEBUG
-        public string working_dir = @"C:\Emu Tarkov\12.9\Client"; // Change for debugging purposes
+        public string working_dir = @"C:\Emu Tarkov\12.9.10988\original\Client"; // Change for debugging purposes
 #else
         public string working_dir = Environment.CurrentDirectory;
 #endif
