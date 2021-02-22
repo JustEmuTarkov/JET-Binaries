@@ -119,6 +119,7 @@ namespace JET.OldLauncher
             Field_Email.Visible = EmailField;
             Label_Password.Visible = PasswordField;
             Field_Password.Visible = PasswordField;
+            BTN_Show_Password.Visible = PasswordField;
             Label_SelectEdition.Visible = EditionField;
             Field_SelectEdition.Visible = EditionField;
             Label_Server.Visible = ServerField;
@@ -618,6 +619,32 @@ namespace JET.OldLauncher
                     }
                 }
             }
+        }
+
+        private void BTN_Show_Password_Click(object sender, EventArgs e)
+        {
+            if (launcherConfig.HidePassword)
+            {
+                // Show password
+                launcherConfig.HidePassword = false;
+                BTN_Show_Password.Image = Launcher.Properties.Resources.eye;
+                Field_Password.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                // Hide password
+                launcherConfig.HidePassword = true;
+                BTN_Show_Password.Image = Launcher.Properties.Resources.eyecross;
+                Field_Password.UseSystemPasswordChar = true;
+            }
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+            BTN_Show_Password.Image = launcherConfig.HidePassword
+                ? Launcher.Properties.Resources.eyecross
+                : Launcher.Properties.Resources.eye;
+            Field_Password.UseSystemPasswordChar = launcherConfig.HidePassword;
         }
     }
 }

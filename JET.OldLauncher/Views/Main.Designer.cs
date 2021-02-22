@@ -1,4 +1,8 @@
-﻿namespace JET.OldLauncher
+﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace JET.OldLauncher
 {
     partial class Main
     {
@@ -43,6 +47,7 @@
             this.BTN_Side_3 = new System.Windows.Forms.Button();
             this.BTN_Side_4 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.BTN_Show_Password = new System.Windows.Forms.Button();
             this.Field_AddServer = new System.Windows.Forms.TextBox();
             this.Label_Url = new System.Windows.Forms.Label();
             this.Label_Server = new System.Windows.Forms.Label();
@@ -112,11 +117,11 @@
             this.Label_Email.BackColor = System.Drawing.Color.Transparent;
             this.Label_Email.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label_Email.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.Label_Email.Location = new System.Drawing.Point(58, 76);
+            this.Label_Email.Location = new System.Drawing.Point(25, 76);
             this.Label_Email.Name = "Label_Email";
-            this.Label_Email.Size = new System.Drawing.Size(48, 21);
+            this.Label_Email.Size = new System.Drawing.Size(81, 21);
             this.Label_Email.TabIndex = 8;
-            this.Label_Email.Text = "Email";
+            this.Label_Email.Text = "Username";
             this.Label_Email.Visible = false;
             // 
             // Field_Password
@@ -126,7 +131,7 @@
             this.Field_Password.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.Field_Password.Location = new System.Drawing.Point(112, 108);
             this.Field_Password.Name = "Field_Password";
-            this.Field_Password.Size = new System.Drawing.Size(230, 29);
+            this.Field_Password.Size = new System.Drawing.Size(203, 29);
             this.Field_Password.TabIndex = 36;
             this.Field_Password.Visible = false;
             // 
@@ -221,6 +226,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.BTN_Show_Password);
             this.panel1.Controls.Add(this.Field_AddServer);
             this.panel1.Controls.Add(this.Label_Url);
             this.panel1.Controls.Add(this.Label_Server);
@@ -235,6 +241,25 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(345, 182);
             this.panel1.TabIndex = 46;
+            // 
+            // BTN_Show_Password
+            // 
+            this.BTN_Show_Password.BackColor = System.Drawing.Color.Transparent;
+            this.BTN_Show_Password.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BTN_Show_Password.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.BTN_Show_Password.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.BTN_Show_Password.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.BTN_Show_Password.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_Show_Password.Image = ((System.Drawing.Image)(resources.GetObject("BTN_Show_Password.Image")));
+            this.BTN_Show_Password.Location = new System.Drawing.Point(313, 108);
+            this.BTN_Show_Password.Name = "BTN_Show_Password";
+            this.BTN_Show_Password.Size = new System.Drawing.Size(29, 29);
+            this.BTN_Show_Password.TabIndex = 0;
+            this.BTN_Show_Password.TabStop = false;
+            this.BTN_Show_Password.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BTN_Show_Password.UseVisualStyleBackColor = false;
+            this.BTN_Show_Password.Visible = false;
+            this.BTN_Show_Password.Click += new System.EventHandler(this.BTN_Show_Password_Click);
             // 
             // Field_AddServer
             // 
@@ -293,7 +318,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::JET.OldLauncher.Properties.Resources.icon;
+            this.pictureBox1.Image = global::JET.Launcher.Properties.Resources.icon;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(75, 75);
@@ -391,6 +416,7 @@
             this.MaximizeBox = false;
             this.Name = "Main";
             this.Text = "JustEmuTarkov - Launcher";
+            this.Load += new System.EventHandler(this.Main_Load);
             this.Resize += new System.EventHandler(this.Main_Resize);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -425,6 +451,7 @@
         private System.Windows.Forms.Button BTN_GenLaunchArgs;
         private System.Windows.Forms.TextBox Text_LaunchArgs;
         private System.Windows.Forms.Timer UpdateTick;
+        private System.Windows.Forms.Button BTN_Show_Password;
     }
 }
 

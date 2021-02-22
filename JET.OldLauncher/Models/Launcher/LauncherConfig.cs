@@ -8,16 +8,18 @@ namespace JET.OldLauncher
 		public List<string> Servers;
 		public string Email;
 		public string Password;
-		public string GamePath;
+        public string GamePath;
 		public bool MinimizeToTray;
+        public bool HidePassword;
 
-		public LauncherConfig()
+        public LauncherConfig()
 		{
 			Servers = new List<string>();
 			Email = "";
 			Password = "";
 			GamePath = new StaticData().working_dir;
 			MinimizeToTray = true;
-		}
+            HidePassword = true;
+        }
 	}
 }
