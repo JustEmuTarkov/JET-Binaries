@@ -24,7 +24,7 @@ namespace JET.Launcher.Utilities
                 Directory.CreateDirectory(filepath);
             }
 
-            string filename = Path.Combine(filepath, $"{DateTime.Now:yyyyMMdd}.log");
+            var filename = Path.Combine(filepath, $"{DateTime.Now:yyyyMMdd}.log");
             File.AppendAllLines(filename, new[] { $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}]{text}" });
         }
 

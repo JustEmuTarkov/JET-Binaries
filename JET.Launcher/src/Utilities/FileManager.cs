@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using Microsoft.VisualBasic;
 
@@ -21,15 +22,13 @@ namespace JET.Launcher.Utilities
         };
         internal static void OpenDirectory(string path)
         {
-            if (Directory.Exists(path))
+            if (!Directory.Exists(path)) return;
+            var startInfo = new ProcessStartInfo
             {
-                ProcessStartInfo startInfo = new ProcessStartInfo
-                {
-                    Arguments = path,
-                    FileName = "explorer.exe"
-                };
-                Process.Start(startInfo);
-            }
+                Arguments = path,
+                FileName = "explorer.exe"
+            };
+            Process.Start(startInfo);
         }
         internal static bool DeleteDirectoryFiles(string path)
         {
@@ -52,37 +51,32 @@ namespace JET.Launcher.Utilities
         }
         internal string ScanToConfirmDirectory(string directory)
         {
-            string[] filesInCurrentDirectory = Directory.GetFiles(directory);
-            for (int i = 0; i < filesInCurrentDirectory.Length; i++)
-            {
-                string folderName = filesInCurrentDirectory[i].ToLower();
-                for (int checkNo = 0; checkNo < namesToFind.Count; checkNo++)
-                {
-                    if (folderName.Contains(namesToFind[checkNo]))
-                        return directory;
-                }
-            }
-            for (int i = 0; i < filesInCurrentDirectory.Length; i++)
-            {
-                string folderName = filesInCurrentDirectory[i].ToLower();
-                for (int checkNo = 0; checkNo < foldersToFind.Count; checkNo++)
-                {
-                    if (folderName.Contains(foldersToFind[checkNo]))
-                    {
-                        if (Directory.Exists(Path.Combine(directory, folderName)))
-                            return ScanToConfirmDirectory(Path.Combine(directory, folderName));
-                    }
+            var filesInCurrentDirectory = Directory.GetFiles(directory);
 
+            var folderNames = filesInCurrentDirectory.Select(x => x.ToLower()).ToArray();
+
+            if (folderNames.Any(folderName => namesToFind.Any(folderName.Contains)))
+            {
+                return directory;
+            }
+
+            foreach (var folderName in folderNames)
+            {
+                if (foldersToFind.Any(name => 
+                    folderName.Contains(name) && 
+                    Directory.Exists(Path.Combine(directory, folderName))))
+                {
+                    return ScanToConfirmDirectory(Path.Combine(directory, folderName));
                 }
             }
             return "Not found";
         }
         internal string CheckIfFileExistReturnDirectory(string directory)
         {
-            string[] filesInCurrentDirectory = Directory.GetFiles(directory);
-            for (int i = 0; i < filesInCurrentDirectory.Length; i++)
+            var filesInCurrentDirectory = Directory.GetFiles(directory);
+            for (var i = 0; i < filesInCurrentDirectory.Length; i++)
             {
-                for (int fileId = 0; i < namesToFind.Count; fileId++) {
+                for (var fileId = 0; i < namesToFind.Count; fileId++) {
                     if (filesInCurrentDirectory[i] == namesToFind[fileId])
                         return directory;
                 }
@@ -102,7 +96,7 @@ namespace JET.Launcher.Utilities
                     }
                 }
             }
-            string LauncherDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
+            var LauncherDirectory = AppDomain.CurrentDomain.BaseDirectory;
             // all lower case cause we lowercase() all names of files
             //check if folder exist in current directory
             Global.ServerLocation = ScanToConfirmDirectory(LauncherDirectory);
@@ -114,20 +108,15 @@ namespace JET.Launcher.Utilities
                 Global.ServerLocation = ScanToConfirmDirectory(LauncherDirectory);
             }
 
-            if (Global.ServerLocation == "Not found")
+            while (Global.ServerLocation == "Not found")// hangs start untill user specify server location
             {
-
-                while (Global.ServerLocation == "Not found")
+                Global.ServerLocation = Interaction.InputBox("Type windows location where server is located.", "I was unable to find server *_*", @"F:\Pulpit\JET\JustEmuTarkov-Server-1.0.1");
+                if (Global.ServerLocation == "")
                 {
-                    Global.ServerLocation = Interaction.InputBox("Type windows location where server is located.", "I was unable to find server *_*", @"F:\Pulpit\JET\JustEmuTarkov-Server-1.0.1");
-                    if (Global.ServerLocation == "")
-                    {
-                        Global.ServerLocation = "Not found";
-                        continue;
-                    }
-                    Global.ServerLocation = ScanToConfirmDirectory(Global.ServerLocation);
+                    Global.ServerLocation = "Not found";
+                    continue;
                 }
-                // hangs start untill user specify server location
+                Global.ServerLocation = ScanToConfirmDirectory(Global.ServerLocation);
             }
         }
     }

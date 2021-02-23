@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using JET.Launcher.Structures;
 using JET.Launcher.Utilities;
 using JET.Utilities.App;
 
 namespace JET.Launcher.Utilities
 {
-    class ServerManager
+    internal class ServerManager
     {
         public static List<RequestData.ServerInfo> AvailableServers = new List<RequestData.ServerInfo>();
         public static RequestData.ServerInfo SelectedServer = new RequestData.ServerInfo();
@@ -23,10 +24,10 @@ namespace JET.Launcher.Utilities
         }
         public static void SelectServer(string BackendName)
         {
-            for (int i = 0; i < AvailableServers.Count; i++)
+            var selected = AvailableServers.FirstOrDefault(server => server.backendUrl == BackendName);
+            if(selected != default(RequestData.ServerInfo))
             {
-                if(AvailableServers[i].backendUrl == BackendName)
-                    SelectedServer = AvailableServers[i];
+                SelectedServer = selected;
             }
         }
         internal static bool LoadServer()
@@ -34,35 +35,35 @@ namespace JET.Launcher.Utilities
             RequestManager.Busy();
             try
             {
-                string json = RequestManager.Connect();
+                var json = RequestManager.Connect();
                 Console.WriteLine(json);
                 if (json == "")
                 {
                     RequestManager.Free();
                     return false;
                 }
-                RequestData.ServerInfo serverInfo = Json.Deserialize<RequestData.ServerInfo>(json);
+                var serverInfo = Json.Deserialize<RequestData.ServerInfo>(json);
                 AvailableServers.Add(serverInfo);
             }
             catch (Exception e) { Console.WriteLine(e); }
             RequestManager.Free();
             return true;
         }
-        internal static bool LoadServerFromDiffrentBackend(string backend, bool save = false)
+        internal static bool LoadServerFromDifferentBackend(string backend, bool save = false)
         {
             RequestManager.Busy();
             try
             {
                 RequestManager.ChangeBackendUrl(backend);
-                string json = RequestManager.Connect();
+                var json = RequestManager.Connect();
                 if (json == "")
                 {
                     RequestManager.Free();
                     return false;
                 }
-                RequestData.ServerInfo serverInfo = Json.Deserialize<RequestData.ServerInfo>(json);
+                var serverInfo = Json.Deserialize<RequestData.ServerInfo>(json);
                 if(save)
-                    AvailableServers.Add(Json.Deserialize<RequestData.ServerInfo>(json));
+                    AvailableServers.Add(serverInfo);
             }
             catch (Exception e) { Console.WriteLine(e); }
             RequestManager.Free();

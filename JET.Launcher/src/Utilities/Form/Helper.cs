@@ -81,9 +81,9 @@ namespace JET.Launcher.Utilities.Form
                         
                         MainWindow.Instance.__ServerList.Items.Clear();
 
-                        foreach (RequestData.ServerInfo server in ServerManager.AvailableServers.ToList())
+                        foreach (var server in ServerManager.AvailableServers.ToList())
                         {
-                            if (ServerManager.LoadServerFromDiffrentBackend(server.backendUrl))
+                            if (ServerManager.LoadServerFromDifferentBackend(server.backendUrl))
                             {
                                 if(server.backendUrl.Contains("localhost") || server.backendUrl.Contains("127.0.0.1"))
                                     LocalServerFound = true;

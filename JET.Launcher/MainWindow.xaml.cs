@@ -68,7 +68,7 @@ namespace JET.Launcher
             }
 
             // set launcher title
-            this.Title = Global.LauncherName + " " + Global.LauncherVersion;
+            Title = Global.LauncherName + " " + Global.LauncherVersion;
             __FormM.UpdateApplyButton("connect");
             __FormM.SetupIntervalUpdater(__ProcM);
         }
@@ -98,14 +98,13 @@ namespace JET.Launcher
         }
         private void OpenGameLogs_Click(object sender, RoutedEventArgs e)
         {
-            FileManager.OpenDirectory(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, Global.PATH.GameLogs));
+            FileManager.OpenDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Global.PATH.GameLogs));
         }
         private void ClearCache_Click(object sender, RoutedEventArgs e)
         {
             if(FileManager.DeleteDirectoryFiles(Path.Combine(Global.ServerLocation, Global.PATH.ServerCache)))
             {
-                MessageBoxManager.Show("Cache properly wiped.", "Information:", 
-                    MessageBoxManager.Button.OK, MessageBoxManager.Image.Information);
+                MessageBoxManager.Show("Cache properly wiped.", "Information:");
             }
         }
         private void OpenServerMods_Click(object sender, RoutedEventArgs e)
@@ -136,11 +135,11 @@ namespace JET.Launcher
         {
             __FormM.BackButtonClickEvent(sender, e);
         }
-        bool _AutoServerStart_RadioButton = false;
+        bool _AutoServerStart_RadioButton;
         private void __AutoServerStart_RadioButton_Click(object sender, RoutedEventArgs e)
         {
             _AutoServerStart_RadioButton = !_AutoServerStart_RadioButton;
-            RadioButton s = sender as RadioButton;
+            var s = sender as RadioButton;
             s.IsChecked = _AutoServerStart_RadioButton;
             Console.WriteLine(s.IsChecked);
             __LauncherConfigL.ChangeStartServerAtLaunch(_AutoServerStart_RadioButton);

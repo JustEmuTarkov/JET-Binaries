@@ -36,7 +36,7 @@ namespace JET.Launcher.Utilities
         {
             try
             {
-                string assembly = new AssemblyName(args.Name).Name;
+                var assembly = new AssemblyName(args.Name).Name;
                 _FileName = Path.Combine(Environment.CurrentDirectory, $"EscapeFromTarkov_Data/Managed/{assembly}.dll");
                 // resources are embedded inside assembly
                 if (_FileName.Contains("resources"))

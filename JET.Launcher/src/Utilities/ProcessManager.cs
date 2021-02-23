@@ -16,33 +16,33 @@ namespace JET.Launcher.Utilities
     
     internal class ProcessManager
     {
-		internal ProcessManager() {}
+        internal ProcessManager() {}
         #region SERVER STARTER
 
         internal static List<string> _ConsoleOutput = new List<string>();
-		internal static string consoleProcessName = ""; // we dont need that but whatever ... we always can ask process variable for anything...
-		internal static Process consoleProcessHandle = new Process();
+        internal static string consoleProcessName = ""; // we dont need that but whatever ... we always can ask process variable for anything...
+        internal static Process consoleProcessHandle = new Process();
         internal void StartConsoleInsideLauncher() 
         {
             consoleProcessHandle = new Process();// incase resets what was in the variable before
             // initialize process parameters
             consoleProcessHandle.StartInfo.WorkingDirectory = Global.ServerLocation;
-			consoleProcessHandle.StartInfo.FileName = Path.Combine(Global.ServerLocation, Global.ServerName);
-			consoleProcessHandle.StartInfo.CreateNoWindow = true;
-			consoleProcessHandle.StartInfo.UseShellExecute = false;
-			consoleProcessHandle.StartInfo.RedirectStandardError = true;
-			consoleProcessHandle.StartInfo.RedirectStandardInput = true;
-			consoleProcessHandle.StartInfo.RedirectStandardOutput = true;
-			consoleProcessHandle.StartInfo.StandardOutputEncoding = Encoding.UTF8;
-			consoleProcessHandle.EnableRaisingEvents = true;
-			consoleProcessHandle.Exited += ServerTerminated;
-			// Start Process
-			consoleProcessHandle.Start();
-			// last setters
-			consoleProcessHandle.BeginOutputReadLine();
-			consoleProcessHandle.OutputDataReceived += ServerOutputDataReceived;
-			consoleProcessName = consoleProcessHandle.ProcessName;
-		}
+            consoleProcessHandle.StartInfo.FileName = Path.Combine(Global.ServerLocation, Global.ServerName);
+            consoleProcessHandle.StartInfo.CreateNoWindow = true;
+            consoleProcessHandle.StartInfo.UseShellExecute = false;
+            consoleProcessHandle.StartInfo.RedirectStandardError = true;
+            consoleProcessHandle.StartInfo.RedirectStandardInput = true;
+            consoleProcessHandle.StartInfo.RedirectStandardOutput = true;
+            consoleProcessHandle.StartInfo.StandardOutputEncoding = Encoding.UTF8;
+            consoleProcessHandle.EnableRaisingEvents = true;
+            consoleProcessHandle.Exited += ServerTerminated;
+            // Start Process
+            consoleProcessHandle.Start();
+            // last setters
+            consoleProcessHandle.BeginOutputReadLine();
+            consoleProcessHandle.OutputDataReceived += ServerOutputDataReceived;
+            consoleProcessName = consoleProcessHandle.ProcessName;
+        }
         #endregion
         #region SERVER FUNCTIONS
         internal void StartOrStop() {
@@ -61,41 +61,41 @@ namespace JET.Launcher.Utilities
             }
         }
         internal void Terminate() {
-			consoleProcessHandle.Kill();
-			consoleProcessName = "";
-		}
-		internal void ServerTerminated(object sender, EventArgs e)
-		{
-			Console.WriteLine("***** Server Closed *****");
-			// server closed what now ?
-		}
+            consoleProcessHandle.Kill();
+            consoleProcessName = "";
+        }
+        internal void ServerTerminated(object sender, EventArgs e)
+        {
+            Console.WriteLine("***** Server Closed *****");
+            // server closed what now ?
+        }
         #region ConsoleRegex Removal strange artifacts
         List<string> TagsToRemoveFromConsoleOutput = new List<string>() {
-			"\\[2J\\[0;0f",
-			"[┌│┐┘└─]"
-		};
-		private void RemoveConsoleTags(ref string _ConsoleOutput) {
-			_ConsoleOutput = _ConsoleOutput.Replace($"", "");
-			var consoleEnum = TagsToRemoveFromConsoleOutput.GetEnumerator();
-			while (consoleEnum.MoveNext())
-			{
-				_ConsoleOutput = Regex.Replace(_ConsoleOutput, consoleEnum.Current, "");
-			}
-		}
+            "\\[2J\\[0;0f",
+            "[┌│┐┘└─]"
+        };
+        private void RemoveConsoleTags(ref string _ConsoleOutput) {
+            _ConsoleOutput = _ConsoleOutput.Replace($"", "");
+            var consoleEnum = TagsToRemoveFromConsoleOutput.GetEnumerator();
+            while (consoleEnum.MoveNext())
+            {
+                _ConsoleOutput = Regex.Replace(_ConsoleOutput, consoleEnum.Current, "");
+            }
+        }
         #endregion
 
         private Color SwitchableColor;
-		private void ServerOutputDataReceived(object sender, DataReceivedEventArgs e)
-		{
-			if (e.Data != null)
-			{
-				string tConsoleOutput = e.Data;
-				RemoveConsoleTags(ref tConsoleOutput);
-                string[] splitLine = tConsoleOutput.Split(new string[] { "[0m" }, StringSplitOptions.None);
+        private void ServerOutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            if (e.Data != null)
+            {
+                var tConsoleOutput = e.Data;
+                RemoveConsoleTags(ref tConsoleOutput);
+                var splitLine = tConsoleOutput.Split(new string[] { "[0m" }, StringSplitOptions.None);
                 //adding to the stack
                 System.Windows.Application.Current.Dispatcher.Invoke(() =>
                 {
-                    for (int index = 0; index < splitLine.Length; index++) {
+                    for (var index = 0; index < splitLine.Length; index++) {
                         if (index == 0)
                         {
                             SwitchableColor = Colors.White;
@@ -108,8 +108,8 @@ namespace JET.Launcher.Utilities
                         }
                     }
                 });
-			}
-		}
+            }
+        }
 
         private void ProcessText(ref Color switchableColor, ref string text)
         {
@@ -182,7 +182,7 @@ namespace JET.Launcher.Utilities
 
             try
             {
-                ProcessStartInfo clientProcess = new ProcessStartInfo("EscapeFromTarkov.exe")
+                var clientProcess = new ProcessStartInfo("EscapeFromTarkov.exe")
                 {
                     Arguments = GenerateArguments(),
                     UseShellExecute = false,
@@ -267,7 +267,7 @@ namespace JET.Launcher.Utilities
         };
         private void SetupGameFiles()
         {
-            foreach (string file in FilesToRemove)
+            foreach (var file in FilesToRemove)
             {
                 try
                 {
@@ -291,9 +291,9 @@ namespace JET.Launcher.Utilities
         {
             try
             {
-                RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Battlestate Games\EscapeFromTarkov", true);
+                var key = Registry.CurrentUser.OpenSubKey(@"Software\Battlestate Games\EscapeFromTarkov", true);
 
-                foreach (string value in key.GetValueNames())
+                foreach (var value in key.GetValueNames())
                 {
                     key.DeleteValue(value);
                 }
@@ -306,19 +306,19 @@ namespace JET.Launcher.Utilities
 
         internal static void CleanTempFiles()
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo(Path.Combine(Path.GetTempPath(), $@"Battlestate Games\EscapeFromTarkov"));
+            var directoryInfo = new DirectoryInfo(Path.Combine(Path.GetTempPath(), $@"Battlestate Games\EscapeFromTarkov"));
 
             if (!Directory.Exists(Path.Combine(Path.GetTempPath(), $@"Battlestate Games\EscapeFromTarkov")))
             {
                 return;
             }
 
-            foreach (FileInfo file in directoryInfo.GetFiles())
+            foreach (var file in directoryInfo.GetFiles())
             {
                 file.Delete();
             }
 
-            foreach (DirectoryInfo directory in directoryInfo.GetDirectories())
+            foreach (var directory in directoryInfo.GetDirectories())
             {
                 directory.Delete(true);
             }
@@ -332,12 +332,12 @@ namespace JET.Launcher.Utilities
         #region Shortcut Creator
         public static void CreateShortcut()
         {
-            IShellLink link = (IShellLink)new ShellLink();
+            var link = (IShellLink)new ShellLink();
             link.SetDescription("Start as " + RequestManager.SelectedAccount.email);
             link.SetArguments(GenerateArguments());
             link.SetPath(Global.TarkovExecutable);
             link.SetIconLocation(Global.TarkovExecutable, 0);
-            IPersistFile file = (IPersistFile)link;
+            var file = (IPersistFile)link;
             file.Save(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "JustEmuTarkov ("+ RequestManager.SelectedAccount.email + ").lnk"), false);
         }
         #region Import Shortcut Libraries
