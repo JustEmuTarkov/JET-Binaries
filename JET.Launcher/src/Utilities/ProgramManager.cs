@@ -11,7 +11,7 @@ namespace JET.Launcher.Utilities
             if(File.Exists(Path.Combine(Environment.CurrentDirectory, "EscapeFromTarkov.exe"))){
                 return true;
             }
-            MessageBoxManager.Show("Game Files Not Found", "Opss!!", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
+            MessageBoxManager.Show("Game Files Not Found", "Oopss!!", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
             return false;
         }
         internal static void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e)

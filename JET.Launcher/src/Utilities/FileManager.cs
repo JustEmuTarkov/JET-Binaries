@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Windows.Forms;
 using Microsoft.VisualBasic;
 
 namespace JET.Launcher.Utilities
@@ -62,8 +63,8 @@ namespace JET.Launcher.Utilities
 
             foreach (var folderName in folderNames)
             {
-                if (foldersToFind.Any(name => 
-                    folderName.Contains(name) && 
+                if (foldersToFind.Any(name =>
+                    folderName.Contains(name) &&
                     Directory.Exists(Path.Combine(directory, folderName))))
                 {
                     return ScanToConfirmDirectory(Path.Combine(directory, folderName));
@@ -76,7 +77,8 @@ namespace JET.Launcher.Utilities
             var filesInCurrentDirectory = Directory.GetFiles(directory);
             for (var i = 0; i < filesInCurrentDirectory.Length; i++)
             {
-                for (var fileId = 0; i < namesToFind.Count; fileId++) {
+                for (var fileId = 0; i < namesToFind.Count; fileId++)
+                {
                     if (filesInCurrentDirectory[i] == namesToFind[fileId])
                         return directory;
                 }
@@ -96,7 +98,7 @@ namespace JET.Launcher.Utilities
                     }
                 }
             }
-            var LauncherDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            var LauncherDirectory = Environment.CurrentDirectory;
             // all lower case cause we lowercase() all names of files
             //check if folder exist in current directory
             Global.ServerLocation = ScanToConfirmDirectory(LauncherDirectory);
@@ -108,15 +110,29 @@ namespace JET.Launcher.Utilities
                 Global.ServerLocation = ScanToConfirmDirectory(LauncherDirectory);
             }
 
-            while (Global.ServerLocation == "Not found")// hangs start untill user specify server location
+            while (Global.ServerLocation == "Not found")// hangs start until user specify server location
             {
-                Global.ServerLocation = Interaction.InputBox("Type windows location where server is located.", "I was unable to find server *_*", @"F:\Pulpit\JET\JustEmuTarkov-Server-1.0.1");
-                if (Global.ServerLocation == "")
+                var prompt = MessageBox.Show("*_* I was unable to find the server. Please select your JET server folder.", "Can't find server", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (prompt != DialogResult.OK)
+                    // Exited the prompt
+                    Environment.Exit(0);
+                var dialog = new FolderBrowserDialog
                 {
-                    Global.ServerLocation = "Not found";
-                    continue;
-                }
-                Global.ServerLocation = ScanToConfirmDirectory(Global.ServerLocation);
+                    SelectedPath = Environment.CurrentDirectory,
+                    ShowNewFolderButton = true,
+                    Description = "Select JET server"
+                };
+                var result = dialog.ShowDialog();
+                if (result != DialogResult.OK)
+                    // Pressed cancel or exited
+                    Environment.Exit(0);
+                Global.ServerLocation = ScanToConfirmDirectory(dialog.SelectedPath);
+
+                //Global.ServerLocation = Interaction.InputBox("Type windows location where server is located.", "I was unable to find server *_*", @"F:\Pulpit\JET\JustEmuTarkov-Server-1.0.1");
+                //if (Global.ServerLocation == "")
+                //    // Likely pressed cancel
+                //    Environment.Exit(0);
+                //Global.ServerLocation = ScanToConfirmDirectory(Global.ServerLocation);
             }
         }
     }

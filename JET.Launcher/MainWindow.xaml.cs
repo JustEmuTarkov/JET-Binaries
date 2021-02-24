@@ -19,6 +19,10 @@ namespace JET.Launcher
         internal LauncherConfigLoader __LauncherConfigL;
         public MainWindow()
         {
+#if DEBUG
+            Environment.CurrentDirectory = @"C:\Emu Tarkov\12.9.10988\original\client"; // Change to debug path
+#endif
+
             Instance = this;
 
             /*
@@ -34,7 +38,7 @@ namespace JET.Launcher
             AppDomain.CurrentDomain.UnhandledException += ProgramManager.CurrentDomainOnUnhandledException;
             
             // load missing assemblies from EFT's managed directory
-            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(ProgramManager.AssemblyResolveEvent);
+            AppDomain.CurrentDomain.AssemblyResolve += ProgramManager.AssemblyResolveEvent;
             InitializeStartups();
             InitializeComponent();
             InitializeLauncherProps();
@@ -92,13 +96,13 @@ namespace JET.Launcher
         {
             Process.Start(RequestManager.GetBackendUrl());
         }
-        private void OpenServerCache_Click(object sender, RoutedEventArgs e)
+        private void OpenServerLogs_Click(object sender, RoutedEventArgs e)
         {
-            FileManager.OpenDirectory(Global.Server.CacheFolderDir);
+            FileManager.OpenDirectory(Global.Server.LogsFolderDir);
         }
         private void OpenGameLogs_Click(object sender, RoutedEventArgs e)
         {
-            FileManager.OpenDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Global.PATH.GameLogs));
+            FileManager.OpenDirectory(Path.Combine(Environment.CurrentDirectory, Global.PATH.GameLogs));
         }
         private void ClearCache_Click(object sender, RoutedEventArgs e)
         {
@@ -159,6 +163,13 @@ namespace JET.Launcher
         }
         #endregion
 
+        private void Main_Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Bring window to front when starting
+            WindowState = WindowState.Minimized;
+            Show();
+            WindowState = WindowState.Normal;
+        }
     }
 }
 

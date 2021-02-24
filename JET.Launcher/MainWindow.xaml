@@ -10,7 +10,7 @@
         FontFamily="/JET.Launcher;component/Resources/#AR Techni" 
         MinWidth="550" MinHeight="300" 
         MaxWidth="550" MaxHeight="300" 
-        UseLayoutRounding="True" WindowStartupLocation="CenterScreen">
+        UseLayoutRounding="True" WindowStartupLocation="CenterScreen" Loaded="Main_Window_Loaded">
     <Grid Margin="0,0,2,1">
         <TabControl Background="Black" BorderBrush="White" Foreground="White" Margin="0,0,0,2">
             <TabItem Header="Launcher" Foreground="White" BorderBrush="White" Background="Black" FontFamily="/JET.Launcher;component/Resources/#AR Techni">
@@ -25,8 +25,8 @@
                         <GroupBox Header=" Quick Menu " HorizontalAlignment="Left" Height="207" VerticalAlignment="Top" Width="149" BorderBrush="#FF4B4B4B" Foreground="#FFC7C7C7" Grid.ColumnSpan="2" FontFamily="/JET.Launcher;component/Resources/#AR Techni">
                             <Grid Height="192" VerticalAlignment="Top" Margin="0,-3,-2,-4">
                                 <Button x:Name="bnt1" Content="Server Webpage" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="127" Margin="0,8,0,0" Height="20" Click="OpenLocalServerWeb_Click" Style="{DynamicResource FlatButton}" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Padding="1,0.5,1,1"/>
-                                <Button x:Name="bnt2" Content="Server Log's" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="127" Margin="0,32,0,0" Height="20" Click="OpenServerCache_Click" Style="{DynamicResource FlatButton}" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Padding="1,0.5,1,1"/>
-                                <Button x:Name="bnt3" Content="Game Log's" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="127" Margin="0,56,0,0" Height="20" Click="OpenGameLogs_Click" Style="{DynamicResource FlatButton}" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Padding="1,0.5,1,1"/>
+                                <Button x:Name="bnt2" Content="Server Logs" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="127" Margin="0,32,0,0" Height="20" Click="OpenServerLogs_Click" Style="{DynamicResource FlatButton}" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Padding="1,0.5,1,1"/>
+                                <Button x:Name="bnt3" Content="Client Logs" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="127" Margin="0,56,0,0" Height="20" Click="OpenGameLogs_Click" Style="{DynamicResource FlatButton}" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Padding="1,0.5,1,1"/>
                                 <Button x:Name="bnt4" Content="Clear Server Cache" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="127" Margin="0,80,0,0" Height="20" UseLayoutRounding="False" Click="ClearCache_Click" Style="{DynamicResource FlatButton}" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Padding="1"/>
                                 <Button x:Name="bnt5" Content="Server Mods" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="127" Margin="6,104,6,0" Height="20" Style="{DynamicResource FlatButton}" Click="OpenServerMods_Click" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Padding="1,0.5,1,1"/>
                                 <Button x:Name="bnt6" Content="Game Temp" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="127" Margin="6,128,6,0" Height="20" Style="{DynamicResource FlatButton}" Click="OpenTarkovTemp_Click" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Padding="1,0.5,1,1"/>

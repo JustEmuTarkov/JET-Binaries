@@ -207,13 +207,13 @@ namespace JET.Launcher.Utilities
                         {
                             return true;
                         }
-                        MessageBoxManager.Show("Missing file: EscapeFromTarkov_Data/Managed/NLog.JET.dll", "Missing Files!", MessageBoxManager.Button.OK, MessageBoxManager.Image.Information);
+                        MessageBoxManager.Show("Missing file: EscapeFromTarkov_Data/Managed/NLog.JET.dll", "Missing Files!");
                         return false;
                     }
-                    MessageBoxManager.Show("Missing file: EscapeFromTarkov_Data/Managed/NLog.dll.nlog", "Missing Files!", MessageBoxManager.Button.OK, MessageBoxManager.Image.Information);
+                    MessageBoxManager.Show("Missing file: EscapeFromTarkov_Data/Managed/NLog.dll.nlog", "Missing Files!");
                     return false;
                 }
-                MessageBoxManager.Show("Missing file: EscapeFromTarkov_Data/Managed/Assembly-CSharp.dll", "Missing Files!", MessageBoxManager.Button.OK, MessageBoxManager.Image.Information);
+                MessageBoxManager.Show("Missing file: EscapeFromTarkov_Data/Managed/Assembly-CSharp.dll", "Missing Files!");
                 return false;
             }
             MessageBoxManager.Show("Missing file: EscapeFromTarkov_Data/Managed/0Harmony.dll", "Missing Files!", MessageBoxManager.Button.OK, MessageBoxManager.Image.Information);

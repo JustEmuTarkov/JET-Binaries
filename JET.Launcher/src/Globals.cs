@@ -15,17 +15,13 @@ namespace JET.Launcher
         internal static string ServerName = "Server.exe";
         internal static string WPF_NewLine = "&#xA;";
         internal static int LimitConsoleOutput = 30;
-#if DEBUG
-        internal static string WorkingDir = "";
-#else
-        internal static string WorkingDir = Directory.GetCurrentDirectory();
-#endif
 
-        internal static string TarkovExecutable => Path.Combine(WorkingDir, "EscapeFromTarkov.exe");
+        internal static string TarkovExecutable => Path.Combine(Environment.CurrentDirectory, "EscapeFromTarkov.exe");
 
-        public static class PATH {
+        internal static class PATH {
             internal static string ServerCache = @"user\cache";
             internal static string ServerMods = @"user\mods";
+            internal static string ServerLogs = @"user\logs";
             internal static string GameLogs = "Logs";
         }
 
@@ -42,6 +38,8 @@ namespace JET.Launcher
 
         internal static class Server {
             public static string ModsFolderDir => Path.Combine(ServerLocation, PATH.ServerMods);
+
+            internal static string LogsFolderDir => Path.Combine(ServerLocation, PATH.ServerLogs);
 
             internal static string CacheFolderDir => Path.Combine(ServerLocation, PATH.ServerCache);
 
