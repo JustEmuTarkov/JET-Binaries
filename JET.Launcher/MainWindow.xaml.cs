@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Windows;
 using JET.Launcher.Utilities;
 using System.Windows.Controls;
+using System.Threading;
 
 namespace JET.Launcher
 {
@@ -22,9 +23,20 @@ namespace JET.Launcher
 #if DEBUG
             Environment.CurrentDirectory = @"C:\Emu Tarkov\12.9.10988\original\client"; // Change to debug path
 #endif
+            string getManagedPath = Environment.CurrentDirectory + $"/EscapeFromTarkov_Data/Managed";
+            Process p_shell = null;
+            if (Directory.Exists(getManagedPath)) {
+                //powershell.exe dir '%1' - Recurse | Unblock - File
+                ProcessStartInfo startInfo = new ProcessStartInfo {
+                    FileName = "powershell.exe",
+                    Arguments = $"dir '{getManagedPath}' -Recurse | Unblock-File"
+                };
+                p_shell = Process.Start(startInfo);
+                p_shell.WaitForExit();
+            }
 
             Instance = this;
-
+            
             /*
              * Enable that after you finish developing :)
              * */

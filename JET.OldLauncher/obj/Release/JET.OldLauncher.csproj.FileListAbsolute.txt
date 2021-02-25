@@ -34,3 +34,64 @@ C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLaun
 C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csproj.CopyComplete
 C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\obj\Release\JET Launcher.exe
 C:\Users\yolos\Source\Repos\JET-Binaries\JET.OldLauncher\obj\Release\JET Launcher.pdb
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\JET Launcher.exe.config
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\JET Launcher.exe
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\JET Launcher.pdb
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\NLog.JET.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\Assembly-CSharp.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\0Harmony.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.AssetBundleModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\Newtonsoft.Json.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\bsg.componentace.compression.libs.zlib.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.ImageConversionModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.UI.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.PhysicsModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\DecalSystem.Runtime.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\Assembly-CSharp-firstpass.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.UIModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\Sirenix.OdinInspector.Attributes.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.TerrainModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.AIModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\Boo.Lang.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.AnimationModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.Networking.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.IMGUIModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.VehiclesModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.AudioModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.Physics2DModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\Comfort.Unity.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.ParticleSystemModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\DOTween.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.TextRenderingModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\SteamAudio.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\Unity.TextMeshPro.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.UNETModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\Unity.Postprocessing.Runtime.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\Sirenix.Serialization.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.VideoModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\Cinemachine.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.ClothModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.VRModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.JSONSerializeModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\CommonExtensions.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\DOTween.Modules.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.TerrainPhysicsModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.ScreenCaptureModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\Sirenix.Utilities.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.WindModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.SharedInternalsModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\LibraryLoaderUtility.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.TextCoreModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\Sirenix.Serialization.Config.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.DirectorModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.Timeline.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.XRModule.dll
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\bin\release\NLog.JET.pdb
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csprojAssemblyReference.cache
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\obj\Release\JET.Launcher.Properties.Resources.resources
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.Main.resources
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csproj.GenerateResource.cache
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csproj.CoreCompileInputs.cache
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csproj.CopyComplete
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\obj\Release\JET Launcher.exe
+E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\obj\Release\JET Launcher.pdb
