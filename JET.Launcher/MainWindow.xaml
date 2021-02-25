@@ -61,12 +61,12 @@
                             <Label x:Name="__Label_LoggedAs" Content="email@jet.com" VerticalAlignment="Top" Foreground="#FF8C8C8C" Height="17" Padding="5,0,0,0" Margin="10,27,10,0"/>
                             <Button x:Name="__CreateShortcut" Content="Create Shortcut" HorizontalAlignment="Left" VerticalAlignment="Top" Width="132" Margin="10,50,0,0" FontSize="11" FontWeight="Bold" Style="{DynamicResource FlatButton}" Click="CreateShortcut_Click"/>
                         </Grid>
-                        <Grid x:Name="__Connect" HorizontalAlignment="Left" Height="83" Margin="10,25,0,0" VerticalAlignment="Top" Width="152">
+                        <Grid x:Name="__Connect" HorizontalAlignment="Left" Height="83" Margin="10,25,0,0" VerticalAlignment="Top" Width="152" d:IsHidden="True">
                             <Label Content="Server's List" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="#99FFFFFF" Height="26" Width="120" Margin="2,0,0,47" FontFamily="/JET.Launcher;component/Resources/#AR Techni"/>
                             <ComboBox x:Name="__ServerList" HorizontalAlignment="Left" Margin="0,32,0,0" VerticalAlignment="Top" Width="152" Foreground="White" Background="Black" Height="27" DataContextChanged="__ServerList_DataContextChanged" Style="{DynamicResource ComboBoxFlatStyle}" FontFamily="/JET.Launcher;component/Resources/#AR Techni" />
                             <Button x:Name="__DeleteSelectedServer" Content="Delete Selected" Margin="52,67,0,0" FontSize="10" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" BorderBrush="#FFB9B9B9" Foreground="Red" Background="#FF1F1F1F" Click="DeleteSelectedServer_Click" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Style="{DynamicResource FlatButton}" Padding="1,0.5,1,1"/>
                         </Grid>
-                        <Grid x:Name="__Login" HorizontalAlignment="Left" Height="84" Margin="0,0,0,2" VerticalAlignment="Bottom" Width="171" d:IsHidden="True">
+                        <Grid x:Name="__Login" HorizontalAlignment="Left" Height="84" Margin="0,0,0,2" VerticalAlignment="Bottom" Width="171" d:IsHidden="False">
                             <Label Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#99FFFFFF" Height="24" Width="120" Margin="10,1,0,0"/>
                             <Label Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#99FFFFFF" Height="24" Width="120" Margin="10,37,0,0"/>
                             <TextBox x:Name="_LoginField" HorizontalAlignment="Left" Height="20" Margin="10,21,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="151" Background="Black" Foreground="White" BorderBrush="#FF8C8D8F" SelectionBrush="#FF760303" FontSize="16" TextDecorations="{x:Null}" IsEnabled="True"/>

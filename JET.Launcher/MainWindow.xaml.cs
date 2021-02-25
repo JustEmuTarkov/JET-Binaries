@@ -5,6 +5,7 @@ using System.Windows;
 using JET.Launcher.Utilities;
 using System.Windows.Controls;
 using System.Threading;
+using JET.Launcher.Utilities.Form;
 
 namespace JET.Launcher
 {
@@ -23,32 +24,24 @@ namespace JET.Launcher
 #if DEBUG
             Environment.CurrentDirectory = @"C:\Emu Tarkov\12.9.10988\original\client"; // Change to debug path
 #endif
-            string getManagedPath = Environment.CurrentDirectory + $"/EscapeFromTarkov_Data/Managed";
-            Process p_shell = null;
-            if (Directory.Exists(getManagedPath)) {
-                //powershell.exe dir '%1' - Recurse | Unblock - File
-                ProcessStartInfo startInfo = new ProcessStartInfo {
-                    FileName = "powershell.exe",
-                    Arguments = $"dir '{getManagedPath}' -Recurse | Unblock-File"
-                };
-                p_shell = Process.Start(startInfo);
-                p_shell.WaitForExit();
-            }
+            var managedPath = Path.Combine(Environment.CurrentDirectory, "EscapeFromTarkov_Data/Managed");
+            foreach (var file in Directory.GetFiles(managedPath))
+                Helper.UnblockFile(Path.Combine(managedPath, file));
 
             Instance = this;
-            
+
             /*
              * Enable that after you finish developing :)
              * */
-            #if !DEBUG
+#if !DEBUG
             if (!ProgramManager.isGameFilesFound()) {
                 Application.Current.Shutdown();
                 return;
             }
-            #endif
+#endif
             Application.Current.DispatcherUnhandledException += (sender, args) => ProgramManager.HandleException(args.Exception);
             AppDomain.CurrentDomain.UnhandledException += ProgramManager.CurrentDomainOnUnhandledException;
-            
+
             // load missing assemblies from EFT's managed directory
             AppDomain.CurrentDomain.AssemblyResolve += ProgramManager.AssemblyResolveEvent;
             InitializeStartups();
@@ -56,7 +49,8 @@ namespace JET.Launcher
             InitializeLauncherProps();
         }
         #region Initialazers
-        private void InitializeStartups() {
+        private void InitializeStartups()
+        {
 
             // initialize launcher config
             __LauncherConfigL = new LauncherConfigLoader();
@@ -65,7 +59,7 @@ namespace JET.Launcher
             __FileM.FindServerDirectory(__LauncherConfigL.GetServerLocation);
 
             // did location of the server changed ?? then save it if yes
-            if(Global.ServerLocation != __LauncherConfigL.GetServerLocation)
+            if (Global.ServerLocation != __LauncherConfigL.GetServerLocation)
                 __LauncherConfigL.ChangeServerLocation(Global.ServerLocation);
         }
         private void InitializeLauncherProps()
@@ -78,7 +72,8 @@ namespace JET.Launcher
             if (__LauncherConfigL.StartServerAtLaunch())
             {
                 __ProcM.StartConsoleInsideLauncher();
-                if (ProcessManager.consoleProcessName != "") {
+                if (ProcessManager.consoleProcessName != "")
+                {
                     __StartStopServer.Content = "Stop Server";
                 }
             }
@@ -118,7 +113,7 @@ namespace JET.Launcher
         }
         private void ClearCache_Click(object sender, RoutedEventArgs e)
         {
-            if(FileManager.DeleteDirectoryFiles(Path.Combine(Global.ServerLocation, Global.PATH.ServerCache)))
+            if (FileManager.DeleteDirectoryFiles(Path.Combine(Global.ServerLocation, Global.PATH.ServerCache)))
             {
                 MessageBoxManager.Show("Cache properly wiped.", "Information:");
             }

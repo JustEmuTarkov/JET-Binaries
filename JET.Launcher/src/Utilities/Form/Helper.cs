@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,6 +11,11 @@ namespace JET.Launcher.Utilities.Form
     internal class Helper
     {
         internal Helper() { }
+
+        internal static void UnblockFile(string path)
+        {
+            DeleteFile(path + ":Zone.Identifier");
+        }
 
         internal void DisplayGrid_LoginConnect(string name = "")
         {
@@ -109,5 +115,9 @@ namespace JET.Launcher.Utilities.Form
         #endregion
         #endregion
 
+
+        [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool DeleteFile(string name);
     }
 }
