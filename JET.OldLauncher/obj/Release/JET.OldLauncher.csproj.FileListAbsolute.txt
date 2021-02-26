@@ -95,3 +95,60 @@ E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csproj.
 E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csproj.CopyComplete
 E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\obj\Release\JET Launcher.exe
 E:\MAOCI\Github\JET-Binaries\JET.OldLauncher\obj\Release\JET Launcher.pdb
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\JET Launcher.exe.config
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\JET Launcher.exe
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\JET Launcher.pdb
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\NLog.JET.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\Assembly-CSharp.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\0Harmony.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\Newtonsoft.Json.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.PhysicsModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\DecalSystem.Runtime.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\Assembly-CSharp-firstpass.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.UIModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\Sirenix.OdinInspector.Attributes.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.TerrainModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.AIModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\Boo.Lang.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.AnimationModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.Networking.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.IMGUIModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.VehiclesModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.AudioModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.Physics2DModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\Comfort.Unity.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.ParticleSystemModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\DOTween.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.TextRenderingModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\SteamAudio.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\Unity.TextMeshPro.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.UNETModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\Unity.Postprocessing.Runtime.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\Sirenix.Serialization.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.VideoModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\Cinemachine.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.ClothModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.VRModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.JSONSerializeModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\CommonExtensions.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\DOTween.Modules.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.TerrainPhysicsModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.ScreenCaptureModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\Sirenix.Utilities.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.WindModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.SharedInternalsModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\LibraryLoaderUtility.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.TextCoreModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\Sirenix.Serialization.Config.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.DirectorModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.Timeline.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.XRModule.dll
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\NLog.JET.pdb
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csprojAssemblyReference.cache
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\obj\Release\JET.Launcher.Properties.Resources.resources
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.Main.resources
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csproj.GenerateResource.cache
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csproj.CoreCompileInputs.cache
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\obj\Release\JET.OldLauncher.csproj.CopyComplete
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\obj\Release\JET Launcher.exe
+J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\obj\Release\JET Launcher.pdb
