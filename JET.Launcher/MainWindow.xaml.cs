@@ -156,6 +156,10 @@ namespace JET.Launcher
         {
             __FormM.BackButtonClickEvent(sender, e);
         }
+        private void CreateAccountButton_Click(object sender, RoutedEventArgs e)
+        {
+           // _LoginField.Text;
+        }
         bool _AutoServerStart_RadioButton;
         private void __AutoServerStart_RadioButton_Click(object sender, RoutedEventArgs e)
         {
@@ -188,10 +192,7 @@ namespace JET.Launcher
             WindowState = WindowState.Normal;
         }
 
-        private void CreateAccountButton_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
     }
 }
 
