@@ -14,7 +14,10 @@ namespace JET.Launcher.Utilities
             if (ConfigFileExists())
                 Load();
             else
+            {
                 Save(new LauncherConfig());
+                Load();
+            }
         }
         private LauncherConfig launcherConfig;
         internal string GetServerLocation => launcherConfig.ServerPath;

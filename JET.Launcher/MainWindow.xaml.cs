@@ -21,6 +21,7 @@ namespace JET.Launcher
         internal LauncherConfigLoader __LauncherConfigL;
         public MainWindow()
         {
+            //Environment.CurrentDirectory = @"J:\TarkovGame\EFT_10988 - Emulator"; // Change to debug path
 #if DEBUG
             Environment.CurrentDirectory = @"C:\Emu Tarkov\12.9.10988\original\client"; // Change to debug path
 #endif
@@ -111,6 +112,15 @@ namespace JET.Launcher
         {
             Process.Start(RequestManager.GetBackendUrl());
         }
+        private void bnt7_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://justemutarkov.eu");
+        }
+
+        private void bnt8_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/justemutarkov");
+        }
         private void OpenServerLogs_Click(object sender, RoutedEventArgs e)
         {
             FileManager.OpenDirectory(Global.Server.LogsFolderDir);
@@ -155,6 +165,10 @@ namespace JET.Launcher
         {
             __FormM.BackButtonClickEvent(sender, e);
         }
+        private void CreateAccountButton_Click(object sender, RoutedEventArgs e)
+        {
+           // _LoginField.Text;
+        }
         bool _AutoServerStart_RadioButton;
         private void __AutoServerStart_RadioButton_Click(object sender, RoutedEventArgs e)
         {
@@ -186,6 +200,8 @@ namespace JET.Launcher
             Show();
             WindowState = WindowState.Normal;
         }
+
+
     }
 }
 

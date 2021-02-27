@@ -148,7 +148,7 @@
     </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y /I "$(TargetDir)*.exe" "$(SolutionDir)\Build\"
-xcopy /Y /I "$(SolutionDir)\Shared\Resources\launcher.config.json" "$(SolutionDir)\Build\"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
