@@ -1,7 +1,11 @@
 ﻿using JET.Launcher.Structures;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Threading;
+using JET.Utilities.HTTP;
 
 namespace JET.Launcher.Utilities.Form
 {
@@ -30,6 +34,16 @@ namespace JET.Launcher.Utilities.Form
                     ApplyButtonAction = "login";
                     _Helper.DisplayGrid_LoginConnect("Login");
                     break;
+                case "register":
+                    MainWindow.Instance.__ApplyButton.Content = "Register";
+                    ApplyButtonAction = "register";
+                    _Helper.DisplayGrid_LoginConnect("Register");
+                    break;
+                case "wipe":
+                    MainWindow.Instance.__ApplyButton.Content = "Wipe";
+                    ApplyButtonAction = "wipe";
+                    _Helper.DisplayGrid_LoginConnect("Wipe");
+                    break;
                 case "startgame":
                     MainWindow.Instance.__ApplyButton.Content = "Start";
                     ApplyButtonAction = "startgame";
@@ -44,7 +58,7 @@ namespace JET.Launcher.Utilities.Form
             }
         }
         private int responseCode = 0;
-        internal void ApplyButtonClickEvent(object sender, System.Windows.RoutedEventArgs e) {
+        internal void ApplyButtonClickEvent(object sender, RoutedEventArgs e) {
 
             switch (ApplyButtonAction) {
                 case "connect":
@@ -59,13 +73,59 @@ namespace JET.Launcher.Utilities.Form
                             MainWindow.Instance.__Label_LoggedAs.Content = RequestManager.SelectedAccount.email;
                             break;
                         case -1: 
-                            MessageBoxManager.Show("Wrong login data. Email or password not exist on the server", "Login Error!!", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
+                            MessageBoxManager.Show("Wrong login data. A profile with that username and password does not exist on the server", "Login Error!!", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
                             break;
                         case -2: 
-                            MessageBoxManager.Show("Couldnt finish a request script crashed at login or getting account data", "Request Error!!", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
+                            MessageBoxManager.Show("Couldn't finish a request script crashed at login or getting account data", "Request Error!!", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
                             break;
                         default:
                             MessageBoxManager.Show($"Something goes wrong and returned code {responseCode}", "Unknown Error!!", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
+                            break;
+                    }
+                    break;
+                case "register":
+                    responseCode = RequestManager.ProfileRegister(MainWindow.Instance._RegisterLoginField.Text, MainWindow.Instance._RegisterPasswordField.Password, MainWindow.Instance._EditionSelectBox.SelectedItem.ToString());
+                    switch (responseCode)
+                    {
+                        case 1:
+                            UpdateApplyButton("startgame");
+                            MainWindow.Instance._LoginField.Text = RequestManager.SelectedAccount.email;
+                            MainWindow.Instance._PasswordField.Password = RequestManager.SelectedAccount.password;
+                            MainWindow.Instance.__Label_LoggedAs.Content = RequestManager.SelectedAccount.email;
+                            break;
+                        case -1:
+                            MessageBoxManager.Show("An account with that login already exists", "", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
+                            break;
+                        case -2:
+                            MessageBoxManager.Show("Did not receive a response from the server. Please try again.", "No response", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
+                            break;
+                        case -3:
+                            UpdateApplyButton("login");
+                            MessageBoxManager.Show("The account was created, but I was unable to log into it. Please try again.", "Couldn't log in", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
+                            break;
+                        default:
+                            MessageBoxManager.Show("Something went wrong but I don't know what", "Unknown error", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
+                            break;
+                    }
+                    break;
+                case "wipe":
+                    var edition = MainWindow.Instance._EditionSelectBox.SelectedItem.ToString();
+                    RequestManager.SelectedAccount.email = MainWindow.Instance._RegisterLoginField.Text;
+                    RequestManager.SelectedAccount.password = MainWindow.Instance._RegisterPasswordField.Password;
+                    
+                    responseCode = RequestManager.Wipe(edition);
+                    switch (responseCode)
+                    {
+                        case 1:
+                            UpdateApplyButton("startgame");
+                            MainWindow.Instance._LoginField.Text = RequestManager.SelectedAccount.email;
+                            MainWindow.Instance._PasswordField.Password = RequestManager.SelectedAccount.password;
+                            break;
+                        case -1:
+                            MessageBoxManager.Show("Failed to wipe profile", "Wipe failed", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
+                            break;
+                        case -2:
+                            MessageBoxManager.Show("Did not receive a response from the server. Please try again.", "No response", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
                             break;
                     }
                     break;
@@ -94,13 +154,41 @@ namespace JET.Launcher.Utilities.Form
                     break;
             }
         }
-        internal void BackButtonClickEvent(object sender, System.Windows.RoutedEventArgs e)
+
+        internal void RegisterButtonClickEvent(object sender, RoutedEventArgs e)
+        {
+            switch (ApplyButtonAction)
+            {
+                case "startgame":
+                    // Wipe
+                    UpdateApplyButton("wipe");
+                    break;
+                case "login":
+                    // Register
+                    UpdateApplyButton("register");
+                    break;
+            }
+            MainWindow.Instance._EditionSelectBox.Items.Clear();
+            foreach (var edition in ServerManager.SelectedServer.editions)
+                MainWindow.Instance._EditionSelectBox.Items.Add(edition);
+            if (ServerManager.SelectedServer.editions.Length > 0)
+                MainWindow.Instance._EditionSelectBox.SelectedIndex = 0;
+            MainWindow.Instance._RegisterLoginField.Text = MainWindow.Instance._LoginField.Text;
+            MainWindow.Instance._RegisterPasswordField.Password = MainWindow.Instance._PasswordField.Password;
+        }
+        internal void BackButtonClickEvent(object sender, RoutedEventArgs e)
         {
             switch (ApplyButtonAction)
             {
                 case "connect":
                     break;
                 case "login":
+                    UpdateApplyButton("connect");
+                    break;
+                case "register":
+                    UpdateApplyButton("login");
+                    break;
+                case "wipe":
                     UpdateApplyButton("connect");
                     break;
                 case "startgame":

@@ -61,7 +61,8 @@ namespace JET.Launcher.Utilities
             }
         }
         internal void Terminate() {
-            consoleProcessHandle.Kill();
+            if(!consoleProcessHandle.HasExited)
+                consoleProcessHandle.Kill();
             consoleProcessName = "";
         }
         internal void ServerTerminated(object sender, EventArgs e)

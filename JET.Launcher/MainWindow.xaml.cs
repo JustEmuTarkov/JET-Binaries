@@ -99,6 +99,14 @@ namespace JET.Launcher
         {
             __FormM.ApplyButtonClickEvent(sender, e);
         }
+        private void __RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            __FormM.RegisterButtonClickEvent(sender, e);
+        }
+        private void __WipeButton_Click(object sender, RoutedEventArgs e)
+        {
+            __FormM.RegisterButtonClickEvent(sender, e);
+        }
         private void OpenLocalServerWeb_Click(object sender, RoutedEventArgs e)
         {
             Process.Start(RequestManager.GetBackendUrl());
@@ -138,6 +146,7 @@ namespace JET.Launcher
         {
             __LauncherConfigL.RemoveServer(__ServerList.SelectedIndex);
         }
+
         private void CreateShortcut_Click(object sender, RoutedEventArgs e)
         {
             ProcessManager.CreateShortcut();

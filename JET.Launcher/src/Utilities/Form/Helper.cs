@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace JET.Launcher.Utilities.Form
 {
@@ -22,19 +23,29 @@ namespace JET.Launcher.Utilities.Form
             switch (name)
             {
                 case "Connect":
-                    MainWindow.Instance.__Connect.Visibility = System.Windows.Visibility.Visible;
-                    MainWindow.Instance.__Login.Visibility = System.Windows.Visibility.Hidden;
-                    MainWindow.Instance.__LoggedIn.Visibility = System.Windows.Visibility.Hidden;
+                    MainWindow.Instance.__Connect.Visibility = Visibility.Visible;
+                    MainWindow.Instance.__Login.Visibility = Visibility.Hidden;
+                    MainWindow.Instance.__LoggedIn.Visibility = Visibility.Hidden;
+                    MainWindow.Instance.__Register.Visibility = Visibility.Hidden;
                     break;
                 case "Login":
-                    MainWindow.Instance.__Connect.Visibility = System.Windows.Visibility.Hidden;
-                    MainWindow.Instance.__Login.Visibility = System.Windows.Visibility.Visible;
-                    MainWindow.Instance.__LoggedIn.Visibility = System.Windows.Visibility.Hidden;
+                    MainWindow.Instance.__Connect.Visibility = Visibility.Hidden;
+                    MainWindow.Instance.__Login.Visibility = Visibility.Visible;
+                    MainWindow.Instance.__LoggedIn.Visibility = Visibility.Hidden;
+                    MainWindow.Instance.__Register.Visibility = Visibility.Hidden;
+                    break;
+                case "Register":
+                case "Wipe":
+                    MainWindow.Instance.__Connect.Visibility = Visibility.Hidden;
+                    MainWindow.Instance.__Login.Visibility = Visibility.Hidden;
+                    MainWindow.Instance.__LoggedIn.Visibility = Visibility.Hidden;
+                    MainWindow.Instance.__Register.Visibility = Visibility.Visible;
                     break;
                 default:
-                    MainWindow.Instance.__Connect.Visibility = System.Windows.Visibility.Hidden;
-                    MainWindow.Instance.__Login.Visibility = System.Windows.Visibility.Hidden;
-                    MainWindow.Instance.__LoggedIn.Visibility = System.Windows.Visibility.Visible;
+                    MainWindow.Instance.__Connect.Visibility = Visibility.Hidden;
+                    MainWindow.Instance.__Login.Visibility = Visibility.Hidden;
+                    MainWindow.Instance.__LoggedIn.Visibility = Visibility.Visible;
+                    MainWindow.Instance.__Register.Visibility = Visibility.Hidden;
                     break;
             }
         }
