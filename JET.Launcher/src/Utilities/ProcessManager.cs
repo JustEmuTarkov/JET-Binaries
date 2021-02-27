@@ -106,6 +106,7 @@ namespace JET.Launcher.Utilities
                         else 
                         {
                             MainWindow.Instance.__ServerConsole.AppendText(splitLine[index]);
+                            MainWindow.Instance.__ServerConsole.ScrollToEnd();
                         }
                     }
                 });
@@ -159,6 +160,7 @@ namespace JET.Launcher.Utilities
             _textRenderer.Foreground = new SolidColorBrush(color); // My Color
             _paragraphRenderer = new Paragraph(_textRenderer);
             MainWindow.Instance.__ServerConsole.Document.Blocks.Add(_paragraphRenderer);
+            MainWindow.Instance.__ServerConsole.ScrollToEnd();
         }
         #endregion
         #endregion

@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="JustEmuTarkov Launcher" 
-        Height="300" Width="550" 
+        Height="300" Width="560" 
         Background="Black" Foreground="White" 
         FontFamily="/JET.Launcher;component/Resources/#AR Techni" 
-        MinWidth="550" MinHeight="300" 
-        MaxWidth="550" MaxHeight="300" 
+        MinWidth="560" MinHeight="300" 
+        MaxWidth="560" MaxHeight="600" 
         UseLayoutRounding="True" WindowStartupLocation="CenterScreen" Loaded="Main_Window_Loaded">
     <Grid Margin="0,0,2,1">
         <TabControl Background="Black" BorderBrush="White" Foreground="White" Margin="0,0,0,2">
@@ -35,11 +35,11 @@
                         </GroupBox>
                     </Grid>
                     <!-- ApplyButton -->
-                    <Button Name="__ApplyButton" Content="Connect" HorizontalAlignment="Left" Margin="5,177,0,0" VerticalAlignment="Top" Width="172" BorderBrush="White" Height="30" Click="__ApplyButton_Click" IsEnabled="False" Style="{DynamicResource FlatButton}" FontFamily="/JET.Launcher;component/Resources/#AR Techni" FontSize="16" Padding="1,0.5,1,1"/>
+                    <Button Name="__ApplyButton" Content="Connect" HorizontalAlignment="Left" Margin="2,177,0,0" VerticalAlignment="Top" Width="172" BorderBrush="White" Height="30" Click="__ApplyButton_Click" IsEnabled="False" Style="{DynamicResource FlatButton}" FontFamily="/JET.Launcher;component/Resources/#AR Techni" FontSize="16" Padding="1,0.5,1,1"/>
                     <!-- Errors Messages -->
                     <!-- Login -->
                     <!-- Password -->
-                    <GroupBox x:Name="AddServer" Header=" Add Server " HorizontalAlignment="Left" Height="64" Margin="181,51,0,0" VerticalAlignment="Top" Width="196" BorderBrush="#FF4B4B4B" Foreground="#FFC7C7C7" FontFamily="/JET.Launcher;component/Resources/#AR Techni">
+                    <GroupBox x:Name="AddServer" Header=" Add Server " HorizontalAlignment="Left" Height="64" Margin="177,51,0,0" VerticalAlignment="Top" Width="196" BorderBrush="#FF4B4B4B" Foreground="#FFC7C7C7" FontFamily="/JET.Launcher;component/Resources/#AR Techni">
                         <Grid Margin="0">
                             <TextBox Name="___NewServerBackend" HorizontalAlignment="Left" Height="16" Margin="7,4,0,0" TextWrapping="Wrap" Text="https://127.0.0.1:443" VerticalAlignment="Top" Width="171" Background="Black" Foreground="White"/>
                             <Button Name="__AddServer" Content="ADD" Margin="69,24,69,2" Style="{DynamicResource FlatButton}" FontSize="10" Click="AddServer_Click" FontFamily="/JET.Launcher;component/Resources/#AR Techni" BorderThickness="1" RenderTransformOrigin="0.5,0.5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Padding="1,0.5,1,1">
@@ -54,13 +54,13 @@
                             </Button>
                         </Grid>
                     </GroupBox>
-                    <Grid x:Name="MainMenu" HorizontalAlignment="Left" Height="115" VerticalAlignment="Top" Width="172" Margin="5,59,0,0">
+                    <Grid x:Name="MainMenu" HorizontalAlignment="Left" Height="115" VerticalAlignment="Top" Width="172" Margin="2,59,0,0">
                         <Rectangle Fill="#00F4F4F5" Stroke="White"/>
                         <Grid x:Name="__LoggedIn" Margin="1,0,1,6" Height="108" VerticalAlignment="Bottom" d:IsHidden="False">
-                            <Button x:Name="__WipeButton" Content="WIPE" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0" Style="{DynamicResource FlatButton}" BorderBrush="#FFAAAAAA" Foreground="#FFAAAAAA" Background="Black" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Click="__WipeButton_Click"/>
+                            <Button x:Name="__WipeButton" Content="WIPE Account" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0" Style="{DynamicResource FlatButton}" BorderBrush="#FFAAAAAA" Foreground="#FFAAAAAA" Background="Black" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Click="__WipeButton_Click" Width="86"/>
                             <Label Content="Logged in as:" VerticalAlignment="Top" HorizontalContentAlignment="Center" Foreground="#FF8C8C8C" Margin="10,33,10,0"/>
                             <Label x:Name="__Label_LoggedAs" Content="email@jet.com" VerticalAlignment="Top" HorizontalContentAlignment="Center" Foreground="#FF8C8C8C" Height="17" Padding="5,0,0,0" Margin="10,56,10,0"/>
-                            <Button x:Name="__CreateShortcut" Content="Create Shortcut" HorizontalAlignment="Left" VerticalAlignment="Top" Width="132" Margin="19,79,0,0" FontSize="11" FontWeight="Bold" Style="{DynamicResource FlatButton}" Click="CreateShortcut_Click"/>
+                            <Button x:Name="__CreateShortcut" Content="Create shortcut on desktop" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Margin="10,79,0,0" FontSize="11" FontWeight="Bold" Style="{DynamicResource FlatButton}" Click="CreateShortcut_Click"/>
                         </Grid>
                         <Grid x:Name="__Connect" HorizontalAlignment="Left" Height="83" Margin="10,25,0,0" VerticalAlignment="Top" Width="152" d:IsHidden="True">
                             <Label Content="Server's List" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="#99FFFFFF" Height="26" Width="120" Margin="2,0,0,47" FontFamily="/JET.Launcher;component/Resources/#AR Techni"/>
@@ -79,13 +79,13 @@
                         <Grid x:Name="__Register" HorizontalAlignment="Left" Height="107" Margin="1,0,0,7" VerticalAlignment="Bottom" Width="171" d:IsHidden="True">
                             <Label Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#99FFFFFF" Height="24" Width="120" Margin="10,30,0,0"/>
                             <Label Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#99FFFFFF" Height="24" Width="120" Margin="10,66,0,0"/>
-                            <ComboBox x:Name="_EditionSelectBox" Height="20" Width="121" Padding="0,0" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="#4CFFFFFF" HorizontalContentAlignment="Center" />
+                            <ComboBox x:Name="_EditionSelectBox" Height="20" Width="121" Padding="0,0" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="#4CFFFFFF" HorizontalContentAlignment="Center" Style="{DynamicResource ComboBoxFlatStyle}" />
                             <TextBox x:Name="_RegisterLoginField" HorizontalAlignment="Left" Height="20" Margin="10,50,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="151" Background="Black" Foreground="White" BorderBrush="#FF8C8D8F" SelectionBrush="#FF760303" FontSize="16" TextDecorations="{x:Null}" IsEnabled="True"/>
                             <PasswordBox x:Name="_RegisterPasswordField" HorizontalAlignment="Left" PasswordChar="*" Height="20" Margin="10,87,0,0" VerticalAlignment="Top" Width="151" Background="Black" Foreground="White" BorderBrush="#FF8C8D8F" SelectionBrush="#FF760303" FontSize="16" IsEnabled="True"/>
                         </Grid>
                         <Button x:Name="__LCL_Back" Content="BACK" VerticalAlignment="Top" Margin="128,1,1,0" Style="{DynamicResource FlatButton}" BorderBrush="#FFAAAAAA" Foreground="#FFAAAAAA" Background="Black" Click="MoveBack_Click" FontFamily="/JET.Launcher;component/Resources/#AR Techni"/>
                     </Grid>
-                    <GroupBox x:Name="Server_Add" Header=" Server"  HorizontalAlignment="Left" Height="92" Margin="181,115,0,0" VerticalAlignment="Top" Width="195">
+                    <GroupBox x:Name="Server_Add" Header=" Server"  HorizontalAlignment="Left" Height="92" Margin="177,115,0,0" VerticalAlignment="Top" Width="195">
                         <Grid Margin="10,2,11,0">
                             <Button x:Name="__StartStopServer" Content="Start Server" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Height="25" BorderBrush="#FFBDBDBD" Click="StartStopServer_Click" Style="{DynamicResource FlatButton}" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Margin="1,0,0,0" Padding="1,0.5,1,1"/>
                             <Label Content="Configuration:" Margin="2,27,0,0" Foreground="White" Height="24" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84"/>
@@ -103,13 +103,9 @@
                 <Grid Margin="0">
                     <RichTextBox Name="__ServerConsole" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="10" BorderBrush="#FFAAAAAA" SelectionBrush="#FFAA1F11" Foreground="#CCFFFFFF" Background="Black" FontFamily="Consolas" TextChanged="TextChangedEventHandler" IsReadOnly="True">
                         <RichTextBox.Resources>
-
                             <Style TargetType="{x:Type Paragraph}">
-
                                 <Setter Property="Margin" Value="0"/>
-
                             </Style>
-
                         </RichTextBox.Resources>
                     </RichTextBox>
                 </Grid>
