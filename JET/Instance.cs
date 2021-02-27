@@ -10,7 +10,6 @@ using JET.Patches.RaidFix;
 using JET.Patches.Quests;
 using JET.Patches.ScavMode;
 using System.Reflection;
-using System;
 
 namespace JET
 {
@@ -21,7 +20,7 @@ namespace JET
         [ObfuscationAttribute(Exclude = true)]
         private void Start()
 		{
-
+            Debug.LogError("[Starting]: " + Watermark);
             PatcherUtil.Patch<BattleEyePatch>();
             PatcherUtil.Patch<SslCertificatePatch>();
             PatcherUtil.Patch<UnityWebRequestPatch>();
@@ -43,12 +42,20 @@ namespace JET
             
             WatermarkOverrider();
         }
-
+        EFT.UI.LocalizedText localizedText;
+        private void LateUpdate() {
+            WatermarkOverrider();
+        }
         private void WatermarkOverrider() {
-            var _barVariable = typeof(EFT.UI.PreloaderUI)
-                .GetField("_alphaVersionLabel", BindingFlags.NonPublic | BindingFlags.Instance)
-                .GetValue(MonoBehaviourSingleton<EFT.UI.PreloaderUI>.Instance) as EFT.UI.LocalizedText;
-            _barVariable.LocalizationKey = Watermark;
+            try
+            {
+                if (localizedText == null)
+                    localizedText = typeof(EFT.UI.PreloaderUI)
+                    .GetField("_alphaVersionLabel", BindingFlags.NonPublic | BindingFlags.Instance)
+                    .GetValue(MonoBehaviourSingleton<EFT.UI.PreloaderUI>.Instance) as EFT.UI.LocalizedText;
+                localizedText.LocalizationKey = Watermark;
+            }
+            catch { }
         }
         private void OfflineModePatchRoutes(Offline.OfflineMode EnabledElements) {
             

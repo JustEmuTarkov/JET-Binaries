@@ -16,6 +16,8 @@ namespace JET.Patches.Bots
         private static AccessTools.FieldRef<object, WildSpawnType> wildSpawnTypeField;
         private static AccessTools.FieldRef<object, BotDifficulty> botDifficultyField;
 
+        // gclass364 (the one containing method_1
+
         public SpawnPmcPatch() : base(prefix: nameof(PatchPrefix))
         {
             targetInterface = PatcherConstants.TargetAssembly.GetTypes().Single(IsTargetInterface);
@@ -24,23 +26,23 @@ namespace JET.Patches.Bots
             botDifficultyField = AccessTools.FieldRefAccess<BotDifficulty>(targetType, "botDifficulty_0"); // BotDifficulty
         }
 
-        private static bool IsTargetInterface(Type type)
-        {
-            return type.IsInterface && type.GetMethod("ChooseProfile", new[] { typeof(List<Profile>), typeof(bool) }) != null;
-        }
+        private static bool IsTargetInterface(Type type) =>
+            type.IsInterface &&
+            type.GetMethod("ChooseProfile", new[] { typeof(List<Profile>), typeof(bool) }) != null;
 
         private bool IsTargetType(Type type)
         {
             if (!targetInterface.IsAssignableFrom(type))
-            {
                 return false;
-            }
 
-            var fields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance);
-            if (!fields.Any(f => f.FieldType == typeof(WildSpawnType)) || !fields.Any(f => f.FieldType == typeof(BotDifficulty)))
-            {
+            if (!type.GetMethods(BindingFlags.Public | BindingFlags.Instance)
+                     .Any(m => m.Name == "SameSide"))
                 return false;
-            }
+
+            if (!type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+                     .Any(f => f.FieldType == typeof(WildSpawnType) || 
+                               f.FieldType == typeof(BotDifficulty)))
+                return false;
 
             return true;
         }
