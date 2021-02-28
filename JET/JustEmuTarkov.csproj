@@ -111,6 +111,7 @@
     <Compile Include="Patches\Healing\MainMenuControllerPatch.cs" />
     <Compile Include="Patches\Healing\PlayerPatch.cs" />
     <Compile Include="Patches\Matchmaker\InsuranceScreenPatch.cs" />
+    <Compile Include="Patches\Matchmaker\MatchMakerAfterSelectLocation.cs" />
     <Compile Include="Patches\Matchmaker\MatchmakerOfflineRaidPatch.cs" />
     <Compile Include="Patches\Matchmaker\MatchMakerSelectionLocationScreenPatch.cs" />
     <Compile Include="Patches\Core\NotificationSslPatch.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Patches\Progression\WeaponDurabilityPatch.cs" />
     <Compile Include="Patches\Quests\BeaconPatch.cs" />
     <Compile Include="Patches\Quests\DogtagPatch.cs" />
+    <Compile Include="Patches\Ragfair\RemoveAddOfferButton.cs" />
     <Compile Include="Patches\RaidFix\BotStationaryWeaponPatch.cs" />
     <Compile Include="Patches\RaidFix\OnDeadPatch.cs" />
     <Compile Include="Patches\RaidFix\OnShellEjectEventPatch.cs" />

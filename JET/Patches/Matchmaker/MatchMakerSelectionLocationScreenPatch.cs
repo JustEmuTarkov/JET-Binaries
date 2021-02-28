@@ -2,6 +2,7 @@
 using EFT.UI;
 using EFT.UI.Matchmaker;
 using JET.Utilities.Patching;
+using UnityEngine;
 
 namespace JET.Patches.Matchmaker
 {
@@ -11,9 +12,9 @@ namespace JET.Patches.Matchmaker
         {
         }
 
-        public static void PatchPostfix(DefaultUIButton ____readyButton)
+        public static void PatchPostfix(ref DefaultUIButton ____readyButton)
         {
-            ____readyButton.GameObject.SetActive(false);
+            ____readyButton.gameObject.SetActive(false);
         }
 
         protected override MethodBase GetTargetMethod()

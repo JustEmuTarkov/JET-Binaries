@@ -169,3 +169,4 @@ J:\_git\_JET_REPOS\JET-Binaries\JET\obj\Release\JustEmuTarkov.csproj.CoreCompile
 J:\_git\_JET_REPOS\JET-Binaries\JET\obj\Release\JustEmuTarkov.csproj.CopyComplete
 J:\_git\_JET_REPOS\JET-Binaries\JET\obj\Release\NLog.JET.dll
 J:\_git\_JET_REPOS\JET-Binaries\JET\obj\Release\NLog.JET.pdb
+J:\_git\_JET_REPOS\JET-Binaries\JET\obj\Release\JustEmuTarkov.csprojAssemblyReference.cache

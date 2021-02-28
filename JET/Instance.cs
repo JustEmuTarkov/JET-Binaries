@@ -10,6 +10,7 @@ using JET.Patches.RaidFix;
 using JET.Patches.Quests;
 using JET.Patches.ScavMode;
 using System.Reflection;
+using JET.Patches.Ragfair;
 
 namespace JET
 {
@@ -39,12 +40,22 @@ namespace JET
             Debug.LogError("RuntimeBundles: Loaded");
 
             OfflineModePatchRoutes(Offline.LoadModules());
-            
+
+
             WatermarkOverrider();
         }
         EFT.UI.LocalizedText localizedText;
         private void LateUpdate() {
             WatermarkOverrider();
+
+            // DISABLE ADD OFFER BUTTON IN FLEA MARKET
+            //try
+            //{
+            //    var addOfferButton = typeof(EFT.UI.Ragfair.RagfairScreen).GetField("_addOfferButton", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(typeof(EFT.UI.Ragfair.RagfairScreen)) as EFT.UI.DefaultUIButton;
+            //    if(addOfferButton != null)
+            //        addOfferButton.Interactable = false;
+            //}
+            //catch { }
         }
         private void WatermarkOverrider() {
             try
@@ -80,7 +91,13 @@ namespace JET
             if (EnabledElements.MatchmakerOfflineRaidPatch)
                 PatcherUtil.Patch<MatchmakerOfflineRaidPatch>();
             if (EnabledElements.MatchMakerSelectionLocationScreenPatch)
+            {
                 PatcherUtil.Patch<MatchMakerSelectionLocationScreenPatch>();
+                PatcherUtil.Patch<MatchMakerAfterSelectLocation>();
+            }
+            PatcherUtil.Patch<RemoveAddOfferButton_Awake>();
+            PatcherUtil.Patch<RemoveAddOfferButton_Call>();
+
             if (EnabledElements.InsuranceScreenPatch)
                 PatcherUtil.Patch<InsuranceScreenPatch>();
 
