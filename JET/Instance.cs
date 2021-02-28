@@ -15,11 +15,11 @@ namespace JET
 {
     [ObfuscationAttribute(Exclude = true)]
     public class Instance : MonoBehaviour
-	{
+    {
         private string Watermark = "10988 | JET";
         [ObfuscationAttribute(Exclude = true)]
         private void Start()
-		{
+        {
             Debug.LogError("[Starting]: " + Watermark);
             PatcherUtil.Patch<BattleEyePatch>();
             PatcherUtil.Patch<SslCertificatePatch>();
@@ -124,8 +124,10 @@ namespace JET
 
             if (EnabledElements.EndByTimerPatch)
                 PatcherUtil.Patch<EndByTimerPatch>();
+            if(EnabledElements.SpawnRandomizationPatch)
+                PatcherUtil.Patch<SpawnRandomizationPatch>();
 
             Debug.LogError("SinglePlayer: Loaded");
         }
-	}
+    }
 }

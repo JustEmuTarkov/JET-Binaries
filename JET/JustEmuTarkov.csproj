@@ -126,6 +126,7 @@
     <Compile Include="Patches\RaidFix\BotStationaryWeaponPatch.cs" />
     <Compile Include="Patches\RaidFix\OnDeadPatch.cs" />
     <Compile Include="Patches\RaidFix\OnShellEjectEventPatch.cs" />
+    <Compile Include="Patches\RaidFix\SpawnRandomizationPatch.cs" />
     <Compile Include="Patches\ScavMode\LoadOfflineRaidScreenPatch.cs" />
     <Compile Include="Patches\ScavMode\ScavExfilPatch.cs" />
     <Compile Include="Patches\ScavMode\ScavPrefabLoadPatch.cs" />
