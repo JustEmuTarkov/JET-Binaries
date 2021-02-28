@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
+using System.Windows.Threading;
 
 namespace JET.Launcher.Utilities
 {
@@ -45,10 +46,12 @@ namespace JET.Launcher.Utilities
         }
         #endregion
         #region SERVER FUNCTIONS
-        internal void StartOrStop() {
+        internal void StartOrStop()
+        {
             if (consoleProcessName == "")
             {
                 //Process running
+                MainWindow.Instance.bnt4.IsEnabled = false; // Disable clear cache button
                 MainWindow.Instance.__StartStopServer.Content = "Stop Server";
                 StartConsoleInsideLauncher();
             }
@@ -58,6 +61,7 @@ namespace JET.Launcher.Utilities
                 MainWindow.Instance.__StartStopServer.Content = "Start Server";
                 Terminate();
                 MainWindow.Instance.__ServerConsole.Document.Blocks.Clear();
+                MainWindow.Instance.bnt4.IsEnabled = true; // Enable clear cache button
             }
         }
         internal void Terminate() {
@@ -68,7 +72,14 @@ namespace JET.Launcher.Utilities
         internal void ServerTerminated(object sender, EventArgs e)
         {
             Console.WriteLine("***** Server Closed *****");
-            // server closed what now ?
+            consoleProcessName = "";
+
+            MainWindow.Instance.Dispatcher.Invoke(() =>
+            {
+                MainWindow.Instance.__StartStopServer.Content = "Start Server";
+                MainWindow.Instance.__ServerConsole.Document.Blocks.Clear();
+                MainWindow.Instance.bnt4.IsEnabled = true; // Enable clear cache button
+            });
         }
         #region ConsoleRegex Removal strange artifacts
         List<string> TagsToRemoveFromConsoleOutput = new List<string>() {
