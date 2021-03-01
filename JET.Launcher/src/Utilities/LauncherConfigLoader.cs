@@ -67,17 +67,17 @@ namespace JET.Launcher.Utilities
         {
             return launcherConfig.Servers.Count;
         }
-        private bool CheckFor_LocalHost1;
-        private bool CheckFor_LocalHost2;
         internal void AddServer(string BackendUrl)
         {
+            var checkForLocalHost1 = false;
+            var checkForLocalHost2 = false;
             if (BackendUrl.Contains("localhost"))
-                CheckFor_LocalHost1 = launcherConfig.Servers.Any(x => x.Contains("localhost"));
+                checkForLocalHost1 = launcherConfig.Servers.Any(x => x.Contains("localhost"));
 
             if (BackendUrl.Contains("127.0.0.1"))
-                CheckFor_LocalHost2 = launcherConfig.Servers.Any(x => x.Contains("127.0.0.1"));
+                checkForLocalHost2 = launcherConfig.Servers.Any(x => x.Contains("127.0.0.1"));
 
-            if (launcherConfig.Servers.Contains(BackendUrl) || CheckFor_LocalHost1 || CheckFor_LocalHost2) return;
+            if (launcherConfig.Servers.Contains(BackendUrl) || checkForLocalHost1 || checkForLocalHost2) return;
             launcherConfig.Servers.Add(BackendUrl);
             Save();
         }
