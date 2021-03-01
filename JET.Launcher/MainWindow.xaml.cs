@@ -1,10 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Diagnostics;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using JET.Launcher.Utilities;
 using System.Windows.Controls;
 using System.Threading;
+using System.Threading.Tasks;
 using JET.Launcher.Utilities.Form;
 
 namespace JET.Launcher
@@ -199,9 +202,14 @@ namespace JET.Launcher
             WindowState = WindowState.Minimized;
             Show();
             WindowState = WindowState.Normal;
+
+            Task.Run(() =>
+            {
+                foreach (var server in __LauncherConfigL.GetServers()
+                    .Where(x => !Regex.IsMatch(x, @"(localhost|127.0.0.1)((:443|(\/?))(\/?))?$")))
+                    ServerManager.LoadServerFromDifferentBackend(server, true);
+            });
         }
-
-
     }
 }
 

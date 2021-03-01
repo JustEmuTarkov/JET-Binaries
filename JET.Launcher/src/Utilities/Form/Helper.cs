@@ -85,7 +85,7 @@ namespace JET.Launcher.Utilities.Form
         {
             if (!RequestManager.OngoingRequest)
             {
-                if (ServerManager.AvailableServers.Count <= 0)
+                if (LastServersCheckCount <= 0 && ServerManager.AvailableServers.Count <= 0)
                 {
                     Task.Factory.StartNew(() => {
                         ServerManager.LoadServer(); // load actual selected server
@@ -95,7 +95,6 @@ namespace JET.Launcher.Utilities.Form
                 {
                     if (MainWindow.Instance.__ServerList.Items.Count <= 0 || LastServersCheckCount != ServerManager.AvailableServers.Count)
                     {
-                        
                         MainWindow.Instance.__ServerList.Items.Clear();
 
                         foreach (var server in ServerManager.AvailableServers.ToList())

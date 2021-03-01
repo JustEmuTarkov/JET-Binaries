@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace JET.Launcher.Utilities
 {
@@ -69,16 +70,27 @@ namespace JET.Launcher.Utilities
         }
         internal void AddServer(string BackendUrl)
         {
+            var split = BackendUrl.Replace("https://", "").Split(':');
+            var port = 0;
+            if (split.Length > 1)
+                int.TryParse(split[1].Replace("/", ""), out port);
             var checkForLocalHost1 = false;
             var checkForLocalHost2 = false;
             if (BackendUrl.Contains("localhost"))
-                checkForLocalHost1 = launcherConfig.Servers.Any(x => x.Contains("localhost"));
+                if (port > 0)
+                    checkForLocalHost1 =
+                        launcherConfig.Servers.Any(x => Regex.IsMatch(x, $"(localhost)((:{port})(\\/?))?$"));
+                else
+                    checkForLocalHost1 = launcherConfig.Servers.Any(x => x.Contains("localhost"));
 
             if (BackendUrl.Contains("127.0.0.1"))
-                checkForLocalHost2 = launcherConfig.Servers.Any(x => x.Contains("127.0.0.1"));
-
+                if (port > 0)
+                    checkForLocalHost2 = launcherConfig.Servers.Any(x => Regex.IsMatch(x, $"(127.0.0.1)((:{port})(\\/?))?$"));
+                else
+                    checkForLocalHost2 = launcherConfig.Servers.Any(x => x.Contains("127.0.0.1"));
             if (launcherConfig.Servers.Contains(BackendUrl) || checkForLocalHost1 || checkForLocalHost2) return;
             launcherConfig.Servers.Add(BackendUrl);
+            ServerManager.LoadServerFromDifferentBackend(BackendUrl, true);
             Save();
         }
         internal void RemoveServer(int index)
