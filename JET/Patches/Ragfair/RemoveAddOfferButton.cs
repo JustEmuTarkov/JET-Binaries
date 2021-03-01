@@ -21,7 +21,7 @@ namespace JET.Patches.Ragfair
 
         protected override MethodBase GetTargetMethod()
         {
-            return typeof(EFT.UI.Ragfair.RagfairScreen).GetMethod("Awake", BindingFlags.Public | BindingFlags.Instance);
+            return typeof(EFT.UI.Ragfair.RagfairScreen).GetMethod("Awake", BindingFlags.NonPublic | BindingFlags.Instance);
         }
     }
     class RemoveAddOfferButton_Call : GenericPatch<RemoveAddOfferButton_Call>
