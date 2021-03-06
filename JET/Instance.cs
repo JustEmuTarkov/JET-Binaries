@@ -26,6 +26,7 @@ namespace JET
             PatcherUtil.Patch<SslCertificatePatch>();
             PatcherUtil.Patch<UnityWebRequestPatch>();
             PatcherUtil.Patch<NotificationSslPatch>();
+            PatcherUtil.Patch<UnlockItemsIdLength>();
             // allows to turn on and off the PreloaderUI.SetStreamMode(bool)
             // PatcherUtil.Patch<Patches.Core.StreamerModePatch>(); 
             // PatcherUtil.Patch<Patches.Core.FixChatOnDestroyPatch>(); 
