@@ -45,7 +45,7 @@ namespace JET.Patches.Progression
             var request = new Request(Config.BackEndSession.GetPhpSessionId(), backendUrl);
             var json = request.GetJson("/api/location/" + location.Id);
             
-            Debug.LogError(json);
+            //Debug.LogError(json);
 
             // some magic here. do not change =)
             var locationLoot = JsonConvert.DeserializeObject<LocationInfo>(json, GClass912.Converters);//.ParseJsonTo<LocationInfo>();
