@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -53,31 +54,35 @@ namespace JET.Launcher.Utilities.Form
         #region Tick Updater
         internal void Updater_Tick(object sender, EventArgs e)
         {
-            ServerCheck();
-            UpdateStartServerButton();
-            UpdateDeleteServerButton();
+            Task.Run(() => Parallel.Invoke(ServerCheck, UpdateStartServerButton, UpdateDeleteServerButton));
         }
         #region Functions
         private void UpdateDeleteServerButton()
         {
-            if (MainWindow.Instance.__LauncherConfigL.GetServersCount() > 0)
-                MainWindow.Instance.__DeleteSelectedServer.IsEnabled = true;
-            else
-                MainWindow.Instance.__DeleteSelectedServer.IsEnabled = false;
+            MainWindow.Instance.Dispatcher.Invoke(() =>
+            {
+                if (MainWindow.Instance.__LauncherConfigL.GetServersCount() > 0)
+                    MainWindow.Instance.__DeleteSelectedServer.IsEnabled = true;
+                else
+                    MainWindow.Instance.__DeleteSelectedServer.IsEnabled = false;
+            });
 
         }
         private void UpdateStartServerButton()
         {
-            if (ProcessManager.consoleProcessName != "")
+            MainWindow.Instance.Dispatcher.Invoke(() =>
             {
-                //Process running
-                MainWindow.Instance.__StartStopServer.Content = "Stop Server";
-            }
-            else
-            {
-                //Process not present
-                MainWindow.Instance.__StartStopServer.Content = "Start Server";
-            }
+                if (ProcessManager.consoleProcessName != "")
+                {
+                    //Process running
+                    MainWindow.Instance.__StartStopServer.Content = "Stop Server";
+                }
+                else
+                {
+                    //Process not present
+                    MainWindow.Instance.__StartStopServer.Content = "Start Server";
+                }
+            });
         }
         private bool LocalServerFound = false;
         private int LastServersCheckCount = 0;
@@ -85,41 +90,44 @@ namespace JET.Launcher.Utilities.Form
         {
             if (!RequestManager.OngoingRequest)
             {
-                if (LastServersCheckCount <= 0 && ServerManager.AvailableServers.Count <= 0)
-                {
-                    Task.Factory.StartNew(() => {
-                        ServerManager.LoadServer(); // load actual selected server
-                    });
-                }
-                else
-                {
-                    if (MainWindow.Instance.__ServerList.Items.Count <= 0 || LastServersCheckCount != ServerManager.AvailableServers.Count)
+                //if (LastServersCheckCount <= 0 && ServerManager.AvailableServers.Count <= 0)
+                //{
+                //    foreach (var server in LauncherConfigLoader.Instance.GetServers())
+                //        ServerManager.LoadServerFromDifferentBackend(server, true); // load actual selected server
+                //}
+                //else
+                //{
+                    foreach (var server in LauncherConfigLoader.Instance.GetServers().Where(x => ServerManager.AvailableServers.All(y => y.backendUrl != x)))
                     {
-                        MainWindow.Instance.__ServerList.Items.Clear();
-
-                        foreach (var server in ServerManager.AvailableServers.ToList())
+                        if (ServerManager.LoadServerFromDifferentBackend(server, true))
                         {
-                            if (ServerManager.LoadServerFromDifferentBackend(server.backendUrl))
-                            {
-                                if(server.backendUrl.Contains("localhost") || server.backendUrl.Contains("127.0.0.1"))
-                                    LocalServerFound = true;
-                                MainWindow.Instance.__ServerList.Items.Add(server.name);
-                            }
+                            if (server.Contains("localhost") || server.Contains("127.0.0.1"))
+                                LocalServerFound = true;
+                            //var selected = ServerManager.AvailableServers.FirstOrDefault(x => x.backendUrl == server);
+                            //MainWindow.Instance.Dispatcher.Invoke(() => MainWindow.Instance.__ServerList.Items.Add(selected?.name ?? server));
                         }
-                        if (MainWindow.Instance.__ServerList.Items.Count > 0)
-                        {
-                            MainWindow.Instance.__ServerTab.IsEnabled = LocalServerFound;
-                            MainWindow.Instance.__ApplyButton.IsEnabled = true;
-                            MainWindow.Instance.__ServerList.SelectedIndex = 0;
-                            ServerManager.SelectServer(0);
-                        }
-                        else
-                        {
-                            //MainWindow.Instance.__ServerList.Text = "No Servers Found";
-                        }
-                        LastServersCheckCount = MainWindow.Instance.__ServerList.Items.Count;
                     }
-                }
+
+                    MainWindow.Instance.Dispatcher.Invoke(() =>
+                    {
+                        if (MainWindow.Instance.__ServerList.Items.Count <= 0 || LastServersCheckCount != ServerManager.AvailableServers.Count)
+                        {
+                            if (MainWindow.Instance.__ServerList.Items.Count > 0)
+                            {
+                                MainWindow.Instance.__ServerTab.IsEnabled = LocalServerFound;
+                                MainWindow.Instance.__ApplyButton.IsEnabled = true;
+                                MainWindow.Instance.__ServerList.SelectedIndex = 0;
+                                ServerManager.SelectServer(0);
+                            }
+                            else
+                            {
+                                //MainWindow.Instance.__ServerList.Text = "No Servers Found";
+                                //MainWindow.Instance.__ServerList.Items.Clear();
+                            }
+                            LastServersCheckCount = MainWindow.Instance.__ServerList.Items.Count;
+                        }
+                    });
+                //}
             }
         }
         #endregion

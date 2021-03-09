@@ -26,7 +26,7 @@ namespace JET.Launcher
         {
             //Environment.CurrentDirectory = @"J:\TarkovGame\EFT_10988 - Emulator"; // Change to debug path
 #if DEBUG
-            Environment.CurrentDirectory = @"C:\Emu Tarkov\12.9.10988\original\client"; // Change to debug path
+            Environment.CurrentDirectory = @"C:\Emu Tarkov\12.9.10988\modded\client"; // Change to debug path
 #endif
             var managedPath = Path.Combine(Environment.CurrentDirectory, "EscapeFromTarkov_Data/Managed");
             foreach (var file in Directory.GetFiles(managedPath))
@@ -94,6 +94,10 @@ namespace JET.Launcher
          */
         #region Change Combobox ServerList
         private void __ServerList_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            ServerManager.SelectServer(__ServerList.SelectedIndex);
+        }
+        private void __ServerList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ServerManager.SelectServer(__ServerList.SelectedIndex);
         }
@@ -203,12 +207,12 @@ namespace JET.Launcher
             Show();
             WindowState = WindowState.Normal;
 
-            Task.Run(() =>
-            {
-                foreach (var server in __LauncherConfigL.GetServers()
-                    .Where(x => !Regex.IsMatch(x, @"(localhost|127.0.0.1)((:443|(\/?))(\/?))?$")))
-                    ServerManager.LoadServerFromDifferentBackend(server, true);
-            });
+            // Add servers from config to server list
+            //Task.Run(() =>
+            //{
+            //    foreach (var server in __LauncherConfigL.GetServers().Distinct())
+            //        ServerManager.LoadServerFromDifferentBackend(server, true);
+            //});
         }
     }
 }

@@ -10,8 +10,10 @@ namespace JET.Launcher.Utilities
 {
     class LauncherConfigLoader
     {
+        public static LauncherConfigLoader Instance;
         internal LauncherConfigLoader()
         {
+            Instance = this;
             if (ConfigFileExists())
                 Load();
             else
