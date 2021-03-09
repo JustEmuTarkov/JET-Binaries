@@ -39,7 +39,7 @@ namespace JET.Launcher.Utilities
             if (index < 0 || index >= AvailableServers.Count)
             {
                 SelectedServer = null;
-                MessageBoxManager.Show("Selected server is out of bounds from saved server list", "Out of bounds: Error", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
+                //MessageBoxManager.Show("Selected server is out of bounds from saved server list", "Out of bounds: Error", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
                 return;
             }
             SelectedServer = AvailableServers[index];
@@ -74,6 +74,15 @@ namespace JET.Launcher.Utilities
         }
 
         private static readonly object ListLock = new object();
+
+        internal static void RemoveServer(RequestData.ServerInfo server)
+        {
+            lock (ListLock)
+            {
+                if (AvailableServers.Contains(server))
+                    AvailableServers.Remove(server);
+            }
+        }
         internal static bool LoadServerFromDifferentBackend(string backend, bool save = false)
         {
             if (RequestManager.OngoingRequest) return false;

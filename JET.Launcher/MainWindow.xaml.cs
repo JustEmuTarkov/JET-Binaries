@@ -157,11 +157,16 @@ namespace JET.Launcher
         }
         private void AddServer_Click(object sender, RoutedEventArgs e)
         {
-            __LauncherConfigL.AddServer(___NewServerBackend.Text);
+            if (Uri.IsWellFormedUriString(___NewServerBackend.Text, UriKind.Absolute))
+                __LauncherConfigL.AddServer(___NewServerBackend.Text);
+            else
+                MessageBox.Show("Url is not in the correct format.");
         }
         private void DeleteSelectedServer_Click(object sender, RoutedEventArgs e)
         {
-            __LauncherConfigL.RemoveServer(__ServerList.SelectedIndex);
+            var server = ServerManager.AvailableServers[__ServerList.SelectedIndex];
+            __LauncherConfigL.RemoveServer(server.backendUrl);
+            ServerManager.RemoveServer(server);
         }
 
         private void CreateShortcut_Click(object sender, RoutedEventArgs e)
