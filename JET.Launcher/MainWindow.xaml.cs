@@ -158,7 +158,7 @@ namespace JET.Launcher
         private void AddServer_Click(object sender, RoutedEventArgs e)
         {
             if (Uri.IsWellFormedUriString(___NewServerBackend.Text, UriKind.Absolute))
-                __LauncherConfigL.AddServer(___NewServerBackend.Text);
+                __LauncherConfigL.AddServer(___NewServerBackend.Text.TrimEnd('\\', '/'));
             else
                 MessageBox.Show("Url is not in the correct format.");
         }
