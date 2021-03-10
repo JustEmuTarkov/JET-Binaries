@@ -89,20 +89,30 @@ namespace JET.Launcher.Utilities
             RequestManager.Busy();
             try
             {
-                var json = RequestManager.Connect(backend);
-                if (json == "")
+                var currentBackend = backend;
+                var lastBackend = string.Empty;
+                RequestData.ServerInfo serverInfo;
+                do
                 {
-                    RequestManager.Free();
-                    return false;
-                }
-                var serverInfo = Json.Deserialize<RequestData.ServerInfo>(json);
+                    lastBackend = currentBackend;
+                    var json = RequestManager.Connect(currentBackend);
+                    if (json == "")
+                    {
+                        RequestManager.Free();
+                        return false;
+                    }
+
+                    serverInfo = Json.Deserialize<RequestData.ServerInfo>(json);
+                    currentBackend = serverInfo.backendUrl;
+                } while (!string.Equals(currentBackend, lastBackend, StringComparison.CurrentCultureIgnoreCase));
+                serverInfo.connectUrl = backend;
                 if (save)
                 {
                     lock (ListLock)
                     {
                         updatingCollection = true;
-                        if (AvailableServers.Any(x => x.backendUrl == backend))
-                            AvailableServers.Remove(AvailableServers.First(x => x.backendUrl == backend));
+                        if (AvailableServers.Any(x => x.connectUrl == backend))
+                            AvailableServers.Remove(AvailableServers.First(x => x.connectUrl == backend));
                         updatingCollection = false;
                         AvailableServers.Add(serverInfo);
                     }
