@@ -89,7 +89,7 @@ namespace JET.Launcher.Utilities
             RequestManager.Busy();
             try
             {
-                var currentBackend = backend;
+                var currentBackend = backend.TrimEnd('\\','/');
                 var lastBackend = string.Empty;
                 RequestData.ServerInfo serverInfo;
                 do
@@ -103,7 +103,7 @@ namespace JET.Launcher.Utilities
                     }
 
                     serverInfo = Json.Deserialize<RequestData.ServerInfo>(json);
-                    currentBackend = serverInfo.backendUrl;
+                    currentBackend = serverInfo.backendUrl.TrimEnd('\\','/');
                 } while (!string.Equals(currentBackend, lastBackend, StringComparison.CurrentCultureIgnoreCase));
                 serverInfo.connectUrl = backend;
                 if (save)
