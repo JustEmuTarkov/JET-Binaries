@@ -97,7 +97,7 @@ namespace JET.Launcher.Utilities.Form
                 //}
                 //else
                 //{
-                    foreach (var server in LauncherConfigLoader.Instance.GetServers().Where(x => ServerManager.AvailableServers.All(y => y.backendUrl != x)))
+                    foreach (var server in LauncherConfigLoader.Instance.GetServers().Where(x => ServerManager.AvailableServers.All(y => y.connectUrl != x)))
                     {
                         if (ServerManager.LoadServerFromDifferentBackend(server, true))
                         {
