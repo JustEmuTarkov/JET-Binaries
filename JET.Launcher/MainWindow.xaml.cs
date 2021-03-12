@@ -212,12 +212,15 @@ namespace JET.Launcher
             Show();
             WindowState = WindowState.Normal;
 
-            // Add servers from config to server list
-            //Task.Run(() =>
-            //{
-            //    foreach (var server in __LauncherConfigL.GetServers().Distinct())
-            //        ServerManager.LoadServerFromDifferentBackend(server, true);
-            //});
+            Dispatcher.Invoke(() =>
+            {
+                if (!string.IsNullOrWhiteSpace(LauncherConfigLoader.Instance.Email))
+                    _LoginField.Text = LauncherConfigLoader.Instance.Email;
+
+                if (!string.IsNullOrWhiteSpace(LauncherConfigLoader.Instance.Password))
+                    _PasswordField.Password = LauncherConfigLoader.Instance.Password;
+            });
+
         }
     }
 }

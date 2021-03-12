@@ -71,6 +71,8 @@ namespace JET.Launcher.Utilities.Form
                         case 1:
                             UpdateApplyButton("startgame");
                             MainWindow.Instance.__Label_LoggedAs.Content = RequestManager.SelectedAccount.email;
+                            LauncherConfigLoader.Instance.Email = MainWindow.Instance._LoginField.Text;
+                            LauncherConfigLoader.Instance.Password = MainWindow.Instance._PasswordField.Password;
                             break;
                         case -1: 
                             MessageBoxManager.Show("Wrong login data. A profile with that username and password does not exist on the server", "Login Error!!", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
@@ -92,6 +94,8 @@ namespace JET.Launcher.Utilities.Form
                             MainWindow.Instance._LoginField.Text = RequestManager.SelectedAccount.email;
                             MainWindow.Instance._PasswordField.Password = RequestManager.SelectedAccount.password;
                             MainWindow.Instance.__Label_LoggedAs.Content = RequestManager.SelectedAccount.email;
+                            LauncherConfigLoader.Instance.Email = MainWindow.Instance._LoginField.Text;
+                            LauncherConfigLoader.Instance.Password = MainWindow.Instance._RegisterPasswordField.Password;
                             break;
                         case -1:
                             MessageBoxManager.Show("An account with that login already exists", "", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
