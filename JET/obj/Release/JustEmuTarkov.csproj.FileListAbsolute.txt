@@ -125,7 +125,6 @@ J:\_git\_JET_REPOS\JET-Binaries\JET\bin\Release\SteamAudio.dll
 J:\_git\_JET_REPOS\JET-Binaries\JET\bin\Release\Unity.TextMeshPro.dll
 J:\_git\_JET_REPOS\JET-Binaries\JET\bin\Release\UnityEngine.UNETModule.dll
 J:\_git\_JET_REPOS\JET-Binaries\JET\bin\Release\Unity.Postprocessing.Runtime.dll
-J:\_git\_JET_REPOS\JET-Binaries\JET\bin\Release\Sirenix.Serialization.dll
 J:\_git\_JET_REPOS\JET-Binaries\JET\bin\Release\UnityEngine.VideoModule.dll
 J:\_git\_JET_REPOS\JET-Binaries\JET\bin\Release\Cinemachine.dll
 J:\_git\_JET_REPOS\JET-Binaries\JET\bin\Release\UnityEngine.ClothModule.dll
@@ -163,7 +162,6 @@ J:\_git\_JET_REPOS\JET-Binaries\JET\bin\Release\UnityEngine.ARModule.dll
 J:\_git\_JET_REPOS\JET-Binaries\JET\bin\Release\UnityEngine.CrashReportingModule.dll
 J:\_git\_JET_REPOS\JET-Binaries\JET\bin\Release\UnityEngine.PerformanceReportingModule.dll
 J:\_git\_JET_REPOS\JET-Binaries\JET\bin\Release\LibraryLoaderUtility.dll
-J:\_git\_JET_REPOS\JET-Binaries\JET\bin\Release\Sirenix.Serialization.Config.dll
 J:\_git\_JET_REPOS\JET-Binaries\JET\bin\Release\UnityEngine.Timeline.dll
 J:\_git\_JET_REPOS\JET-Binaries\JET\obj\Release\JustEmuTarkov.csproj.CoreCompileInputs.cache
 J:\_git\_JET_REPOS\JET-Binaries\JET\obj\Release\JustEmuTarkov.csproj.CopyComplete

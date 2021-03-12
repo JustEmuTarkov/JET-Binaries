@@ -139,7 +139,6 @@ J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.WindModu
 J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.SharedInternalsModule.dll
 J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\LibraryLoaderUtility.dll
 J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.TextCoreModule.dll
-J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\Sirenix.Serialization.Config.dll
 J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.DirectorModule.dll
 J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.Timeline.dll
 J:\_git\_JET_REPOS\JET-Binaries\JET.OldLauncher\bin\release\UnityEngine.XRModule.dll

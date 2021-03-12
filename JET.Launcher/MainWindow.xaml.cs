@@ -50,6 +50,14 @@ namespace JET.Launcher
             AppDomain.CurrentDomain.AssemblyResolve += ProgramManager.AssemblyResolveEvent;
             InitializeStartups();
             InitializeComponent();
+            /*if (Global.ServerLocation == "Server Not Selected") {
+                __ServerTab.IsEnabled = false;
+                Server_Add.IsEnabled = false;
+                bnt1.IsEnabled = false;
+                bnt2.IsEnabled = false;
+                bnt4.IsEnabled = false;
+                bnt5.IsEnabled = false;
+            }*/
             InitializeLauncherProps();
         }
         #region Initialazers

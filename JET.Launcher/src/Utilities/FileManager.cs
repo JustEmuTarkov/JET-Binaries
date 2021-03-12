@@ -15,12 +15,6 @@ namespace JET.Launcher.Utilities
         {
             "server.exe"
         };
-        private List<string> foldersToFind = new List<string>()
-        {
-            "jet",
-            "justemutarkov",
-            "server"
-        };
         internal static void OpenDirectory(string path)
         {
             if (!Directory.Exists(path)) return;
@@ -50,26 +44,31 @@ namespace JET.Launcher.Utilities
             return false;
 
         }
-        internal string ScanToConfirmDirectory(string directory)
+        internal string ScanToConfirmDirectory(string directory, bool only_local = false)
         {
-            var filesInCurrentDirectory = Directory.GetFiles(directory);
-
-            var folderNames = filesInCurrentDirectory.Select(x => x.ToLower()).ToArray();
-
-            if (folderNames.Any(folderName => namesToFind.Any(folderName.Contains)))
+            // Search in current folder //
+            var files_in_folder = Directory.GetFiles(directory, "*.exe").ToList();
+            foreach (var file_path in files_in_folder) 
             {
-                return directory;
-            }
-
-            foreach (var folderName in folderNames)
-            {
-                if (foldersToFind.Any(name =>
-                    folderName.Contains(name) &&
-                    Directory.Exists(Path.Combine(directory, folderName))))
+                string filename = Path.GetFileName(file_path).ToLower();
+                if (namesToFind.Contains(filename))
                 {
-                    return ScanToConfirmDirectory(Path.Combine(directory, folderName));
+                    return Path.GetDirectoryName(file_path);
                 }
             }
+            
+            // Search
+            directory = Path.GetFullPath(Path.Combine(directory, @"..\"));
+            files_in_folder = Directory.GetFiles(directory, "*.exe").ToList();
+            foreach (var file_path in files_in_folder)
+            {
+                string filename = Path.GetFileName(file_path).ToLower();
+                if (namesToFind.Contains(filename))
+                {
+                    return Path.GetDirectoryName(file_path);
+                }
+            }
+            
             return "Not found";
         }
         internal string CheckIfFileExistReturnDirectory(string directory)
@@ -91,7 +90,7 @@ namespace JET.Launcher.Utilities
             {
                 if (Directory.Exists(initialDirectory))
                 {
-                    Global.ServerLocation = ScanToConfirmDirectory(initialDirectory);
+                    Global.ServerLocation = ScanToConfirmDirectory(initialDirectory, true);
                     if (Global.ServerLocation != "Not found")
                     {
                         return;
@@ -102,13 +101,6 @@ namespace JET.Launcher.Utilities
             // all lower case cause we lowercase() all names of files
             //check if folder exist in current directory
             Global.ServerLocation = ScanToConfirmDirectory(LauncherDirectory);
-
-            if (Global.ServerLocation == "Not found")
-            {
-                // if not found search 1 folder up
-                LauncherDirectory = Path.GetFullPath(Path.Combine(LauncherDirectory, @"..\"));
-                Global.ServerLocation = ScanToConfirmDirectory(LauncherDirectory);
-            }
 
             while (Global.ServerLocation == "Not found")// hangs start until user specify server location
             {
@@ -123,10 +115,14 @@ namespace JET.Launcher.Utilities
                     Description = "Select JET server"
                 };
                 var result = dialog.ShowDialog();
-                if (result != DialogResult.OK)
-                    // Pressed cancel or exited
-                    Environment.Exit(0);
-                Global.ServerLocation = ScanToConfirmDirectory(dialog.SelectedPath);
+                if (result == DialogResult.OK)
+                    Global.ServerLocation = ScanToConfirmDirectory(dialog.SelectedPath, true);
+                else 
+                {
+                    Global.ServerLocation = "Server Not Selected";
+                }
+                // Pressed cancel or exited
+                //Environment.Exit(0);
 
                 //Global.ServerLocation = Interaction.InputBox("Type windows location where server is located.", "I was unable to find server *_*", @"F:\Pulpit\JET\JustEmuTarkov-Server-1.0.1");
                 //if (Global.ServerLocation == "")
