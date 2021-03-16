@@ -55,20 +55,20 @@
                     </GroupBox>
                     <Grid x:Name="MainMenu" HorizontalAlignment="Left" Height="115" VerticalAlignment="Top" Width="204" Margin="2,59,0,0">
                         <Rectangle Fill="#00F4F4F5" Stroke="White"/>
-                        <Grid d:IsHidden="True" x:Name="__LoggedIn" Margin="1,0,1,6" Height="108" VerticalAlignment="Bottom">
-                            <Button x:Name="__WipeButton" Content="WIPE Account" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0" Style="{DynamicResource FlatButton}" BorderBrush="#FFAAAAAA" Foreground="#FFAAAAAA" Background="Black" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Click="__WipeButton_Click" Width="102" FontSize="14"/>
+                        <Grid d:IsHidden="False" x:Name="__LoggedIn" Margin="1,0,1,6" Height="108" VerticalAlignment="Bottom">
+                            <Button x:Name="__WipeButton" Content="Wipe Account" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0" Style="{DynamicResource FlatButton}" BorderBrush="#FFAAAAAA" Foreground="#FFAAAAAA" Background="Black" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Click="__WipeButton_Click" Width="102" FontSize="14"/>
                             <Label Content="Logged in as:" VerticalAlignment="Top" HorizontalContentAlignment="Center" Foreground="#FF8C8C8C" Margin="10,26,106,0"/>
                             <Label x:Name="__Label_LoggedAs" Content="email@jet.com" VerticalAlignment="Top" HorizontalContentAlignment="Center" Foreground="#FF8C8C8C" Height="17" Padding="5,0,0,0" Margin="10,51,10,0" FontSize="14"/>
                             <Button x:Name="__CreateShortcut" Content="Create shortcut on desktop" VerticalAlignment="Top" Margin="10,79,10,0" FontWeight="Bold" Style="{DynamicResource FlatButton}" Click="CreateShortcut_Click" Height="29" FontSize="14"/>
                         </Grid>
                         <Grid d:IsHidden="True" x:Name="__Connect" Height="83" Margin="10,25,10,0" VerticalAlignment="Top">
-                            <Label Content="Server's list:" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="#99FFFFFF" Height="26" Width="120" Margin="2,-12,0,69" FontFamily="/JET.Launcher;component/Resources/#AR Techni" FontSize="14"/>
+                            <Label Content="Server List:" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="#99FFFFFF" Height="26" Width="120" Margin="2,-12,0,69" FontFamily="/JET.Launcher;component/Resources/#AR Techni" FontSize="14"/>
                             <ComboBox x:Name="__ServerList" Margin="10,13,10,0" VerticalAlignment="Top" Foreground="White" Background="Black" Height="32" DataContextChanged="__ServerList_DataContextChanged" Style="{DynamicResource ComboBoxFlatStyle}" FontFamily="/JET.Launcher;component/Resources/#AR Techni" SelectionChanged="__ServerList_SelectionChanged" FontSize="14" />
                             <Button x:Name="__DeleteSelectedServer" Content="Delete selected" Margin="72,59,0,0" FontSize="14" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" BorderBrush="#FFB9B9B9" Foreground="Red" Background="#FF1F1F1F" Click="DeleteSelectedServer_Click" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Style="{DynamicResource FlatButton}" Padding="1,0.5,1,1"/>
                         </Grid>
                         <Grid d:IsHidden="True" x:Name="__Login" Height="107" Margin="1,0,1,7" VerticalAlignment="Bottom">
-                            <Button x:Name="__RegisterButton" Padding="0,0" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="23" Foreground="White" Background="Black" BorderBrush="#99FFFFFF" FontSize="24" Height="21" VerticalContentAlignment="Center" Click="__RegisterButton_Click">
-                                <Label Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#99FFFFFF" Height="24" Width="24" Margin="5,-14" Padding="0"/>
+                            <Button x:Name="__RegisterButton" Padding="0,0" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="66" Foreground="White" Background="Black" BorderBrush="#99FFFFFF" FontSize="16" Height="24" VerticalContentAlignment="Center" Click="__RegisterButton_Click">
+                                <Label FontWeight="Thin" Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#99FFFFFF" Height="24" Width="56" Padding="0"/>
                             </Button>
                             <Label Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#99FFFFFF" Height="31" Width="120" Margin="6,18,0,0" FontSize="16"/>
                             <Label Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#99FFFFFF" Height="31" Width="120" Margin="6,59,0,0" FontSize="16"/>
