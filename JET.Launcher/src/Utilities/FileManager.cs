@@ -11,6 +11,8 @@ namespace JET.Launcher.Utilities
 {
     internal class FileManager
     {
+        internal static FileManager Instance { get; private set; }
+        internal FileManager() => Instance = this;
         private List<string> namesToFind = new List<string>()
         {
             "server.exe"
@@ -48,7 +50,7 @@ namespace JET.Launcher.Utilities
         {
             // Search in current folder //
             var files_in_folder = Directory.GetFiles(directory, "*.exe").ToList();
-            foreach (var file_path in files_in_folder) 
+            foreach (var file_path in files_in_folder)
             {
                 string filename = Path.GetFileName(file_path).ToLower();
                 if (namesToFind.Contains(filename))
@@ -56,7 +58,7 @@ namespace JET.Launcher.Utilities
                     return Path.GetDirectoryName(file_path);
                 }
             }
-            
+
             // Search
             directory = Path.GetFullPath(Path.Combine(directory, @"..\"));
             files_in_folder = Directory.GetFiles(directory, "*.exe").ToList();
@@ -68,7 +70,7 @@ namespace JET.Launcher.Utilities
                     return Path.GetDirectoryName(file_path);
                 }
             }
-            
+
             return "Not found";
         }
         internal string CheckIfFileExistReturnDirectory(string directory)
@@ -102,34 +104,26 @@ namespace JET.Launcher.Utilities
             //check if folder exist in current directory
             Global.ServerLocation = ScanToConfirmDirectory(LauncherDirectory);
 
-            while (Global.ServerLocation == "Not found")// hangs start until user specify server location
-            {
-                var prompt = MessageBox.Show("*_* I was unable to find the server. Please select your JET server folder.", "Can't find server", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                if (prompt != DialogResult.OK)
-                    // Exited the prompt
-                    Environment.Exit(0);
-                var dialog = new FolderBrowserDialog
-                {
-                    SelectedPath = Environment.CurrentDirectory,
-                    ShowNewFolderButton = true,
-                    Description = "Select JET server"
-                };
-                var result = dialog.ShowDialog();
-                if (result == DialogResult.OK)
-                    Global.ServerLocation = ScanToConfirmDirectory(dialog.SelectedPath, true);
-                else 
-                {
-                    Global.ServerLocation = "Server Not Selected";
-                }
-                // Pressed cancel or exited
-                //Environment.Exit(0);
-
-                //Global.ServerLocation = Interaction.InputBox("Type windows location where server is located.", "I was unable to find server *_*", @"F:\Pulpit\JET\JustEmuTarkov-Server-1.0.1");
-                //if (Global.ServerLocation == "")
-                //    // Likely pressed cancel
-                //    Environment.Exit(0);
-                //Global.ServerLocation = ScanToConfirmDirectory(Global.ServerLocation);
-            }
+            //if (Global.ServerLocation == "Not found")// hangs start until user specify server location
+            //{
+            //    var prompt = MessageBox.Show("*_* I was unable to find the server. Please select your JET server folder.", "Can't find server", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    if (prompt != DialogResult.OK)
+            //        // Exited the prompt
+            //        Environment.Exit(0);
+            //    var dialog = new FolderBrowserDialog
+            //    {
+            //        SelectedPath = Environment.CurrentDirectory,
+            //        ShowNewFolderButton = true,
+            //        Description = "Select JET server"
+            //    };
+            //    var result = dialog.ShowDialog();
+            //    if (result == DialogResult.OK)
+            //        Global.ServerLocation = ScanToConfirmDirectory(dialog.SelectedPath, true);
+            //    else
+            //    {
+            //        Global.ServerLocation = "Server Not Selected";
+            //    }
+            //}
         }
     }
 }

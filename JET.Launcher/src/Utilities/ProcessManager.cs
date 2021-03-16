@@ -23,6 +23,7 @@ namespace JET.Launcher.Utilities
         internal static List<string> _ConsoleOutput = new List<string>();
         internal static string consoleProcessName = ""; // we dont need that but whatever ... we always can ask process variable for anything...
         internal static Process consoleProcessHandle = new Process();
+        internal static bool Started => !string.IsNullOrWhiteSpace(consoleProcessName);
         internal void StartConsoleInsideLauncher() 
         {
             consoleProcessHandle = new Process();// incase resets what was in the variable before
@@ -53,15 +54,16 @@ namespace JET.Launcher.Utilities
                 //Process running
                 MainWindow.Instance.bnt4.IsEnabled = false; // Disable clear cache button
                 MainWindow.Instance.__StartStopServer.Content = "Stop Server";
+                MainWindow.Instance.__ServerTab.IsEnabled = true;
                 StartConsoleInsideLauncher();
             }
             else
             {
                 //Process not present
                 MainWindow.Instance.__StartStopServer.Content = "Start Server";
-                Terminate();
                 MainWindow.Instance.__ServerConsole.Document.Blocks.Clear();
                 MainWindow.Instance.bnt4.IsEnabled = true; // Enable clear cache button
+                Terminate();
             }
         }
         internal void Terminate() {
@@ -76,6 +78,7 @@ namespace JET.Launcher.Utilities
 
             MainWindow.Instance.Dispatcher.Invoke(() =>
             {
+                MainWindow.Instance.__ServerTab.IsEnabled = false;
                 MainWindow.Instance.__StartStopServer.Content = "Start Server";
                 MainWindow.Instance.__ServerConsole.Document.Blocks.Clear();
                 MainWindow.Instance.bnt4.IsEnabled = true; // Enable clear cache button

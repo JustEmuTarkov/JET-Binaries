@@ -22,7 +22,7 @@
                             <ColumnDefinition Width="55*"/>
                             <ColumnDefinition Width="31*"/>
                         </Grid.ColumnDefinitions>
-                        <GroupBox Header=" Quick Menu " BorderBrush="#FF4B4B4B" Foreground="#FFC7C7C7" Grid.ColumnSpan="2" FontFamily="/JET.Launcher;component/Resources/#AR Techni" FontSize="16" Margin="0,0,1,3">
+                        <GroupBox Header=" Quick Menu " BorderBrush="#FF4B4B4B" Foreground="#FFC7C7C7" Grid.ColumnSpan="2" FontFamily="/JET.Launcher;component/Resources/#AR Techni" FontSize="16" Margin="0,0,1,0">
                             <Grid Margin="0">
                                 <Button x:Name="bnt1" Content="Server Webpage" HorizontalContentAlignment="Center" VerticalAlignment="Top" Margin="5,8,5,0" Height="30" Click="OpenLocalServerWeb_Click" Style="{DynamicResource FlatButton}" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Padding="1,0.5,1,1"/>
                                 <Button x:Name="bnt2" Content="Server Logs" HorizontalContentAlignment="Center" VerticalAlignment="Top" Margin="5,40,5,0" Height="30" Click="OpenServerLogs_Click" Style="{DynamicResource FlatButton}" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Padding="1,0.5,1,1"/>
@@ -85,15 +85,16 @@
                         </Grid>
                         <Button x:Name="__LCL_Back" Content="BACK" VerticalAlignment="Top" Margin="128,1,1,0" Style="{DynamicResource FlatButton}" BorderBrush="#FFAAAAAA" Foreground="#FFAAAAAA" Background="Black" Click="MoveBack_Click" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Height="24" FontSize="14"/>
                     </Grid>
-                    <GroupBox x:Name="Server_Add" Header=" Server"  HorizontalAlignment="Left" Height="124" Margin="211,148,0,0" VerticalAlignment="Top" Width="232" FontSize="16">
+                    <GroupBox x:Name="Server_Add" Header=" Server"  HorizontalAlignment="Left" Height="181" Margin="211,148,0,0" VerticalAlignment="Top" Width="232" FontSize="16">
                         <Grid Margin="10,2,11,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="24*"/>
                                 <ColumnDefinition Width="161*"/>
                             </Grid.ColumnDefinitions>
                             <Button x:Name="__StartStopServer" Content="Start Server" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" Height="36" BorderBrush="#FFBDBDBD" Click="StartStopServer_Click" Style="{DynamicResource FlatButton}" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Margin="11,6,0,0" Padding="1,0.5,1,1" FontSize="16" Grid.Column="1"/>
-                            <Label Content="Configuration:" Margin="20,44,0,0" Foreground="White" Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" Width="115" FontSize="16" Grid.ColumnSpan="2"/>
+                            <Label Content="Configuration:" Margin="0,44,0,0" Foreground="White" Height="30" VerticalAlignment="Top" HorizontalAlignment="Center" Width="115" FontSize="16" Grid.ColumnSpan="2"/>
                             <RadioButton x:Name="__AutoServerStart_RadioButton" Content="Auto Server Start" HorizontalAlignment="Left" Margin="5,75,0,0" VerticalAlignment="Top" Foreground="White" Width="148" Height="21" BorderThickness="1" Click="__AutoServerStart_RadioButton_Click" FontSize="16" Padding="4,-3,0,0" Grid.IsSharedSizeScope="True" Grid.Column="1"/>
+                            <Button x:Name="__SelectServer" Content="Select Server" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" Height="36" BorderBrush="#FFBDBDBD" Style="{DynamicResource FlatButton}" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Margin="11,101,0,0" Padding="1,0.5,1,1" FontSize="16" Grid.Column="1" Click="__SelectServer_Click"/>
                         </Grid>
                     </GroupBox>
                     <Image x:Name="Logo" HorizontalAlignment="Left" Height="46" VerticalAlignment="Top" Width="236" Source="Resources/Jet_Logo.png">
@@ -103,7 +104,7 @@
                     </Image>
                 </Grid>
             </TabItem>
-            <TabItem Name="__ServerTab" Header="Server" Foreground="White" BorderBrush="Black" Background="Black">
+            <TabItem IsEnabled="false" Name="__ServerTab" Header="Server" Foreground="White" BorderBrush="Black" Background="Black">
                 <Grid Margin="0">
                     <RichTextBox Name="__ServerConsole" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible" Margin="10" BorderBrush="#FFAAAAAA" SelectionBrush="#FFAA1F11" Foreground="#CCFFFFFF" Background="Black" FontFamily="Consolas" TextChanged="TextChangedEventHandler" IsReadOnly="True">
                         <RichTextBox.Resources>

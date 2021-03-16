@@ -114,7 +114,6 @@ namespace JET.Launcher.Utilities.Form
                         {
                             if (MainWindow.Instance.__ServerList.Items.Count > 0)
                             {
-                                MainWindow.Instance.__ServerTab.IsEnabled = LocalServerFound;
                                 MainWindow.Instance.__ApplyButton.IsEnabled = true;
                                 MainWindow.Instance.__ServerList.SelectedIndex = 0;
                                 ServerManager.SelectServer(0);

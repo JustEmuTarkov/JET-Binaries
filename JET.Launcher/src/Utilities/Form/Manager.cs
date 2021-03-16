@@ -193,7 +193,7 @@ namespace JET.Launcher.Utilities.Form
                     UpdateApplyButton("login");
                     break;
                 case "wipe":
-                    UpdateApplyButton("connect");
+                    UpdateApplyButton("startgame");
                     break;
                 case "startgame":
                     UpdateApplyButton("login");

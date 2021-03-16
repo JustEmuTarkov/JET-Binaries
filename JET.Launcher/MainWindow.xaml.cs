@@ -8,7 +8,12 @@ using JET.Launcher.Utilities;
 using System.Windows.Controls;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using JET.Launcher.Utilities.Form;
+using Application = System.Windows.Application;
+using MessageBox = System.Windows.MessageBox;
+using RadioButton = System.Windows.Controls.RadioButton;
+using RichTextBox = System.Windows.Controls.RichTextBox;
 
 namespace JET.Launcher
 {
@@ -19,7 +24,7 @@ namespace JET.Launcher
     {
         public static MainWindow Instance;
         FileManager __FileM = new FileManager();
-        Utilities.Form.Manager __FormM;
+        Manager __FormM;
         internal ProcessManager __ProcM;
         internal LauncherConfigLoader __LauncherConfigL;
         public MainWindow()
@@ -78,7 +83,7 @@ namespace JET.Launcher
         {
             __AutoServerStart_RadioButton.IsChecked = __LauncherConfigL.StartServerAtLaunch();
             _AutoServerStart_RadioButton = __LauncherConfigL.StartServerAtLaunch();
-            __FormM = new Utilities.Form.Manager(); // initialize Form Manager
+            __FormM = new Manager(); // initialize Form Manager
             __ProcM = new ProcessManager();
 
             if (__LauncherConfigL.StartServerAtLaunch())
@@ -187,7 +192,7 @@ namespace JET.Launcher
         }
         private void CreateAccountButton_Click(object sender, RoutedEventArgs e)
         {
-           // _LoginField.Text;
+            // _LoginField.Text;
         }
         bool _AutoServerStart_RadioButton;
         private void __AutoServerStart_RadioButton_Click(object sender, RoutedEventArgs e)
@@ -211,6 +216,51 @@ namespace JET.Launcher
             //documentRange.ClearAllProperties();
 
         }
+        private void __SelectServer_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new FolderBrowserDialog
+            {
+                SelectedPath = Environment.CurrentDirectory,
+                ShowNewFolderButton = true,
+                Description = "Select JET server"
+            };
+            var result = dialog.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+                FileManager.Instance.FindServerDirectory(dialog.SelectedPath);
+            if (Global.ServerLocation != "Not Found" && Directory.Exists(Global.ServerLocation))
+            {
+                LauncherConfigLoader.Instance.ChangeServerLocation(Global.ServerLocation);
+                EnableServerFunctions();
+            }
+            else
+                MessageBox.Show("I couldn't find a JET server in the selected directory.");
+        }
+
+        private void DisableServerFunctions()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                __StartStopServer.IsEnabled = false;
+                __AutoServerStart_RadioButton.IsEnabled = false;
+                bnt1.IsEnabled = false; // Server Webpage
+                bnt2.IsEnabled = false; // Server Logs
+                bnt4.IsEnabled = !ProcessManager.Started; // Server Cache
+                bnt5.IsEnabled = false; // Server Mods
+                __ServerTab.IsEnabled = false;
+            });
+        }
+        private void EnableServerFunctions()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                __StartStopServer.IsEnabled = true;
+                __AutoServerStart_RadioButton.IsEnabled = true;
+                bnt1.IsEnabled = true; // Server Webpage
+                bnt2.IsEnabled = true; // Server Logs
+                bnt4.IsEnabled = !ProcessManager.Started; // Server Cache
+                bnt5.IsEnabled = true; // Server Mods
+            });
+        }
         #endregion
 
         private void Main_Window_Loaded(object sender, RoutedEventArgs e)
@@ -227,6 +277,10 @@ namespace JET.Launcher
 
                 if (!string.IsNullOrWhiteSpace(LauncherConfigLoader.Instance.Password))
                     _PasswordField.Password = LauncherConfigLoader.Instance.Password;
+
+                if (Global.ServerLocation == "Not Found" || !Directory.Exists(LauncherConfigLoader.Instance.GetServerLocation))
+                    DisableServerFunctions();
+
             });
 
         }
