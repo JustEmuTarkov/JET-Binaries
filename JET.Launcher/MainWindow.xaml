@@ -68,7 +68,7 @@
                         </Grid>
                         <Grid d:IsHidden="True" x:Name="__Login" Height="107" Margin="1,0,1,7" VerticalAlignment="Bottom">
                             <Button x:Name="__RegisterButton" Padding="0,0" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="66" Foreground="White" Background="Black" BorderBrush="#99FFFFFF" FontSize="16" Height="24" VerticalContentAlignment="Center" Click="__RegisterButton_Click">
-                                <Label FontWeight="Thin" Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#99FFFFFF" Height="24" Width="56" Padding="0"/>
+                                <Label FontWeight="Thin" Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#99FFFFFF" Height="24" Width="56" Padding="0" Cursor="Hand"/>
                             </Button>
                             <Label Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#99FFFFFF" Height="31" Width="120" Margin="6,18,0,0" FontSize="16"/>
                             <Label Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#99FFFFFF" Height="31" Width="120" Margin="6,59,0,0" FontSize="16"/>
