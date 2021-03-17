@@ -87,12 +87,14 @@ namespace JET.Launcher
             __FormM = new Manager(); // initialize Form Manager
             __ProcM = new ProcessManager();
 
-            if (__LauncherConfigL.StartServerAtLaunch())
+            if (__LauncherConfigL.StartServerAtLaunch() && Directory.Exists(Global.ServerLocation))
             {
                 __ProcM.StartConsoleInsideLauncher();
                 if (ProcessManager.consoleProcessName != "")
                 {
                     __StartStopServer.Content = "Stop Server";
+                    bnt4.IsEnabled = false; // Disable clear cache button
+                    __ServerTab.IsEnabled = true;
                 }
             }
 

@@ -62,7 +62,6 @@ namespace JET.Launcher.Utilities
                 //Process not present
                 MainWindow.Instance.__StartStopServer.Content = "Start Server";
                 MainWindow.Instance.__ServerConsole.Document.Blocks.Clear();
-                MainWindow.Instance.bnt4.IsEnabled = true; // Enable clear cache button
                 Terminate();
             }
         }
