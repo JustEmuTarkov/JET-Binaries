@@ -43,7 +43,8 @@ namespace JET.Launcher
              * Enable that after you finish developing :)
              * */
 #if !DEBUG
-            if (!ProgramManager.isGameFilesFound()) {
+            if (!ProgramManager.isGameFilesFound())
+            {
                 Application.Current.Shutdown();
                 return;
             }
@@ -225,8 +226,8 @@ namespace JET.Launcher
                 Description = "Select JET server"
             };
             var result = dialog.ShowDialog();
-            if (result == System.Windows.Forms.DialogResult.OK)
-                FileManager.Instance.FindServerDirectory(dialog.SelectedPath);
+            if (result != System.Windows.Forms.DialogResult.OK) return;
+            FileManager.Instance.FindServerDirectory(dialog.SelectedPath);
             if (Global.ServerLocation != "Not Found" && Directory.Exists(Global.ServerLocation))
             {
                 LauncherConfigLoader.Instance.ChangeServerLocation(Global.ServerLocation);
@@ -244,7 +245,8 @@ namespace JET.Launcher
                 __AutoServerStart_RadioButton.IsEnabled = false;
                 bnt1.IsEnabled = false; // Server Webpage
                 bnt2.IsEnabled = false; // Server Logs
-                bnt4.IsEnabled = !ProcessManager.Started; // Server Cache
+                //bnt4.IsEnabled = !ProcessManager.Started; // Server Cache
+                bnt4.IsEnabled = false; // Server Cache
                 bnt5.IsEnabled = false; // Server Mods
                 __ServerTab.IsEnabled = false;
             });
@@ -257,7 +259,7 @@ namespace JET.Launcher
                 __AutoServerStart_RadioButton.IsEnabled = true;
                 bnt1.IsEnabled = true; // Server Webpage
                 bnt2.IsEnabled = true; // Server Logs
-                bnt4.IsEnabled = !ProcessManager.Started; // Server Cache
+                bnt4.IsEnabled = true; // Server Cache
                 bnt5.IsEnabled = true; // Server Mods
             });
         }
