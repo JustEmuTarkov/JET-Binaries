@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using JET.Launcher.Utilities.Form;
 using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
+using MessageBoxManager = JET.Launcher.Utilities.MessageBoxManager;
 using RadioButton = System.Windows.Controls.RadioButton;
 using RichTextBox = System.Windows.Controls.RichTextBox;
 
@@ -89,12 +90,20 @@ namespace JET.Launcher
 
             if (__LauncherConfigL.StartServerAtLaunch() && Directory.Exists(Global.ServerLocation))
             {
-                __ProcM.StartConsoleInsideLauncher();
-                if (ProcessManager.consoleProcessName != "")
+                
+                if (__ProcM.StartConsoleInsideLauncher())
                 {
                     __StartStopServer.Content = "Stop Server";
                     bnt4.IsEnabled = false; // Disable clear cache button
                     __ServerTab.IsEnabled = true;
+                }
+                else
+                {
+                    MessageBoxManager.Show(
+                        "Failed to start server. Please check that the file exists, and you have permission to read it.",
+                        "Failed to start server", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
+                    if(Global.ServerLocation == "" || Global.ServerLocation == "Not Found")
+                        DisableServerFunctions();
                 }
             }
 
@@ -239,7 +248,7 @@ namespace JET.Launcher
                 MessageBox.Show("I couldn't find a JET server in the selected directory.");
         }
 
-        private void DisableServerFunctions()
+        internal void DisableServerFunctions()
         {
             Dispatcher.Invoke(() =>
             {
@@ -253,7 +262,7 @@ namespace JET.Launcher
                 __ServerTab.IsEnabled = false;
             });
         }
-        private void EnableServerFunctions()
+        internal void EnableServerFunctions()
         {
             Dispatcher.Invoke(() =>
             {

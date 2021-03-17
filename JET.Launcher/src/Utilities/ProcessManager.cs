@@ -24,8 +24,9 @@ namespace JET.Launcher.Utilities
         internal static string consoleProcessName = ""; // we dont need that but whatever ... we always can ask process variable for anything...
         internal static Process consoleProcessHandle = new Process();
         internal static bool Started => !string.IsNullOrWhiteSpace(consoleProcessName);
-        internal void StartConsoleInsideLauncher() 
+        internal bool StartConsoleInsideLauncher()
         {
+            if (!File.Exists(Path.Combine(Global.ServerLocation, Global.ServerName))) return false;
             consoleProcessHandle = new Process();// incase resets what was in the variable before
             // initialize process parameters
             consoleProcessHandle.StartInfo.WorkingDirectory = Global.ServerLocation;
@@ -39,11 +40,12 @@ namespace JET.Launcher.Utilities
             consoleProcessHandle.EnableRaisingEvents = true;
             consoleProcessHandle.Exited += ServerTerminated;
             // Start Process
-            consoleProcessHandle.Start();
+            if (!consoleProcessHandle.Start()) return false;
             // last setters
             consoleProcessHandle.BeginOutputReadLine();
             consoleProcessHandle.OutputDataReceived += ServerOutputDataReceived;
             consoleProcessName = consoleProcessHandle.ProcessName;
+            return true;
         }
         #endregion
         #region SERVER FUNCTIONS
@@ -55,7 +57,14 @@ namespace JET.Launcher.Utilities
                 MainWindow.Instance.bnt4.IsEnabled = false; // Disable clear cache button
                 MainWindow.Instance.__StartStopServer.Content = "Stop Server";
                 MainWindow.Instance.__ServerTab.IsEnabled = true;
-                StartConsoleInsideLauncher();
+                if (!StartConsoleInsideLauncher())
+                {
+                    MessageBoxManager.Show(
+                        "Failed to start server. Please check that the file exists, and you have permission to read it.",
+                        "Failed to start server", MessageBoxManager.Button.OK, MessageBoxManager.Image.Error);
+                    if (Global.ServerLocation == "" || Global.ServerLocation == "Not Found")
+                        MainWindow.Instance.DisableServerFunctions();
+                }
             }
             else
             {
