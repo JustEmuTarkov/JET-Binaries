@@ -6,8 +6,23 @@ using EFT;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
 using JET.Utilities;
+#if B10988
 using WaveInfo = GClass929; // Field: Role (choose first one displayed as "Role")
 using BotsPresets = GClass362; // Method: GetNewProfile (higher GClass number)
+#endif
+#if B9767
+using WaveInfo = GClass904; // Field: Role (choose first one displayed as "Role")
+using BotsPresets = GClass337; // Method: GetNewProfile (higher GClass number)
+#endif
+#if B9018
+using WaveInfo = GClass897; // Field: Role (choose first one displayed as "Role")
+using BotsPresets = GClass334; // Method: GetNewProfile (higher GClass number)
+#endif
+#if DEBUG
+using WaveInfo = GClass929; // Field: Role (choose first one displayed as "Role")
+using BotsPresets = GClass362; // Method: GetNewProfile (higher GClass number)
+#endif
+
 
 namespace JET.Patches.Bots
 {

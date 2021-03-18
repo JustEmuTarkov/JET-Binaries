@@ -4,9 +4,22 @@ using UnityEngine;
 using EFT;
 using EFT.InventoryLogic;
 using JET.Utilities.Patching;
+#if B10988
 using Equipment = GClass1692;
 using DamageInfo = GStruct239;
-
+#endif
+#if B9767
+using Equipment = GClass1632;
+using DamageInfo = GStruct232;
+#endif
+#if B9018
+using Equipment = GClass1602;
+using DamageInfo = GStruct227;
+#endif
+#if DEBUG
+using Equipment = GClass1692;
+using DamageInfo = GStruct239;
+#endif
 namespace JET.Patches.Quests
 {
     class DogtagPatch : GenericPatch<DogtagPatch>
@@ -41,7 +54,7 @@ namespace JET.Patches.Quests
 
             if (dogtagItem == null)
             {
-                Debug.LogError("DogtagPatch error > DogTag slot item is null somehow.");
+                Debug.LogError("[DogtagPatch] error > DogTag slot item is null somehow.");
                 return;
             }
 
@@ -49,7 +62,7 @@ namespace JET.Patches.Quests
 
             if (itemComponent == null)
             {
-                Debug.LogError("DogtagPatch error > DogTagComponent on dog tag slot is null. Something went horrifically wrong!");
+                Debug.LogError("[DogtagPatch] error > DogTagComponent on dog tag slot is null. Something went horrifically wrong!");
                 return;
             }
 
@@ -61,7 +74,7 @@ namespace JET.Patches.Quests
             itemComponent.Side = victimProfileInfo.Side;
             itemComponent.KillerName = aggressor.Profile.Info.Nickname;
             itemComponent.Time = DateTime.Now;
-            itemComponent.Status = "Killed by";
+            itemComponent.Status = "Killed by ";
             itemComponent.KillerAccountId = aggressor.Profile.AccountId;
             itemComponent.KillerProfileId = aggressor.Profile.Id;
             itemComponent.WeaponName = damageInfo.Weapon.Name;

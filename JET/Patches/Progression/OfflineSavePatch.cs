@@ -4,12 +4,35 @@ using Comfort.Common;
 using EFT;
 using JET.Utilities.Patching;
 using JET.Utilities.Player;
+#if B10988
 using ClientMetrics = GClass1367; // GameUpdateBinMetricCollector (lower Gclass number)
+#endif
+#if B9767
+using ClientMetrics = GClass1325; // GameUpdateBinMetricCollector (lower Gclass number)
+#endif
+#if B9018
+using ClientMetrics = GClass1304; // GameUpdateBinMetricCollector (lower Gclass number)
+#endif
+#if DEBUG
+using ClientMetrics = GClass1367; // GameUpdateBinMetricCollector (lower Gclass number)
+#endif
 
 namespace JET.Patches.Progression
 {
     class OfflineSaveProfilePatch : GenericPatch<OfflineSaveProfilePatch>
     {
+#if B10988
+        string methodNumber = "41";
+#endif
+#if B9767
+        string methodNumber = "40";
+#endif
+#if B9018
+        string methodNumber = "38";
+#endif
+#if DEBUG
+        string methodNumber = "41";
+#endif
         public OfflineSaveProfilePatch() : base(prefix: nameof(PatchPrefix))
         {
             // compile-time check
@@ -18,7 +41,7 @@ namespace JET.Patches.Progression
 
         protected override MethodBase GetTargetMethod()
         {
-            return PatcherConstants.MainApplicationType.GetMethod("method_41", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            return PatcherConstants.MainApplicationType.GetMethod($"method_{methodNumber}", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
         }
 
         public static void PatchPrefix(ESideType ___esideType_0, Result<ExitStatus, TimeSpan, ClientMetrics> result)

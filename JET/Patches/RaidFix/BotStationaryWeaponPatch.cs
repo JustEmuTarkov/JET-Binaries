@@ -61,7 +61,7 @@ namespace JET.Patches.RaidFix
 
             if (!labelFound)
             {
-                Debug.LogError("Label not found.");
+                Debug.LogError("[BotStationaryWeaponPatch] Label not found.");
                 return instructions;
             }
 

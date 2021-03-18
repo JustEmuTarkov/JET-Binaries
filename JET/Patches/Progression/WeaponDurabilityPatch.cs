@@ -4,8 +4,18 @@ using UnityEngine;
 using EFT;
 using JET.Utilities.Patching;
 using JET.Utilities;
+#if B10988
 using AmmoInfo = GClass1709;
-
+#endif
+#if B9767
+using AmmoInfo = GClass1649;
+#endif
+#if B9018
+using AmmoInfo = GClass1619;
+#endif
+#if DEBUG
+using AmmoInfo = GClass1709;
+#endif
 namespace JET.Patches.Progression
 {
     public class WeaponDurabilityPatch : GenericPatch<WeaponDurabilityPatch>

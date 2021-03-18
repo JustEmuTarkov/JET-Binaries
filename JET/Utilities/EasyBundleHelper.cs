@@ -4,9 +4,22 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using HarmonyLib;
+#if B10988
 using IBundleLock = GInterface251; //Property: IsLocked
 using BindableState = GClass2166<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
-
+#endif
+#if B9767
+using IBundleLock = GInterface239; //Property: IsLocked
+using BindableState = GClass2100<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
+#endif
+#if B9018
+using IBundleLock = GInterface224; //Property: IsLocked
+using BindableState = GClass2046<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
+#endif
+#if DEBUG
+using IBundleLock = GInterface251; //Property: IsLocked
+using BindableState = GClass2166<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
+#endif
 namespace JET.Utilities
 {
     class EasyBundleHelper

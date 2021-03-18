@@ -3,8 +3,18 @@ using UnityEngine;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
 using JET.Utilities;
+#if B10988
 using BotDifficultyHandler = GClass303; // Method: CheckOnExcude, LoadCoreByString
-
+#endif
+#if B9767
+using BotDifficultyHandler = GClass283; // Method: CheckOnExcude, LoadCoreByString
+#endif
+#if B9018
+using BotDifficultyHandler = GClass280; // Method: CheckOnExcude, LoadCoreByString
+#endif
+#if DEBUG
+using BotDifficultyHandler = GClass303; // Method: CheckOnExcude, LoadCoreByString
+#endif
 namespace JET.Patches.Bots
 {
 	public class CoreDifficultyPatch : GenericPatch<CoreDifficultyPatch>

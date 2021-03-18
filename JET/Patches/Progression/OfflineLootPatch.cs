@@ -5,9 +5,24 @@ using JET.Utilities.App;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
 using JET.Utilities;
-using LocationInfo = GClass782.GClass784;
 using System;
 using Newtonsoft.Json;
+#if B10988
+using LocationInfo = GClass782.GClass784;
+using ConverterBucket = GClass912;
+#endif
+#if B9767
+using LocationInfo = GClass759.GClass761;
+using ConverterBucket = GClass887;
+#endif
+#if B9018
+using LocationInfo = GClass757.GClass759;
+using ConverterBucket = GClass882;
+#endif
+#if DEBUG
+using LocationInfo = GClass782.GClass784;
+using ConverterBucket = GClass912;
+#endif
 
 namespace JET.Patches.Progression
 {
@@ -45,12 +60,8 @@ namespace JET.Patches.Progression
             var request = new Request(Config.BackEndSession.GetPhpSessionId(), backendUrl);
             var json = request.GetJson("/api/location/" + location.Id);
             
-            //Debug.LogError(json);
-
             // some magic here. do not change =)
-            var locationLoot = JsonConvert.DeserializeObject<LocationInfo>(json, GClass912.Converters);//.ParseJsonTo<LocationInfo>();
-
-            Debug.LogError(locationLoot.Name);
+            var locationLoot = JsonConvert.DeserializeObject<LocationInfo>(json, ConverterBucket.Converters);//.ParseJsonTo<LocationInfo>();
 
             request.PostJson("/raid/map/name", Json.Serialize(new LocationName(location.Id)));
 

@@ -23,74 +23,96 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '10988|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>B10988;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '9767|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>B9767;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '9018|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>B9018;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>..\Shared\References\0Harmony.dll</HintPath>
+      <HintPath>..\Shared\References_$(Configuration)\0Harmony.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\Shared\References\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\Shared\References_$(Configuration)\Assembly-CSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="bsg.componentace.compression.libs.zlib">
-      <HintPath>..\Shared\References\bsg.componentace.compression.libs.zlib.dll</HintPath>
+    <Reference Include="bsg.componentace.compression.libs.zlib" Condition=" '$(Configuration)|$(Platform)' == '10988|AnyCPU' ">
+      <HintPath>..\Shared\References_10988\bsg.componentace.compression.libs.zlib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Comfort">
-      <HintPath>..\Shared\References\Comfort.dll</HintPath>
+      <HintPath>..\Shared\References_$(Configuration)\Comfort.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ItemComponent.Types">
-      <HintPath>..\Shared\References\ItemComponent.Types.dll</HintPath>
+      <HintPath>..\Shared\References_$(Configuration)\ItemComponent.Types.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\Shared\References\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\Shared\References_$(Configuration)\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
-      <HintPath>..\Shared\References\NLog.dll</HintPath>
+      <HintPath>..\Shared\References_$(Configuration)\NLog.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sirenix.Serialization, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="Sirenix.Serialization, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\Shared\References_10988\Sirenix.Serialization.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="UnityEngine">
-      <HintPath>..\Shared\References\UnityEngine.dll</HintPath>
+      <HintPath>..\Shared\References_$(Configuration)\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AssetBundleModule">
-      <HintPath>..\Shared\References\UnityEngine.AssetBundleModule.dll</HintPath>
+      <HintPath>..\Shared\References_$(Configuration)\UnityEngine.AssetBundleModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\Shared\References\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\Shared\References_$(Configuration)\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.ImageConversionModule">
-      <HintPath>..\Shared\References\UnityEngine.ImageConversionModule.dll</HintPath>
+      <HintPath>..\Shared\References_$(Configuration)\UnityEngine.ImageConversionModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>..\Shared\References\UnityEngine.UI.dll</HintPath>
+      <HintPath>..\Shared\References_$(Configuration)\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
-      <HintPath>..\Shared\References\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+      <HintPath>..\Shared\References_$(Configuration)\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestModule">
-      <HintPath>..\Shared\References\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <HintPath>..\Shared\References_$(Configuration)\UnityEngine.UnityWebRequestModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestTextureModule">
-      <HintPath>..\Shared\References\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+      <HintPath>..\Shared\References_$(Configuration)\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="zlib.net" Condition=" '$(Configuration)|$(Platform)' == '9018|AnyCPU' Or '$(Configuration)|$(Platform)' == '9767|AnyCPU' ">
+      <HintPath>..\Shared\References_9018\zlib.net.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -179,9 +201,12 @@
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>xcopy /Y /I "$(TargetDir)NLog.JET.dll" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
-xcopy /Y /I "$(SolutionDir)Shared\Resources\NLog.dll.nlog" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
-xcopy /Y /I "$(SolutionDir)Shared\References\0Harmony.dll" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
-xcopy /Y /I "$(SolutionDir)Shared\References\Assembly-CSharp.dll" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
+	
+ xcopy /Y /I "$(SolutionDir)Shared\Resources\NLog.dll.nlog" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
+
+ xcopy /Y /I "$(TargetDir)0Harmony.dll" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
+
+ xcopy /Y /I "$(TargetDir)Assembly-CSharp.dll" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

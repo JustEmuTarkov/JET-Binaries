@@ -1,12 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine;
+using JET.Utilities.HTTP;
+#if B10988
 using IHealthController = GInterface169; // ActiveBuffsNames
 using StDamage = GStruct239; // BodyPartColliderType
 using IEffect = GInterface128; // AddWholeTime
-using UnityEngine;
-using JET.Utilities.HTTP;
-
+#endif
+#if B9767
+using IHealthController = GInterface163; // ActiveBuffsNames
+using StDamage = GStruct232; // BodyPartColliderType
+using IEffect = GInterface126; // AddWholeTime
+#endif
+#if B9018
+using IHealthController = GInterface157; // ActiveBuffsNames
+using StDamage = GStruct227; // BodyPartColliderType
+using IEffect = GInterface122; // AddWholeTime
+#endif
+#if DEBUG
+using IHealthController = GInterface169; // ActiveBuffsNames
+using StDamage = GStruct239; // BodyPartColliderType
+using IEffect = GInterface128; // AddWholeTime
+#endif
 namespace JET.Utilities.Player
 {
     class HealthListener

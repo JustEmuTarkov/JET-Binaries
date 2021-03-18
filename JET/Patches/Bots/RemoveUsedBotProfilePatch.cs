@@ -5,7 +5,18 @@ using System.Reflection;
 using HarmonyLib;
 using EFT;
 using JET.Utilities.Patching;
+#if B10988
 using BotData = GInterface15;
+#endif
+#if B9767
+using BotData = GInterface14;
+#endif
+#if B9018
+using BotData = GInterface13;
+#endif
+#if DEBUG
+using BotData = GInterface15;
+#endif
 
 namespace JET.Patches.Bots
 {

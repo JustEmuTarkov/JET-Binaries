@@ -8,11 +8,34 @@ using UnityEngine;
 using Comfort.Common;
 using EFT;
 using JET.Utilities.Patching;
+#if B10988
 using WaveInfo = GClass929; // Field: Role (choose first one displayed as "Role")
 using BotsPresets = GClass362; // Method: GetNewProfile (higher GClass number)
 using BotData = GInterface15; // Method: ChooseProfile
 using PoolManager = GClass1168; // CancellationToken: PoolsCancellationToken
 using JobPriority = GClass2146; // Delegate: Immediate
+#endif
+#if B9767
+using WaveInfo = GClass904; // Field: Role (choose first one displayed as "Role")
+using BotsPresets = GClass337; // Method: GetNewProfile (higher GClass number)
+using BotData = GInterface14; // Method: ChooseProfile
+using PoolManager = GClass1133; // CancellationToken: PoolsCancellationToken
+using JobPriority = GClass2080; // Delegate: Immediate
+#endif
+#if B9018
+using WaveInfo = GClass897; // Field: Role (choose first one displayed as "Role")
+using BotsPresets = GClass334; // Method: GetNewProfile (higher GClass number)
+using BotData = GInterface13; // Method: ChooseProfile
+using PoolManager = GClass1120; // CancellationToken: PoolsCancellationToken
+using JobPriority = GClass2026; // Delegate: Immediate
+#endif
+#if DEBUG
+using WaveInfo = GClass929; // Field: Role (choose first one displayed as "Role")
+using BotsPresets = GClass362; // Method: GetNewProfile (higher GClass number)
+using BotData = GInterface15; // Method: ChooseProfile
+using PoolManager = GClass1168; // CancellationToken: PoolsCancellationToken
+using JobPriority = GClass2146; // Delegate: Immediate
+#endif
 
 namespace JET.Patches.Bots
 {

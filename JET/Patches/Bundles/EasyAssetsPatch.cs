@@ -10,10 +10,30 @@ using Diz.Resources;
 using JetBrains.Annotations;
 using JET.Utilities.Patching;
 using JET.Utilities;
+#if B10988
 using IEasyBundle = GInterface250; //Property: SameNameAsset 
 using IBundleLock = GInterface251; //Property: IsLocked
 using BundleLock = GClass2180; //Property: MaxConcurrentOperations
 using DependencyGraph = GClass2181<GInterface250>; // Method: GetDefaultNode() / Inside <T> goes IEasyBundle
+#endif
+#if B9767
+using IEasyBundle = GInterface238; //Property: SameNameAsset 
+using IBundleLock = GInterface239; //Property: IsLocked
+using BundleLock = GClass2114; //Property: MaxConcurrentOperations
+using DependencyGraph = GClass2115<GInterface238>; // Method: GetDefaultNode() / Inside <T> goes IEasyBundle
+#endif
+#if B9018
+using IEasyBundle = GInterface223; //Property: SameNameAsset 
+using IBundleLock = GInterface224; //Property: IsLocked
+using BundleLock = GClass2061; //Property: MaxConcurrentOperations
+using DependencyGraph = GClass2062<GInterface223>; // Method: GetDefaultNode() / Inside <T> goes IEasyBundle
+#endif
+#if DEBUG
+using IEasyBundle = GInterface250; //Property: SameNameAsset 
+using IBundleLock = GInterface251; //Property: IsLocked
+using BundleLock = GClass2180; //Property: MaxConcurrentOperations
+using DependencyGraph = GClass2181<GInterface250>; // Method: GetDefaultNode() / Inside <T> goes IEasyBundle
+#endif
 
 namespace JET.Patches
 {

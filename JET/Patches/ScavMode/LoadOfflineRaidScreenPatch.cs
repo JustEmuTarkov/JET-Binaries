@@ -9,22 +9,57 @@ using EFT.UI.Matchmaker;
 using EFT.UI.Screens;
 using JET.Utilities.Patching;
 using JET.Utilities.Reflection;
+using UnityEngine;
+#if B10988
 using MenuController = GClass1194; // .SelectedKeyCard
 using WeatherSettings = GStruct92; // IsRandomTime and IsRandomWeather
 using BotsSettings = GStruct232; // IsScavWars and BotAmount
 using WavesSettings = GStruct93; // IsTaggedAndCursed and IsBosses
 using MatchmakerScreenCreator = EFT.UI.Matchmaker.MatchmakerOfflineRaid.GClass2026; // simply go to class below and search for new gclass simple as that...
-using UnityEngine;
-
+#endif
+#if B9767
+using MenuController = GClass1157; // .SelectedKeyCard
+using WeatherSettings = GStruct88; // IsRandomTime and IsRandomWeather
+using BotsSettings = GStruct225; // IsScavWars and BotAmount
+using WavesSettings = GStruct89; // IsTaggedAndCursed and IsBosses
+using MatchmakerScreenCreator = EFT.UI.Matchmaker.MatchmakerOfflineRaid.GClass1963; // simply go to class below and search for new gclass simple as that...
+#endif
+#if B9018
+using MenuController = GClass1144; // .SelectedKeyCard
+using WeatherSettings = GStruct87; // IsRandomTime and IsRandomWeather
+using BotsSettings = GStruct220; // IsScavWars and BotAmount
+using WavesSettings = GStruct88; // IsTaggedAndCursed and IsBosses
+using MatchmakerScreenCreator = EFT.UI.Matchmaker.MatchmakerOfflineRaid.GClass1912;
+#endif
+#if DEBUG
+using MenuController = GClass1194; // .SelectedKeyCard
+using WeatherSettings = GStruct92; // IsRandomTime and IsRandomWeather
+using BotsSettings = GStruct232; // IsScavWars and BotAmount
+using WavesSettings = GStruct93; // IsTaggedAndCursed and IsBosses
+using MatchmakerScreenCreator = EFT.UI.Matchmaker.MatchmakerOfflineRaid.GClass2026; // simply go to class below and search for new gclass simple as that...
+#endif
 namespace JET.Patches.ScavMode
 {
     using OfflineRaidAction = Action<bool, WeatherSettings, BotsSettings, WavesSettings>;
 
     public class LoadOfflineRaidScreenPatch : GenericPatch<LoadOfflineRaidScreenPatch>
     {
+#if B10988
         private const string loadReadyScreenMethod = "method_35";
         private const string readyMethod = "method_50";
-
+#endif
+#if B9767
+        private const string loadReadyScreenMethod = "method_37";
+        private const string readyMethod = "method_53";
+#endif
+#if B9018
+        private const string loadReadyScreenMethod = "method_36";
+        private const string readyMethod = "method_54";
+#endif
+#if DEBUG
+        private const string loadReadyScreenMethod = "method_35";
+        private const string readyMethod = "method_50";
+#endif
         //private static Type MenuController;
 
         public LoadOfflineRaidScreenPatch() : base(transpiler: nameof(PatchTranspiler)) { }

@@ -68,7 +68,7 @@ namespace JET.Patches.RaidFix
                             lastCallIndex = i;
                             break;
                         default:
-                            Debug.LogError("Mismatched callvirt instruction count.");
+                            Debug.LogError("[OnDeadPatch] Mismatched callvirt instruction count.");
                             break;
                     }
 

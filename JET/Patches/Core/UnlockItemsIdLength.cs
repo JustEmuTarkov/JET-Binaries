@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
+/// TODO: CHECK STRINGS IF THEY ARE PROPER ONES
+
 namespace JET.Patches
 {
     class UnlockItemsIdLength : GenericPatch<UnlockItemsIdLength>
