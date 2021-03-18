@@ -189,6 +189,7 @@ namespace JET.Launcher
         }
         private void DeleteSelectedServer_Click(object sender, RoutedEventArgs e)
         {
+            if (__ServerList.SelectedIndex == -1) return;
             var server = ServerManager.AvailableServers[__ServerList.SelectedIndex];
             __LauncherConfigL.RemoveServer(server.backendUrl);
             ServerManager.RemoveServer(server);
