@@ -10,6 +10,7 @@ using JET.Patches.RaidFix;
 using JET.Patches.Quests;
 using JET.Patches.ScavMode;
 using System.Reflection;
+using JET.Patches.Other;
 using JET.Patches.Ragfair;
 
 namespace JET
@@ -45,7 +46,7 @@ namespace JET
             Debug.LogError("Core: Loaded");
 
             new Settings(null, Config.BackendUrl);
-            
+
             PatcherUtil.Patch<EasyAssetsPatch>();
             PatcherUtil.Patch<EasyBundlePatch>();
             PatcherUtil.Patch<BundleLoadPatch>();
@@ -57,7 +58,8 @@ namespace JET
             WatermarkOverrider();
         }
         EFT.UI.LocalizedText localizedText;
-        private void LateUpdate() {
+        private void LateUpdate()
+        {
             WatermarkOverrider();
 
             // DISABLE ADD OFFER BUTTON IN FLEA MARKET
@@ -69,7 +71,8 @@ namespace JET
             //}
             //catch { }
         }
-        private void WatermarkOverrider() {
+        private void WatermarkOverrider()
+        {
             try
             {
                 if (localizedText == null)
@@ -80,9 +83,10 @@ namespace JET
             }
             catch { }
         }
-        private void OfflineModePatchRoutes(Offline.OfflineMode EnabledElements) {
-            
-            if(EnabledElements.OfflineLootPatch)
+        private void OfflineModePatchRoutes(Offline.OfflineMode EnabledElements)
+        {
+
+            if (EnabledElements.OfflineLootPatch)
                 PatcherUtil.Patch<OfflineLootPatch>();
             if (EnabledElements.OfflineSaveProfilePatch)
                 PatcherUtil.Patch<OfflineSaveProfilePatch>();
@@ -107,8 +111,12 @@ namespace JET
                 PatcherUtil.Patch<MatchMakerSelectionLocationScreenPatch>();
                 PatcherUtil.Patch<MatchMakerAfterSelectLocation>();
             }
-            PatcherUtil.Patch<RemoveAddOfferButton_Awake>();
-            PatcherUtil.Patch<RemoveAddOfferButton_Call>();
+
+            if (EnabledElements.RemoveAddOfferButton)
+            {
+                PatcherUtil.Patch<RemoveAddOfferButton_Awake>();
+                PatcherUtil.Patch<RemoveAddOfferButton_Call>();
+            }
 
             if (EnabledElements.InsuranceScreenPatch)
                 PatcherUtil.Patch<InsuranceScreenPatch>();
@@ -153,8 +161,10 @@ namespace JET
 
             if (EnabledElements.EndByTimerPatch)
                 PatcherUtil.Patch<EndByTimerPatch>();
-            if(EnabledElements.SpawnRandomizationPatch)
+            if (EnabledElements.SpawnRandomizationPatch)
                 PatcherUtil.Patch<SpawnRandomizationPatch>();
+            if (EnabledElements.NoFiltersPatch)
+                PatcherUtil.Patch<NoFiltersPatch>();
 
             Debug.LogError("SinglePlayer: Loaded");
         }

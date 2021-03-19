@@ -39,6 +39,8 @@ namespace JET.Utilities
             public bool ScavExfilPatch= true;
             public bool EndByTimerPatch= true;
             public bool SpawnRandomizationPatch = true;
+            public bool RemoveAddOfferButton = true;
+            public bool NoFiltersPatch = false;
         }
 
         public static OfflineMode LoadModules()

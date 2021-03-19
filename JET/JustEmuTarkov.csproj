@@ -139,6 +139,7 @@
     <Compile Include="Patches\Matchmaker\MatchmakerOfflineRaidPatch.cs" />
     <Compile Include="Patches\Matchmaker\MatchMakerSelectionLocationScreenPatch.cs" />
     <Compile Include="Patches\Core\NotificationSslPatch.cs" />
+    <Compile Include="Patches\Other\NoFiltersPatch.cs" />
     <Compile Include="Patches\Progression\EndByTimerPatch.cs" />
     <Compile Include="Patches\Progression\ExperienceGainPatch.cs" />
     <Compile Include="Patches\Progression\OfflineLootPatch.cs" />
@@ -190,6 +191,7 @@
   <ItemGroup>
     <None Include="CodeMap.dgml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent Condition="'$(OS)' != 'Unix'">
