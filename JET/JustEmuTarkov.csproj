@@ -56,7 +56,7 @@
       <HintPath>..\Shared\References_$(Configuration)\Assembly-CSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="bsg.componentace.compression.libs.zlib" Condition=" '$(Configuration)|$(Platform)' == '10988|AnyCPU' ">
+    <Reference Include="bsg.componentace.compression.libs.zlib" Condition=" '$(Configuration)|$(Platform)' == '10988|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
       <HintPath>..\Shared\References_10988\bsg.componentace.compression.libs.zlib.dll</HintPath>
       <Private>False</Private>
     </Reference>

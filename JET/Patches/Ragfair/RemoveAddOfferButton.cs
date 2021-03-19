@@ -13,7 +13,7 @@ using UI_Button = EFT.UI.UIButtonSpawner; // Method: CheckOnExcude, LoadCoreBySt
 using UI_Button = EFT.UI.UIButtonSpawner; // Method: CheckOnExcude, LoadCoreByString
 #endif
 #if DEBUG
-using UI_Button = DefaultUIButton; // Method: CheckOnExcude, LoadCoreByString
+using UI_Button = EFT.UI.DefaultUIButton; // Method: CheckOnExcude, LoadCoreByString
 #endif
 namespace JET.Patches.Ragfair
 {
