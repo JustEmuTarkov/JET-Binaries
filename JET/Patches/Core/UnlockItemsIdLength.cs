@@ -30,17 +30,10 @@ namespace JET.Patches
                         if (method_29_info != null)
                         {
                             ParameterInfo[] paramInfo = method_29_info.GetParameters();
-                            if (paramInfo.Length == 1)
-                            {
-                                if (paramInfo[0].Name == "item" && paramInfo[0].ParameterType.Name.StartsWith("GStruct"))
-                                {
-                                    var returnType = method_29_info.ReturnType;
-                                    if (returnType.Name.StartsWith("Class"))
-                                    {
-                                        return true;
-                                    }
-                                }
-                            }
+                            return  paramInfo.Length == 1 && 
+                                    paramInfo[0].Name == "item" && 
+                                    paramInfo[0].ParameterType.Name.StartsWith("GStruct") && 
+                                    method_29_info.ReturnType.Name.StartsWith("Class");
                         }
                     }
                     return false;
