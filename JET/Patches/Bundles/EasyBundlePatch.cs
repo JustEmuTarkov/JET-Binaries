@@ -6,6 +6,12 @@ using System.Reflection;
 using Diz.DependencyManager;
 using JET.Utilities.Patching;
 using JET.Utilities;
+#if B11661
+using IEasyBundle = GInterface253; //Property: SameNameAsset 
+using IBundleLock = GInterface254; //Property: IsLocked
+// go to actual gclass and search for gclassXXXX<T> with initial value gparam_0 and base.method_0(value) call
+using BindableState = GClass2206<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue 
+#endif
 #if B10988
 using IEasyBundle = GInterface250; //Property: SameNameAsset 
 using IBundleLock = GInterface251; //Property: IsLocked

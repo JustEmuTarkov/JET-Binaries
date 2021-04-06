@@ -4,6 +4,10 @@ using UnityEngine;
 using EFT;
 using EFT.InventoryLogic;
 using JET.Utilities.Patching;
+#if B11661
+using Equipment = GClass1729; // GetSlot
+using DamageInfo = GStruct240; // HittedBallisticCollider
+#endif
 #if B10988
 using Equipment = GClass1692;
 using DamageInfo = GStruct239;

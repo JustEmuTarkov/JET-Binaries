@@ -4,6 +4,10 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using HarmonyLib;
+#if B11661
+using IBundleLock = GInterface254; //Property: IsLocked
+using BindableState = GClass2206<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
+#endif
 #if B10988
 using IBundleLock = GInterface251; //Property: IsLocked
 using BindableState = GClass2166<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue

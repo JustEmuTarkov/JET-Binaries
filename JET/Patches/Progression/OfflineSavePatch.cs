@@ -4,6 +4,9 @@ using Comfort.Common;
 using EFT;
 using JET.Utilities.Patching;
 using JET.Utilities.Player;
+#if B11661
+using ClientMetrics = GClass1408; // GameUpdateBinMetricCollector (lower Gclass number)
+#endif
 #if B10988
 using ClientMetrics = GClass1367; // GameUpdateBinMetricCollector (lower Gclass number)
 #endif
@@ -21,6 +24,9 @@ namespace JET.Patches.Progression
 {
     class OfflineSaveProfilePatch : GenericPatch<OfflineSaveProfilePatch>
     {
+#if B11661
+        string methodNumber = "41";
+#endif
 #if B10988
         string methodNumber = "41";
 #endif

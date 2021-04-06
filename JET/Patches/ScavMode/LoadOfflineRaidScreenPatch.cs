@@ -10,6 +10,13 @@ using EFT.UI.Screens;
 using JET.Utilities.Patching;
 using JET.Utilities.Reflection;
 using UnityEngine;
+#if B11661
+using MenuController = GClass1224; // .SelectedKeyCard
+using WeatherSettings = GStruct92; // IsRandomTime and IsRandomWeather
+using BotsSettings = GStruct233; // IsScavWars and BotAmount
+using WavesSettings = GStruct93; // IsTaggedAndCursed and IsBosses
+using MatchmakerScreenCreator = EFT.UI.Matchmaker.MatchmakerOfflineRaid.GClass2066; // simply go to class below and search for new gclass simple as that...
+#endif
 #if B10988
 using MenuController = GClass1194; // .SelectedKeyCard
 using WeatherSettings = GStruct92; // IsRandomTime and IsRandomWeather
@@ -44,6 +51,42 @@ namespace JET.Patches.ScavMode
 
     public class LoadOfflineRaidScreenPatch : GenericPatch<LoadOfflineRaidScreenPatch>
     {
+        /*
+search both in MenuController GClass
+** load ready screen**
+private void method_38()
+{
+	if (!this.method_39())
+	{
+		return;
+	}
+	MatchMakerAcceptScreen.GClass2063 gclass = new MatchMakerAcceptScreen.GClass2063(this.ginterface27_0.Session, this.esideType_0, this.SelectedDateTime, this.SelectedLocation, this.bool_0, this.SelectedKeyCard);
+	gclass.OnShowNextScreen += this.method_16;
+	gclass.ShowScreen(EScreenState.Queued);
+}
+** readyMethod **
+private void method_55(bool local, GStruct92 weatherSettings, GStruct233 botsSettings, GStruct93 wavesSettings)
+{
+	if (this.SelectedLocation.Id == "laboratory")
+	{
+		wavesSettings.IsBosses = true;
+	}
+	this.bool_0 = local;
+	this.gstruct233_0 = botsSettings;
+	this.gstruct93_0 = wavesSettings;
+	this.gstruct92_0 = weatherSettings;
+	if (!this.bool_0)
+	{
+		this.method_37();
+		return;
+	}
+	this.method_38();
+}
+         */
+#if B11661
+        private const string loadReadyScreenMethod = "method_38";
+        private const string readyMethod = "method_55";
+#endif
 #if B10988
         private const string loadReadyScreenMethod = "method_35";
         private const string readyMethod = "method_50";

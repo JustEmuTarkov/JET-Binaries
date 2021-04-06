@@ -118,7 +118,11 @@ namespace JET.Utilities.HTTP
                     Texture2D texture = new Texture2D(8, 8);
 
                     stream.CopyTo(ms);
+#if B11661
+                    texture.LoadRawTextureData(ms.ToArray());
+#else
                     texture.LoadImage(ms.ToArray());
+#endif
                     return texture;
                 }
             }

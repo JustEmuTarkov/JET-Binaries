@@ -3,17 +3,20 @@ using EFT.UI;
 using EFT.UI.Matchmaker;
 using JET.Utilities.Patching;
 using UnityEngine;
+#if B11661
+using UI_Button = EFT.UI.DefaultUIButton;
+#endif
 #if B10988
-using UI_Button = EFT.UI.DefaultUIButton; // Method: CheckOnExcude, LoadCoreByString
+using UI_Button = EFT.UI.DefaultUIButton;
 #endif
 #if B9767
-using UI_Button = EFT.UI.UIButtonSpawner; // Method: CheckOnExcude, LoadCoreByString
+using UI_Button = EFT.UI.UIButtonSpawner;
 #endif
 #if B9018
-using UI_Button = EFT.UI.UIButtonSpawner; // Method: CheckOnExcude, LoadCoreByString
+using UI_Button = EFT.UI.UIButtonSpawner;
 #endif
 #if DEBUG
-using UI_Button = EFT.UI.DefaultUIButton; // Method: CheckOnExcude, LoadCoreByString
+using UI_Button = EFT.UI.DefaultUIButton;
 #endif
 namespace JET.Patches.Matchmaker
 {

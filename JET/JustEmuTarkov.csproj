@@ -23,6 +23,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '11661|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>B11661;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '10988|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -56,8 +64,8 @@
       <HintPath>..\Shared\References_$(Configuration)\Assembly-CSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="bsg.componentace.compression.libs.zlib" Condition=" '$(Configuration)|$(Platform)' == '10988|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-      <HintPath>..\Shared\References_10988\bsg.componentace.compression.libs.zlib.dll</HintPath>
+    <Reference Include="bsg.componentace.compression.libs.zlib" Condition=" '$(Configuration)|$(Platform)' == '11661|AnyCPU' Or '$(Configuration)|$(Platform)' == '10988|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+      <HintPath>..\Shared\References_$(Configuration)\bsg.componentace.compression.libs.zlib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Comfort">
@@ -87,16 +95,16 @@
       <HintPath>..\Shared\References_$(Configuration)\UnityEngine.AssetBundleModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\Shared\References_$(Configuration)\UnityEngine.CoreModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnityEngine.ImageConversionModule">
       <HintPath>..\Shared\References_$(Configuration)\UnityEngine.ImageConversionModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>..\Shared\References_$(Configuration)\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\Shared\References_$(Configuration)\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">

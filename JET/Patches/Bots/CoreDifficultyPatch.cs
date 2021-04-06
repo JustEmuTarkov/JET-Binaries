@@ -3,6 +3,9 @@ using UnityEngine;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
 using JET.Utilities;
+#if B11661
+using BotDifficultyHandler = GClass304; // Method: CheckOnExcude, LoadCoreByString
+#endif
 #if B10988
 using BotDifficultyHandler = GClass303; // Method: CheckOnExcude, LoadCoreByString
 #endif

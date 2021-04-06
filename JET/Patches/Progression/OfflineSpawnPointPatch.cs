@@ -5,6 +5,10 @@ using JET.Utilities.Patching;
 using System.Linq;
 using System;
 using System.Collections.Generic;
+#if B11661
+using EFT.Game.Spawning;
+using ISpawnPoints = GInterface222; // DestroySpawnPoint or CreateSpawnPoint as ginterface
+#endif
 #if B10988
 using EFT.Game.Spawning;
 using ISpawnPoints = GInterface217;

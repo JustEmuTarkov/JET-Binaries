@@ -18,6 +18,9 @@ namespace JET
     [ObfuscationAttribute(Exclude = true)]
     public class Instance : MonoBehaviour
     {
+#if B11661
+        private string Watermark = "11661 | JET";
+#endif
 #if B10988
         private string Watermark = "10988 | JET";
 #endif
