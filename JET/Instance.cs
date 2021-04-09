@@ -42,6 +42,8 @@ namespace JET
             PatcherUtil.Patch<UnityWebRequestPatch>();
             PatcherUtil.Patch<NotificationSslPatch>();
             PatcherUtil.Patch<UnlockItemsIdLength>();
+            PatcherUtil.Patch<BarterSchemeAutoFill>();
+            PatcherUtil.Patch<BarterSchemeAutoFillPersist>();
             // allows to turn on and off the PreloaderUI.SetStreamMode(bool)
             // PatcherUtil.Patch<Patches.Core.StreamerModePatch>(); 
             // PatcherUtil.Patch<Patches.Core.FixChatOnDestroyPatch>(); 

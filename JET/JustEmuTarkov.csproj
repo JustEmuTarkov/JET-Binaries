@@ -57,7 +57,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>..\Shared\References_$(Configuration)\0Harmony.dll</HintPath>
+      <HintPath>..\Shared\References_Unchangabled\0Harmony.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
@@ -65,62 +65,64 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="bsg.componentace.compression.libs.zlib" Condition=" '$(Configuration)|$(Platform)' == '11661|AnyCPU' Or '$(Configuration)|$(Platform)' == '10988|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-      <HintPath>..\Shared\References_$(Configuration)\bsg.componentace.compression.libs.zlib.dll</HintPath>
+      <HintPath>..\Shared\References_Unchangabled\bsg.componentace.compression.libs.zlib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Comfort">
-      <HintPath>..\Shared\References_$(Configuration)\Comfort.dll</HintPath>
+      <HintPath>..\Shared\References_Unchangabled\Comfort.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ItemComponent.Types">
-      <HintPath>..\Shared\References_$(Configuration)\ItemComponent.Types.dll</HintPath>
+      <HintPath>..\Shared\References_Unchangabled\ItemComponent.Types.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\Shared\References_$(Configuration)\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\Shared\References_Unchangabled\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="NLog">
-      <HintPath>..\Shared\References_$(Configuration)\NLog.dll</HintPath>
+      <HintPath>..\Shared\References_Unchangabled\NLog.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Sirenix.Serialization, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\Shared\References_10988\Sirenix.Serialization.dll</HintPath>
+      <HintPath>..\Shared\References_Unchangabled\Sirenix.Serialization.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="UnityEngine">
-      <HintPath>..\Shared\References_$(Configuration)\UnityEngine.dll</HintPath>
+      <HintPath>..\Shared\References_Unchangabled\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.AssetBundleModule">
-      <HintPath>..\Shared\References_$(Configuration)\UnityEngine.AssetBundleModule.dll</HintPath>
+      <HintPath>..\Shared\References_Unchangabled\UnityEngine.AssetBundleModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.ImageConversionModule">
-      <HintPath>..\Shared\References_$(Configuration)\UnityEngine.ImageConversionModule.dll</HintPath>
+      <HintPath>..\Shared\References_Unchangabled\UnityEngine.ImageConversionModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>..\Shared\References_$(Configuration)\UnityEngine.UI.dll</HintPath>
+      <HintPath>..\Shared\References_Unchangabled\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\Shared\References_$(Configuration)\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\Shared\References_Unchangabled\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
-      <HintPath>..\Shared\References_$(Configuration)\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+      <HintPath>..\Shared\References_Unchangabled\UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestModule">
-      <HintPath>..\Shared\References_$(Configuration)\UnityEngine.UnityWebRequestModule.dll</HintPath>
+      <HintPath>..\Shared\References_Unchangabled\UnityEngine.UnityWebRequestModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UnityWebRequestTextureModule">
-      <HintPath>..\Shared\References_$(Configuration)\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+      <HintPath>..\Shared\References_Unchangabled\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="zlib.net" Condition=" '$(Configuration)|$(Platform)' == '9018|AnyCPU' Or '$(Configuration)|$(Platform)' == '9767|AnyCPU' ">
-      <HintPath>..\Shared\References_9018\zlib.net.dll</HintPath>
+      <HintPath>..\Shared\References_Unchangabled\zlib.net.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -157,6 +159,7 @@
     <Compile Include="Patches\Progression\WeaponDurabilityPatch.cs" />
     <Compile Include="Patches\Quests\BeaconPatch.cs" />
     <Compile Include="Patches\Quests\DogtagPatch.cs" />
+    <Compile Include="Patches\Ragfair\BarterSchemeAutoFill.cs" />
     <Compile Include="Patches\Ragfair\RemoveAddOfferButton.cs" />
     <Compile Include="Patches\RaidFix\BotStationaryWeaponPatch.cs" />
     <Compile Include="Patches\RaidFix\OnDeadPatch.cs" />
