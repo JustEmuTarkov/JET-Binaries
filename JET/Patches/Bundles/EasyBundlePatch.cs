@@ -6,7 +6,7 @@ using System.Reflection;
 using Diz.DependencyManager;
 using JET.Utilities.Patching;
 using JET.Utilities;
-#if B11661
+#if B11661 || B12102
 using IEasyBundle = GInterface253; //Property: SameNameAsset 
 using IBundleLock = GInterface254; //Property: IsLocked
 // go to actual gclass and search for gclassXXXX<T> with initial value gparam_0 and base.method_0(value) call

@@ -4,7 +4,7 @@ using UnityEngine;
 using EFT;
 using JET.Utilities.Patching;
 using JET.Utilities;
-#if B11661
+#if B11661 || B12102
 using AmmoInfo = GClass1746; // AmmoLifeTimeSec
 #endif
 #if B10988

@@ -1,0 +1,1 @@
+de4dot.exe --un-name "!^<>[a-z0-9]$&!^<>[a-z0-9]__.*$&![A-Z][A-Z]\$<>.*$&^[a-zA-Z_<{$][a-zA-Z_0-9<>{}$.`-]*$" "E:\MAOCI\Github\JET-Binaries\Shared\References_12102\Assembly-CSharpS.dll" --strtyp delegate --strtok 0600CFAC

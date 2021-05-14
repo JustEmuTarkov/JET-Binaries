@@ -6,7 +6,7 @@ using EFT;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
 using JET.Utilities;
-#if B11661
+#if B11661 || B12102
 using WaveInfo = GClass956; // Field: Role (choose first one(or middle one) displayed as "Role")
 using BotsPresets = GClass363; // Method: GetNewProfile (higher GClass number)
 #endif

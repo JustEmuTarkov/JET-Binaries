@@ -7,7 +7,7 @@ using JET.Utilities.Patching;
 using JET.Utilities;
 using System;
 using Newtonsoft.Json;
-#if B11661
+#if B11661 || B12102
 using LocationInfo = GClass783.GClass785; // NightTimeAllowedLocations
 using ConverterBucket = GClass939; // Converters
 #endif
@@ -39,7 +39,11 @@ namespace JET.Patches.Progression
             // compile-time check
             _ = nameof(LocationInfo.BotLocationModifier);
         }
-
+#if B11661
+        private static string method = "method_6";
+#else
+        private static string method = "method_5";
+#endif
         protected override MethodBase GetTargetMethod()
         {
             var localGameBaseType = PatcherConstants.LocalGameType.BaseType;

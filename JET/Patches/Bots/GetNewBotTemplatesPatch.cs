@@ -8,7 +8,7 @@ using UnityEngine;
 using Comfort.Common;
 using EFT;
 using JET.Utilities.Patching;
-#if B11661
+#if B11661 || B12102
 using WaveInfo = GClass956; // Field: Role (choose first one displayed as "Role")
 using BotsPresets = GClass363; // Method: GetNewProfile (higher GClass number)
 using BotData = GInterface16; // Method: ChooseProfile

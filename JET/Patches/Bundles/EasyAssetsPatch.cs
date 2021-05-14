@@ -10,7 +10,7 @@ using Diz.Resources;
 using JetBrains.Annotations;
 using JET.Utilities.Patching;
 using JET.Utilities;
-#if B11661
+#if B11661 || B12102
 using IEasyBundle = GInterface253; //Property: SameNameAsset 
 using IBundleLock = GInterface254; //Property: IsLocked
 using BundleLock = GClass2220; //Property: MaxConcurrentOperations

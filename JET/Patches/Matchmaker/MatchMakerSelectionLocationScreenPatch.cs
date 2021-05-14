@@ -3,7 +3,7 @@ using EFT.UI;
 using EFT.UI.Matchmaker;
 using JET.Utilities.Patching;
 using UnityEngine;
-#if B11661
+#if B11661 || B12102
 using UI_Button = EFT.UI.DefaultUIButton;
 #endif
 #if B10988

@@ -5,7 +5,7 @@ using System.Reflection;
 using HarmonyLib;
 using EFT;
 using JET.Utilities.Patching;
-#if B11661
+#if B11661 || B12102
 using BotData = GInterface16;
 #endif
 #if B10988

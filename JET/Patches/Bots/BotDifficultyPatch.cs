@@ -4,7 +4,7 @@ using EFT;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
 using JET.Utilities;
-#if B11661
+#if B11661 || B12102
 using BotDifficultyHandler = GClass304; // Method: CheckOnExcude, LoadDifficultyStringInternal
 #endif
 #if B10988

@@ -3,16 +3,10 @@ using EFT.UI;
 using EFT.UI.Matchmaker;
 using JET.Utilities.Patching;
 using UnityEngine;
-#if B11661
+#if B10988 || B11661 || B12102
 using UI_Button = EFT.UI.DefaultUIButton;
 #endif
-#if B10988
-using UI_Button = EFT.UI.DefaultUIButton;
-#endif
-#if B9767
-using UI_Button = EFT.UI.UIButtonSpawner;
-#endif
-#if B9018
+#if B9767 || B9018
 using UI_Button = EFT.UI.UIButtonSpawner;
 #endif
 #if DEBUG

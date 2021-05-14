@@ -10,7 +10,7 @@ using EFT.UI.Screens;
 using JET.Utilities.Patching;
 using JET.Utilities.Reflection;
 using UnityEngine;
-#if B11661
+#if B11661 || B12102
 using MenuController = GClass1224; // .SelectedKeyCard
 using WeatherSettings = GStruct92; // IsRandomTime and IsRandomWeather
 using BotsSettings = GStruct233; // IsScavWars and BotAmount
@@ -83,7 +83,7 @@ private void method_55(bool local, GStruct92 weatherSettings, GStruct233 botsSet
 	this.method_38();
 }
          */
-#if B11661
+#if B11661 || B12102
         private const string loadReadyScreenMethod = "method_38";
         private const string readyMethod = "method_55";
 #endif
