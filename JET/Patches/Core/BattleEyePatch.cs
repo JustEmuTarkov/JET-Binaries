@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using JET.Utilities.Patching;
+using UnityEngine;
 
 namespace JET.Patches
 {
@@ -15,7 +17,7 @@ namespace JET.Patches
         public BattleEyePatch() : base(prefix: nameof(PatchPrefix)) {}
 
 		protected override MethodBase GetTargetMethod()
-		{
+        {
 			System.Type __type = PatcherConstants.TargetAssembly.GetTypes().Single(x => x.GetMethod(_MethodName, BindingFlags.Public | BindingFlags.Instance) != null);
 
             __property = __type.GetProperty(_FieldName, BindingFlags.Public | BindingFlags.Instance);

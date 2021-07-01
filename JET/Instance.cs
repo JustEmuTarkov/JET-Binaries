@@ -18,6 +18,7 @@ namespace JET
     [ObfuscationAttribute(Exclude = true)]
     public class Instance : MonoBehaviour
     {
+        private static Settings _settings;
 #if B13074
         private string Watermark = "13074 | JET";
 #endif
@@ -47,7 +48,9 @@ namespace JET
             PatcherUtil.Patch<SslCertificatePatch>();
             PatcherUtil.Patch<UnityWebRequestPatch>();
             PatcherUtil.Patch<NotificationSslPatch>();
+#if !B13074
             PatcherUtil.Patch<UnlockItemsIdLength>();
+#endif
             PatcherUtil.Patch<BarterSchemeAutoFill>();
             PatcherUtil.Patch<BarterSchemeAutoFillPersist>();
             // allows to turn on and off the PreloaderUI.SetStreamMode(bool)
@@ -56,7 +59,7 @@ namespace JET
 
             Debug.LogError("Core: Loaded");
 
-            new Settings(null, Config.BackendUrl);
+            _settings = new Settings(null, Config.BackendUrl);
 
             PatcherUtil.Patch<EasyAssetsPatch>();
             PatcherUtil.Patch<EasyBundlePatch>();

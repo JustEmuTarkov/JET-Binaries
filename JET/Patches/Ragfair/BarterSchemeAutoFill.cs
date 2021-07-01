@@ -25,15 +25,16 @@ namespace JET.Patches.Ragfair
     class BarterSchemeAutoFillPersist : GenericPatch<BarterSchemeAutoFillPersist>
     {
         public BarterSchemeAutoFillPersist() : base(prefix: nameof(PatchPrefix)) { }
-        public static bool PatchPrefix(ref bool arg, ref bool ___bool_1)
+        public static bool PatchPrefix(ref bool ___bool_1)
         {
-            arg = true;
             ___bool_1 = true;
-            return false;
+            PlayerPrefs.SetInt("AutoFillRequirements", 1);
+            PlayerPrefs.Save();
+            return true;
         }
         protected override MethodBase GetTargetMethod()
         {
-            return typeof(EFT.UI.BarterSchemePanel).GetMethod("method_6", BindingFlags.NonPublic | BindingFlags.Instance);
+            return typeof(EFT.UI.BarterSchemePanel).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).Single(x => x.Name == "method_6");
         }
     }
 }
