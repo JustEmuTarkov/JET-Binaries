@@ -10,6 +10,12 @@ using Diz.Resources;
 using JetBrains.Annotations;
 using JET.Utilities.Patching;
 using JET.Utilities;
+#if B13074
+using IEasyBundle = GInterface263; //Property: SameNameAsset 
+using IBundleLock = GInterface264; //Property: IsLocked
+using BundleLock = GClass2265; //Property: MaxConcurrentOperations
+using DependencyGraph = GClass2266<GInterface263>; // Method: GetDefaultNode() / Inside <T> goes IEasyBundle // mostly its +1 number from BundleLock
+#endif
 #if B11661 || B12102
 using IEasyBundle = GInterface253; //Property: SameNameAsset 
 using IBundleLock = GInterface254; //Property: IsLocked

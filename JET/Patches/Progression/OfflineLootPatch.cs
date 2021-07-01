@@ -7,6 +7,10 @@ using JET.Utilities.Patching;
 using JET.Utilities;
 using System;
 using Newtonsoft.Json;
+#if B13074
+using LocationInfo = GClass804.GClass806; // NightTimeAllowedLocations
+using ConverterBucket = GClass967; // Converters
+#endif
 #if B11661 || B12102
 using LocationInfo = GClass783.GClass785; // NightTimeAllowedLocations
 using ConverterBucket = GClass939; // Converters

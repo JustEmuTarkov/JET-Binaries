@@ -1,6 +1,9 @@
 using System.Linq;
 using System.Reflection;
 using JET.Utilities.Patching;
+#if B13074
+using MainMenuController = GClass1253;  // SelectedDateTime or get_SelectedDateTime as GClass (should ge first in dnspy)
+#endif
 #if B11661 || B12102
 using MainMenuController = GClass1224;  // SelectedDateTime
 #endif

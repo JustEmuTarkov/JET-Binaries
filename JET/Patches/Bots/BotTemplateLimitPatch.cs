@@ -6,6 +6,10 @@ using EFT;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
 using JET.Utilities;
+#if B13074
+using WaveInfo = GClass984; // search for: Difficulty and chppse gclass with lower number whic hcontains Role and Limit variables
+using BotsPresets = GClass379; // Method: GetNewProfile (higher GClass number)
+#endif
 #if B11661 || B12102
 using WaveInfo = GClass956; // Field: Role (choose first one(or middle one) displayed as "Role")
 using BotsPresets = GClass363; // Method: GetNewProfile (higher GClass number)

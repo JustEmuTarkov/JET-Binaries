@@ -16,7 +16,7 @@ namespace JET.Patches.Progression
         public SingleModeJamPatch() : base(postfix: nameof(PatchPostfix))
         {
         }
-
+#if !B13074
         protected override MethodBase GetTargetMethod()
         {
             var targetType = PatcherConstants.TargetAssembly.GetTypes().Single(IsTargetType);
@@ -62,5 +62,14 @@ namespace JET.Patches.Progression
             ___firearmsAnimator_0.Animator.Play("JAM", 1, 0f);
             ___firearmController_0.EmitEvents();
         }
+#else
+        protected override MethodBase GetTargetMethod()
+        {
+            return null;
+        }
+        public static void PatchPostfix() {
+            return;
+        }
+#endif
     }
 }

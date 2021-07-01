@@ -39,6 +39,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '13074|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>B13074;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '10988|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -72,7 +80,7 @@
       <HintPath>..\Shared\References_$(Configuration)\Assembly-CSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="bsg.componentace.compression.libs.zlib" Condition=" '$(Configuration)|$(Platform)' == '12102|AnyCPU' Or '$(Configuration)|$(Platform)' == '11661|AnyCPU' Or '$(Configuration)|$(Platform)' == '10988|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Reference Include="bsg.componentace.compression.libs.zlib" Condition=" '$(Configuration)' == '13074' Or '$(Configuration)' == '12102' Or '$(Configuration)' == '11661' Or '$(Configuration)' == '10988' Or '$(Configuration)' == 'Debug' ">
       <HintPath>..\Shared\References_Unchangabled\bsg.componentace.compression.libs.zlib.dll</HintPath>
       <Private>False</Private>
     </Reference>
@@ -84,10 +92,23 @@
       <HintPath>..\Shared\References_Unchangabled\ItemComponent.Types.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
+	<Reference Include="Newtonsoft.Json"  Condition=" '$(Configuration)' == '13074' ">
+      <HintPath>..\Shared\References_$(Configuration)\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json" Condition=" '$(Configuration)' != '13074' ">
       <HintPath>..\Shared\References_Unchangabled\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
+	<Reference Include="Newtonsoft.Json.UnityConverters"  Condition=" '$(Configuration)' == '13074' ">
+      <HintPath>..\Shared\References_$(Configuration)\Newtonsoft.Json.UnityConverters.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+	<Reference Include="netstandard"  Condition=" '$(Configuration)' == '13074' ">
+      <HintPath>..\Shared\References_$(Configuration)\netstandard.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+
     <Reference Include="NLog">
       <HintPath>..\Shared\References_Unchangabled\NLog.dll</HintPath>
       <Private>False</Private>
@@ -214,20 +235,20 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent Condition="'$(OS)' != 'Unix'">
-      xcopy /Y /I $(TargetDir)*.dll $(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\
+      xcopy /Y /I $(TargetDir)*.dll $(SolutionDir)\Build\$(Configuration)\EscapeFromTarkov_Data\Managed\
     </PostBuildEvent>
     <PostBuildEvent Condition="'$(OS)' == 'Unix'">
-      cp $(TargetDir)*.dll $(SolutionDir)/Build/EscapeFromTarkov_Data/Managed/
+      cp $(TargetDir)*.dll $(SolutionDir)/Build/$(Configuration)/EscapeFromTarkov_Data/Managed/
     </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y /I "$(TargetDir)NLog.JET.dll" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
+    <PostBuildEvent>xcopy /Y /I "$(TargetDir)NLog.JET.dll" "$(SolutionDir)\Build\$(Configuration)\EscapeFromTarkov_Data\Managed\"
 	
- xcopy /Y /I "$(SolutionDir)Shared\Resources\NLog.dll.nlog" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
+ xcopy /Y /I "$(SolutionDir)Shared\Resources\NLog.dll.nlog" "$(SolutionDir)\Build\$(Configuration)\EscapeFromTarkov_Data\Managed\"
 
- xcopy /Y /I "$(TargetDir)0Harmony.dll" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
+ xcopy /Y /I "$(TargetDir)0Harmony.dll" "$(SolutionDir)\Build\$(Configuration)\EscapeFromTarkov_Data\Managed\"
 
- xcopy /Y /I "$(TargetDir)Assembly-CSharp.dll" "$(SolutionDir)\Build\EscapeFromTarkov_Data\Managed\"
+ xcopy /Y /I "$(TargetDir)Assembly-CSharp.dll" "$(SolutionDir)\Build\$(Configuration)\EscapeFromTarkov_Data\Managed\"
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

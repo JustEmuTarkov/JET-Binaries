@@ -20,10 +20,16 @@ namespace JET.Patches
 
         protected override MethodBase GetTargetMethod()
         {
+#if B13074
+            // its fixed from now on...
+            return null;
+#else
+
             return PatcherConstants.TargetAssembly.GetTypes()
                 .Single(x => {
                    // x.Name.StartsWith("Class") &&
                    // x.GetMethod("method_29") != null;
+                   // Find Logout >> Find Class with 3 number like 189 etc. >> 
                     if (x.Name.StartsWith("Class"))
                     {
                         var method_29_info = x.GetMethod("method_29", BindingFlags.NonPublic | BindingFlags.Instance);
@@ -38,11 +44,15 @@ namespace JET.Patches
                     }
                     return false;
                 }).GetMethod("method_29", BindingFlags.NonPublic | BindingFlags.Instance);
+#endif
         }
 
         static IEnumerable<CodeInstruction> PatchTranspile(IEnumerable<CodeInstruction> instructions)
         {
-            
+#if B13074
+            return instructions;
+#else
+
             var codes = new List<CodeInstruction>(instructions);
 
             // that should be the fastest way cause its at index 3 and we need to remov e3 instructions from there
@@ -77,6 +87,7 @@ namespace JET.Patches
                 return instructions;
             }
             return codes.AsEnumerable();
+#endif
         }
     }
 }

@@ -4,6 +4,9 @@ using UnityEngine;
 using EFT;
 using JET.Utilities.Patching;
 using JET.Utilities;
+#if B13074
+using AmmoInfo = GClass1774; // AmmoLifeTimeSec
+#endif
 #if B11661 || B12102
 using AmmoInfo = GClass1746; // AmmoLifeTimeSec
 #endif
@@ -37,6 +40,9 @@ namespace JET.Patches.Progression
 
         private static bool IsTargetMethod(MethodInfo methodInfo)
         {
+#if B13074 
+            return false;
+#else
             if (methodInfo.IsVirtual)
             {
                 return false;
@@ -58,10 +64,14 @@ namespace JET.Patches.Progression
             }
 
             return false;
+#endif
         }
 
         public static void PatchPostfix(Player.FirearmController __instance, AmmoInfo ammo)
         {
+#if B13074
+            return;
+#else
             if (!Config.WeaponDurabilityEnabled)
             {
                 return;
@@ -79,6 +89,7 @@ namespace JET.Patches.Progression
 
             durability -= item.Repairable.MaxDurability / operatingResource * deterioration;
             item.Repairable.Durability = (durability > 0) ? durability : 0;
+#endif
         }
     }
 }

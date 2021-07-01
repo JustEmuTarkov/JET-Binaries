@@ -4,6 +4,9 @@ using Comfort.Common;
 using EFT;
 using JET.Utilities.Patching;
 using JET.Utilities.Player;
+#if B13074
+using ClientMetrics = GClass1432; // GameUpdateBinMetricCollector (lower Gclass number)
+#endif
 #if B11661 || B12102
 using ClientMetrics = GClass1408; // GameUpdateBinMetricCollector (lower Gclass number)
 #endif
@@ -24,8 +27,12 @@ namespace JET.Patches.Progression
 {
     class OfflineSaveProfilePatch : GenericPatch<OfflineSaveProfilePatch>
     {
+#if B13074
+        string methodNumber = "44"; // search main application for those:
+                                    // method_xx(string profileId, Profile savageProfile, GClass783.GClass785 location, bool isLocal, Result<ExitStatus, TimeSpan, GClass1403> result, MatchmakerTimeHasCome.GClass2068 timeHasComeScreenController = null)
+#endif
 #if B11661 || B12102
-        string methodNumber = "41";
+        string methodNumber = "41"; // could be wrong one
 #endif
 #if B10988
         string methodNumber = "41";
