@@ -44,6 +44,7 @@ namespace JET
         private void Start()
         {
             Debug.LogError("[Starting]: " + Watermark);
+            PatcherUtil.Patch<EnsureConsistencyPatch>();
             PatcherUtil.Patch<BattleEyePatch>();
             PatcherUtil.Patch<SslCertificatePatch>();
             PatcherUtil.Patch<UnityWebRequestPatch>();

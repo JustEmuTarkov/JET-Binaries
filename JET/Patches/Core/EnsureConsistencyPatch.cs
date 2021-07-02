@@ -9,9 +9,7 @@ namespace JET.Patches
 {
     class EnsureConsistencyPatch : GenericPatch<EnsureConsistencyPatch>
     {
-		public EnsureConsistencyPatch() : base(prefix: nameof(PatchPrefix))
-		{
-		}
+		public EnsureConsistencyPatch() : base(prefix: nameof(PatchPrefix)){}
 
 		protected override MethodBase GetTargetMethod()
 		{

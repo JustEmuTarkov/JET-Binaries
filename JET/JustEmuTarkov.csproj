@@ -172,6 +172,7 @@
     <Compile Include="Patches\Bundles\BundleLoadPatch.cs" />
     <Compile Include="Patches\Bundles\EasyAssetsPatch.cs" />
     <Compile Include="Patches\Bundles\EasyBundlePatch.cs" />
+    <Compile Include="Patches\Core\EnsureConsistencyPatch.cs" />
     <Compile Include="Patches\Core\StreamerModePatch.cs" />
     <Compile Include="Patches\Core\UnlockItemsIdLength.cs" />
     <Compile Include="Patches\Healing\MainMenuControllerPatch.cs" />
