@@ -41,6 +41,7 @@ namespace JET.Utilities
             public bool SpawnRandomizationPatch = true;
             public bool RemoveAddOfferButton = true;
             public bool NoFiltersPatch = false;
+            public bool JetLogger = false;
         }
 
         public static OfflineMode LoadModules()

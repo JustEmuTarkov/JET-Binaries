@@ -12,12 +12,15 @@ using JET.Patches.ScavMode;
 using System.Reflection;
 using JET.Patches.Other;
 using JET.Patches.Ragfair;
+using JET.Patches.Logging;
 
 namespace JET
 {
     [ObfuscationAttribute(Exclude = true)]
     public class Instance : MonoBehaviour
     {
+        public delegate void Void();
+        public static event Void ApplicationQuitEvent;
         private static Settings _settings;
 #if B13074
         private string Watermark = "13074 | JET";
@@ -111,6 +114,12 @@ namespace JET
         }
         private void OfflineModePatchRoutes(Offline.OfflineMode EnabledElements)
         {
+            if (EnabledElements.JetLogger)
+            {
+                PatcherUtil.Patch<InitialHookPatch>();
+                PatcherUtil.Patch<ResetHookPatch>();
+                PatcherUtil.Patch<LoggingPatch>();
+            }
 
             //if (EnabledElements.OfflineLootPatch)
             //    PatcherUtil.Patch<OfflineLootPatch>();
@@ -194,5 +203,7 @@ namespace JET
 
             Debug.LogError("SinglePlayer: Loaded");
         }
+
+        public void OnApplicationQuit() => ApplicationQuitEvent?.Invoke();
     }
 }

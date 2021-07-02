@@ -177,6 +177,9 @@
     <Compile Include="Patches\Core\UnlockItemsIdLength.cs" />
     <Compile Include="Patches\Healing\MainMenuControllerPatch.cs" />
     <Compile Include="Patches\Healing\PlayerPatch.cs" />
+    <Compile Include="Patches\Logging\InitialHookPatch.cs" />
+    <Compile Include="Patches\Logging\LoggingPatch.cs" />
+    <Compile Include="Patches\Logging\ResetHookPatch.cs" />
     <Compile Include="Patches\Matchmaker\InsuranceScreenPatch.cs" />
     <Compile Include="Patches\Matchmaker\MatchMakerAfterSelectLocation.cs" />
     <Compile Include="Patches\Matchmaker\MatchmakerOfflineRaidPatch.cs" />
@@ -214,6 +217,7 @@
     <Compile Include="Utilities\EasyBundleHelper.cs" />
     <Compile Include="Utilities\Hook\Loader.cs" />
     <Compile Include="Utilities\HTTP\Request.cs" />
+    <Compile Include="Utilities\Logging\FileLogger.cs" />
     <Compile Include="Utilities\Offline.cs" />
     <Compile Include="Utilities\Patching\AbstractPatch.cs" />
     <Compile Include="Utilities\Patching\GenericPatch.cs" />
@@ -231,6 +235,7 @@
     <Compile Include="Utilities\Reflection\PrivateMethodAccessor.cs" />
     <Compile Include="Utilities\Reflection\PrivateValueAccessor.cs" />
     <Compile Include="Utilities\Settings.cs" />
+    <Compile Include="Utilities\Logging\UnityLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeMap.dgml" />
