@@ -41,14 +41,25 @@ namespace JET
         private string Watermark = "Debug | JET";
 #endif
         [ObfuscationAttribute(Exclude = true)]
-        private void Start()
-        {
+        private void Awake() {
+            GClass389.IsLogsEnabled = true;
+            GClass389.UnityDebugLogsEnabled = true;
+            Debug.unityLogger.logEnabled = true;
+            Application.SetStackTraceLogType(LogType.Assert, StackTraceLogType.Full);
+            Application.SetStackTraceLogType(LogType.Error, StackTraceLogType.Full);
+            Application.SetStackTraceLogType(LogType.Exception, StackTraceLogType.Full);
+            Application.SetStackTraceLogType(LogType.Warning, StackTraceLogType.Full);
+            Application.SetStackTraceLogType(LogType.Log, StackTraceLogType.Full);
             Debug.LogError("[Starting]: " + Watermark);
             PatcherUtil.Patch<EnsureConsistencyPatch>();
             PatcherUtil.Patch<BattleEyePatch>();
             PatcherUtil.Patch<SslCertificatePatch>();
             PatcherUtil.Patch<UnityWebRequestPatch>();
             PatcherUtil.Patch<NotificationSslPatch>();
+        }
+        [ObfuscationAttribute(Exclude = true)]
+        private void Start()
+        {
 #if !B13074
             PatcherUtil.Patch<UnlockItemsIdLength>();
 #endif
@@ -101,16 +112,16 @@ namespace JET
         private void OfflineModePatchRoutes(Offline.OfflineMode EnabledElements)
         {
 
-            if (EnabledElements.OfflineLootPatch)
-                PatcherUtil.Patch<OfflineLootPatch>();
+            //if (EnabledElements.OfflineLootPatch)
+            //    PatcherUtil.Patch<OfflineLootPatch>();
             if (EnabledElements.OfflineSaveProfilePatch)
                 PatcherUtil.Patch<OfflineSaveProfilePatch>();
             if (EnabledElements.OfflineSpawnPointPatch)
                 PatcherUtil.Patch<OfflineSpawnPointPatch>();
-            if (EnabledElements.WeaponDurabilityPatch)
-                PatcherUtil.Patch<WeaponDurabilityPatch>();
-            if (EnabledElements.SingleModeJamPatch)
-                PatcherUtil.Patch<SingleModeJamPatch>();
+            //if (EnabledElements.WeaponDurabilityPatch)
+            //    PatcherUtil.Patch<WeaponDurabilityPatch>();
+            //if (EnabledElements.SingleModeJamPatch)
+            //    PatcherUtil.Patch<SingleModeJamPatch>();
             if (EnabledElements.ExperienceGainPatch)
                 PatcherUtil.Patch<ExperienceGainPatch>();
 
@@ -124,7 +135,7 @@ namespace JET
             if (EnabledElements.MatchMakerSelectionLocationScreenPatch)
             {
                 PatcherUtil.Patch<MatchMakerSelectionLocationScreenPatch>();
-                PatcherUtil.Patch<MatchMakerAfterSelectLocation>();
+                //PatcherUtil.Patch<MatchMakerAfterSelectLocation>();
             }
 
             if (EnabledElements.RemoveAddOfferButton)
@@ -167,12 +178,12 @@ namespace JET
                 PatcherUtil.Patch<LoadOfflineRaidScreenPatch>();
             if (EnabledElements.ScavPrefabLoadPatch)
                 PatcherUtil.Patch<ScavPrefabLoadPatch>();
-            if (EnabledElements.ScavProfileLoadPatch)
-                PatcherUtil.Patch<ScavProfileLoadPatch>();
+            //if (EnabledElements.ScavProfileLoadPatch)
+            //    PatcherUtil.Patch<ScavProfileLoadPatch>();
             //if (EnabledElements.ScavSpawnPointPatch)
             //    PatcherUtil.Patch<ScavSpawnPointPatch>();
-            if (EnabledElements.ScavExfilPatch)
-                PatcherUtil.Patch<ScavExfilPatch>(); // if its not required by players can be removed or moved into config loading patches
+            //if (EnabledElements.ScavExfilPatch)
+            //    PatcherUtil.Patch<ScavExfilPatch>(); // if its not required by players can be removed or moved into config loading patches
 
             if (EnabledElements.EndByTimerPatch)
                 PatcherUtil.Patch<EndByTimerPatch>();

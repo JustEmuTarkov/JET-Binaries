@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace JET.Patches
 {
@@ -13,14 +14,24 @@ namespace JET.Patches
 
 		protected override MethodBase GetTargetMethod()
 		{
-			return Assembly.GetAssembly(typeof(ICheckResult))
-				.GetTypes().Single(x => x.Name == "ConsistencyController")
-				.GetMethod("EnsureConsistency", BindingFlags.Public | BindingFlags.Instance);
+			/*return PatcherConstants.TargetAssembly.GetTypes().First(x =>
+					x.IsClass &&
+					x.GetMethod("Awake", BindingFlags.Public | BindingFlags.Instance) != null)
+				.GetNestedTypes(BindingFlags.NonPublic)
+				.Single(y => y.GetConstructor(new[] { typeof(int) }) != null).GetMethod("method_0",
+					BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);*/
+
+			return typeof(EFT.MainApplication)
+				.GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance)
+				.Single(x => x.Name == "Class1000")
+				.GetMethod("method_0", BindingFlags.NonPublic | BindingFlags.Instance);
 		}
 
-		private static bool PatchPrefix(ref Task<ICheckResult> __result)
+		static bool PatchPrefix(ref Task<ICheckResult> __result)
 		{
 			__result = Task.FromResult<ICheckResult>(new ScanResult());
+			Debug.LogError(__result.Result.Exception == null);
+			Debug.LogError("FUCKING CALLED ?? MAYBE ??");
 			return false;
 		}
 	}
@@ -31,8 +42,9 @@ namespace JET.Patches
 
 		public ScanResult()
 		{
-			ElapsedTime = new TimeSpan(10);
+			ElapsedTime = new TimeSpan(5);
 			Exception = null;
+
 		}
 	}
 }

@@ -27,6 +27,7 @@ namespace JET.Patches
 
         private static bool PatchPrefix(ref Task __result, object __instance)
 		{
+			Debug.LogError("Battleye done ?");
             __property.SetValue(__instance, true);
 			__result = Task.CompletedTask;
 			return false;
