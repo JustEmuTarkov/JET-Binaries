@@ -14,37 +14,33 @@ namespace JET.Patches
 
 		protected override MethodBase GetTargetMethod()
 		{
-			/*return PatcherConstants.TargetAssembly.GetTypes().First(x =>
-					x.IsClass &&
-					x.GetMethod("Awake", BindingFlags.Public | BindingFlags.Instance) != null)
-				.GetNestedTypes(BindingFlags.NonPublic)
-				.Single(y => y.GetConstructor(new[] { typeof(int) }) != null).GetMethod("method_0",
-					BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);*/
-
-			return typeof(EFT.MainApplication)
+			return typeof(FilesChecker.ICheckResult)
 				.GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance)
-				.Single(x => x.Name == "Class1000")
-				.GetMethod("method_0", BindingFlags.NonPublic | BindingFlags.Instance);
+				.Single(Class => Class.Name == "ConsistencyMetadataProvider")
+				.GetMethod("GetConsistencyMetadata", BindingFlags.Public | BindingFlags.Instance);
 		}
 
-		static bool PatchPrefix(ref Task<ICheckResult> __result)
+		static bool PatchPrefix(ref System.Collections.Generic.IReadOnlyList<FilesChecker.FileConsistencyMetadata> __result)
 		{
-			__result = Task.FromResult<ICheckResult>(new ScanResult());
-			Debug.LogError(__result.Result.Exception == null);
-			Debug.LogError("FUCKING CALLED ?? MAYBE ??");
+			Debug.LogError("No Files to check");
+			__result = new FileConsistencyMetadata[] {};
+			// you can add your own files to check to disallow game to run if something is not found 
+			// filename, size, checksum, is critical
+			//new FileConsistencyMetadata("EscapeFromTarkov.exe", 661712L, 72195026, true),
+			//__result = Task.FromResult<ICheckResult>(new ScanResult());
 			return false;
 		}
 	}
-	class ScanResult : ICheckResult
-	{
-		public TimeSpan ElapsedTime { get; private set; }
-		public Exception Exception { get; private set; }
+	//class ScanResult : ICheckResult
+	//{
+	//	public TimeSpan ElapsedTime { get; private set; }
+	//	public Exception Exception { get; private set; }
 
-		public ScanResult()
-		{
-			ElapsedTime = new TimeSpan(5);
-			Exception = null;
+	//	public ScanResult()
+	//	{
+	//		ElapsedTime = new TimeSpan(5);
+	//		Exception = null;
 
-		}
-	}
+	//	}
+	//}
 }

@@ -13,6 +13,7 @@ namespace JET.Patches.Logging
     class InitialHookPatch : GenericPatch<InitialHookPatch>
     {
         public InitialHookPatch() : base(postfix: nameof(PatchPostifx)) {}
+
         protected override MethodBase GetTargetMethod()
             => typeof(MainApplication).GetConstructors().First();
 

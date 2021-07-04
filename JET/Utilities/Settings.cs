@@ -52,7 +52,7 @@ namespace JET.Utilities
                 }
             }
             
-            Debug.LogError("[JET]: Successfully received Bundles");
+            Debug.Log("[JET]: Successfully received Bundles");
 		}
 
         private void CleanCache()

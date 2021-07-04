@@ -45,48 +45,43 @@ namespace JET
 #endif
         [ObfuscationAttribute(Exclude = true)]
         private void Awake() {
-            GClass389.IsLogsEnabled = true;
-            GClass389.UnityDebugLogsEnabled = true;
-            Debug.unityLogger.logEnabled = true;
-            Application.SetStackTraceLogType(LogType.Assert, StackTraceLogType.Full);
-            Application.SetStackTraceLogType(LogType.Error, StackTraceLogType.Full);
-            Application.SetStackTraceLogType(LogType.Exception, StackTraceLogType.Full);
-            Application.SetStackTraceLogType(LogType.Warning, StackTraceLogType.Full);
-            Application.SetStackTraceLogType(LogType.Log, StackTraceLogType.Full);
-            Debug.LogError("[Starting]: " + Watermark);
+
             PatcherUtil.Patch<EnsureConsistencyPatch>();
-            PatcherUtil.Patch<BattleEyePatch>();
-            PatcherUtil.Patch<SslCertificatePatch>();
-            PatcherUtil.Patch<UnityWebRequestPatch>();
-            PatcherUtil.Patch<NotificationSslPatch>();
         }
         [ObfuscationAttribute(Exclude = true)]
         private void Start()
         {
+            Debug.Log("[Starting]: " + Watermark);
+            PatcherUtil.Patch<InitialHookPatch>();
+            PatcherUtil.Patch<ResetHookPatch>();
+            PatcherUtil.Patch<LoggingPatch>();
+            PatcherUtil.Patch<BattleEyePatch>();
+            PatcherUtil.Patch<SslCertificatePatch>();
+            PatcherUtil.Patch<UnityWebRequestPatch>();
+            PatcherUtil.Patch<NotificationSslPatch>();
 #if !B13074
             PatcherUtil.Patch<UnlockItemsIdLength>();
 #endif
             PatcherUtil.Patch<BarterSchemeAutoFill>();
-            PatcherUtil.Patch<BarterSchemeAutoFillPersist>();
+            //PatcherUtil.Patch<BarterSchemeAutoFillPersist>();
             // allows to turn on and off the PreloaderUI.SetStreamMode(bool)
             // PatcherUtil.Patch<Patches.Core.StreamerModePatch>(); 
             // PatcherUtil.Patch<Patches.Core.FixChatOnDestroyPatch>(); 
 
-            Debug.LogError("Core: Loaded");
+            Debug.Log("Core: Loaded");
 
-            _settings = new Settings(null, Config.BackendUrl);
+            //_settings = new Settings(null, Config.BackendUrl);
 
-            PatcherUtil.Patch<EasyAssetsPatch>();
-            PatcherUtil.Patch<EasyBundlePatch>();
-            PatcherUtil.Patch<BundleLoadPatch>();
-            Debug.LogError("RuntimeBundles: Loaded");
+            //PatcherUtil.Patch<EasyAssetsPatch>();
+            //PatcherUtil.Patch<EasyBundlePatch>();
+            //PatcherUtil.Patch<BundleLoadPatch>();
+            //Debug.Log("RuntimeBundles: Loaded");
 
-            OfflineModePatchRoutes(Offline.LoadModules());
+            //OfflineModePatchRoutes(Offline.LoadModules());
 
 
             WatermarkOverrider();
         }
-        EFT.UI.LocalizedText localizedText;
         private void LateUpdate()
         {
             WatermarkOverrider();
@@ -100,6 +95,7 @@ namespace JET
             //}
             //catch { }
         }
+        EFT.UI.LocalizedText localizedText;
         private void WatermarkOverrider()
         {
             try
@@ -201,7 +197,7 @@ namespace JET
             if (EnabledElements.NoFiltersPatch)
                 PatcherUtil.Patch<NoFiltersPatch>();
 
-            Debug.LogError("SinglePlayer: Loaded");
+            Debug.Log("SinglePlayer: Loaded");
         }
 
         public void OnApplicationQuit() => ApplicationQuitEvent?.Invoke();
