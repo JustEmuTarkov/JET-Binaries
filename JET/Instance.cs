@@ -14,6 +14,13 @@ using JET.Patches.Other;
 using JET.Patches.Ragfair;
 using JET.Patches.Logging;
 
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using System.IO;
+using System;
+//using System.Text.Json;
+//using System.Text.Json.Serialization;
+
 namespace JET
 {
     [ObfuscationAttribute(Exclude = true)]
@@ -51,6 +58,15 @@ namespace JET
         [ObfuscationAttribute(Exclude = true)]
         private void Start()
         {
+            //try
+            //{ //client.game.profile.list
+            //    var stringProfiles = File.ReadAllText("J:\\_git\\_JET_REPOS\\JET-Backend-Server\\user\\profiles\\AID8131647517931710690RF\\character.json");
+            //    var player_data = JsonConvert.DeserializeObject<EFT.Profile>(stringProfiles);
+            //   // var serialized = JsonConvert.SerializeObject(player_data);
+            //    Debug.LogError("PLAYER STRUCT");
+            //    //Debug.LogError(serialized);
+            //}
+            //catch (Exception e){ Debug.LogError(e); }
             Debug.Log("[Starting]: " + Watermark);
             PatcherUtil.Patch<InitialHookPatch>();
             PatcherUtil.Patch<ResetHookPatch>();
