@@ -62,11 +62,11 @@ namespace JET
             //{ //client.game.profile.list
             //    var stringProfiles = File.ReadAllText("J:\\_git\\_JET_REPOS\\JET-Backend-Server\\user\\profiles\\AID8131647517931710690RF\\character.json");
             //    var player_data = JsonConvert.DeserializeObject<EFT.Profile>(stringProfiles);
-            //   // var serialized = JsonConvert.SerializeObject(player_data);
-            //    Debug.LogError("PLAYER STRUCT");
+            //    // var serialized = JsonConvert.SerializeObject(player_data);
+            //    Debug.LogError("FUCKING WORKING !!!!!");
             //    //Debug.LogError(serialized);
             //}
-            //catch (Exception e){ Debug.LogError(e); }
+            //catch (Exception e) { Debug.LogError(e); }
             Debug.Log("[Starting]: " + Watermark);
             PatcherUtil.Patch<InitialHookPatch>();
             PatcherUtil.Patch<ResetHookPatch>();
@@ -112,8 +112,11 @@ namespace JET
             //catch { }
         }
         EFT.UI.LocalizedText localizedText;
+        int count = 0;
         private void WatermarkOverrider()
         {
+            if (count > 20)
+                return;
             try
             {
                 if (localizedText == null)
@@ -122,7 +125,7 @@ namespace JET
                     .GetValue(MonoBehaviourSingleton<EFT.UI.PreloaderUI>.Instance) as EFT.UI.LocalizedText;
                 localizedText.LocalizationKey = Watermark;
             }
-            catch { }
+            catch { count++; }
         }
         private void OfflineModePatchRoutes(Offline.OfflineMode EnabledElements)
         {
