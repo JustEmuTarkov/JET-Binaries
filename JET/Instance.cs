@@ -88,12 +88,12 @@ namespace JET
 
             //_settings = new Settings(null, Config.BackendUrl);
 
-            //PatcherUtil.Patch<EasyAssetsPatch>();
-            //PatcherUtil.Patch<EasyBundlePatch>();
-            //PatcherUtil.Patch<BundleLoadPatch>();
+            PatcherUtil.Patch<EasyAssetsPatch>();
+            PatcherUtil.Patch<EasyBundlePatch>();
+            PatcherUtil.Patch<BundleLoadPatch>();
             //Debug.Log("RuntimeBundles: Loaded");
 
-            //OfflineModePatchRoutes(Offline.LoadModules());
+            OfflineModePatchRoutes(Offline.LoadModules());
 
 
             WatermarkOverrider();
@@ -112,11 +112,8 @@ namespace JET
             //catch { }
         }
         EFT.UI.LocalizedText localizedText;
-        int count = 0;
         private void WatermarkOverrider()
         {
-            if (count > 20)
-                return;
             try
             {
                 if (localizedText == null)
@@ -125,7 +122,7 @@ namespace JET
                     .GetValue(MonoBehaviourSingleton<EFT.UI.PreloaderUI>.Instance) as EFT.UI.LocalizedText;
                 localizedText.LocalizationKey = Watermark;
             }
-            catch { count++; }
+            catch { }
         }
         private void OfflineModePatchRoutes(Offline.OfflineMode EnabledElements)
         {
@@ -140,8 +137,8 @@ namespace JET
             //    PatcherUtil.Patch<OfflineLootPatch>();
             if (EnabledElements.OfflineSaveProfilePatch)
                 PatcherUtil.Patch<OfflineSaveProfilePatch>();
-            if (EnabledElements.OfflineSpawnPointPatch)
-                PatcherUtil.Patch<OfflineSpawnPointPatch>();
+            //if (EnabledElements.OfflineSpawnPointPatch)
+            //    PatcherUtil.Patch<OfflineSpawnPointPatch>();
             //if (EnabledElements.WeaponDurabilityPatch)
             //    PatcherUtil.Patch<WeaponDurabilityPatch>();
             //if (EnabledElements.SingleModeJamPatch)
