@@ -8,19 +8,19 @@ using UnityEngine;
 
 namespace JET.Patches
 {
-    class EnsureConsistencyPatch : GenericPatch<EnsureConsistencyPatch>
-    {
+	class EnsureConsistencyPatch : GenericPatch<EnsureConsistencyPatch>
+	{
 		public EnsureConsistencyPatch() : base(prefix: nameof(PatchPrefix)){}
 
 		protected override MethodBase GetTargetMethod()
 		{
-			return typeof(FilesChecker.ICheckResult)
-				.GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance)
+			return typeof(ICheckResult)
+				.Assembly.GetTypes()
 				.Single(Class => Class.Name == "ConsistencyMetadataProvider")
 				.GetMethod("GetConsistencyMetadata", BindingFlags.Public | BindingFlags.Instance);
 		}
 
-		static bool PatchPrefix(ref System.Collections.Generic.IReadOnlyList<FilesChecker.FileConsistencyMetadata> __result)
+		static bool PatchPrefix(ref System.Collections.Generic.IReadOnlyList<FileConsistencyMetadata> __result)
 		{
 			Debug.LogError("No Files to check");
 			__result = new FileConsistencyMetadata[] {};
