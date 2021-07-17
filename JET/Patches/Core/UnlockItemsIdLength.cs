@@ -20,11 +20,6 @@ namespace JET.Patches
 
         protected override MethodBase GetTargetMethod()
         {
-#if B13074
-            // its fixed from now on...
-            return null;
-#else
-
             return PatcherConstants.TargetAssembly.GetTypes()
                 .Single(x => {
                    // x.Name.StartsWith("Class") &&
@@ -32,29 +27,24 @@ namespace JET.Patches
                    // Find Logout >> Find Class with 3 number like 189 etc. >> 
                     if (x.Name.StartsWith("Class"))
                     {
-                        var method_29_info = x.GetMethod("method_29", BindingFlags.NonPublic | BindingFlags.Instance);
-                        if (method_29_info != null)
+                        var method_info = x.GetMethod("method_28", BindingFlags.NonPublic | BindingFlags.Instance);
+                        if (method_info != null)
                         {
-                            ParameterInfo[] paramInfo = method_29_info.GetParameters();
+                            ParameterInfo[] paramInfo = method_info.GetParameters();
                             return  paramInfo.Length == 1 && 
                                     paramInfo[0].Name == "item" && 
-                                    paramInfo[0].ParameterType.Name.StartsWith("GStruct") && 
-                                    method_29_info.ReturnType.Name.StartsWith("Class");
+                                    paramInfo[0].ParameterType.Name == "TradingItemReference" &&
+                                    method_info.ReturnType.Name.EndsWith("`3");
                         }
                     }
                     return false;
-                }).GetMethod("method_29", BindingFlags.NonPublic | BindingFlags.Instance);
-#endif
+                }).GetMethod("method_28", BindingFlags.NonPublic | BindingFlags.Instance);
         }
 
         static IEnumerable<CodeInstruction> PatchTranspile(IEnumerable<CodeInstruction> instructions)
         {
-#if B13074
-            return instructions;
-#else
 
             var codes = new List<CodeInstruction>(instructions);
-
             // that should be the fastest way cause its at index 3 and we need to remov e3 instructions from there
             for (var i = 0; i < 3; i++)
                 codes.RemoveAt(3);
@@ -87,7 +77,6 @@ namespace JET.Patches
                 return instructions;
             }
             return codes.AsEnumerable();
-#endif
         }
     }
 }
