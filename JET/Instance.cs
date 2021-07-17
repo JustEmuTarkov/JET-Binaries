@@ -99,7 +99,14 @@ namespace JET
         private void LateUpdate()
         {
             WatermarkOverrider();
-
+            GClass389.IsLogsEnabled = true;
+            GClass389.UnityDebugLogsEnabled = true;
+            Debug.unityLogger.logEnabled = true;
+            Application.SetStackTraceLogType(LogType.Assert, StackTraceLogType.Full);
+            Application.SetStackTraceLogType(LogType.Error, StackTraceLogType.Full);
+            Application.SetStackTraceLogType(LogType.Exception, StackTraceLogType.Full);
+            Application.SetStackTraceLogType(LogType.Warning, StackTraceLogType.Full);
+            Application.SetStackTraceLogType(LogType.Log, StackTraceLogType.Full);
             // DISABLE ADD OFFER BUTTON IN FLEA MARKET
             //try
             //{
