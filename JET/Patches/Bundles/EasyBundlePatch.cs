@@ -60,7 +60,6 @@ namespace JET.Patches
 
         static bool PatchPrefix(object __instance, string key, string rootPath, AssetBundleManifest manifest, object bundleLock, ref string ___string_1, ref string ___string_0, ref Task ___task_0)
         {
-            Debug.Log("EasyBundlePatch Start");
             var easyBundle = new EasyBundleHelper(__instance)
             {
                 Key = key
@@ -75,8 +74,6 @@ namespace JET.Patches
             ___task_0 = null;
 
             Shared.BundleLockField.SetValue(__instance, bundleLock);
-
-            Debug.Log("EasyBundlePatch Finish");
 
             return false;
         }

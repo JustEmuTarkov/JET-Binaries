@@ -90,9 +90,13 @@ namespace JET.Patches
                 if (!File.Exists(___string_1) && Shared.CachedBundles.ContainsKey(___string_1))
                     ___string_1 = Shared.CachedBundles[___string_1];
 
-                Debug.Log("BundleLoadPatch Start");
-                ___task_0 = LoadTarkovBundle(__instance, bundleLock, ___bool_0, ___string_1, ___string_0);
-                Debug.Log("BundleLoadPatch Finish");
+                try
+                {
+                    ___task_0 = LoadTarkovBundle(__instance, bundleLock, ___bool_0, ___string_1, ___string_0);
+                }catch(Exception e)
+                {
+                    Debug.LogError(e);
+                }
                 __result = ___task_0;
             }
             catch (Exception e)
@@ -118,7 +122,6 @@ namespace JET.Patches
 
                 await Task.Delay(100);
             }
-
             if (!bool_0)
             {
                 Shared.TaskField.SetValue(instance, null);
@@ -132,7 +135,6 @@ namespace JET.Patches
 
 
                 Debug.Log($"Patching bundle {key} with modded assets...");
-
                 //AssetBundle assetBundle;
                 var request = AssetBundle.LoadFromFileAsync(Shared.ModdedBundlePaths[key]);
                 if (request == null)
@@ -167,7 +169,9 @@ namespace JET.Patches
 
                 var assetsRequest = assetBundle.LoadAllAssetsAsync();
                 while (!assetsRequest.isDone && assetsRequest.progress < 1)
+                {
                     await Task.Delay(100);
+                }
                 var assetsList = assetsRequest.allAssets;
 
                 AccessTools.Property(instance.GetType(), "Progress").SetValue(instance, 0.9f);
@@ -239,7 +243,6 @@ namespace JET.Patches
                 Shared.TaskField.SetValue(instance, null);
                 Shared.BundleField.SetValue(instance, assetBundle);
             }
-
         }
     }
 

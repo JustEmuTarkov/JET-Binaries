@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace JET.Patches.Bundles
 {
@@ -89,7 +90,7 @@ namespace JET.Patches.Bundles
         {
             get
             {
-                if(_bundleLockConstructor == null)
+                if (_bundleLockConstructor == null)
                     _bundleLockConstructor = PatcherConstants.TargetAssembly.GetTypes()
                         .First(x => x.IsClass && x.GetProperty("MaxConcurrentOperations") != null).GetConstructors().First();
                 return _bundleLockConstructor;
@@ -120,8 +121,8 @@ namespace JET.Patches.Bundles
 
             internal bool IsLocked
             {
-                get => (bool)AccessTools.Field(_instance.GetType(), "IsLocked").GetValue(_instance);
-                set => AccessTools.Field(_instance.GetType(), "IsLocked").SetValue(_instance, value);
+                get => (bool)AccessTools.Property(_instance.GetType(), "IsLocked").GetValue(_instance);
+                set => AccessTools.Property(_instance.GetType(), "IsLocked").SetValue(_instance, value);
             }
             internal BundleLockWrapper(object instance)
             {

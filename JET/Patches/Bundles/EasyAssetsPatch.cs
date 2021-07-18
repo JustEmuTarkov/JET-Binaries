@@ -77,7 +77,6 @@ namespace JET.Patches
 
         private static bool PatchPrefix(ref object[] loadables, string defaultKey, [CanBeNull] Func<string, bool> shouldExclude)
         {
-            Debug.Log("EasyAssetsPatch Start");
             CacheServerBundles();
             var newInstances = new List<object>();
 
@@ -96,7 +95,6 @@ namespace JET.Patches
 
             loadables = loadables.Concat(newInstances.ToArray()).ToArray();
 
-            Debug.Log("EasyAssetsPatch Finish");
             return true;
         }
         private static string GetLocalBundlePath(Bundle bundle)

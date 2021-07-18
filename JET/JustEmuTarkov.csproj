@@ -261,11 +261,13 @@
   <PropertyGroup>
     <PostBuildEvent>xcopy /Y /I "$(TargetDir)NLog.JET.dll" "$(SolutionDir)\Build\$(Configuration)\EscapeFromTarkov_Data\Managed\"
 	
- xcopy /Y /I "$(SolutionDir)Shared\Resources\NLog.dll.nlog" "$(SolutionDir)\Build\$(Configuration)\EscapeFromTarkov_Data\Managed\"
+xcopy /Y /I "$(SolutionDir)Shared\Resources\NLog.dll.nlog" "$(SolutionDir)\Build\$(Configuration)\EscapeFromTarkov_Data\Managed\"
 
- xcopy /Y /I "$(TargetDir)0Harmony.dll" "$(SolutionDir)\Build\$(Configuration)\EscapeFromTarkov_Data\Managed\"
+xcopy /Y /I "$(TargetDir)0Harmony.dll" "$(SolutionDir)\Build\$(Configuration)\EscapeFromTarkov_Data\Managed\"
 
- xcopy /Y /I "$(TargetDir)Assembly-CSharp.dll" "$(SolutionDir)\Build\$(Configuration)\EscapeFromTarkov_Data\Managed\"
-</PostBuildEvent>
+xcopy /Y /I "$(TargetDir)Assembly-CSharp.dll" "$(SolutionDir)\Build\$(Configuration)\EscapeFromTarkov_Data\Managed\"
+
+mkdir "$(SolutionDir)\Build\$(Configuration)\Bundles\Local"
+mkdir "$(SolutionDir)\Build\$(Configuration)\Bundles\Cache"</PostBuildEvent>
   </PropertyGroup>
 </Project>
