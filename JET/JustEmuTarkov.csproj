@@ -267,7 +267,7 @@ xcopy /Y /I "$(TargetDir)0Harmony.dll" "$(SolutionDir)\Build\$(Configuration)\Es
 
 xcopy /Y /I "$(TargetDir)Assembly-CSharp.dll" "$(SolutionDir)\Build\$(Configuration)\EscapeFromTarkov_Data\Managed\"
 
-mkdir "$(SolutionDir)\Build\$(Configuration)\Bundles\Local"
-mkdir "$(SolutionDir)\Build\$(Configuration)\Bundles\Cache"</PostBuildEvent>
+if not exist "$(SolutionDir)\Build\$(Configuration)\Bundles\Local" mkdir "$(SolutionDir)\Build\$(Configuration)\Bundles\Local"
+if not exist "$(SolutionDir)\Build\$(Configuration)\Bundles\Cache" mkdir "$(SolutionDir)\Build\$(Configuration)\Bundles\Cache"</PostBuildEvent>
   </PropertyGroup>
 </Project>
