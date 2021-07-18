@@ -6,6 +6,9 @@ using System.Reflection;
 using Diz.DependencyManager;
 using JET.Utilities.Patching;
 using JET.Utilities;
+using JET.Patches.Bundles;
+using System.Threading.Tasks;
+using UnityEngine;
 #if B13074
 using IEasyBundle = GInterface263; //Property: SameNameAsset 
 using IBundleLock = GInterface264; //Property: IsLocked
@@ -26,7 +29,7 @@ using BindableState = GClass2166<Diz.DependencyManager.ELoadState>; //Construct 
 #endif
 #if B9767
 using IEasyBundle = GInterface238; //Property: SameNameAsset 
-using IBundleLock = GInterface239; //Property: IsLocked
+using IBundleLock = bundleLock; //Property: IsLocked
 // go to actual gclass and search for gclassXXXX<T> with initial value gparam_0 and base.method_0(value) call
 using BindableState = GClass2100<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue 
 #endif
@@ -48,51 +51,32 @@ namespace JET.Patches
 {
     public class EasyBundlePatch : GenericPatch<EasyBundlePatch>
     {
-        public EasyBundlePatch() : base(prefix: nameof(PatchPrefix)) {}
+        public EasyBundlePatch() : base(prefix: nameof(PatchPrefix)) { }
 
         protected override MethodBase GetTargetMethod()
         {
-            return PatcherConstants.TargetAssembly.GetTypes().Single(IsTargetType).GetConstructors()[0];
+            return Shared.LoaderType.GetConstructors().First();
         }
 
-        private static bool IsTargetType(Type type)
+        static bool PatchPrefix(object __instance, string key, string rootPath, AssetBundleManifest manifest, object bundleLock, ref string ___string_1, ref string ___string_0, ref Task ___task_0)
         {
-            return type.IsClass && type.GetProperty("SameNameAsset") != null;
-        }
-
-        static bool PatchPrefix(IEasyBundle __instance, string key, string rootPath, UnityEngine.AssetBundleManifest manifest, IBundleLock bundleLock)
-        {
-            var easyBundle = new EasyBundleHelper(__instance);
-            easyBundle.Key = key;
-
-            var path = rootPath + key;
-            var bundle = (BundleInfo)null;
-
-            if (Settings.bundles.TryGetValue(key, out bundle))
+            Debug.Log("EasyBundlePatch Start");
+            var easyBundle = new EasyBundleHelper(__instance)
             {
-                path = bundle.Path;
-            }
+                Key = key
+            };
+            ___string_1 = rootPath + key;
+            ___string_0 = Path.GetFileNameWithoutExtension(key);
+            if (manifest != null)
+                easyBundle.DependencyKeys = manifest.GetDirectDependencies(key);
 
-            easyBundle.Path = path;
-            easyBundle.KeyWithoutExtension = Path.GetFileNameWithoutExtension(key);
+            var newInst = Activator.CreateInstance(Shared.LoadState.PropertyType, ELoadState.Unloaded, null);
+            Shared.LoadState.SetValue(__instance, newInst);
+            ___task_0 = null;
 
-            var dependencyKeys = manifest.GetDirectDependencies(key);
+            Shared.BundleLockField.SetValue(__instance, bundleLock);
 
-            foreach (KeyValuePair<string, BundleInfo> kvp in Settings.bundles)
-            {
-                if (!key.Equals(kvp.Key))
-                {
-                    continue;
-                }
-
-                var result = dependencyKeys == null ? new List<string>() : dependencyKeys.ToList();
-                dependencyKeys = result.Union(kvp.Value.DependencyKeys).ToList().ToArray<string>();
-                break;
-            }
-
-            easyBundle.DependencyKeys = dependencyKeys;
-            easyBundle.LoadState = new BindableState(ELoadState.Unloaded, null);
-            easyBundle.BundleLock = bundleLock;
+            Debug.Log("EasyBundlePatch Finish");
 
             return false;
         }

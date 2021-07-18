@@ -10,6 +10,12 @@ using Diz.Resources;
 using JetBrains.Annotations;
 using JET.Utilities.Patching;
 using JET.Utilities;
+using JET.Patches.Bundles;
+using System.IO;
+using JET.Utilities.HTTP;
+using Newtonsoft.Json;
+using System.Net;
+using System.Net.Cache;
 #if B13074
 using IEasyBundle = GInterface263; //Property: SameNameAsset 
 using IBundleLock = GInterface264; //Property: IsLocked
@@ -30,7 +36,7 @@ using DependencyGraph = GClass2181<GInterface250>; // Method: GetDefaultNode() /
 #endif
 #if B9767
 using IEasyBundle = GInterface238; //Property: SameNameAsset 
-using IBundleLock = GInterface239; //Property: IsLocked
+using IBundleLock = bundleLock; //Property: IsLocked
 using BundleLock = GClass2114; //Property: MaxConcurrentOperations
 using DependencyGraph = GClass2115<GInterface238>; // Method: GetDefaultNode() / Inside <T> goes IEasyBundle
 #endif
@@ -51,96 +57,163 @@ namespace JET.Patches
 {
     public class EasyAssetsPatch : GenericPatch<EasyAssetsPatch>
     {
-        private static Type easyBundleType;
-        private static string bundlesFieldName;
+        private const string BUNDLE_URL = "/singleplayer/bundles";
+        private static WebClient Client = new WebClient { CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore) };
 
         public EasyAssetsPatch() : base(prefix: nameof(PatchPrefix)) { }
 
         protected override MethodBase GetTargetMethod()
         {
-            // return AccessTools.Method("Diz.Resources.EasyAssets:Init");
-
-            easyBundleType = PatcherConstants.TargetAssembly.GetTypes()
-                .Single(type => type.IsClass && type.GetProperty("SameNameAsset") != null);
-            bundlesFieldName = easyBundleType.Name.ToLower() + "_0";
-
-            var targetType = PatcherConstants.TargetAssembly.GetTypes().Single(IsTargetType);
-            return AccessTools.GetDeclaredMethods(targetType).Single(IsTargetMethod);
+            var nodeInterfaceType = PatcherConstants.TargetAssembly.GetTypes().First(x => x.IsInterface && x.GetProperty("SameNameAsset") != null);
+            var targetType = PatcherConstants.TargetAssembly.GetTypes().Single(IsTargetType).MakeGenericType(nodeInterfaceType);
+            
+            return targetType.GetConstructors().First();
         }
 
         private static bool IsTargetType(Type type)
         {
-            //TODO: Development needs, to be deleted later
-            /*if (type == typeof(EasyAssets))
-            {
-                Debugger.Break();
-            }*/
-
-            var fields = type.GetFields();
-
-            if (fields.Length > 2)
-                return false;
-
-            if (!fields.Any(x => x.Name == "Manifest"))
-                return false;
-
-            return type.GetMethod("Create", BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly) != null;
+            return type.IsClass && type.GetMethod("GetNode") != null && string.IsNullOrWhiteSpace(type.Namespace);
         }
 
-        private static bool IsTargetMethod(MethodInfo mi)
+        private static bool PatchPrefix(ref object[] loadables, string defaultKey, [CanBeNull] Func<string, bool> shouldExclude)
         {
-            var parameters = mi.GetParameters();
-            return (parameters.Length != 5 || parameters[0].Name != "bundleLock" || parameters[1].Name != "defaultKey" || parameters[4].Name != "shouldExclude") ? false : true;
+            Debug.Log("EasyAssetsPatch Start");
+            CacheServerBundles();
+            var newInstances = new List<object>();
+
+            foreach (var bundle in Shared.CachedBundles)
+            {
+                var bundleLock = Shared.BundleLockConstructor.Invoke(new object[] { 1 });
+                var loaderInstance =
+                    Activator.CreateInstance(Shared.LoaderType, bundle.Key, string.Empty, null, bundleLock);
+                AccessTools.Property(Shared.LoaderType, "DependencyKeys").SetValue(loaderInstance, 
+                    Shared.ManifestCache.ContainsKey(bundle.Key)
+                        ? File.ReadAllLines(Shared.ManifestCache[bundle.Key])
+                        : new string[] { });
+                newInstances.Add(loaderInstance);
+                Debug.Log("Adding custom bundle " + bundle.Key + " to the game");
+            }
+
+            loadables = loadables.Concat(newInstances.ToArray()).ToArray();
+
+            Debug.Log("EasyAssetsPatch Finish");
+            return true;
+        }
+        private static string GetLocalBundlePath(Bundle bundle)
+        {
+            try
+            {
+                var local = false;
+                var backend = new Uri(Config.BackendUrl);
+                if (IPAddress.TryParse(backend.Host, out var ip))
+                    if (ip.MapToIPv4().ToString().StartsWith("127"))
+                        local = true;
+
+
+                if (local && File.Exists(bundle.path))
+                    return bundle.path;
+
+                // Check local bundles folder
+                var possibleLocalPath = Path.Combine(Shared.LOCAL_BUNDLES_PATH, bundle.key);
+                if (File.Exists(possibleLocalPath))
+                    return possibleLocalPath;
+
+                // Check local cache
+                var cachePath = Path.Combine(Shared.CACHE_BUNDLES_PATH, backend.Host, bundle.key);
+                if (File.Exists(cachePath))
+                    return cachePath;
+
+                // Download bundle and put it in the cache folder
+                var url = Config.BackendUrl + "/files/bundle/" + bundle.key;
+                var dirPath = Path.GetDirectoryName(cachePath);
+                if (!Directory.Exists(dirPath))
+                    Directory.CreateDirectory(dirPath);
+
+                Debug.Log("Downloading bundle from " + url);
+
+                Client.DownloadFile(url, cachePath);
+
+                return cachePath;
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e.Data);
+                return null;
+            }
         }
 
-        static bool PatchPrefix(EasyAssets __instance, [CanBeNull] IBundleLock bundleLock, string defaultKey, string rootPath, string platformName, [CanBeNull] Func<string, bool> shouldExclude, ref Task __result)
+        private static void CacheServerBundles()
         {
-            __result = Init(__instance, bundleLock, defaultKey, rootPath, platformName, shouldExclude);
-            return false;
+            try
+            {
+                var text = new Request(null, Config.BackendUrl).GetJson(BUNDLE_URL);
+                var serverBundles = JsonConvert.DeserializeObject<Bundle[]>(text);
+                foreach (var bundle in serverBundles)
+                {
+                    var localPath = GetLocalBundlePath(bundle);
+                    AssetBundle customBundle = null;
+
+
+                    if (bundle.dependencyKeys.Length > 0)
+                        File.WriteAllLines(localPath + ".manifest", bundle.dependencyKeys);
+
+                    try
+                    {
+                        customBundle = AssetBundle.LoadFromFile(localPath);
+                        var bundlePath = Path.Combine(AppContext.BaseDirectory,
+                            "EscapeFromTarkov_Data/StreamingAssets/Windows/", customBundle.name);
+                        if (!File.Exists(bundlePath))
+                        {
+                            Shared.CachedBundles.Add(customBundle.name, localPath);
+                            Debug.Log("Cached modded bundle " + customBundle.name);
+                            var manifestPath = localPath + ".manifest";
+                            if (File.Exists(manifestPath))
+                            {
+                                Shared.ManifestCache.Add(customBundle.name, manifestPath);
+                                Debug.Log("Cached manifest for " + customBundle.name);
+                            }
+                        }
+
+                        else
+                        {
+                            var assets = customBundle.GetAllAssetNames();
+                            foreach (var assetName in assets)
+                            {
+                                if (!Shared.ModdedAssets.ContainsKey(customBundle.name))
+                                    Shared.ModdedAssets.Add(customBundle.name, new List<string>());
+                                if (!Shared.ModdedBundlePaths.ContainsKey(customBundle.name))
+                                    Shared.ModdedBundlePaths.Add(customBundle.name, localPath);
+                                if (!Shared.ModdedAssets[customBundle.name].Contains(assetName))
+                                    Shared.ModdedAssets[customBundle.name].Add(assetName);
+                            }
+
+                            Debug.Log("Cached modded assets for " + customBundle.name);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogError("Failed to Load modded bundle " + localPath + ": " + e);
+                    }
+
+                    try
+                    {
+                        customBundle.Unload(true);
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e.ToString());
+            }
         }
-
-        public static async Task Init(EasyAssets __instance, [CanBeNull] IBundleLock bundleLock, string defaultKey, string rootPath, string platformName, [CanBeNull] Func<string, bool> shouldExclude)
+        internal class Bundle
         {
-            var traverse = Traverse.Create(__instance);
-            var path = rootPath.Replace("file:///", "").Replace("file://", "") + "/" + platformName + "/";
-            
-            var manifestLoading = AssetBundle.LoadFromFileAsync(path + platformName);
-            await manifestLoading.Await();
-            var assetBundle = manifestLoading.assetBundle;
-            var assetLoading = assetBundle.LoadAllAssetsAsync();
-
-            await assetLoading.Await();
-            traverse.Field<AssetBundleManifest>("Manifest").Value = (AssetBundleManifest)assetLoading.allAssets[0];
-            var manifest = traverse.Field<AssetBundleManifest>("Manifest").Value;
-
-            //Add ModManifest
-            var result = manifest.GetAllAssetBundles().ToList<string>();
-            var resourcesModbundles = new List<string>();
-
-            foreach (KeyValuePair<string, BundleInfo> kvp in Settings.bundles)
-            {
-                resourcesModbundles.Add(kvp.Key);
-            }
-
-            var bundleNames = result.Union(resourcesModbundles).ToList<string>().ToArray<string>();
-
-            traverse.Field(bundlesFieldName).SetValue(Array.CreateInstance(easyBundleType, bundleNames.Length));
-
-            if (bundleLock == null)
-            {
-                bundleLock = new BundleLock(int.MaxValue);
-            }
-
-            var bundles = traverse.Field(bundlesFieldName).GetValue<IEasyBundle[]>();
-
-            for (var i = 0; i < bundleNames.Length; i++)
-            {
-                bundles[i] = (IEasyBundle)Activator.CreateInstance(easyBundleType, new object[] { bundleNames[i], path, manifest, bundleLock });
-                await JobScheduler.Yield();
-            }
-
-            traverse.Field(bundlesFieldName).SetValue(bundles);
-            traverse.Property<DependencyGraph>("System").Value = new DependencyGraph(bundles, defaultKey, shouldExclude);
+            public string key { get; set; }
+            public string path { get; set; }
+            public string[] dependencyKeys { get; set; }
         }
     }
 }
