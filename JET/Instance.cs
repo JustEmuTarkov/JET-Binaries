@@ -52,8 +52,9 @@ namespace JET
 #endif
         [ObfuscationAttribute(Exclude = true)]
         private void Awake() {
-
+#if B13074
             PatcherUtil.Patch<EnsureConsistencyPatch>();
+#endif
         }
         [ObfuscationAttribute(Exclude = true)]
         private void Start()
@@ -68,9 +69,6 @@ namespace JET
             //}
             //catch (Exception e) { Debug.LogError(e); }
             Debug.Log("[Starting]: " + Watermark);
-            PatcherUtil.Patch<InitialHookPatch>();
-            PatcherUtil.Patch<ResetHookPatch>();
-            PatcherUtil.Patch<LoggingPatch>();
             PatcherUtil.Patch<BattleEyePatch>();
             PatcherUtil.Patch<SslCertificatePatch>();
             PatcherUtil.Patch<UnityWebRequestPatch>();
@@ -99,6 +97,7 @@ namespace JET
         private void LateUpdate()
         {
             WatermarkOverrider();
+#if B13074
             GClass389.IsLogsEnabled = true;
             GClass389.UnityDebugLogsEnabled = true;
             Debug.unityLogger.logEnabled = true;
@@ -107,6 +106,7 @@ namespace JET
             Application.SetStackTraceLogType(LogType.Exception, StackTraceLogType.Full);
             Application.SetStackTraceLogType(LogType.Warning, StackTraceLogType.Full);
             Application.SetStackTraceLogType(LogType.Log, StackTraceLogType.Full);
+#endif
             // DISABLE ADD OFFER BUTTON IN FLEA MARKET
             //try
             //{
@@ -183,6 +183,9 @@ namespace JET
                 PatcherUtil.Patch<RemoveUsedBotProfilePatch>();
             if (EnabledElements.SpawnPmcPatch)
                 PatcherUtil.Patch<SpawnPmcPatch>();
+
+            PatcherUtil.Patch<BotSettingsLoadPatch>();
+            
             if (EnabledElements.CoreDifficultyPatch)
                 PatcherUtil.Patch<CoreDifficultyPatch>();
             if (EnabledElements.BotDifficultyPatch)

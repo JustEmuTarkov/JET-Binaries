@@ -1,4 +1,5 @@
-﻿using FilesChecker;
+﻿#if B13074
+using FilesChecker;
 using JET.Utilities.Patching;
 using System;
 using System.Linq;
@@ -44,3 +45,4 @@ namespace JET.Patches
 	//	}
 	//}
 }
+#endif
