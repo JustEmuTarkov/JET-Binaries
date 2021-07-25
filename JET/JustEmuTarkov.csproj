@@ -166,55 +166,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomMods.cs" />
     <Compile Include="Hook\Target.cs" />
     <Compile Include="Instance.cs" />
-    <Compile Include="Patches\Bundles\Shared.cs" />
-    <Compile Include="Patches\Bots\BotSettingsLoadPatch.cs" />
     <Compile Include="Patches\Core\BattleEyePatch.cs" />
-    <Compile Include="Patches\Bots\BossSpawnChancePatch.cs" />
-    <Compile Include="Patches\Bots\BotDifficultyPatch.cs" />
-    <Compile Include="Patches\Bots\BotTemplateLimitPatch.cs" />
-    <Compile Include="Patches\Bots\CoreDifficultyPatch.cs" />
-    <Compile Include="Patches\Bots\GetNewBotTemplatesPatch.cs" />
-    <Compile Include="Patches\Bots\RemoveUsedBotProfilePatch.cs" />
-    <Compile Include="Patches\Bots\SpawnPmcPatch.cs" />
-    <Compile Include="Patches\Bundles\BundleLoadPatch.cs" />
-    <Compile Include="Patches\Bundles\EasyAssetsPatch.cs" />
-    <Compile Include="Patches\Bundles\EasyBundlePatch.cs" />
     <Compile Include="Patches\Core\EnsureConsistencyPatch.cs" />
-    <Compile Include="Patches\Core\StreamerModePatch.cs" />
-    <Compile Include="Patches\Core\UnlockItemsIdLength.cs" />
-    <Compile Include="Patches\Healing\MainMenuControllerPatch.cs" />
-    <Compile Include="Patches\Healing\PlayerPatch.cs" />
     <Compile Include="Patches\Logging\InitialHookPatch.cs" />
     <Compile Include="Patches\Logging\LoggingPatch.cs" />
     <Compile Include="Patches\Logging\ResetHookPatch.cs" />
-    <Compile Include="Patches\Matchmaker\InsuranceScreenPatch.cs" />
-    <Compile Include="Patches\Matchmaker\MatchMakerAfterSelectLocation.cs" />
-    <Compile Include="Patches\Matchmaker\MatchmakerOfflineRaidPatch.cs" />
-    <Compile Include="Patches\Matchmaker\MatchMakerSelectionLocationScreenPatch.cs" />
     <Compile Include="Patches\Core\NotificationSslPatch.cs" />
-    <Compile Include="Patches\Other\NoFiltersPatch.cs" />
-    <Compile Include="Patches\Progression\EndByTimerPatch.cs" />
-    <Compile Include="Patches\Progression\ExperienceGainPatch.cs" />
-    <Compile Include="Patches\Progression\OfflineLootPatch.cs" />
-    <Compile Include="Patches\Progression\OfflineSavePatch.cs" />
-    <Compile Include="Patches\Progression\OfflineSpawnPointPatch.cs" />
-    <Compile Include="Patches\Progression\SingleModeJamPatch.cs" />
-    <Compile Include="Patches\Progression\WeaponDurabilityPatch.cs" />
-    <Compile Include="Patches\Quests\BeaconPatch.cs" />
-    <Compile Include="Patches\Quests\DogtagPatch.cs" />
-    <Compile Include="Patches\Ragfair\BarterSchemeAutoFill.cs" />
-    <Compile Include="Patches\Ragfair\RemoveAddOfferButton.cs" />
-    <Compile Include="Patches\RaidFix\BotStationaryWeaponPatch.cs" />
-    <Compile Include="Patches\RaidFix\OnDeadPatch.cs" />
-    <Compile Include="Patches\RaidFix\OnShellEjectEventPatch.cs" />
-    <Compile Include="Patches\RaidFix\SpawnRandomizationPatch.cs" />
-    <Compile Include="Patches\ScavMode\LoadOfflineRaidScreenPatch.cs" />
-    <Compile Include="Patches\ScavMode\ScavExfilPatch.cs" />
-    <Compile Include="Patches\ScavMode\ScavPrefabLoadPatch.cs" />
-    <Compile Include="Patches\ScavMode\ScavProfileLoadPatch.cs" />
-    <Compile Include="Patches\ScavMode\ScavSpawnPointPatch.cs" />
     <Compile Include="Patches\Core\SslCertificatePatch.cs" />
     <Compile Include="Patches\Core\UnityWebRequestPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -245,6 +205,7 @@
     <Compile Include="Utilities\Reflection\PrivateValueAccessor.cs" />
     <Compile Include="Utilities\Settings.cs" />
     <Compile Include="Utilities\Logging\UnityLogger.cs" />
+    <Compile Include="Watermark.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CodeMap.dgml" />
