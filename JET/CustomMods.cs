@@ -24,10 +24,9 @@ namespace JET
             {
                 string[] launchingCommands = File.ReadLines(files[i]).ToArray();
                 List<string> AssemblyPathing = launchingCommands[1].Split('.').ToList();
-                Debug.Log($"{launchingCommands[0]} {launchingCommands[1]}");
+                //Debug.Log($"{launchingCommands[0]} {launchingCommands[1]}");
                 if (AssemblyPathing.Count < 2) {
                     Debug.LogError($"Failed with count {AssemblyPathing.Count}, string be: {launchingCommands[1]}");
-                    //Logging here??
                     continue;
                 }
                 try
@@ -51,8 +50,9 @@ namespace JET
                     Debug.Log($"Error: {errorOccured.Message}");
                     Debug.Log(errorOccured.StackTrace);
                     Debug.Log("-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -");
+                    continue;
                 }
-                
+                Debug.Log($"Loaded: {launchingCommands[0]} [{launchingCommands[1]}]");
             }
         }
 

@@ -37,12 +37,18 @@ namespace JET
             try
             {
                 if (localizedText == null)
+                {
+                    if (typeof(EFT.UI.PreloaderUI).GetField("_alphaVersionLabel", BindingFlags.NonPublic | BindingFlags.Instance) == null)
+                        return;
                     localizedText = typeof(EFT.UI.PreloaderUI)
                     .GetField("_alphaVersionLabel", BindingFlags.NonPublic | BindingFlags.Instance)
                     .GetValue(MonoBehaviourSingleton<EFT.UI.PreloaderUI>.Instance) as EFT.UI.LocalizedText;
+                }
+                if (localizedText.LocalizationKey == null)
+                    return;
                 localizedText.LocalizationKey = Version;
             }
-            catch (Exception e) { Debug.LogError(e); }
+            catch {  }
         }
     }
 }
