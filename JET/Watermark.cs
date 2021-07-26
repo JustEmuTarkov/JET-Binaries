@@ -34,7 +34,7 @@ namespace JET
         EFT.UI.LocalizedText localizedText;
         internal void Do()
         {
-            try
+            if (MonoBehaviourSingleton<EFT.UI.PreloaderUI>.Instance != null)
             {
                 if (localizedText == null)
                 {
@@ -48,7 +48,6 @@ namespace JET
                     return;
                 localizedText.LocalizationKey = Version;
             }
-            catch {  }
         }
     }
 }
