@@ -16,7 +16,7 @@ using JET.Patches.Logging;
 
 namespace JET
 {
-    [ObfuscationAttribute(Exclude = true)]
+    [Obfuscation(Exclude = true)]
     public class Instance : MonoBehaviour
     {
         public delegate void Void();
@@ -24,14 +24,14 @@ namespace JET
         public void OnApplicationQuit() => ApplicationQuitEvent?.Invoke();
 
         private static CustomMods _customMods = new CustomMods();
-        private Watermark _watermark = new Watermark();
+        private readonly Watermark _watermark = new Watermark();
 
-        private static bool FULL_LOGGER_ENABLED = false;
-        [ObfuscationAttribute(Exclude = true)]
+        private static bool _fullLoggerEnabled;
+        [Obfuscation(Exclude = true)]
         private void Awake() {
             if (File.Exists(Path.Combine(CustomMods.GetGameDirectory, "LoggerEnable")))
             {
-                FULL_LOGGER_ENABLED = true;
+                _fullLoggerEnabled = true;
                 PatcherUtil.Patch<InitialHookPatch>();
                 PatcherUtil.Patch<LoggingPatch>();
                 PatcherUtil.Patch<ResetHookPatch>();
@@ -45,14 +45,14 @@ namespace JET
             PatcherUtil.Patch<NotificationSslPatch>();
             
         }
-        [ObfuscationAttribute(Exclude = true)]
+        [Obfuscation(Exclude = true)]
         private void Start()
         {
             Debug.Log("JET JET JET JET JET");
             CustomMods.Load();
             _watermark.Do();
         }
-        [ObfuscationAttribute(Exclude = true)]
+        [Obfuscation(Exclude = true)]
         private void LateUpdate()
         {
             _watermark.Do();
@@ -61,9 +61,8 @@ namespace JET
 #endif
         }
 
-        private static bool PatchedIngameLogger = false;
         private void FullLogger() {
-            if (!FULL_LOGGER_ENABLED) return;
+            if (!_fullLoggerEnabled) return;
             // if logger is enabled enable all features
             GClass389.IsLogsEnabled = true;
             GClass389.UnityDebugLogsEnabled = true;
