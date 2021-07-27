@@ -1,19 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using System.Text.RegularExpressions;
+using Diz.DependencyManager;
+using HarmonyLib;
+using JET.Utilities.Patching;
 using UnityEngine;
 using UnityEngine.Networking;
-using JET.Utilities.Patching;
-using JET.Utilities;
-using System.Collections.Generic;
-using HarmonyLib;
-using Diz.DependencyManager;
-using JET.Patches;
 
-namespace JET.Patches
+namespace JET.Patches.Bundles
 {
     public class BundleLoadPatch : GenericPatch<BundleLoadPatch>
     {

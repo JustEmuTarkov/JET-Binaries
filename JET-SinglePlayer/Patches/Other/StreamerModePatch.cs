@@ -1,17 +1,13 @@
-﻿using HarmonyLib;
-using JET.Utilities;
-using JET.Utilities.Patching;
-using JET.Utilities.Reflection.CodeWrapper;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
+using HarmonyLib;
+using JET.Utilities;
+using JET.Utilities.Patching;
 using UnityEngine;
 
-namespace JET.Patches
+namespace JET.Patches.Other
 {
     class StreamerModePatch : GenericPatch<StreamerModePatch>
     {

@@ -4,7 +4,7 @@ using EFT;
 using EFT.InventoryLogic;
 using JET.Utilities.Patching;
 
-namespace JET.Patches
+namespace JET.Patches.Quests
 {
     public class BeaconPatch : GenericPatch<BeaconPatch>
     {

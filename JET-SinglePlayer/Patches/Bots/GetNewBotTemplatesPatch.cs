@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using UnityEngine;
 using Comfort.Common;
 using EFT;
 using JET.Utilities.Patching;
+using UnityEngine;
 #if B13074
 using WaveInfo = GClass984; // search for: Difficulty and chppse gclass with lower number whic hcontains Role and Limit variables
 using BotsPresets = GClass379; // Method: GetNewProfile (higher GClass number)
@@ -51,7 +50,7 @@ using PoolManager = GClass1168; // CancellationToken: PoolsCancellationToken
 using JobPriority = GClass2146; // Delegate: Immediate
 #endif
 
-namespace JET.Patches
+namespace JET.Patches.Bots
 {
     public class GetNewBotTemplatesPatch : GenericPatch<GetNewBotTemplatesPatch>
     {

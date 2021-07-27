@@ -1,12 +1,12 @@
-using System.Reflection;
-using UnityEngine;
-using EFT;
-using JET.Utilities.Patching;
-using System.Linq;
 using System;
 using System.Collections.Generic;
-#if B13074
+using System.Linq;
+using System.Reflection;
+using EFT;
 using EFT.Game.Spawning;
+using JET.Utilities.Patching;
+using UnityEngine;
+#if B13074
 using ISpawnPoints = GInterface229; // DestroySpawnPoint or CreateSpawnPoint as ginterface
 #endif
 #if B11661 || B12102
@@ -29,7 +29,7 @@ using EFT.Game.Spawning;
 using ISpawnPoints = GInterface217;
 #endif
 
-namespace JET.Patches
+namespace JET.Patches.Progression
 {
     class OfflineSpawnPointPatch : GenericPatch<OfflineSpawnPointPatch>
     {

@@ -1,12 +1,12 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Threading.Tasks;
-using UnityEngine;
+using JET.Utilities;
 using JET.Utilities.App;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
-using JET.Utilities;
-using System;
 using Newtonsoft.Json;
+using UnityEngine;
 #if B13074
 using LocationInfo = GClass804.GClass806; // NightTimeAllowedLocations
 using ConverterBucket = GClass967; // Converters
@@ -32,7 +32,7 @@ using LocationInfo = GClass782.GClass784;
 using ConverterBucket = GClass912;
 #endif
 
-namespace JET.Patches
+namespace JET.Patches.Progression
 {
     public class OfflineLootPatch : GenericPatch<OfflineLootPatch>
     {

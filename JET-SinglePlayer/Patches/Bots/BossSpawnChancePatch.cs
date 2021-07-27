@@ -2,7 +2,7 @@
 using System.Reflection;
 using JET.Utilities.Patching;
 
-namespace JET.Patches
+namespace JET.Patches.Bots
 {
     public class BossSpawnChancePatch : GenericPatch<BossSpawnChancePatch>
     {

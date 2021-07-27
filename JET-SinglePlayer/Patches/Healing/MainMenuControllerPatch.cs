@@ -25,7 +25,7 @@ using MainMenuController = GClass1194; // SelectedDateTime
 using IHealthController = GInterface169; // CarryingWeightAbsoluteModifier
 #endif
 
-namespace JET.Patches
+namespace JET.Patches.Healing
 {
     class MainMenuControllerPatch : GenericPatch<MainMenuControllerPatch>
     {

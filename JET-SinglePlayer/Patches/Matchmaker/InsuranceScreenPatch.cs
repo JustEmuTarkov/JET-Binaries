@@ -20,7 +20,7 @@ using MainMenuController = GClass1144;  // SelectedDateTime
 using MainMenuController = GClass1194;  // SelectedDateTime
 #endif
 
-namespace JET.Patches
+namespace JET.Patches.Matchmaker
 {
     class InsuranceScreenPatch : GenericPatch<InsuranceScreenPatch>
     {

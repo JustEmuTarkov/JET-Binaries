@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using UnityEngine;
 using EFT;
+using JET.Utilities;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
-using JET.Utilities;
+using UnityEngine;
 
-namespace JET.Patches
+namespace JET.Patches.Progression
 {
     /// <summary>
     /// Fixes exit status to 'MissingInAction' when the raid time ends. Default is Survived.

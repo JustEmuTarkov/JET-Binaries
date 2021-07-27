@@ -1,11 +1,4 @@
-﻿using System.Linq;
-using System.Reflection;
-using EFT;
-using EFT.Interactive;
-using JET.Utilities.Patching;
-using JET.Utilities.Reflection;
-
-namespace JET.Patches
+﻿namespace JET.Patches.ScavMode
 {
     /*public class ScavSpawnPointPatch : GenericPatch<ScavSpawnPointPatch>
     {

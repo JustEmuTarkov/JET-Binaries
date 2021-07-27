@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Reflection;
-using UnityEngine;
-using Newtonsoft.Json;
 using EFT.UI;
 using EFT.UI.Matchmaker;
-using JET.Utilities.HTTP;
-using JET.Utilities.Patching;
 using JET.Utilities;
 using JET.Utilities.DefaultSettings;
+using JET.Utilities.HTTP;
+using JET.Utilities.Patching;
+using Newtonsoft.Json;
+using UnityEngine;
 
-namespace JET.Patches
+namespace JET.Patches.Matchmaker
 {
     class MatchmakerOfflineRaidPatch : GenericPatch<MatchmakerOfflineRaidPatch>
     {

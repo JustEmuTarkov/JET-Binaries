@@ -1,4 +1,14 @@
 ﻿using JET.Patches;
+using JET.Patches.Bots;
+using JET.Patches.Bundles;
+using JET.Patches.Healing;
+using JET.Patches.Matchmaker;
+using JET.Patches.Other;
+using JET.Patches.Progression;
+using JET.Patches.Quests;
+using JET.Patches.Ragfair;
+using JET.Patches.RaidFix;
+using JET.Patches.ScavMode;
 using JET.Utilities;
 using JET.Utilities.Patching;
 

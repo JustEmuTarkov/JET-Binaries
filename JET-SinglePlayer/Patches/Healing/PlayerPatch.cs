@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using EFT;
 using JET.Utilities.Patching;
 
-namespace JET.Patches
+namespace JET.Patches.Healing
 {
     class PlayerPatch : GenericPatch<PlayerPatch>
     {

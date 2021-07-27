@@ -1,13 +1,9 @@
-﻿using JET.Utilities.Patching;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using JET.Utilities.Patching;
 using UnityEngine;
 
-namespace JET.Patches
+namespace JET.Patches.Ragfair
 {
     class BarterSchemeAutoFill : GenericPatch<BarterSchemeAutoFill>
     {

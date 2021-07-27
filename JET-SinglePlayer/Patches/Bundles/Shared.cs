@@ -1,14 +1,11 @@
-﻿using HarmonyLib;
-using JET.Utilities.Patching;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+using HarmonyLib;
+using JET.Utilities.Patching;
 
-namespace JET.Patches
+namespace JET.Patches.Bundles
 {
     public static class Shared
     {

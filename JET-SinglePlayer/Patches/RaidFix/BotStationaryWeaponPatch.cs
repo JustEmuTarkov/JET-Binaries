@@ -2,14 +2,14 @@
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using HarmonyLib;
-using UnityEngine;
 using EFT.Interactive;
-using JET.Utilities.Patching;
+using HarmonyLib;
 using JET.Utilities;
+using JET.Utilities.Patching;
 using JET.Utilities.Reflection.CodeWrapper;
+using UnityEngine;
 
-namespace JET.Patches
+namespace JET.Patches.RaidFix
 {
     // Fix null reference exception errors when bots are trying to think about using stationary weapons (i.e. on Reserve).
     public class BotStationaryWeaponPatch : GenericPatch<BotStationaryWeaponPatch>

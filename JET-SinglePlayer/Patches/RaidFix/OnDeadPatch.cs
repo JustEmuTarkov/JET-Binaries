@@ -2,14 +2,14 @@
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using UnityEngine;
-using HarmonyLib;
 using EFT;
-using JET.Utilities.Patching;
+using HarmonyLib;
 using JET.Utilities;
+using JET.Utilities.Patching;
 using JET.Utilities.Reflection.CodeWrapper;
+using UnityEngine;
 
-namespace JET.Patches
+namespace JET.Patches.RaidFix
 {
     public class OnDeadPatch : GenericPatch<OnDeadPatch>
     {

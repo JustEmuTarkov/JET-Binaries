@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using HarmonyLib;
 using EFT;
+using HarmonyLib;
 using JET.Utilities.Patching;
 #if B13074
 using BotData = GInterface17; // find ChooseProfile and get ginterface off that
@@ -24,7 +24,7 @@ using BotData = GInterface13;
 using BotData = GInterface15;
 #endif
 
-namespace JET.Patches
+namespace JET.Patches.Bots
 {
     public class RemoveUsedBotProfilePatch : GenericPatch<RemoveUsedBotProfilePatch>
     {

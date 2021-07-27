@@ -1,14 +1,14 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using HarmonyLib;
 using EFT;
+using HarmonyLib;
+using JET.Utilities;
 using JET.Utilities.Patching;
 using JET.Utilities.Reflection.CodeWrapper;
-using JET.Utilities;
 
-namespace JET.Patches
+namespace JET.Patches.ScavMode
 {
     public class ScavProfileLoadPatch : GenericPatch<ScavProfileLoadPatch>
     {

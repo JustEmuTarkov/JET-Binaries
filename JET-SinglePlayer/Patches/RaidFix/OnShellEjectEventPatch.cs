@@ -2,7 +2,7 @@
 using JET.Utilities.Patching;
 using JET.Utilities.Reflection;
 
-namespace JET.Patches
+namespace JET.Patches.RaidFix
 {
     public class OnShellEjectEventPatch : GenericPatch<OnShellEjectEventPatch>
     {

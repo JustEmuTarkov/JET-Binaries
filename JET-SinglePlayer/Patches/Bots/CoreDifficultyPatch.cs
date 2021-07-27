@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
-using UnityEngine;
+using JET.Utilities;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
-using JET.Utilities;
+using UnityEngine;
 #if B13074
 using BotDifficultyHandler = GClass320; // Method: CheckOnExcude, LoadCoreByString, LoadDifficultyStringInternal, LoadInternalCoreByString
 #endif
@@ -21,7 +21,7 @@ using BotDifficultyHandler = GClass280; // Method: CheckOnExcude, LoadCoreByStri
 #if DEBUG
 using BotDifficultyHandler = GClass303; // Method: CheckOnExcude, LoadCoreByString
 #endif
-namespace JET.Patches
+namespace JET.Patches.Bots
 {
 	public class CoreDifficultyPatch : GenericPatch<CoreDifficultyPatch>
 	{

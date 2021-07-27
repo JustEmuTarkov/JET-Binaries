@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Diz.DependencyManager;
-using JET.Utilities.Patching;
-using JET.Utilities;
-using JET.Patches;
 using System.Threading.Tasks;
+using Diz.DependencyManager;
+using JET.Utilities;
+using JET.Utilities.Patching;
 using UnityEngine;
 #if B13074
-using IEasyBundle = GInterface263; //Property: SameNameAsset 
-using IBundleLock = GInterface264; //Property: IsLocked
+//Property: SameNameAsset 
+//Property: IsLocked
 // go to actual gclass and search for gclassXXXX<T> with initial value gparam_0 and base.method_0(value) call
-using BindableState = GClass2251<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue 
+
+//Construct method parameter: initialValue 
 #endif
 #if B11661 || B12102
 using IEasyBundle = GInterface253; //Property: SameNameAsset 
@@ -47,7 +46,7 @@ using BindableState = GClass2166<Diz.DependencyManager.ELoadState>; //Construct 
 #endif
 
 
-namespace JET.Patches
+namespace JET.Patches.Bundles
 {
     public class EasyBundlePatch : GenericPatch<EasyBundlePatch>
     {

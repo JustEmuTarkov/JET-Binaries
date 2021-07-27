@@ -1,13 +1,9 @@
-﻿using HarmonyLib;
-using JET.Utilities;
-using JET.Utilities.Patching;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
+using HarmonyLib;
+using JET.Utilities;
+using JET.Utilities.Patching;
 using UnityEngine;
 #if B13074
 using BotDifficultyHandler = GClass320; // Method: CheckOnExcude, LoadDifficultyStringInternal
@@ -29,7 +25,7 @@ using BotDifficultyHandler = GClass303; // Method: CheckOnExcude, LoadDifficulty
 #endif
 /// TODO: CHECK STRINGS IF THEY ARE PROPER ONES
 
-namespace JET.Patches
+namespace JET.Patches.Bots
 {
     class BotSettingsLoadPatch : GenericPatch<BotSettingsLoadPatch>
     {

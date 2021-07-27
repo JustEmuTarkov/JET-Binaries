@@ -1,11 +1,9 @@
 ﻿using System.Reflection;
-using UnityEngine;
 using EFT;
+using JET.Utilities;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
-using JET.Utilities;
-using System;
-using System.Collections.Generic;
+using UnityEngine;
 #if B13074
 using BotDifficultyHandler = GClass320; // Method: CheckOnExcude, LoadDifficultyStringInternal
 #endif
@@ -25,7 +23,7 @@ using BotDifficultyHandler = GClass280; // Method: CheckOnExcude, LoadDifficulty
 using BotDifficultyHandler = GClass303; // Method: CheckOnExcude, LoadDifficultyStringInternal
 #endif
 
-namespace JET.Patches
+namespace JET.Patches.Bots
 {
     public class BotDifficultyPatch : GenericPatch<BotDifficultyPatch>
     {

@@ -23,7 +23,7 @@ using ClientMetrics = GClass1304; // GameUpdateBinMetricCollector (lower Gclass 
 using ClientMetrics = GClass1367; // GameUpdateBinMetricCollector (lower Gclass number)
 #endif
 
-namespace JET.Patches
+namespace JET.Patches.Progression
 {
     class OfflineSaveProfilePatch : GenericPatch<OfflineSaveProfilePatch>
     {

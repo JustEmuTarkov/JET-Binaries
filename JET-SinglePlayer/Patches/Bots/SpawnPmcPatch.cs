@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using HarmonyLib;
 using EFT;
+using HarmonyLib;
 using JET.Utilities.Patching;
 
-namespace JET.Patches
+namespace JET.Patches.Bots
 {
     public class SpawnPmcPatch : GenericPatch<SpawnPmcPatch>
     {

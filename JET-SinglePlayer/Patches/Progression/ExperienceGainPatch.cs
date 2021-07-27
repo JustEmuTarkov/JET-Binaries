@@ -1,10 +1,9 @@
-﻿using EFT.UI.SessionEnd;
-using JET.Utilities.Patching;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
+using EFT.UI.SessionEnd;
+using JET.Utilities.Patching;
 
-
-namespace JET.Patches
+namespace JET.Patches.Progression
 {
     public class ExperienceGainPatch : GenericPatch<ExperienceGainPatch>
     {

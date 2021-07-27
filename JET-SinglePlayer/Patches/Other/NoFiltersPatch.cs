@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using JET.Utilities.Patching;
 
-namespace JET.Patches
+namespace JET.Patches.Other
 {
     class NoFiltersPatch : GenericPatch<NoFiltersPatch>
     {

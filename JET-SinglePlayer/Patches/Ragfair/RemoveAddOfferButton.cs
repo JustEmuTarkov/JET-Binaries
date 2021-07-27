@@ -1,8 +1,5 @@
 ﻿using System.Reflection;
-using EFT.UI;
-using EFT.UI.Matchmaker;
 using JET.Utilities.Patching;
-using UnityEngine;
 #if B10988 || B11661 || B12102 || B13074
 using UI_Button = EFT.UI.DefaultUIButton;
 #endif
@@ -12,7 +9,7 @@ using UI_Button = EFT.UI.UIButtonSpawner;
 #if DEBUG
 using UI_Button = EFT.UI.DefaultUIButton;
 #endif
-namespace JET.Patches
+namespace JET.Patches.Ragfair
 {
     class RemoveAddOfferButton_Awake : GenericPatch<RemoveAddOfferButton_Awake>
     {

@@ -1,13 +1,7 @@
-using System;
-using System.Linq;
 using System.Reflection;
-using EFT;
-using EFT.InventoryLogic;
 using JET.Utilities.Patching;
-using JET.Utilities;
-using static EFT.Player;
 
-namespace JET.Patches
+namespace JET.Patches.Progression
 {
     public class SingleModeJamPatch : GenericPatch<SingleModeJamPatch>
     {

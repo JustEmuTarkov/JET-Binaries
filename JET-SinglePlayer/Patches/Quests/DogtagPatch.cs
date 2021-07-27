@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reflection;
-using UnityEngine;
 using EFT;
 using EFT.InventoryLogic;
 using JET.Utilities.Patching;
+using UnityEngine;
 #if B13074
 using Equipment = GClass1757; // GetSlot
 using DamageInfo = GStruct241; // HittedBallisticCollider
@@ -28,7 +28,7 @@ using DamageInfo = GStruct227;
 using Equipment = GClass1692;
 using DamageInfo = GStruct239;
 #endif
-namespace JET.Patches
+namespace JET.Patches.Quests
 {
     class DogtagPatch : GenericPatch<DogtagPatch>
     {

@@ -1,18 +1,14 @@
-﻿using HarmonyLib;
-using JET.Utilities;
-using JET.Utilities.Patching;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
+using HarmonyLib;
+using JET.Utilities;
+using JET.Utilities.Patching;
 using UnityEngine;
 
 /// TODO: CHECK STRINGS IF THEY ARE PROPER ONES
 
-namespace JET.Patches
+namespace JET.Patches.Other
 {
     class UnlockItemsIdLength : GenericPatch<UnlockItemsIdLength>
     {

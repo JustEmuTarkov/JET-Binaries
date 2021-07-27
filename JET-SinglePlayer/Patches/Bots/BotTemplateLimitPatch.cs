@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
-using System;
-using UnityEngine;
 using EFT;
+using JET.Utilities;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
-using JET.Utilities;
+using UnityEngine;
 #if B13074
 using WaveInfo = GClass984; // search for: Difficulty and chppse gclass with lower number whic hcontains Role and Limit variables
 using BotsPresets = GClass379; // Method: GetNewProfile (higher GClass number)
@@ -32,7 +32,7 @@ using BotsPresets = GClass362; // Method: GetNewProfile (higher GClass number)
 #endif
 
 
-namespace JET.Patches
+namespace JET.Patches.Bots
 {
     public class BotTemplateLimitPatch : GenericPatch<BotTemplateLimitPatch>
     {

@@ -1,9 +1,7 @@
 using System.Linq;
 using System.Reflection;
-using UnityEngine;
 using EFT;
 using JET.Utilities.Patching;
-using JET.Utilities;
 #if B13074
 using AmmoInfo = GClass1774; // AmmoLifeTimeSec
 #endif
@@ -22,7 +20,7 @@ using AmmoInfo = GClass1619;
 #if DEBUG
 using AmmoInfo = GClass1709;
 #endif
-namespace JET.Patches
+namespace JET.Patches.Progression
 {
     public class WeaponDurabilityPatch : GenericPatch<WeaponDurabilityPatch>
     {

@@ -1,26 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using UnityEngine;
-using HarmonyLib;
-using Diz.Jobs;
-using Diz.Resources;
-using JetBrains.Annotations;
-using JET.Utilities.Patching;
-using JET.Utilities;
-using JET.Patches;
 using System.IO;
-using JET.Utilities.HTTP;
-using Newtonsoft.Json;
+using System.Linq;
 using System.Net;
 using System.Net.Cache;
+using System.Reflection;
+using HarmonyLib;
+using JET.Utilities;
+using JET.Utilities.HTTP;
+using JET.Utilities.Patching;
+using JetBrains.Annotations;
+using Newtonsoft.Json;
+using UnityEngine;
 #if B13074
-using IEasyBundle = GInterface263; //Property: SameNameAsset 
-using IBundleLock = GInterface264; //Property: IsLocked
-using BundleLock = GClass2265; //Property: MaxConcurrentOperations
-using DependencyGraph = GClass2266<GInterface263>; // Method: GetDefaultNode() / Inside <T> goes IEasyBundle // mostly its +1 number from BundleLock
+//Property: SameNameAsset 
+//Property: IsLocked
+//Property: MaxConcurrentOperations
+
+// Method: GetDefaultNode() / Inside <T> goes IEasyBundle // mostly its +1 number from BundleLock
 #endif
 #if B11661 || B12102
 using IEasyBundle = GInterface253; //Property: SameNameAsset 
@@ -53,7 +50,7 @@ using BundleLock = GClass2180; //Property: MaxConcurrentOperations
 using DependencyGraph = GClass2181<GInterface250>; // Method: GetDefaultNode() / Inside <T> goes IEasyBundle
 #endif
 
-namespace JET.Patches
+namespace JET.Patches.Bundles
 {
     public class EasyAssetsPatch : GenericPatch<EasyAssetsPatch>
     {

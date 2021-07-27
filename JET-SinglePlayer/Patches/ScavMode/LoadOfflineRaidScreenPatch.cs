@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using HarmonyLib;
 using EFT;
-using EFT.UI.Matchmaker;
 using EFT.UI.Screens;
+using HarmonyLib;
 using JET.Utilities.Patching;
 using JET.Utilities.Reflection;
-using UnityEngine;
 #if B13074
 using MenuController = GClass1253; // .SelectedKeyCard
 using WeatherSettings = GStruct93; // IsRandomTime and IsRandomWeather
@@ -52,7 +50,7 @@ using BotsSettings = GStruct232; // IsScavWars and BotAmount
 using WavesSettings = GStruct93; // IsTaggedAndCursed and IsBosses
 using MatchmakerScreenCreator = EFT.UI.Matchmaker.MatchmakerOfflineRaid.GClass2026; // simply go to class below and search for new gclass simple as that...
 #endif
-namespace JET.Patches
+namespace JET.Patches.ScavMode
 {
     using OfflineRaidAction = Action<bool, WeatherSettings, BotsSettings, WavesSettings>;
 
