@@ -26,12 +26,12 @@ namespace JET
         private static CustomMods _customMods = new CustomMods();
         private readonly Watermark _watermark = new Watermark();
 
-        private static bool _fullLoggerEnabled;
+        private static bool FullLoggerEnabled;
         [Obfuscation(Exclude = true)]
         private void Awake() {
             if (File.Exists(Path.Combine(CustomMods.GetGameDirectory, "LoggerEnable")))
             {
-                _fullLoggerEnabled = true;
+                FullLoggerEnabled = true;
                 PatcherUtil.Patch<InitialHookPatch>();
                 PatcherUtil.Patch<LoggingPatch>();
                 PatcherUtil.Patch<ResetHookPatch>();
@@ -48,7 +48,6 @@ namespace JET
         [Obfuscation(Exclude = true)]
         private void Start()
         {
-            Debug.Log("JET JET JET JET JET");
             CustomMods.Load();
             _watermark.Do();
         }
@@ -62,7 +61,7 @@ namespace JET
         }
 
         private void FullLogger() {
-            if (!_fullLoggerEnabled) return;
+            if (!FullLoggerEnabled) return;
             // if logger is enabled enable all features
             GClass389.IsLogsEnabled = true;
             GClass389.UnityDebugLogsEnabled = true;

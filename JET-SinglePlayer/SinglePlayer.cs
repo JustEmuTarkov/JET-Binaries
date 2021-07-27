@@ -11,6 +11,7 @@ using JET.Patches.RaidFix;
 using JET.Patches.ScavMode;
 using JET.Utilities;
 using JET.Utilities.Patching;
+using System.Collections.Generic;
 
 namespace JET
 {
@@ -106,7 +107,8 @@ namespace JET
             if (EnabledElements.SpawnPmcPatch)
                 PatcherUtil.Patch<SpawnPmcPatch>();
 
-            PatcherUtil.Patch<BotSettingsLoadPatch>();
+            if (EnabledElements.BotSettingsLoadPatch)
+                PatcherUtil.Patch<BotSettingsLoadPatch>();
 
             if (EnabledElements.CoreDifficultyPatch)
                 PatcherUtil.Patch<CoreDifficultyPatch>();
@@ -142,6 +144,49 @@ namespace JET
                 PatcherUtil.Patch<SpawnRandomizationPatch>();
             if (EnabledElements.NoFiltersPatch)
                 PatcherUtil.Patch<NoFiltersPatch>();
+            if (EnabledElements.AllDifficultiesAvaliable)
+            {
+                GClass320.ExcludedDifficulties = new System.Collections.Generic.Dictionary<EFT.WildSpawnType, System.Collections.Generic.List<BotDifficulty>>()
+                {
+					{
+						EFT.WildSpawnType.assaultGroup,
+						new List<BotDifficulty>
+						{
+							BotDifficulty.normal,
+							BotDifficulty.easy,
+							BotDifficulty.hard,
+							BotDifficulty.impossible
+						}
+					},
+					{
+						EFT.WildSpawnType.followerTest,
+						new List<BotDifficulty>
+						{
+							BotDifficulty.easy,
+							BotDifficulty.hard,
+							BotDifficulty.impossible
+						}
+					},
+					{
+						EFT.WildSpawnType.bossTest,
+						new List<BotDifficulty>
+						{
+							BotDifficulty.easy,
+							BotDifficulty.hard,
+							BotDifficulty.impossible
+						}
+					},
+					{
+                        EFT.WildSpawnType.test,
+						new List<BotDifficulty>
+						{
+							BotDifficulty.easy,
+							BotDifficulty.hard,
+							BotDifficulty.impossible
+						}
+					}
+				};
+            }
         }
     }
 }

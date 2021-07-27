@@ -42,6 +42,8 @@ namespace JET.Utilities
             public bool RemoveAddOfferButton = true;
             public bool NoFiltersPatch = false;
             public bool JetLogger = false;
+            public bool AllDifficultiesAvaliable = false;
+            public bool BotSettingsLoadPatch = false;
         }
 
         public static OfflineMode LoadModules()
