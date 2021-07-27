@@ -20,7 +20,7 @@ namespace JET.Patches
         {
         }
 #if B13074
-        private string propertyName = "GClass806_0";
+        private const string PropertyName = "GClass806_0";
 #else
         private string propertyName = "SelectedLocation";
 #endif
@@ -31,7 +31,7 @@ namespace JET.Patches
 
         protected override MethodBase GetTargetMethod()
         {
-            return typeof(MatchMakerSelectionLocationScreen).GetProperty(propertyName, BindingFlags.NonPublic | BindingFlags.Instance).SetMethod; 
+            return typeof(MatchMakerSelectionLocationScreen).GetProperty(PropertyName, BindingFlags.NonPublic | BindingFlags.Instance)?.SetMethod; 
         }
     }
 }
