@@ -178,6 +178,7 @@
     <Compile Include="Patches\Bundles\EasyAssetsPatch.cs" />
     <Compile Include="Patches\Bundles\EasyBundlePatch.cs" />
     <Compile Include="Patches\Bundles\Shared.cs" />
+    <Compile Include="Patches\Other\HideoutRequirementIndicator.cs" />
     <Compile Include="SinglePlayer.cs" />
     <Compile Include="Patches\Healing\MainMenuControllerPatch.cs" />
     <Compile Include="Patches\Healing\PlayerPatch.cs" />
