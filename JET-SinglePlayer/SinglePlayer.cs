@@ -47,6 +47,7 @@ namespace JET
             // DEFAULT PATCHES
             PatcherUtil.Patch<UnlockItemsIdLength>();
             PatcherUtil.Patch<BarterSchemeAutoFill>();
+            PatcherUtil.Patch<HideoutRequirementIndicator>();
 
             // BUNDLE LOADING PATCHES
             PatcherUtil.Patch<EasyAssetsPatch>();

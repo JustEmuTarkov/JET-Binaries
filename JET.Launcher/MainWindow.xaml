@@ -103,7 +103,7 @@
                             </Grid>
                         </GroupBox>
                     </Grid>
-                    <RichTextBox x:Name="LolTheyGotMe" HorizontalAlignment="Left" Height="360" Margin="513,79,0,0" VerticalAlignment="Top" Width="402" Background="Transparent" Foreground="White" BorderBrush="{x:Null}">
+                    <RichTextBox x:Name="LolTheyGotMe" HorizontalAlignment="Left" Height="360" Margin="513,79,0,0" VerticalAlignment="Top" Width="402" Background="Transparent" Foreground="White" BorderBrush="{x:Null}" IsReadOnly="True">
                         <FlowDocument>
                             <Paragraph>
                                 <Run Text=""/>
