@@ -9,44 +9,41 @@ using UnityEngine;
 
 namespace JET
 {
-    class CustomMods
+    internal class CustomMods
     {
-        internal static string GetGameDirectory
-        {
-            get { return AppDomain.CurrentDomain.BaseDirectory; }
-        }
-        private static List<Assembly> LoadedAssemblyMods = new List<Assembly>();
+        internal static string GetGameDirectory => AppDomain.CurrentDomain.BaseDirectory;
+        public static readonly List<Assembly> LoadedAssemblyMods = new List<Assembly>();
 
         internal static void Load() {
-            string PathToCustomMods = Path.Combine(GetGameDirectory, "ClientMods");
-            List<string> files = Directory.GetFiles(PathToCustomMods, "*.launch").ToList();
-            for (int i = 0; i < files.Count; i++)
+            var pathToCustomMods = Path.Combine(GetGameDirectory, "ClientMods");
+            var files = Directory.GetFiles(pathToCustomMods, "*.launch").ToList();
+            foreach (var file in files)
             {
-                string[] launchingCommands = File.ReadLines(files[i]).ToArray();
-                List<string> AssemblyPathing = launchingCommands[1].Split('.').ToList();
+                var launchingCommands = File.ReadLines(file).ToArray();
+                var assemblyPathing = launchingCommands[1].Split('.').ToList();
                 //Debug.Log($"{launchingCommands[0]} {launchingCommands[1]}");
-                if (AssemblyPathing.Count < 2) {
-                    Debug.LogError($"Failed with count {AssemblyPathing.Count}, string be: {launchingCommands[1]}");
+                if (assemblyPathing.Count < 2) {
+                    Debug.LogError($"Failed with count {assemblyPathing.Count}, string be: {launchingCommands[1]}");
                     continue;
                 }
                 try
                 {
-                    Assembly LoadedAssembly = Assembly.LoadFile(Path.Combine(GetGameDirectory, "ClientMods", launchingCommands[0]));
+                    var loadedAssembly = Assembly.LoadFile(Path.Combine(GetGameDirectory, "ClientMods", launchingCommands[0]));
 
-                    Type ClassHandle = LoadedAssembly.GetExportedTypes().Single(type => type.Name == AssemblyPathing[AssemblyPathing.Count - 2]);
+                    var classHandle = loadedAssembly.GetExportedTypes().Single(type => type.Name == assemblyPathing[assemblyPathing.Count - 2]);
 
-                    ClassHandle.GetMethods(BindingFlags.Public | BindingFlags.Static).Single(method => {
-                        if(method.Name == AssemblyPathing[AssemblyPathing.Count - 1])
-                            Debug.Log(method.Name + " " + method.GetParameters().Length);
-                        return method.Name == AssemblyPathing[AssemblyPathing.Count - 1] && method.GetParameters().Length == 0;
+                    classHandle.GetMethods(BindingFlags.Public | BindingFlags.Static).Single(method => {
+                            if(method.Name == assemblyPathing[assemblyPathing.Count - 1])
+                                Debug.Log(method.Name + " " + method.GetParameters().Length);
+                            return method.Name == assemblyPathing[assemblyPathing.Count - 1] && method.GetParameters().Length == 0;
                         })
-                        .Invoke(ClassHandle, new object[] { });
+                        .Invoke(classHandle, new object[] { });
 
-                    LoadedAssemblyMods.Add(LoadedAssembly);
+                    LoadedAssemblyMods.Add(loadedAssembly);
                 }
                 catch (Exception errorOccured)
                 {
-                    Debug.Log($"Error Loading: {files[i]}");
+                    Debug.Log($"Error Loading: {file}");
                     Debug.Log($"Error: {errorOccured.Message}");
                     Debug.Log(errorOccured.StackTrace);
                     Debug.Log("-  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -");
