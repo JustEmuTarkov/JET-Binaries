@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using EFT.Hideout;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,14 +37,14 @@ namespace JET.Patches.Other
             ref string ___string_3, 
             ref EFT.UI.SimpleTooltip ___simpleTooltip_0
         ) {
-            bool foundNeeded = false;
-            bool foundFullfilled = false;
-            List<string> areaNames = new List<string>();
+            var foundNeeded = false;
+            var foundFullfilled = false;
+            var areaNames = new List<string>();
 
-            HideoutInstance hideoutInstance = Comfort.Common.Singleton<HideoutInstance>.Instance;
-            foreach (EFT.Hideout.AreaData ad in hideoutInstance.AreaDatas)
+            var hideoutInstance = Comfort.Common.Singleton<HideoutInstance>.Instance;
+            foreach (var ad in hideoutInstance.AreaDatas)
             {
-                EFT.Hideout.Stage actualNextStage = ad.NextStage;
+                var actualNextStage = ad.NextStage;
 
                 // TODO: the following should depend on config
                 // If we don't want to get requirement of locked to construct areas, skip if it is locked to construct
@@ -52,68 +53,65 @@ namespace JET.Patches.Other
                 //    continue;
                 //}
 
-                // If the area has no future upgrade, skip
-                if (ad.Status == EFT.Hideout.EAreaStatus.NoFutureUpgrades)
+                switch (ad.Status)
                 {
-                    continue;
-                }
-
-                // If in process of constructing or upgrading, go to actual next stage if it exists
-                if (ad.Status == EFT.Hideout.EAreaStatus.Constructing ||
-                   ad.Status == EFT.Hideout.EAreaStatus.Upgrading)
-                {
-                    actualNextStage = ad.StageAt(ad.NextStage.Level + 1);
-
-                    // If there are not StageAt given level, it will return a new stage, so level will be 0
-                    if (actualNextStage.Level == 0)
-                    {
+                    // If the area has no future upgrade, skip
+                    case EFT.Hideout.EAreaStatus.NoFutureUpgrades:
                         continue;
+                    // If in process of constructing or upgrading, go to actual next stage if it exists
+                    case EFT.Hideout.EAreaStatus.Constructing:
+                    case EFT.Hideout.EAreaStatus.Upgrading:
+                    {
+                        actualNextStage = ad.StageAt(ad.NextStage.Level + 1);
+
+                        // If there are not StageAt given level, it will return a new stage, so level will be 0
+                        if (actualNextStage.Level == 0)
+                        {
+                            continue;
+                        }
+
+                        break;
                     }
                 }
 
-                EFT.Hideout.RelatedRequirements requirements = actualNextStage.Requirements;
+                var requirements = actualNextStage.Requirements;
 
-                foreach (Requirement requirement in requirements)
+                foreach (var requirement in requirements)
                 {
-                    EFT.Hideout.ItemRequirement itemRequirement = requirement as EFT.Hideout.ItemRequirement;
-                    if (itemRequirement != null)
+                    if (!(requirement is ItemRequirement itemRequirement)) continue;
+                    var requirementTemplate = itemRequirement.TemplateId;
+                    if (item.TemplateId != requirementTemplate) continue;
+                    // A requirement but already have the amount we need
+                    if (requirement.Fulfilled)
                     {
-                        string requirementTemplate = itemRequirement.TemplateId;
-                        if (item.TemplateId == requirementTemplate)
+                        // Even if we have enough of this item to fulfill a requirement in one area
+                        // we might still need it, and if thats the case we want to show that color, not fulfilled color, so you know you still need more of it
+                        // So only set color to fulfilled if not needed
+                        if (!foundNeeded && !foundFullfilled)
                         {
-                            // A requirement but already have the amount we need
-                            if (requirement.Fulfilled)
-                            {
-                                // Even if we have enough of this item to fulfill a requirement in one area
-                                // we might still need it, and if thats the case we want to show that color, not fulfilled color, so you know you still need more of it
-                                // So only set color to fulfilled if not needed
-                                if (!foundNeeded && !foundFullfilled)
-                                {
-                                    // Following calls base class method ShowGameObject()
-                                    // To call base methods without reverse patch, must modify IL code for this line from callvirt to call
-                                    (__instance as EFT.UI.UIElement).ShowGameObject(false);
-                                    ____questIconImage.sprite = ____foundInRaidSprite;
-                                    ____questIconImage.color = new Color(0.23137f, 0.93725f, 1);
+                            // Following calls base class method ShowGameObject()
+                            // To call base methods without reverse patch, must modify IL code for this line from callvirt to call
+                            (__instance as EFT.UI.UIElement).ShowGameObject(false);
+                            ____questIconImage.sprite = ____foundInRaidSprite;
+                            ____questIconImage.color = new Color(0.23137f, 0.93725f, 1);
 
-                                    foundFullfilled = true;
-                                }
-
-                                areaNames.Add("<color=#3bdfff>" + ad.Template.Name + "</color>");
-                            }
-                            else
-                            {
-                                if (!foundNeeded)
-                                {
-                                    (__instance as EFT.UI.UIElement).ShowGameObject(false);
-                                    ____questIconImage.sprite = ____foundInRaidSprite;
-                                    ____questIconImage.color = new Color(0.23922f, 1, 0.44314f);
-
-                                    foundNeeded = true;
-                                }
-
-                                areaNames.Add("<color=#3dff71>" + ad.Template.Name + "</color>");
-                            }
+                            foundFullfilled = true;
                         }
+
+                        areaNames.Add("<color=#3bdfff>" + ad.Template.Name + "</color>");
+                    }
+                    else
+                    {
+                        if (!foundNeeded)
+                        {
+                            (__instance as EFT.UI.UIElement).ShowGameObject(false);
+                            ____questIconImage.sprite = ____foundInRaidSprite;
+                            ____questIconImage.color = new Color(0.23922f, 1, 0.44314f);
+
+                            foundNeeded = true;
+                        }
+
+                        areaNames.Add("<color=#3dff71>" + ad.Template.Name + "</color>");
                     }
                 }
             }
@@ -121,8 +119,8 @@ namespace JET.Patches.Other
             if (foundNeeded || foundFullfilled)
             {
                 // Build string of list of areas this is needed for
-                string areaNamesString = "";
-                for (int i = 0; i < areaNames.Count; ++i)
+                var areaNamesString = "";
+                for (var i = 0; i < areaNames.Count; ++i)
                 {
                     areaNamesString += (i == 0 ? "" : (areaNames.Count == 2 ? "" : ",") + (i == areaNames.Count - 1 ? " and " : " ")) + areaNames[i];
                 }
