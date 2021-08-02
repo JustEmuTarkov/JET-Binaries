@@ -12,6 +12,9 @@ using JET.Patches.ScavMode;
 using JET.Utilities;
 using JET.Utilities.Patching;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using UnityEngine;
 
 namespace JET
 {
@@ -23,7 +26,7 @@ namespace JET
 
 		private static Settings _settings;
 #if B13074
-		public static string GameVersion = "0.12.11.2.13074";
+		public static string GAME_VERSION = "0.12.11.0.13074";
 #endif
 #if B12102
 		public static string GAME_VERSION = "";
@@ -35,15 +38,29 @@ namespace JET
 		public static string GAME_VERSION = "0.12.9.10988";
 #endif
 #if B9767
-		public static string GAME_VERSION = "";
+		public static string GAME_VERSION = "0.12.8.9767";
 #endif
 #if B9018
-		public static string GAME_VERSION = "";
+		public static string GAME_VERSION = "0.12.7.9018";
 #endif
 #if DEBUG
 		public static string GAME_VERSION = "";
 #endif
+
+		private static void CheckVersion() {
+			var list = PatcherConstants.TargetAssembly.GetTypes().Where(type => type.Name.StartsWith("Class") && type.GetField("string_0", BindingFlags.NonPublic | BindingFlags.Static) != null && type.GetMethods().Length == 4 && type.GetProperties().Length == 0 && type.GetMethods(BindingFlags.NonPublic | BindingFlags.Static).Length == 0 && type.GetProperties(BindingFlags.NonPublic | BindingFlags.Static).Length == 0).ToList();
+			if (list.Count > 0)
+			{
+				string inGameVersion = list[0].GetField("string_0", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null).ToString();
+				if (GAME_VERSION != inGameVersion)
+				{
+					Debug.LogError($"This 50IQ is trying to launch Singleplayer module precompiled for {GAME_VERSION} on {inGameVersion}");
+					Application.Quit(0);
+				}
+			}
+		}
 		public static void Initialize() {
+			CheckVersion();
 			// DEFAULT PATCHES
 			PatcherUtil.Patch<UnlockItemsIdLength>();
 			PatcherUtil.Patch<BarterSchemeAutoFill>();
