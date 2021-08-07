@@ -10,6 +10,7 @@ using EFT.Hideout;
 using UnityEngine;
 using UnityEngine.UI;
 
+#if B13074 || B13487
 using Requirement = GClass1329; // EFT.Hideout.RelatedRequirements as Data field (list)
 using HideoutInstance = GClass1305; // search for AreaDatas (Member)
 
@@ -147,3 +148,4 @@ namespace JET.Patches.Other
         }
     }
 }
+#endif

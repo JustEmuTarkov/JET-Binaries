@@ -5,24 +5,24 @@ using HarmonyLib;
 using JET.Utilities;
 using JET.Utilities.Patching;
 using UnityEngine;
-#if B13074
-using BotDifficultyHandler = GClass320; // Method: CheckOnExcude, LoadDifficultyStringInternal
-#endif
-#if B11661 || B12102
-using BotDifficultyHandler = GClass304; // Method: CheckOnExcude, LoadDifficultyStringInternal
-#endif
-#if B10988
-using BotDifficultyHandler = GClass303; // Method: CheckOnExcude, LoadDifficultyStringInternal
-#endif
-#if B9767
-using BotDifficultyHandler = GClass283; // Method: CheckOnExcude, LoadDifficultyStringInternal
-#endif
-#if B9018
-using BotDifficultyHandler = GClass280; // Method: CheckOnExcude, LoadDifficultyStringInternal
-#endif
-#if DEBUG
-using BotDifficultyHandler = GClass303; // Method: CheckOnExcude, LoadDifficultyStringInternal
-#endif
+//#if B13074
+//using BotDifficultyHandler = GClass320; // Method: CheckOnExcude, LoadDifficultyStringInternal
+//#endif
+//#if B11661 || B12102
+//using BotDifficultyHandler = GClass304; // Method: CheckOnExcude, LoadDifficultyStringInternal
+//#endif
+//#if B10988
+//using BotDifficultyHandler = GClass303; // Method: CheckOnExcude, LoadDifficultyStringInternal
+//#endif
+//#if B9767
+//using BotDifficultyHandler = GClass283; // Method: CheckOnExcude, LoadDifficultyStringInternal
+//#endif
+//#if B9018
+//using BotDifficultyHandler = GClass280; // Method: CheckOnExcude, LoadDifficultyStringInternal
+//#endif
+//#if DEBUG
+//using BotDifficultyHandler = GClass303; // Method: CheckOnExcude, LoadDifficultyStringInternal
+//#endif
 /// TODO: CHECK STRINGS IF THEY ARE PROPER ONES
 
 namespace JET.Patches.Bots
@@ -33,7 +33,10 @@ namespace JET.Patches.Bots
 
         protected override MethodBase GetTargetMethod()
         {
-            return typeof(BotDifficultyHandler).GetMethod("Load", BindingFlags.Public | BindingFlags.Static);
+            var getBotDifficultyHandler = typeof(EFT.MainApplication).Assembly.GetTypes().Where(type => type.Name.StartsWith("GClass") && type.GetMethod("CheckOnExcude", BindingFlags.Public | BindingFlags.Static) != null).First();
+            if (getBotDifficultyHandler == null)
+                return null;
+            return getBotDifficultyHandler.GetMethod("Load", BindingFlags.Public | BindingFlags.Static);
         }
 
         static IEnumerable<CodeInstruction> PatchTranspile(IEnumerable<CodeInstruction> instructions)

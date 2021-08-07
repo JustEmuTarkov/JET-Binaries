@@ -12,43 +12,6 @@ using JET.Utilities.Patching;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
 using UnityEngine;
-#if B13074
-//Property: SameNameAsset 
-//Property: IsLocked
-//Property: MaxConcurrentOperations
-
-// Method: GetDefaultNode() / Inside <T> goes IEasyBundle // mostly its +1 number from BundleLock
-#endif
-#if B11661 || B12102
-using IEasyBundle = GInterface253; //Property: SameNameAsset 
-using IBundleLock = GInterface254; //Property: IsLocked
-using BundleLock = GClass2220; //Property: MaxConcurrentOperations
-using DependencyGraph = GClass2221<GInterface253>; // Method: GetDefaultNode() / Inside <T> goes IEasyBundle
-#endif
-#if B10988
-using IEasyBundle = GInterface250; //Property: SameNameAsset 
-using IBundleLock = GInterface251; //Property: IsLocked
-using BundleLock = GClass2180; //Property: MaxConcurrentOperations
-using DependencyGraph = GClass2181<GInterface250>; // Method: GetDefaultNode() / Inside <T> goes IEasyBundle
-#endif
-#if B9767
-using IEasyBundle = GInterface238; //Property: SameNameAsset 
-using IBundleLock = bundleLock; //Property: IsLocked
-using BundleLock = GClass2114; //Property: MaxConcurrentOperations
-using DependencyGraph = GClass2115<GInterface238>; // Method: GetDefaultNode() / Inside <T> goes IEasyBundle
-#endif
-#if B9018
-using IEasyBundle = GInterface223; //Property: SameNameAsset 
-using IBundleLock = GInterface224; //Property: IsLocked
-using BundleLock = GClass2061; //Property: MaxConcurrentOperations
-using DependencyGraph = GClass2062<GInterface223>; // Method: GetDefaultNode() / Inside <T> goes IEasyBundle
-#endif
-#if DEBUG
-using IEasyBundle = GInterface250; //Property: SameNameAsset 
-using IBundleLock = GInterface251; //Property: IsLocked
-using BundleLock = GClass2180; //Property: MaxConcurrentOperations
-using DependencyGraph = GClass2181<GInterface250>; // Method: GetDefaultNode() / Inside <T> goes IEasyBundle
-#endif
 
 namespace JET.Patches.Bundles
 {

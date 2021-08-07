@@ -1,18 +1,12 @@
 ﻿using UnityEngine;
 using JET.Utilities.Patching;
-using JET.Utilities;
 using JET.Patches;
 using System.Reflection;
-
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json;
 using System.IO;
-using System;
-using System.Linq;
-using System.Collections.Generic;
 using JET.Patches.Logging;
-//using System.Text.Json;
-//using System.Text.Json.Serialization;
+using System.Linq;
+using System;
+using JET.Utilities;
 
 namespace JET
 {
@@ -23,15 +17,22 @@ namespace JET
         public static event Void ApplicationQuitEvent;
         public void OnApplicationQuit() => ApplicationQuitEvent?.Invoke();
 
-        private static CustomMods _customMods = new CustomMods();
+        //private static CustomMods _customMods = new CustomMods();
         private readonly Watermark _watermark = new Watermark();
 
-        private static bool FullLoggerEnabled;
+        internal static bool FullLoggerEnabled { 
+            get 
+            { 
+                return File.Exists(Path.Combine(CustomMods.GetGameDirectory, "LoggerEnable"));
+            }
+        }
+
         [Obfuscation(Exclude = true)]
         private void Awake() {
-            if (File.Exists(Path.Combine(CustomMods.GetGameDirectory, "LoggerEnable")))
+
+            if (FullLoggerEnabled)
             {
-                FullLoggerEnabled = true;
+                FullLogger.Independent();
                 PatcherUtil.Patch<InitialHookPatch>();
                 PatcherUtil.Patch<LoggingPatch>();
                 PatcherUtil.Patch<ResetHookPatch>();
@@ -50,27 +51,15 @@ namespace JET
         {
             CustomMods.Load();
             _watermark.Do();
+            if (FullLoggerEnabled)
+            {
+                FullLogger.Independent();
+            }
         }
         [Obfuscation(Exclude = true)]
         private void LateUpdate()
         {
             _watermark.Do();
-#if B13074
-            FullLogger();
-#endif
-        }
-
-        private void FullLogger() {
-            if (!FullLoggerEnabled) return;
-            // if logger is enabled enable all features
-            GClass389.IsLogsEnabled = true;
-            GClass389.UnityDebugLogsEnabled = true;
-            Debug.unityLogger.logEnabled = true;
-            Application.SetStackTraceLogType(LogType.Assert, StackTraceLogType.Full);
-            Application.SetStackTraceLogType(LogType.Error, StackTraceLogType.Full);
-            Application.SetStackTraceLogType(LogType.Exception, StackTraceLogType.Full);
-            Application.SetStackTraceLogType(LogType.Warning, StackTraceLogType.Full);
-            Application.SetStackTraceLogType(LogType.Log, StackTraceLogType.Full);
         }
 
     }

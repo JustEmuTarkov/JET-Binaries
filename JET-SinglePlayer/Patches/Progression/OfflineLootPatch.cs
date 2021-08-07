@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if !B13074 && !B13487
+
+using System;
 using System.Reflection;
 using System.Threading.Tasks;
 using JET.Utilities;
@@ -7,10 +9,8 @@ using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
 using Newtonsoft.Json;
 using UnityEngine;
-#if B13074
-using LocationInfo = GClass804.GClass806; // NightTimeAllowedLocations
-using ConverterBucket = GClass967; // Converters
-#endif
+
+
 #if B11661 || B12102
 using LocationInfo = GClass783.GClass785; // NightTimeAllowedLocations
 using ConverterBucket = GClass939; // Converters
@@ -118,3 +118,4 @@ namespace JET.Patches.Progression
         }
     }
 }
+#endif

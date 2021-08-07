@@ -16,6 +16,36 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
+/*
+ Files To Edit GClasses:
+	Utilities.EasyBundleHelper.cs
+	Utilities.Config.cs
+	Utilities.Player.HealthListener.cs
+	Patches.ScavMode.LoadOfflineRaidScreenPatch.cs
+	Patches.Quests.DogtagPatch.cs
+	Patcher.Progression.WeaponDurabilityPatch.cs
+	Patcher.Progression.OfflineSpawnPointPatch.cs
+	Patcher.Progression.OfflineSavePatch.cs
+	Patcher.Progression.OfflineLootPatch.cs (disabled after 12.11 cause we use build in one)
+	Patcher.Other.HideoutRequirementIndicator.cs
+	Patcher.Matchmaker.MatchMakerSelectionLocationScreenPatch.cs >> menu button
+	Patcher.Matchmaker.MatchMakerAfterSelectLocation.cs >> menu button
+	Patcher.Matchmaker.InsuranceScreenPatch.cs
+	Patcher.Healing.MainMenuControllerPatch.cs
+	Patcher.Bots.RemoveUsedBotProfilePatch.cs
+	Patcher.Bots.GetNewBotTemplatesPatch.cs
+	Patcher.Bots.CoreDifficultyPatch.cs
+	Patcher.Bots.BotSettingsLoadPatch.cs
+	Patcher.Bots.BotDifficultyPatch.cs
+	
+	
+Edit finder so its not searching static names
+	RemoveAddOfferButton.cs + BarterSchemeAutoFill.cs
+	UnlockItemsIdLength.cs
+ */
+
+
+
 namespace JET
 {
 	public class SinglePlayer
@@ -25,14 +55,11 @@ namespace JET
 		public void OnApplicationQuit() => ApplicationQuitEvent?.Invoke();
 
 		private static Settings _settings;
+#if B13487
+		public static string GAME_VERSION = "0.12.11.1.13487";
+#endif
 #if B13074
 		public static string GAME_VERSION = "0.12.11.0.13074";
-#endif
-#if B12102
-		public static string GAME_VERSION = "";
-#endif
-#if B11661
-		public static string GAME_VERSION = "";
 #endif
 #if B10988
 		public static string GAME_VERSION = "0.12.9.10988";
@@ -44,7 +71,7 @@ namespace JET
 		public static string GAME_VERSION = "0.12.7.9018";
 #endif
 #if DEBUG
-		public static string GAME_VERSION = "";
+		public static string GAME_VERSION = "DEBUG";
 #endif
 
 		private static void CheckVersion() {
@@ -64,8 +91,9 @@ namespace JET
 			// DEFAULT PATCHES
 			PatcherUtil.Patch<UnlockItemsIdLength>();
 			PatcherUtil.Patch<BarterSchemeAutoFill>();
+			#if B13074 || B13487
 			PatcherUtil.Patch<HideoutRequirementIndicator>();
-
+			#endif
 			// BUNDLE LOADING PATCHES
 			PatcherUtil.Patch<EasyAssetsPatch>();
 			PatcherUtil.Patch<EasyBundlePatch>();
@@ -76,9 +104,10 @@ namespace JET
 		}
 		private static void OfflineModePatchRoutes(Offline.OfflineMode EnabledElements)
 		{
-			//if (EnabledElements.OfflineLootPatch)
-			//    PatcherUtil.Patch<OfflineLootPatch>();
-
+			#if !B13074 && !B13487
+			if (EnabledElements.OfflineLootPatch)
+			    PatcherUtil.Patch<OfflineLootPatch>();
+			#endif
 			if (EnabledElements.OfflineSaveProfilePatch)
 				PatcherUtil.Patch<OfflineSaveProfilePatch>();
 

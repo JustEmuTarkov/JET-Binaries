@@ -10,6 +10,9 @@ namespace JET
 {
     class Watermark
     {
+#if B13487
+        private static string Version = "13487 | JET";
+#endif
 #if B13074
         private static string Version = "13074 | JET";
 #endif

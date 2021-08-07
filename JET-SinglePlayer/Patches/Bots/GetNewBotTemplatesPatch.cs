@@ -7,6 +7,13 @@ using Comfort.Common;
 using EFT;
 using JET.Utilities.Patching;
 using UnityEngine;
+#if B13487
+using WaveInfo = GClass984; // search for: Difficulty and chppse gclass with lower number whic hcontains Role and Limit variables
+using BotsPresets = GClass378; // Method: GetNewProfile (higher GClass number)
+using BotData = GInterface17; // Method: ChooseProfile
+using PoolManager = GClass1230; // CancellationToken: PoolsCancellationToken
+using JobPriority = GClass2232; // Delegate: Immediate also has General / Low
+#endif
 #if B13074
 using WaveInfo = GClass984; // search for: Difficulty and chppse gclass with lower number whic hcontains Role and Limit variables
 using BotsPresets = GClass379; // Method: GetNewProfile (higher GClass number)

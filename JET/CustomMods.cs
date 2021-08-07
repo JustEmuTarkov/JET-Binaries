@@ -52,10 +52,5 @@ namespace JET
                 Debug.Log($"Loaded: {launchingCommands[0]} [{launchingCommands[1]}]");
             }
         }
-
-       // private void LogError(string data) {
-
-            //File.AppendAllText(Path.Combine(GetGameDirectory, "ClientMods.log"), data + "\n");
-       // }
     }
 }
