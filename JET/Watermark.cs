@@ -26,7 +26,7 @@ namespace JET
                 }
                 if (localizedText.LocalizationKey == null)
                     return;
-                localizedText.LocalizationKey = Game.GetVersion.Split('.').Last() + " | JET";
+                localizedText.LocalizationKey = Game.Version.Split('.').Last() + " | JET";
             }
         }
     }
