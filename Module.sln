@@ -8,6 +8,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JET.Launcher", "JET.Launcher\JET.Launcher.csproj", "{3812C87E-F193-43B0-9FC6-3116948C023B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JET-SinglePlayer", "JET-SinglePlayer\JET-SinglePlayer.csproj", "{1D95F26C-E959-40C8-A73F-C9E280E87E17}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AC9ADC41-6007-4392-9D52-2BD850506052} = {AC9ADC41-6007-4392-9D52-2BD850506052}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -10,6 +10,7 @@ using System.IO;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using JET.Modding;
 using JET.Patches.Logging;
 //using System.Text.Json;
 //using System.Text.Json.Serialization;
