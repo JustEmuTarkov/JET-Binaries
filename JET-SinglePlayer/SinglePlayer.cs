@@ -1,4 +1,5 @@
-﻿using JET.Patches;
+﻿using System;
+using JET.Patches;
 using JET.Patches.Bots;
 using JET.Patches.Bundles;
 using JET.Patches.Healing;
@@ -89,10 +90,10 @@ namespace JET
 		}
 
 
-		protected override void Initialize() {
+		protected override void Initialize(IReadOnlyDictionary<Type, JetMod> dependencies, string gameVersion) {
 			CheckVersion();
-            // DEFAULT PATCHES
-            PatcherUtil.Patch<UnlockItemsIdLength>();
+			// DEFAULT PATCHES
+			PatcherUtil.Patch<UnlockItemsIdLength>();
 			PatcherUtil.Patch<BarterSchemeAutoFill>();
 			#if B13074 || B13487
 			PatcherUtil.Patch<HideoutRequirementIndicator>();
@@ -109,7 +110,7 @@ namespace JET
 		{
 			#if !B13074 && !B13487
 			if (EnabledElements.OfflineLootPatch)
-			    PatcherUtil.Patch<OfflineLootPatch>();
+				PatcherUtil.Patch<OfflineLootPatch>();
 			#endif
 			if (EnabledElements.OfflineSaveProfilePatch)
 				PatcherUtil.Patch<OfflineSaveProfilePatch>();

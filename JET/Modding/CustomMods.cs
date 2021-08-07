@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using EFT;
 using UnityEngine;
 
 namespace JET.Modding
@@ -10,6 +11,7 @@ namespace JET.Modding
     internal class CustomMods
     {
         internal static string GetGameDirectory => AppDomain.CurrentDomain.BaseDirectory;
+        internal static readonly List<JetMod> ModInstances = new List<JetMod>();
 
         internal static void Load()
         {
@@ -17,7 +19,7 @@ namespace JET.Modding
             var mods = Directory.GetFiles(pathToCustomMods, "*.dll").ToList();
 
             var availableMods = new Dictionary<Type, ModSettings>();
-            var modInstances = new List<JetMod>();
+
 
             foreach (var file in mods)
             {
@@ -48,7 +50,7 @@ namespace JET.Modding
             foreach (var (type, settings) in noDependencies)
             {
                 if (!LoadMod(settings, out var mod)) continue;
-                modInstances.Add(mod);
+                ModInstances.Add(mod);
                 Debug.Log($"Mod {type.FullName} loaded successfully");
             }
 
@@ -59,18 +61,18 @@ namespace JET.Modding
                 var newRemaining = remaining.ToList();
                 foreach (var (type, settings) in remaining)
                 {
-                    if (!settings.DependsOn.Select(x => modInstances.Any(y => y.GetType() == x)).All(x => x) ||
-                        !settings.SoftDependsOn.Select(x => modInstances.Any(y => y.GetType() == x)).All(x => x))
+                    if (!settings.DependsOn.Select(x => ModInstances.Any(y => y.GetType() == x)).All(x => x) ||
+                        !settings.SoftDependsOn.Select(x => ModInstances.Any(y => y.GetType() == x)).All(x => x))
                         continue;
                     if (!LoadMod(settings, out var mod)) continue;
-                    modInstances.Add(mod);
+                    ModInstances.Add(mod);
                     newRemaining.RemoveFirst(x => x.Key == type);
                     modsLoaded++;
                     Debug.Log($"Mod {type.FullName} loaded successfully");
                 }
 
                 remaining = newRemaining.ToArray();
-                if(modsLoaded == 0)
+                if (modsLoaded == 0)
                     break;
             }
 
@@ -81,10 +83,10 @@ namespace JET.Modding
                 var newRemaining = remaining.ToList();
                 foreach (var (type, settings) in remaining)
                 {
-                    if (!settings.DependsOn.Select(x => modInstances.Any(y => y.GetType() == x)).All(x => x))
+                    if (!settings.DependsOn.Select(x => ModInstances.Any(y => y.GetType() == x)).All(x => x))
                         continue;
                     if (!LoadMod(settings, out var mod)) continue;
-                    modInstances.Add(mod);
+                    ModInstances.Add(mod);
                     newRemaining.RemoveFirst(x => x.Key == type);
                     modsLoaded++;
                     Debug.Log($"Mod {type.FullName} loaded successfully");
@@ -98,7 +100,7 @@ namespace JET.Modding
             // Remaining mods have required dependencies that don't exist
             foreach (var (type, settings) in remaining)
             {
-                var missing = settings.DependsOn.Where(x => modInstances.All(y => y.GetType() != x));
+                var missing = settings.DependsOn.Where(x => ModInstances.All(y => y.GetType() != x));
                 var missingList = missing.Select(x => x.FullName);
                 Debug.LogError($"Mod {type.FullName} is missing required dependencies and will not be loaded. Missing: {string.Join(", ", missingList)}");
             }
@@ -156,11 +158,23 @@ namespace JET.Modding
             try
             {
                 var instance = Activator.CreateInstance(settings.ModType) as JetMod;
-                instance?.Initialize();
-                if (instance == null)
+                var dependInstances = ModInstances
+                    .Where(x => settings.DependsOn.Contains(x.GetType()) || settings.DependsOn.Contains(x.GetType()))
+                    .ToDictionary(x => x.GetType(), x => x);
+
+                try
                 {
-                    Debug.LogError($"Failed to load mod {settings.ModType}. Instance is null.");
-                    return false;
+                    instance?.Initialize(dependInstances, Application.version);
+                    if (instance == null)
+                    {
+                        Debug.LogError($"Failed to load mod {settings.ModType}. Instance is null.");
+                        return false;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"An error occurred while loading mod {settings.ModType.FullName}: {e}");
+                    // Don't return as the mod could still be (mostly) working
                 }
 
                 mod = instance;
