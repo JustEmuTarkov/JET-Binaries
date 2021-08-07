@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using Comfort.Common;
 using EFT;
 using JET.Utilities.Patching;
 using JET.Utilities.Player;
-#if B13074
+#if B13074 || B13487
 using ClientMetrics = GClass1432; // GameUpdateBinMetricCollector (lower Gclass number)
 #endif
 #if B11661 || B12102
@@ -54,10 +55,19 @@ namespace JET.Patches.Progression
 
         protected override MethodBase GetTargetMethod()
         {
-            return PatcherConstants.MainApplicationType.GetMethod($"method_{methodNumber}", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            return PatcherConstants.MainApplicationType
+                .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+                .Where(method => 
+                    method.Name.StartsWith("method_") && 
+                    method.GetParameters().Length == 6 && 
+                    method.GetParameters()[0].GetType() == typeof(string) && 
+                    method.GetParameters()[3].Name == "isLocal" && 
+                    method.GetParameters()[3].GetType() == typeof(bool))
+                .First();
+            //return PatcherConstants.MainApplicationType.GetMethod($"method_{methodNumber}", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
         }
 
-        public static void PatchPrefix(ESideType ___esideType_0, Result<ExitStatus, TimeSpan, ClientMetrics> result)
+        public static void PatchPrefix(ESideType ___esideType_0, Result<ExitStatus, TimeSpan, object> result)
         {
             var session = Utilities.Config.BackEndSession;
             var isPlayerScav = false;

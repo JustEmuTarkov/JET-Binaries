@@ -6,7 +6,7 @@ using EFT;
 using EFT.Game.Spawning;
 using JET.Utilities.Patching;
 using UnityEngine;
-#if B13074
+#if B13074 || B13487
 using ISpawnPoints = GInterface229; // DestroySpawnPoint or CreateSpawnPoint as ginterface
 #endif
 #if B11661 || B12102
@@ -92,7 +92,7 @@ namespace JET.Patches.Progression
             }
         }
 #else
-#if B13074
+#if B13074 || B13487
         public static bool PatchPrefix(ref ISpawnPoint __result, ISpawnPoints ___ginterface229_0, ESpawnCategory category, EPlayerSide side, string infiltration)
         {
             var spawnPoints = ___ginterface229_0.ToList();
@@ -116,7 +116,6 @@ namespace JET.Patches.Progression
             var infils = spawnPoints.Select(sp => sp.Infiltration).Distinct();
             Debug.LogError($"PatchPrefix SelectSpawnPoint Infiltrations: {spawnPoints.Count} | {String.Join(", ", infils)}");
 
-           // Debug.LogError($"Filter by Infiltration: {infiltration}");
             spawnPoints = spawnPoints.Where(sp => sp != null && sp.Infiltration != null && (String.IsNullOrEmpty(infiltration) || sp.Infiltration.Equals(infiltration))).ToList();
             if (spawnPoints.Count == 0)
             {
@@ -124,7 +123,6 @@ namespace JET.Patches.Progression
                 return false;
             }
 
-           // Debug.LogError($"Filter by Categories: {category}");
             spawnPoints = spawnPoints.Where(sp => sp.Categories.Contain(category)).ToList();
             if (spawnPoints.Count == 0)
             {
@@ -132,7 +130,6 @@ namespace JET.Patches.Progression
                 return false;
             }
 
-           // Debug.LogError($"Filter by Side: {side}");
             spawnPoints = spawnPoints.Where(sp => sp.Sides.Contain(side)).ToList();
             if (spawnPoints.Count == 0)
             {
@@ -141,7 +138,6 @@ namespace JET.Patches.Progression
             }
 
             __result = spawnPoints.RandomElement();
-           // Debug.LogError($"PatchPrefix SelectSpawnPoint: {__result.Id}");
             return false;
         }
 
@@ -149,7 +145,6 @@ namespace JET.Patches.Progression
         {
             var spawn = spawnPoints.Where(sp => sp.Categories.Contain(ESpawnCategory.Player)).RandomElement();
             Debug.LogError($"PatchPrefix SelectSpawnPoint [Id: {spawn.Id}]: Couldn't find any spawn points for:  {category}  |  {side}  |  {infiltration}");
-            //Debug.LogError($"PatchPrefix SelectSpawnPoint: {spawn.Id}");
             return spawn;
         }
 #endif

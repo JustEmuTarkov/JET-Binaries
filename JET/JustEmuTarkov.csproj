@@ -51,6 +51,15 @@
     <WarningLevel>4</WarningLevel>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '13487|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>B13487;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '10988|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -160,9 +169,8 @@
       <HintPath>..\Shared\References_Unchangabled\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="zlib.net" Condition=" '$(Configuration)|$(Platform)' == '9018|AnyCPU' Or '$(Configuration)|$(Platform)' == '9767|AnyCPU' ">
+    <Reference Include="zlib.net">
       <HintPath>..\Shared\References_Unchangabled\zlib.net.dll</HintPath>
-      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +197,7 @@
     <Compile Include="Utilities\App\Logger.cs" />
     <Compile Include="Utilities\App\ProcessMonitor.cs" />
     <Compile Include="Utilities\DefaultSettings\DefaultRaidSettings.cs" />
+    <Compile Include="Utilities\FullLogger.cs" />
     <Compile Include="Utilities\Hook\Loader.cs" />
     <Compile Include="Utilities\HTTP\Request.cs" />
     <Compile Include="Utilities\Logging\FileLogger.cs" />

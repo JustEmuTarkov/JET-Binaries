@@ -7,44 +7,6 @@ using Diz.DependencyManager;
 using JET.Utilities;
 using JET.Utilities.Patching;
 using UnityEngine;
-#if B13074
-//Property: SameNameAsset 
-//Property: IsLocked
-// go to actual gclass and search for gclassXXXX<T> with initial value gparam_0 and base.method_0(value) call
-
-//Construct method parameter: initialValue 
-#endif
-#if B11661 || B12102
-using IEasyBundle = GInterface253; //Property: SameNameAsset 
-using IBundleLock = GInterface254; //Property: IsLocked
-// go to actual gclass and search for gclassXXXX<T> with initial value gparam_0 and base.method_0(value) call
-using BindableState = GClass2206<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue 
-#endif
-#if B10988
-using IEasyBundle = GInterface250; //Property: SameNameAsset 
-using IBundleLock = GInterface251; //Property: IsLocked
-// go to actual gclass and search for gclassXXXX<T> with initial value gparam_0 and base.method_0(value) call
-using BindableState = GClass2166<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue 
-#endif
-#if B9767
-using IEasyBundle = GInterface238; //Property: SameNameAsset 
-using IBundleLock = bundleLock; //Property: IsLocked
-// go to actual gclass and search for gclassXXXX<T> with initial value gparam_0 and base.method_0(value) call
-using BindableState = GClass2100<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue 
-#endif
-#if B9018
-using IEasyBundle = GInterface223; //Property: SameNameAsset 
-using IBundleLock = GInterface224; //Property: IsLocked
-// go to actual gclass and search for gclassXXXX<T> with initial value gparam_0 and base.method_0(value) call
-using BindableState = GClass2046<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue 
-#endif
-#if DEBUG
-using IEasyBundle = GInterface250; //Property: SameNameAsset 
-using IBundleLock = GInterface251; //Property: IsLocked
-// go to actual gclass and search for gclassXXXX<T> with initial value gparam_0 and base.method_0(value) call
-using BindableState = GClass2166<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue 
-#endif
-
 
 namespace JET.Patches.Bundles
 {

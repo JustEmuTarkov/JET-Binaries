@@ -1,4 +1,5 @@
 using System.Reflection;
+using JET.Utilities;
 using JET.Utilities.Patching;
 
 namespace JET.Patches.Progression
@@ -10,7 +11,7 @@ namespace JET.Patches.Progression
         public SingleModeJamPatch() : base(postfix: nameof(PatchPostfix))
         {
         }
-#if !B13074
+#if !B13074 && !B13487
         protected override MethodBase GetTargetMethod()
         {
             var targetType = PatcherConstants.TargetAssembly.GetTypes().Single(IsTargetType);

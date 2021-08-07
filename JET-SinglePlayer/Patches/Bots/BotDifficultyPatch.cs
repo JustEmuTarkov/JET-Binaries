@@ -1,27 +1,28 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 using EFT;
 using JET.Utilities;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
 using UnityEngine;
-#if B13074
-using BotDifficultyHandler = GClass320; // Method: CheckOnExcude, LoadDifficultyStringInternal
-#endif
-#if B11661 || B12102
-using BotDifficultyHandler = GClass304; // Method: CheckOnExcude, LoadDifficultyStringInternal
-#endif
-#if B10988
-using BotDifficultyHandler = GClass303; // Method: CheckOnExcude, LoadDifficultyStringInternal
-#endif
-#if B9767
-using BotDifficultyHandler = GClass283; // Method: CheckOnExcude, LoadDifficultyStringInternal
-#endif
-#if B9018
-using BotDifficultyHandler = GClass280; // Method: CheckOnExcude, LoadDifficultyStringInternal
-#endif
-#if DEBUG
-using BotDifficultyHandler = GClass303; // Method: CheckOnExcude, LoadDifficultyStringInternal
-#endif
+//#if B13074
+//using BotDifficultyHandler = GClass320; // Method: CheckOnExcude, LoadDifficultyStringInternal
+//#endif
+//#if B11661 || B12102
+//using BotDifficultyHandler = GClass304; // Method: CheckOnExcude, LoadDifficultyStringInternal
+//#endif
+//#if B10988
+//using BotDifficultyHandler = GClass303; // Method: CheckOnExcude, LoadDifficultyStringInternal
+//#endif
+//#if B9767
+//using BotDifficultyHandler = GClass283; // Method: CheckOnExcude, LoadDifficultyStringInternal
+//#endif
+//#if B9018
+//using BotDifficultyHandler = GClass280; // Method: CheckOnExcude, LoadDifficultyStringInternal
+//#endif
+//#if DEBUG
+//using BotDifficultyHandler = GClass303; // Method: CheckOnExcude, LoadDifficultyStringInternal
+//#endif
 
 namespace JET.Patches.Bots
 {
@@ -33,8 +34,11 @@ namespace JET.Patches.Bots
 
         protected override MethodBase GetTargetMethod()
         {
-            //return typeof(BotDifficultyHandler).GetMethod("LoadInternal", BindingFlags.Public | BindingFlags.Static);
-            return typeof(BotDifficultyHandler).GetMethod("LoadDifficultyStringInternal", BindingFlags.Public | BindingFlags.Static);
+            var getBotDifficultyHandler = typeof(EFT.MainApplication).Assembly.GetTypes().Where(type => type.Name.StartsWith("GClass") && type.GetMethod("CheckOnExcude", BindingFlags.Public | BindingFlags.Static) != null).First();
+            if (getBotDifficultyHandler == null)
+                return null;
+            //return getBotDifficultyHandler.GetMethod("LoadInternal", BindingFlags.Public | BindingFlags.Static);
+            return getBotDifficultyHandler.GetMethod("LoadDifficultyStringInternal", BindingFlags.Public | BindingFlags.Static);
         }
 
         //private static bool PatchPrefix(ref bool __result, out GClass319 core)
