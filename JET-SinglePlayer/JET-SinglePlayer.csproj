@@ -96,7 +96,7 @@
       <HintPath>..\Shared\References_$(Configuration)\Assembly-CSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="bsg.componentace.compression.libs.zlib" Condition=" '$(Configuration)' == '13074' Or '$(Configuration)' == '12102' Or '$(Configuration)' == '11661' Or '$(Configuration)' == '10988' Or '$(Configuration)' == 'Debug' ">
+    <Reference Include="bsg.componentace.compression.libs.zlib" Condition=" '$(Configuration)' == '13487' Or '$(Configuration)' == '13074' Or '$(Configuration)' == '12102' Or '$(Configuration)' == '11661' Or '$(Configuration)' == '10988' Or '$(Configuration)' == 'Debug' ">
       <HintPath>..\Shared\References_Unchangabled\bsg.componentace.compression.libs.zlib.dll</HintPath>
       <Private>False</Private>
     </Reference>
@@ -169,7 +169,7 @@
       <HintPath>..\Shared\References_Unchangabled\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="zlib.net">
+    <Reference Include="zlib.net" Condition=" '$(Configuration)' != '13074' And '$(Configuration)' != '13487' ">
       <HintPath>..\Shared\References_Unchangabled\zlib.net.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -229,10 +229,6 @@
     <Compile Include="Utilities\Logging\FileLogger.cs" />
     <Compile Include="Utilities\Logging\UnityLogger.cs" />
     <Compile Include="Utilities\Offline.cs" />
-    <Compile Include="Utilities\Patching\AbstractPatch.cs" />
-    <Compile Include="Utilities\Patching\GenericPatch.cs" />
-    <Compile Include="Utilities\Patching\PatcherConstants.cs" />
-    <Compile Include="Utilities\Patching\PatcherUtil.cs" />
     <Compile Include="Utilities\PatchLogger.cs" />
     <Compile Include="Utilities\Player\HealthListener.cs" />
     <Compile Include="Utilities\Player\PlayerHealth.cs" />
@@ -262,7 +258,6 @@
     </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y /I "$(TargetDir)JET-SinglePlayer.dll" "$(SolutionDir)\Build\$(Configuration)\ClientMods\ExternalLibraries\"
-xcopy /Y /I "$(SolutionDir)Shared\Resources\JET.launch" "$(SolutionDir)\Build\$(Configuration)\ClientMods"</PostBuildEvent>
+    <PostBuildEvent>xcopy /Y /I "$(TargetDir)JET-SinglePlayer.dll" "$(SolutionDir)\Build\$(Configuration)\ClientMods\"</PostBuildEvent>
   </PropertyGroup>
 </Project>

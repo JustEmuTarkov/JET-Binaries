@@ -1,4 +1,4 @@
-﻿#if B13074
+﻿#if B13074 || B13487
 using FilesChecker;
 using JET.Utilities.Patching;
 using System;

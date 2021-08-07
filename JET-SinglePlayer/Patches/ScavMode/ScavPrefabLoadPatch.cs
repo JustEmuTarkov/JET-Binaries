@@ -16,10 +16,16 @@ namespace JET.Patches.ScavMode
 
         protected override MethodBase GetTargetMethod()
         {
-            return typeof(MainApplication).GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly).
-                Single(x => x.GetField("entryPoint") != null && x.GetField("timeAndWeather") != null && x.Name.Contains("Struct"))
-                .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly)
-                .FirstOrDefault(x => x.Name == "MoveNext");
+            foreach (var type in PatcherConstants.MainApplicationType.GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly)) {
+                if (type.Name.StartsWith("Struct")) {
+                    if (type.GetField("entryPoint") != null && type.GetField("timeAndWeather") != null && type.GetField("timeHasComeScreenController") != null) {
+                        var TargetedMethod = type.GetMethod("MoveNext", BindingFlags.NonPublic | BindingFlags.Instance);
+                        if (TargetedMethod != null)
+                            return TargetedMethod;
+                    }
+                }
+            }
+            return null;
         }
 
         static IEnumerable<CodeInstruction> PatchTranspile(ILGenerator generator, IEnumerable<CodeInstruction> instructions)

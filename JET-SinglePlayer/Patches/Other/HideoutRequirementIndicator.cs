@@ -30,7 +30,8 @@ namespace JET.Patches.Other
         }
 
         public static void PatchPostfix(
-            EFT.Profile profile, EFT.InventoryLogic.Item item, 
+           // EFT.Profile profile, 
+            EFT.InventoryLogic.Item item, 
             EFT.UI.SimpleTooltip tooltip, 
             EFT.UI.DragAndDrop.QuestItemViewPanel __instance,
             ref Image ____questIconImage, 

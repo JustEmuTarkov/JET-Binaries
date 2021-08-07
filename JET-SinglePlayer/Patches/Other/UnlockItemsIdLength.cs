@@ -16,20 +16,25 @@ namespace JET.Patches.Other
 
         protected override MethodBase GetTargetMethod()
         {
-            return PatcherConstants.TargetAssembly.GetTypes()
-                .Single(x => {
-                   // x.Name.StartsWith("Class") &&
-                   // x.GetMethod("method_29") != null;
-                   // Find Logout >> Find Class with 3 number like 189 etc. >> 
-                   if (!x.Name.StartsWith("Class")) return false;
-                   var methodInfo = x.GetMethod("method_28", BindingFlags.NonPublic | BindingFlags.Instance);
-                   if (methodInfo == null) return false;
-                   var paramInfo = methodInfo.GetParameters();
-                    return  paramInfo.Length == 1 && 
-                            paramInfo[0].Name == "item" && 
-                            paramInfo[0].ParameterType.Name == "TradingItemReference" &&
-                            methodInfo.ReturnType.Name.EndsWith("`3");
-                }).GetMethod("method_28", BindingFlags.NonPublic | BindingFlags.Instance);
+            foreach (var MyType in PatcherConstants.TargetAssembly.GetTypes()) {
+                if (MyType.FullName.Split('+').Length == 3) // make sure its 3 classes deep
+                {
+                    if (string.IsNullOrEmpty(MyType.Namespace)) // make sure it doesnt have namespace
+                    {
+                        foreach (var m in MyType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance))
+                        {
+                            var paramInfo = m.GetParameters();
+                            // make sure return type is class<thing, thing, thing> there is 1 param named item and its type is TradingItemReference
+                            if (m.ReturnType.Name.EndsWith("3") && paramInfo.Length == 1 && paramInfo[0].Name == "item" && paramInfo[0].ParameterType.Name == "TradingItemReference")
+                            {
+                                return m;
+                            }
+                        }
+                    }
+                }
+                
+            }
+            return null;
         }
 
         static IEnumerable<CodeInstruction> PatchTranspile(IEnumerable<CodeInstruction> instructions)

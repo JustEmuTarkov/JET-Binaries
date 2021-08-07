@@ -41,7 +41,7 @@ namespace JET
                 PatcherUtil.Patch<LoggingPatch>();
                 PatcherUtil.Patch<ResetHookPatch>();
             }
-#if B13074
+#if B13074 || B13487
             PatcherUtil.Patch<EnsureConsistencyPatch>(); // this occurs only in ~13074 and above
 #endif
             PatcherUtil.Patch<BattleEyePatch>();

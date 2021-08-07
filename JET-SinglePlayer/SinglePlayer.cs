@@ -104,6 +104,7 @@ namespace JET
 
 			OfflineModePatchRoutes(Offline.LoadModules());
 
+			Application.Quit(0);
 		}
 		private static void OfflineModePatchRoutes(Offline.OfflineMode EnabledElements)
 		{

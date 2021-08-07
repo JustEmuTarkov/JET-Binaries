@@ -17,11 +17,6 @@ namespace JET.Patches.Matchmaker
         public MatchMakerAfterSelectLocation() : base(postfix: nameof(PatchPostfix))
         {
         }
-#if B13074
-        private const string PropertyName = "GClass806_0";
-#else
-        private const string PropertyName = "SelectedLocation";
-#endif
         public static void PatchPostfix(ref UI_Button ____readyButton)
         {
             ____readyButton.gameObject.SetActive(false);
@@ -29,7 +24,12 @@ namespace JET.Patches.Matchmaker
 
         protected override MethodBase GetTargetMethod()
         {
-            return typeof(MatchMakerSelectionLocationScreen).GetProperty(PropertyName, BindingFlags.NonPublic | BindingFlags.Instance)?.SetMethod; 
+            foreach (var method in typeof(MatchMakerSelectionLocationScreen).GetProperties(BindingFlags.NonPublic | BindingFlags.Instance))
+            {
+                return method?.SetMethod; // there is only 1 here so lets just return first one...
+            }
+            return null;
+            //return typeof(MatchMakerSelectionLocationScreen).GetProperty(PropertyName, BindingFlags.NonPublic | BindingFlags.Instance)?.SetMethod; 
         }
     }
 }

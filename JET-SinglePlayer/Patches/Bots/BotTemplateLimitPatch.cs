@@ -49,7 +49,17 @@ namespace JET.Patches.Bots
 
         protected override MethodBase GetTargetMethod()
         {
-            return typeof(BotsPresets).GetMethod("method_1", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            foreach (var type in PatcherConstants.TargetAssembly.GetTypes()) {
+                if (type.Name.StartsWith("GClass")) {
+                    var BoolCheck = type.GetMethod("GetNewProfile", BindingFlags.NonPublic | BindingFlags.Instance) == null;
+                    if (BoolCheck) continue;
+                    // its proper gclass now lets check if our targeted method exists there
+                    var TargetedMethod = type.GetMethod("method_1", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+                    if (TargetedMethod != null)
+                        return TargetedMethod;
+                }
+            }
+            return null;
         }
 
         public static void PatchPostfix(List<WaveInfo> __result, List<WaveInfo> wavesProfiles, List<WaveInfo> delayed)

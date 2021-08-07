@@ -8,8 +8,8 @@ using EFT;
 using JET.Utilities.Patching;
 using UnityEngine;
 #if B13487
-using WaveInfo = GClass984; // search for: Difficulty and chppse gclass with lower number whic hcontains Role and Limit variables
-using BotsPresets = GClass378; // Method: GetNewProfile (higher GClass number)
+//using WaveInfo = GClass984; // not used // search for: Difficulty and chppse gclass with lower number whic hcontains Role and Limit variables
+using BotsPresets = GClass379; // Method: GetNewProfile (higher GClass number)
 using BotData = GInterface17; // Method: ChooseProfile
 using PoolManager = GClass1230; // CancellationToken: PoolsCancellationToken
 using JobPriority = GClass2232; // Delegate: Immediate also has General / Low
@@ -66,22 +66,40 @@ namespace JET.Patches.Bots
 
         public GetNewBotTemplatesPatch() : base(prefix: nameof(PatchPrefix))
         {
-            // compile-time checks
-            _ = nameof(WaveInfo.Difficulty);
-            _ = nameof(BotsPresets.GetNewProfile);
-            _ = nameof(BotData.PrepareToLoadBackend);
-            _ = nameof(PoolManager.LoadBundlesAndCreatePools);
-            _ = nameof(JobPriority.General);
-
-            // creating delegate
-            _getNewProfileFunc = typeof(BotsPresets)
-                .GetMethod(nameof(BotsPresets.GetNewProfile), BindingFlags.NonPublic | BindingFlags.Instance)
-                .CreateDelegate(typeof(Func<BotsPresets, BotData, Profile>)) as Func<BotsPresets, BotData, Profile>;
         }
 
         protected override MethodBase GetTargetMethod()
         {
-            return typeof(BotsPresets).GetMethod(nameof(BotsPresets.CreateProfile), BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            foreach (var type in PatcherConstants.TargetAssembly.GetTypes())
+            {
+                if (type.Name.Contains("GClass"))
+                {
+                    // its proper gclass now lets check if our targeted method exists there
+                    var TargetedMethod = type.GetMethod("method_1", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+                    if (TargetedMethod == null)
+                    {
+                        continue;
+                    }
+                    MethodBase CreateProfileMethod = null;
+                    foreach (var method in type.GetMethods()) {
+                        if (method.Name == "CreateProfile" && method.GetParameters().Length == 1 && method.ReturnType.Name == "Task`1")
+                            CreateProfileMethod = method;
+                    }
+
+                    if (CreateProfileMethod == null)
+                    {
+                        continue;
+                    }
+                    if (CreateProfileMethod.GetParameters().Length != 1) continue;
+
+
+                    _getNewProfileFunc = type.GetMethod("GetNewProfile", BindingFlags.NonPublic | BindingFlags.Instance)
+                        .CreateDelegate(typeof(Func<BotsPresets, BotData, Profile>)) as Func<BotsPresets, BotData, Profile>;
+                    if (_getNewProfileFunc == null) return null;
+                    return CreateProfileMethod;
+                }
+            }
+            return null;
         }
 
         public static bool PatchPrefix(ref Task<Profile> __result, BotsPresets __instance, BotData data)
