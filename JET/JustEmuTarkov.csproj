@@ -179,7 +179,6 @@
     <Compile Include="Hook\Target.cs" />
     <Compile Include="Instance.cs" />
     <Compile Include="Modding\DependAttribute.cs" />
-    <Compile Include="Modding\DependencyType.cs" />
     <Compile Include="Modding\JetMod.cs" />
     <Compile Include="Modding\ModInfoAttribute.cs" />
     <Compile Include="Modding\ModSettings.cs" />

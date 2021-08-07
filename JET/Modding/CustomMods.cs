@@ -152,9 +152,16 @@ namespace JET.Modding
             mod = null;
             if (settings.ModType.GetConstructors().All(x => x.GetParameters().Length != 0))
             {
-                Debug.LogError($"Mod {settings.ModType} does not contain a constructor that takes 0 arguments. Please add one.");
+                Debug.LogError($"Mod {settings.ModType.FullName} does not contain a constructor that takes 0 arguments. Please add one.");
                 return false;
             }
+
+            if (settings.CompatibleWith.Length > 0 && !settings.CompatibleWith.Contains(Application.version))
+            {
+                Debug.LogError($"Mod {settings.ModType.FullName} is not compatible with game version {Application.version}.");
+                return false;
+            }
+
             try
             {
                 var instance = Activator.CreateInstance(settings.ModType) as JetMod;
@@ -167,7 +174,7 @@ namespace JET.Modding
                     instance?.Initialize(dependInstances, Application.version);
                     if (instance == null)
                     {
-                        Debug.LogError($"Failed to load mod {settings.ModType}. Instance is null.");
+                        Debug.LogError($"Failed to load mod {settings.ModType.FullName}. Instance is null.");
                         return false;
                     }
                 }
