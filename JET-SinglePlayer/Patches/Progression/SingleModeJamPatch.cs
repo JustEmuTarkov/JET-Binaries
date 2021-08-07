@@ -6,7 +6,8 @@ namespace JET.Patches.Progression
 {
     public class SingleModeJamPatch : GenericPatch<SingleModeJamPatch>
     {
-        private static MethodInfo _onFireEventMethod;
+
+        private static readonly MethodInfo _onFireEventMethod;
 
         public SingleModeJamPatch() : base(postfix: nameof(PatchPostfix))
         {

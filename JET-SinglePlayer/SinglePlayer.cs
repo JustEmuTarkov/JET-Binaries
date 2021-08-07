@@ -14,6 +14,7 @@ using JET.Utilities.Patching;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using JET.Modding;
 using UnityEngine;
 
 /*
@@ -48,7 +49,7 @@ Edit finder so its not searching static names
 
 namespace JET
 {
-	public class SinglePlayer
+	public class SinglePlayer : JetMod
 	{
 		public delegate void Void();
 		public static event Void ApplicationQuitEvent;
@@ -86,7 +87,9 @@ namespace JET
 				}
 			}
 		}
-		public static void Initialize() {
+
+
+		protected override void Initialize() {
 			CheckVersion();
 			// DEFAULT PATCHES
 			PatcherUtil.Patch<UnlockItemsIdLength>();

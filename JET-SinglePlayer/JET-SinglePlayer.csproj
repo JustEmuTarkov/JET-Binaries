@@ -246,6 +246,12 @@
     <Compile Include="Utilities\Reflection\PrivateValueAccessor.cs" />
     <Compile Include="Utilities\Settings.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JET\JustEmuTarkov.csproj">
+      <Project>{ac9adc41-6007-4392-9d52-2bd850506052}</Project>
+      <Name>JustEmuTarkov</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent Condition="'$(OS)' != 'Unix'">
