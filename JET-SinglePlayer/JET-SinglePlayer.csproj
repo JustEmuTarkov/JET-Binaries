@@ -218,28 +218,13 @@
     <Compile Include="Patches\Quests\DogtagPatch.cs" />
     <Compile Include="Patches\Ragfair\BarterSchemeAutoFill.cs" />
     <Compile Include="Patches\Ragfair\RemoveAddOfferButton.cs" />
-    <Compile Include="Utilities\App\Json.cs" />
-    <Compile Include="Utilities\App\Logger.cs" />
-    <Compile Include="Utilities\App\ProcessMonitor.cs" />
     <Compile Include="Utilities\Config.cs" />
-    <Compile Include="Utilities\DefaultSettings\DefaultRaidSettings.cs" />
     <Compile Include="Utilities\EasyBundleHelper.cs" />
-    <Compile Include="Utilities\Hook\Loader.cs" />
-    <Compile Include="Utilities\HTTP\Request.cs" />
-    <Compile Include="Utilities\Logging\FileLogger.cs" />
-    <Compile Include="Utilities\Logging\UnityLogger.cs" />
     <Compile Include="Utilities\Offline.cs" />
     <Compile Include="Utilities\PatchLogger.cs" />
     <Compile Include="Utilities\Player\HealthListener.cs" />
     <Compile Include="Utilities\Player\PlayerHealth.cs" />
     <Compile Include="Utilities\Player\SaveLootUtil.cs" />
-    <Compile Include="Utilities\Reflection\ClientAppUtils.cs" />
-    <Compile Include="Utilities\Reflection\CodeWrapper\Code.cs" />
-    <Compile Include="Utilities\Reflection\CodeWrapper\CodeGenerator.cs" />
-    <Compile Include="Utilities\Reflection\CodeWrapper\CodeWithLabel.cs" />
-    <Compile Include="Utilities\Reflection\LocalGameUtils.cs" />
-    <Compile Include="Utilities\Reflection\PrivateMethodAccessor.cs" />
-    <Compile Include="Utilities\Reflection\PrivateValueAccessor.cs" />
     <Compile Include="Utilities\Settings.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JET.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -10,30 +11,6 @@ namespace JET
 {
     class Watermark
     {
-#if B13487
-        private static string Version = "13487 | JET";
-#endif
-#if B13074
-        private static string Version = "13074 | JET";
-#endif
-#if B12102
-        private static string Version = "12102 | JET";
-#endif
-#if B11661
-        private static string Version = "11661 | JET";
-#endif
-#if B10988
-        private static string Version = "10988 | JET";
-#endif
-#if B9767
-        private static string Version = "9767 | JET";
-#endif
-#if B9018
-        private static string Version = "9018 | JET";
-#endif
-#if DEBUG
-        private static string Version = "Debug | JET";
-#endif
         EFT.UI.LocalizedText localizedText;
         internal void Do()
         {
@@ -49,7 +26,7 @@ namespace JET
                 }
                 if (localizedText.LocalizationKey == null)
                     return;
-                localizedText.LocalizationKey = Version;
+                localizedText.LocalizationKey = Game.GetVersion.Split('.').Last() + " | JET";
             }
         }
     }

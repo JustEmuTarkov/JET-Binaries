@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 namespace JET.Patches
 {
-	public class SslCertificatePatch : GenericPatch<SslCertificatePatch>
+	class SslCertificatePatch : GenericPatch<SslCertificatePatch>
 	{
 		private string _ValidateCertificate = "ValidateCertificate";
 		public SslCertificatePatch() : base(prefix: nameof(PatchPrefix)) {}

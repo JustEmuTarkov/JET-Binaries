@@ -4,7 +4,7 @@ using EFT;
 
 namespace JET.Utilities.Reflection
 {
-    internal static class ClientAppUtils
+    public static class ClientAppUtils
     {
         public static ClientApplication GetClientApp()
         {

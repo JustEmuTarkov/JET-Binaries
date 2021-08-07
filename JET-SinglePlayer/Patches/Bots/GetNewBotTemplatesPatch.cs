@@ -81,7 +81,7 @@ namespace JET.Patches.Bots
                         continue;
                     }
                     MethodBase CreateProfileMethod = null;
-                    foreach (var method in type.GetMethods()) {
+                    foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)) {
                         if (method.Name == "CreateProfile" && method.GetParameters().Length == 1 && method.ReturnType.Name == "Task`1")
                             CreateProfileMethod = method;
                     }
@@ -90,7 +90,8 @@ namespace JET.Patches.Bots
                     {
                         continue;
                     }
-                    if (CreateProfileMethod.GetParameters().Length != 1) continue;
+                    if (CreateProfileMethod.GetParameters().Length != 1) 
+                        continue;
 
 
                     _getNewProfileFunc = type.GetMethod("GetNewProfile", BindingFlags.NonPublic | BindingFlags.Instance)
@@ -104,6 +105,7 @@ namespace JET.Patches.Bots
 
         public static bool PatchPrefix(ref Task<Profile> __result, BotsPresets __instance, BotData data)
         {
+            int i = 0;
             /*
                 in short when client wants new bot and GetNewProfile() return null (if not more available templates or they don't satisfied by Role and Difficulty condition)
                 then client gets new piece of WaveInfo collection (with Limit = 30 by default) and make request to server
@@ -114,7 +116,6 @@ namespace JET.Patches.Bots
                 new[] { new WaveInfo() { Limit = 1, Role = role, Difficulty = difficulty } }
                 then perform request to server and get only first value of resulting single element collection
             */
-
             var session = Utilities.Config.BackEndSession;
             var taskScheduler = TaskScheduler.FromCurrentSynchronizationContext();
             var taskAwaiter = (Task<Profile>)null;

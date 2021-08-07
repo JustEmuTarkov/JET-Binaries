@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace JET.Patches
 {
-	public class BattleEyePatch : GenericPatch<BattleEyePatch>
+	class BattleEyePatch : GenericPatch<BattleEyePatch>
 	{
         public static PropertyInfo __property;
 

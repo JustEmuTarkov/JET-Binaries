@@ -3,13 +3,8 @@ using JET.Utilities.Patching;
 using JET.Patches;
 using System.Reflection;
 using System.IO;
-using System;
-using System.Linq;
-using System.Collections.Generic;
 using JET.Modding;
 using JET.Patches.Logging;
-using System.Linq;
-using System;
 using JET.Utilities;
 
 namespace JET

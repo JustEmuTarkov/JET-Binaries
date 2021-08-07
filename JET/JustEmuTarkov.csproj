@@ -197,6 +197,7 @@
     <Compile Include="Utilities\App\ProcessMonitor.cs" />
     <Compile Include="Utilities\DefaultSettings\DefaultRaidSettings.cs" />
     <Compile Include="Utilities\FullLogger.cs" />
+    <Compile Include="Utilities\Game.cs" />
     <Compile Include="Utilities\Hook\Loader.cs" />
     <Compile Include="Utilities\HTTP\Request.cs" />
     <Compile Include="Utilities\Logging\FileLogger.cs" />

@@ -8,7 +8,7 @@ using JET.Utilities.Patching;
 
 namespace JET.Patches
 {
-    public class NotificationSslPatch : GenericPatch<NotificationSslPatch>
+    class NotificationSslPatch : GenericPatch<NotificationSslPatch>
     {
         private string _MethodName = "get_UriParams";
         private string _MethodName_MoveNext = "MoveNext";

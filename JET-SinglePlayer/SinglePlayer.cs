@@ -56,7 +56,6 @@ namespace JET
 		public static event Void ApplicationQuitEvent;
 		public void OnApplicationQuit() => ApplicationQuitEvent?.Invoke();
 
-		private static Settings _settings;
 #if B13487
 		public static string GAME_VERSION = "0.12.11.1.13487";
 #endif
@@ -76,16 +75,13 @@ namespace JET
 		public static string GAME_VERSION = "DEBUG";
 #endif
 
-		private static void CheckVersion() {
-			var list = PatcherConstants.TargetAssembly.GetTypes().Where(type => type.Name.StartsWith("Class") && type.GetField("string_0", BindingFlags.NonPublic | BindingFlags.Static) != null && type.GetMethods().Length == 4 && type.GetProperties().Length == 0 && type.GetMethods(BindingFlags.NonPublic | BindingFlags.Static).Length == 0 && type.GetProperties(BindingFlags.NonPublic | BindingFlags.Static).Length == 0).ToList();
-			if (list.Count > 0)
+		private static void CheckVersion() 
+		{
+			string inGameVersion = Game.GetVersion;
+			if (GAME_VERSION != inGameVersion)
 			{
-				string inGameVersion = list[0].GetField("string_0", BindingFlags.NonPublic | BindingFlags.Static).GetValue(null).ToString();
-				if (GAME_VERSION != inGameVersion)
-				{
-					Debug.LogError($"This 50IQ is trying to launch Singleplayer module precompiled for {GAME_VERSION} on {inGameVersion}");
-					Application.Quit(0);
-				}
+				Debug.LogError($"This 50IQ is trying to launch Singleplayer module precompiled for {GAME_VERSION} on {inGameVersion}");
+				Application.Quit(0);
 			}
 		}
 
@@ -180,8 +176,8 @@ namespace JET
 
 			if (EnabledElements.LoadOfflineRaidScreenPatch)
 				PatcherUtil.Patch<LoadOfflineRaidScreenPatch>();
-			if (EnabledElements.ScavPrefabLoadPatch)
-				PatcherUtil.Patch<ScavPrefabLoadPatch>();
+			//if (EnabledElements.ScavPrefabLoadPatch)
+			//	PatcherUtil.Patch<ScavPrefabLoadPatch>();
 			//if (EnabledElements.ScavProfileLoadPatch)
 			//    PatcherUtil.Patch<ScavProfileLoadPatch>();
 			//if (EnabledElements.ScavSpawnPointPatch)
