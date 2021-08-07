@@ -17,7 +17,7 @@ namespace JET.Patches.Other
 {
     /*
      Patch created by: VIPkiller17#4326
-     Github: https://github.com/TommySoucy/HideoutRequirementIndicator
+     Github: https://github.com/TommySoucy/HideoutRequirementIndicator >> https://github.com/TommySoucy/MoreCheckmarks
      */
     class HideoutRequirementIndicator : GenericPatch<HideoutRequirementIndicator>
     {
