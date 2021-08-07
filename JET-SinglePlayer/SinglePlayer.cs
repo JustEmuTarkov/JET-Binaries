@@ -91,8 +91,8 @@ namespace JET
 
 		protected override void Initialize() {
 			CheckVersion();
-			// DEFAULT PATCHES
-			PatcherUtil.Patch<UnlockItemsIdLength>();
+            // DEFAULT PATCHES
+            PatcherUtil.Patch<UnlockItemsIdLength>();
 			PatcherUtil.Patch<BarterSchemeAutoFill>();
 			#if B13074 || B13487
 			PatcherUtil.Patch<HideoutRequirementIndicator>();
@@ -104,7 +104,6 @@ namespace JET
 
 			OfflineModePatchRoutes(Offline.LoadModules());
 
-			Application.Quit(0);
 		}
 		private static void OfflineModePatchRoutes(Offline.OfflineMode EnabledElements)
 		{
