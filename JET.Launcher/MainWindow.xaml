@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="JustEmuTarkov Launcher" 
-        Height="559.5" Width="943" 
+        Height="466.5" Width="818.5" 
         Background="Black" Foreground="White" 
         FontFamily="/JET.Launcher;component/Resources/#AR Techni" 
         UseLayoutRounding="True" WindowStartupLocation="CenterScreen" Loaded="Main_Window_Loaded">
@@ -21,7 +21,7 @@
                     <!-- Errors Messages -->
                     <!-- Login -->
                     <!-- Password -->
-                    <GroupBox x:Name="AddServer" Header=" Add Server " HorizontalAlignment="Left" Margin="276,0,0,52" Width="232" BorderBrush="#FF4B4B4B" Foreground="#FFC7C7C7" FontFamily="/JET.Launcher;component/Resources/#AR Techni" FontSize="16" Height="124" VerticalAlignment="Bottom">
+                    <GroupBox x:Name="AddServer" Header=" Add Server " HorizontalAlignment="Left" Margin="513,247,0,0" Width="261" BorderBrush="#FF4B4B4B" Foreground="#FFC7C7C7" FontFamily="/JET.Launcher;component/Resources/#AR Techni" FontSize="16" Height="124" VerticalAlignment="Top">
                         <Grid Margin="0">
                             <Label Content="Server ip address" HorizontalAlignment="Left" Margin="9,0,0,67" VerticalAlignment="Bottom" Foreground="#CCFFFFFF"/>
                             <TextBox Name="___NewServerBackend" Margin="10,0,10,43" TextWrapping="Wrap" Text="https://127.0.0.1:443" Background="Black" Foreground="White" Height="27" VerticalAlignment="Bottom"/>
@@ -74,7 +74,7 @@
                         <Button x:Name="__LCL_Back" Content="BACK" VerticalAlignment="Top" Margin="208,1,1,0" Style="{DynamicResource FlatButton}" BorderBrush="#FFAAAAAA" Foreground="#FFAAAAAA" Background="Black" Click="MoveBack_Click" FontFamily="/JET.Launcher;component/Resources/#AR Techni" Height="24" FontSize="14"/>
                         <Button Name="__ApplyButton" Content="Connect" Margin="32,0,32,32" BorderBrush="White" Click="__ApplyButton_Click" IsEnabled="False" Style="{DynamicResource FlatButton}" FontFamily="/JET.Launcher;component/Resources/#AR Techni" FontSize="16" Padding="1,0.5,1,1" Height="42" VerticalAlignment="Bottom"/>
                     </Grid>
-                    <GroupBox x:Name="Server_Add" Header=" Server"  HorizontalAlignment="Left" Margin="10,0,0,0" Width="261" FontSize="16" VerticalAlignment="Bottom" Height="176">
+                    <GroupBox x:Name="Server_Add" Header=" Server"  HorizontalAlignment="Left" Margin="513,70,0,0" Width="261" FontSize="16" Height="176" VerticalAlignment="Top">
                         <Grid Margin="10,2,11,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="24*"/>
@@ -103,13 +103,6 @@
                             </Grid>
                         </GroupBox>
                     </Grid>
-                    <RichTextBox x:Name="LolTheyGotMe" HorizontalAlignment="Left" Height="360" Margin="513,79,0,0" VerticalAlignment="Top" Width="402" Background="Transparent" Foreground="White" BorderBrush="{x:Null}" IsReadOnly="True">
-                        <FlowDocument>
-                            <Paragraph>
-                                <Run Text=""/>
-                            </Paragraph>
-                        </FlowDocument>
-                    </RichTextBox>
                 </Grid>
             </TabItem>
             <TabItem IsEnabled="false" Name="__ServerTab" Header="Server" Foreground="White" BorderBrush="Black" Background="Black">

@@ -49,6 +49,7 @@ namespace JET.Launcher
                 Application.Current.Shutdown();
                 return;
             }
+            ProgramManager.IsGameFound();
 #endif
             Application.Current.DispatcherUnhandledException += (sender, args) => ProgramManager.HandleException(args.Exception);
             AppDomain.CurrentDomain.UnhandledException += ProgramManager.CurrentDomainOnUnhandledException;

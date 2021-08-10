@@ -77,7 +77,7 @@ namespace JET
 
 		private static void CheckVersion() 
 		{
-			string inGameVersion = Game.GetVersion;
+			string inGameVersion = Game.Version;
 			if (GAME_VERSION != inGameVersion)
 			{
 				Debug.LogError($"This 50IQ is trying to launch Singleplayer module precompiled for {GAME_VERSION} on {inGameVersion}");
