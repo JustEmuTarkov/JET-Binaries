@@ -137,6 +137,9 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>..\Shared\References_Unchangabled\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\Shared\References_Unchangabled\UnityEngine.dll</HintPath>
       <Private>False</Private>
@@ -184,6 +187,7 @@
     <Compile Include="Modding\ModSettings.cs" />
     <Compile Include="Modding\SoftDependAttribute.cs" />
     <Compile Include="Patches\Core\BattleEyePatch.cs" />
+    <Compile Include="Patches\Core\DisplayMoneyAmountPatch.cs" />
     <Compile Include="Patches\Core\EnsureConsistencyPatch.cs" />
     <Compile Include="Patches\Logging\InitialHookPatch.cs" />
     <Compile Include="Patches\Logging\LoggingPatch.cs" />
