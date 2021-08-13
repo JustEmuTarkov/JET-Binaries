@@ -93,9 +93,6 @@ namespace JET.Launcher.Utilities
                             string file_version2 = FoundGameVersions.Split('.').Last();
                             if (file_version == file_version2) {
                                 NoOfficialHyh = false;
-                                MessageBoxManager.Show(
-                                    Encoding.ASCII.GetString(w1),
-                                    Encoding.ASCII.GetString(w2), MessageBoxManager.Button.OK, MessageBoxManager.Image.Warning);
                                 return true;
                             }
                         }
@@ -104,10 +101,6 @@ namespace JET.Launcher.Utilities
             }
             catch
             {
-                MessageBoxManager.Show(
-                    Encoding.ASCII.GetString(w1),
-                    Encoding.ASCII.GetString(w2), MessageBoxManager.Button.OK, MessageBoxManager.Image.Warning);
-                return false;
             }
             MessageBoxManager.Show(
                     Encoding.ASCII.GetString(w1),
