@@ -77,8 +77,6 @@ Global
 		{1D95F26C-E959-40C8-A73F-C9E280E87E17}.13487|Any CPU.Build.0 = 13487|Any CPU
 		{1D95F26C-E959-40C8-A73F-C9E280E87E17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1D95F26C-E959-40C8-A73F-C9E280E87E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1D95F26C-E959-40C8-A73F-C9E280E87E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1D95F26C-E959-40C8-A73F-C9E280E87E17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

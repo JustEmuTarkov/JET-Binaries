@@ -233,7 +233,7 @@
     </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y /I "$(TargetDir)NLog.JET.dll" "$(SolutionDir)\Build\$(Configuration)\EscapeFromTarkov_Data\Managed\"
+    <PostBuildEvent Condition="'$(OS)' != 'Unix'">xcopy /Y /I "$(TargetDir)NLog.JET.dll" "$(SolutionDir)\Build\$(Configuration)\EscapeFromTarkov_Data\Managed\"
 	
 xcopy /Y /I "$(SolutionDir)Shared\Resources\NLog.dll.nlog" "$(SolutionDir)\Build\$(Configuration)\EscapeFromTarkov_Data\Managed\"
 
@@ -242,6 +242,15 @@ xcopy /Y /I "$(TargetDir)0Harmony.dll" "$(SolutionDir)\Build\$(Configuration)\Es
 xcopy /Y /I "$(TargetDir)Assembly-CSharp.dll" "$(SolutionDir)\Build\$(Configuration)\EscapeFromTarkov_Data\Managed\"
 
 if not exist "$(SolutionDir)\Build\$(Configuration)\Bundles\Local" mkdir "$(SolutionDir)\Build\$(Configuration)\Bundles\Local"
-if not exist "$(SolutionDir)\Build\$(Configuration)\Bundles\Cache" mkdir "$(SolutionDir)\Build\$(Configuration)\Bundles\Cache"</PostBuildEvent>
+if not exist "$(SolutionDir)\Build\$(Configuration)\Bundles\Cache" mkdir "$(SolutionDir)\Build\$(Configuration)\Bundles\Cache"
+    </PostBuildEvent>
+    <PostBuildEvent Condition="'$(OS)' == 'Unix'">
+      cp $(TargetDir)NLog.JET.dll $(SolutionDir)/Build/$(Configuration)/EscapeFromTarkov_Data/Managed/
+      cp $(SolutionDir)Shared/Resources/NLog.dll.nlog $(SolutionDir)/Build/$(Configuration)/EscapeFromTarkov_Data/Managed/
+      cp $(TargetDir)0Harmony.dll $(SolutionDir)/Build/$(Configuration)/EscapeFromTarkov_Data/Managed/
+      cp $(TargetDir)Assembly-CSharp.dll $(SolutionDir)/Build/$(Configuration)/EscapeFromTarkov_Data/Managed/
+      mkdir -p $(SolutionDir)/Build/$(Configuration)/Bundles/Local
+      mkdir -p $(SolutionDir)/Build/$(Configuration)/Bundles/Cache
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
