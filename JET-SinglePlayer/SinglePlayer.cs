@@ -176,14 +176,14 @@ namespace JET
 
 			if (EnabledElements.LoadOfflineRaidScreenPatch)
 				PatcherUtil.Patch<LoadOfflineRaidScreenPatch>();
-			//if (EnabledElements.ScavPrefabLoadPatch)
-			//	PatcherUtil.Patch<ScavPrefabLoadPatch>();
+			if (EnabledElements.ScavPrefabLoadPatch)
+				PatcherUtil.Patch<ScavPrefabLoadPatch>();
 			//if (EnabledElements.ScavProfileLoadPatch)
 			//    PatcherUtil.Patch<ScavProfileLoadPatch>();
 			//if (EnabledElements.ScavSpawnPointPatch)
-			//    PatcherUtil.Patch<ScavSpawnPointPatch>();
-			//if (EnabledElements.ScavExfilPatch)
-			//    PatcherUtil.Patch<ScavExfilPatch>(); // if its not required by players can be removed or moved into config loading patches
+			  //  PatcherUtil.Patch<ScavSpawnPointPatch>();
+			if (EnabledElements.ScavExfilPatch)
+			    PatcherUtil.Patch<ScavExfilPatch>(); // if its not required by players can be removed or moved into config loading patches
 
 			if (EnabledElements.EndByTimerPatch)
 				PatcherUtil.Patch<EndByTimerPatch>();

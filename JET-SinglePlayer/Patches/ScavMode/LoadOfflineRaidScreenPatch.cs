@@ -54,6 +54,8 @@ namespace JET.Patches.ScavMode
 {
     using OfflineRaidAction = Action<bool, WeatherSettings, BotsSettings, WavesSettings>;
 
+
+    /// TODO: This needs a rewrite
     public class LoadOfflineRaidScreenPatch : GenericPatch<LoadOfflineRaidScreenPatch>
     {
         /*
@@ -131,8 +133,8 @@ private void method_55(bool local, GStruct92 weatherSettings, GStruct233 botsSet
              search for Class816 but actually its Class1010
              so i made it so it searches for that thing automatickly less burden later on ...
             */
-            return typeof(MenuController).GetNestedTypes(BindingFlags.NonPublic)
-                .Single(x => x.Name.StartsWith("Class") && x.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).Any(m => m.Name == "method_4"))
+            return typeof(MenuController).GetNestedTypes(BindingFlags.NonPublic)            
+                .Single(x => x.IsNested && x.GetField("selectLocationScreenController", BindingFlags.Public | BindingFlags.Instance) != null)
                 .GetMethod("method_2", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
         }
 
@@ -186,8 +188,8 @@ private void method_55(bool local, GStruct92 weatherSettings, GStruct233 botsSet
 
             PrivateValueAccessor.SetPrivateFieldValue(typeof(MenuController), "bool_0", menuController, local);
             PrivateValueAccessor.SetPrivateFieldValue(typeof(MenuController), $"{typeof(BotsSettings).Name.ToLower()}_0", menuController, botsSettings);
-            PrivateValueAccessor.SetPrivateFieldValue(typeof(MenuController), $"{typeof(WeatherSettings).Name.ToLower()}_0", menuController, wavesSettings);
-            PrivateValueAccessor.SetPrivateFieldValue(typeof(MenuController), $"{typeof(WavesSettings).Name.ToLower()}_0", menuController, weatherSettings);
+            PrivateValueAccessor.SetPrivateFieldValue(typeof(MenuController), $"{typeof(WeatherSettings).Name.ToLower()}_0", menuController, weatherSettings);
+            PrivateValueAccessor.SetPrivateFieldValue(typeof(MenuController), $"{typeof(WavesSettings).Name.ToLower()}_0", menuController, wavesSettings);
 
             typeof(MenuController).GetMethod(loadReadyScreenMethod, BindingFlags.NonPublic | BindingFlags.Instance).Invoke(menuController, null);
         }

@@ -108,10 +108,6 @@
       <HintPath>..\Shared\References_Unchangabled\ItemComponent.Types.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json" Condition=" '$(Configuration)' == '13074' Or '$(Configuration)' == '13487' ">
-      <HintPath>..\Shared\References_$(Configuration)\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="FilesChecker" Condition=" '$(Configuration)' == '13074' Or '$(Configuration)' == '13487' ">
       <HintPath>..\Shared\References_$(Configuration)\FilesChecker.dll</HintPath>
       <Private>False</Private>
@@ -120,13 +116,15 @@
       <HintPath>..\Shared\References_Unchangabled\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json.UnityConverters" Condition=" '$(Configuration)' == '13074' Or '$(Configuration)' == '13487' ">
-      <HintPath>..\Shared\References_$(Configuration)\Newtonsoft.Json.UnityConverters.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="netstandard" Condition=" '$(Configuration)' == '13074' Or '$(Configuration)' == '13487' ">
       <HintPath>..\Shared\References_$(Configuration)\netstandard.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Shared\References_13487\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.UnityConverters">
+      <HintPath>..\Shared\References_13487\Newtonsoft.Json.UnityConverters.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
       <HintPath>..\Shared\References_Unchangabled\NLog.dll</HintPath>

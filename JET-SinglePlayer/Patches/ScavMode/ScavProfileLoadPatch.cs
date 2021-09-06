@@ -7,6 +7,7 @@ using HarmonyLib;
 using JET.Utilities;
 using JET.Utilities.Patching;
 using JET.Utilities.Reflection.CodeWrapper;
+using UnityEngine;
 
 namespace JET.Patches.ScavMode
 {
@@ -16,9 +17,68 @@ namespace JET.Patches.ScavMode
 
         protected override MethodBase GetTargetMethod()
         {
-            return typeof(MainApplication).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly)
-                .FirstOrDefault(IsTargetMethod);
+            /* SHORTEN VERSION - Sometimes isnt working for unknown reason... (maybe only for me...) */
+            /*
+            var classType = PatcherConstants.MainApplicationType.GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly).Where(type =>
+                type.Name.StartsWith("Struct") &&
+                type.GetField("entryPoint") != null &&
+                type.GetField("timeAndWeather") != null &&
+                type.GetField("location") != null &&
+                type.GetField("mainApplication_0") != null &&
+                type.GetField("timeHasComeScreenController") != null).FirstOrDefault();
+
+            var returned = classType.GetMethod("MoveNext", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
+            if (returned != null)
+            {
+                Debug.Log("[ScavProfileLoadPatch] Method Found: " + returned.Name + " " + classType.Name);
+                return returned;
+            } else {
+                Debug.Log("[ScavProfileLoadPatch] Method Not Found in class " + classType.Name);
+                return null;
+            }
+            */
+            foreach (var type in PatcherConstants.MainApplicationType.GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+            {
+                if (type.Name.StartsWith("Struct"))
+                {
+                    if (type.GetField("entryPoint") != null &&
+                        type.GetField("timeAndWeather") != null &&
+                        type.GetField("location") != null &&
+                        type.GetField("mainApplication_0") != null &&
+                        type.GetField("timeHasComeScreenController") != null)
+                    {
+                        var TargetedMethod = type.GetMethod("MoveNext", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
+                        if (TargetedMethod != null)
+                        {
+                            Debug.Log("[ScavProfileLoadPatch] Method Found: " + TargetedMethod.Name + " " + type.Name);
+                            return TargetedMethod;
+                        }
+                            
+                    }
+                }
+            }
+            return null;
+
+            //return typeof(MainApplication).GetMethods(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+            //    .FirstOrDefault(IsTargetMethod);
         }
+        //private static bool IsTargetMethod(MethodInfo methodInfo)
+        //{
+        //    var parameters = methodInfo.GetParameters();
+
+        //    if (parameters.Length != 4
+        //    || parameters[0].Name != "location"
+        //    || parameters[1].Name != "timeAndWeather"
+        //    || parameters[2].Name != "entryPoint"
+        //    || parameters[3].Name != "timeHasComeScreenController"
+        //    || parameters[2].ParameterType != typeof(string)
+        //    || methodInfo.ReturnType != typeof(void))
+        //    {
+        //        return false;
+        //    }
+
+        //    return true;
+        //}
 
         static IEnumerable<CodeInstruction> PatchTranspile(ILGenerator generator, IEnumerable<CodeInstruction> instructions)
         {
@@ -71,24 +131,6 @@ namespace JET.Patches.ScavMode
             codes.InsertRange(searchIndex + 1, newCodes);
 
             return codes.AsEnumerable();
-        }
-
-        private static bool IsTargetMethod(MethodInfo methodInfo)
-        {
-            var parameters = methodInfo.GetParameters();
-
-            if (parameters.Length != 4
-            || parameters[0].Name != "location"
-            || parameters[1].Name != "timeAndWeather"
-            || parameters[2].Name != "entryPoint"
-            || parameters[3].Name != "timeHasComeScreenController"
-            || parameters[2].ParameterType != typeof(string)
-            || methodInfo.ReturnType != typeof(void))
-            {
-                return false;
-            }
-
-            return true;
         }
 
         private static bool IsTargetNestedType(System.Type nestedType)
