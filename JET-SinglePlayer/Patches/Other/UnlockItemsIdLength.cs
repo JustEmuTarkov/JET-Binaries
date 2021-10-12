@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using HarmonyLib;
 using JET.Utilities;
 using JET.Utilities.Patching;
@@ -17,22 +18,34 @@ namespace JET.Patches.Other
         protected override MethodBase GetTargetMethod()
         {
             foreach (var MyType in PatcherConstants.TargetAssembly.GetTypes()) {
-                if (MyType.FullName.Split('+').Length == 3) // make sure its 3 classes deep
+
+                if (MyType.FullName.Split('+').Length == 3 && MyType.FullName.StartsWith("Class")) // make sure its 3 classes deep
                 {
+                    if (!(new Regex(@"Class[0-9]{3}\+Class[0-9]{3}\+Class[0-9]{3}").Match(MyType.FullName)).Success) {
+                        continue;
+                    }
                     if (string.IsNullOrEmpty(MyType.Namespace)) // make sure it doesnt have namespace
                     {
                         foreach (var m in MyType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance))
                         {
                             var paramInfo = m.GetParameters();
-                            // make sure return type is class<thing, thing, thing> there is 1 param named item and its type is TradingItemReference
-                            if (m.ReturnType.Name.EndsWith("3") && paramInfo.Length == 1 && paramInfo[0].Name == "item" && paramInfo[0].ParameterType.Name == "TradingItemReference")
+                            if (!m.Name.Contains("method_"))
                             {
-                                return m;
+                                continue;
+                            }
+                            // make sure return type is class<thing, thing, thing> there is 1 param named item and its type is TradingItemReference
+                            if (m.ReturnType.Name.EndsWith("3") && paramInfo.Length == 1)
+                            {
+                                if (paramInfo[0].ParameterType.Name == "TradingItemReference")
+                                {
+                                    Debug.LogError($"{m.Name} {m.ReturnType.Name} {MyType.FullName}");
+                                    return m;
+                                }
                             }
                         }
                     }
                 }
-                
+            
             }
             return null;
         }
