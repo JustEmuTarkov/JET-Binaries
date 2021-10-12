@@ -3,6 +3,9 @@ using System.Reflection;
 using EFT;
 using JET.Utilities;
 using JET.Utilities.Patching;
+#if B14687
+using AmmoInfo = GClass1992; // AmmoLifeTimeSec
+#endif
 #if B13074 || B13487
 using AmmoInfo = GClass1774; // AmmoLifeTimeSec
 #endif
@@ -39,7 +42,7 @@ namespace JET.Patches.Progression
 
         private static bool IsTargetMethod(MethodInfo methodInfo)
         {
-#if B13074  || B13487
+#if B13074  || B13487 || B14687
             return false;
 #else
             if (methodInfo.IsVirtual)
@@ -68,7 +71,7 @@ namespace JET.Patches.Progression
 
         public static void PatchPostfix(Player.FirearmController __instance, AmmoInfo ammo)
         {
-#if B13074 || B13487
+#if B13074 || B13487 || B14687
             return;
 #else
             if (!Config.WeaponDurabilityEnabled)

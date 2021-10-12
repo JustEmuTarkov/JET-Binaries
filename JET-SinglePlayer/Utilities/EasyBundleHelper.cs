@@ -4,6 +4,37 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using HarmonyLib;
+#if B14687
+using IBundleLock = GInterface272; //Property: IsLocked
+using BindableState = GClass2464<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
+
+/* Example how bindable state looks like **
+public sealed class GClass2464<T> : GClass2463<T>
+{
+	// Token: 0x17001A96 RID: 6806
+	// (set) Token: 0x0600C8D8 RID: 51416 RVA: 0x0011EAA7 File Offset: 0x0011CCA7
+	public override T Value
+	{
+		set
+		{
+			base.method_0(value);
+		}
+	}
+
+	// Token: 0x0600C8D9 RID: 51417 RVA: 0x0011EAB0 File Offset: 0x0011CCB0
+	public GClass2464() : base(null)
+	{
+	}
+
+	// Token: 0x0600C8DA RID: 51418 RVA: 0x0011EAB9 File Offset: 0x0011CCB9
+	public GClass2464([CanBeNull] T initialValue, IEqualityComparer<T> equalityComparer = null) : base(equalityComparer)
+	{
+		this.gparam_0 = initialValue;
+	}
+}
+*/
+
+#endif
 #if B13074 || B13487
 using IBundleLock = GInterface264; //Property: IsLocked
 using BindableState = GClass2251<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue

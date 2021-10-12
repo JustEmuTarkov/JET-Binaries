@@ -1,5 +1,9 @@
 ﻿using System.Reflection;
 using JET.Utilities.Patching;
+#if B14687
+using MainMenuController = GClass1454; // SelectedDateTime
+using IHealthController = GInterface187; // CarryingWeightAbsoluteModifier
+#endif
 #if B13074 || B13487
 using MainMenuController = GClass1253; // SelectedDateTime
 using IHealthController = GInterface177; // CarryingWeightAbsoluteModifier

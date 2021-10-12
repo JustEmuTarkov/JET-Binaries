@@ -10,9 +10,17 @@ using EFT.Hideout;
 using UnityEngine;
 using UnityEngine.UI;
 
-#if B13074 || B13487
+#if B13074 || B13487 || B14687
+
+#if B14687
+using Requirement = GClass1549; // EFT.Hideout.RelatedRequirements as Data field (list)
+using HideoutInstance = GClass1525; // search for AreaDatas (Member)
+#else
 using Requirement = GClass1329; // EFT.Hideout.RelatedRequirements as Data field (list)
 using HideoutInstance = GClass1305; // search for AreaDatas (Member)
+#endif
+
+
 
 namespace JET.Patches.Other
 {

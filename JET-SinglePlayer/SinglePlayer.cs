@@ -56,6 +56,9 @@ namespace JET
 		public static event Void ApplicationQuitEvent;
 		public void OnApplicationQuit() => ApplicationQuitEvent?.Invoke();
 
+#if B14687
+		public static string GAME_VERSION = "0.12.11.5.14687";
+#endif
 #if B13487
 		public static string GAME_VERSION = "0.12.11.1.13487";
 #endif
@@ -91,8 +94,8 @@ namespace JET
 			// DEFAULT PATCHES
 			PatcherUtil.Patch<UnlockItemsIdLength>();
 			PatcherUtil.Patch<BarterSchemeAutoFill>();
-			#if B13074 || B13487
-			PatcherUtil.Patch<HideoutRequirementIndicator>();
+			#if B13074 || B13487 || B14687
+			//PatcherUtil.Patch<HideoutRequirementIndicator>();
 			#endif
 			// BUNDLE LOADING PATCHES
 			PatcherUtil.Patch<EasyAssetsPatch>();
@@ -104,7 +107,7 @@ namespace JET
 		}
 		private static void OfflineModePatchRoutes(Offline.OfflineMode EnabledElements)
 		{
-			#if !B13074 && !B13487
+			#if !B13074 && !B13487 && !B14687
 			if (EnabledElements.OfflineLootPatch)
 				PatcherUtil.Patch<OfflineLootPatch>();
 			#endif
@@ -193,46 +196,46 @@ namespace JET
 				PatcherUtil.Patch<NoFiltersPatch>();
 			if (EnabledElements.AllDifficultiesAvaliable)
 			{
-				GClass320.ExcludedDifficulties = new System.Collections.Generic.Dictionary<EFT.WildSpawnType, System.Collections.Generic.List<BotDifficulty>>()
-				{
-					{
-						EFT.WildSpawnType.assaultGroup,
-						new List<BotDifficulty>
-						{
-							BotDifficulty.normal,
-							BotDifficulty.easy,
-							BotDifficulty.hard,
-							BotDifficulty.impossible
-						}
-					},
-					{
-						EFT.WildSpawnType.followerTest,
-						new List<BotDifficulty>
-						{
-							BotDifficulty.easy,
-							BotDifficulty.hard,
-							BotDifficulty.impossible
-						}
-					},
-					{
-						EFT.WildSpawnType.bossTest,
-						new List<BotDifficulty>
-						{
-							BotDifficulty.easy,
-							BotDifficulty.hard,
-							BotDifficulty.impossible
-						}
-					},
-					{
-						EFT.WildSpawnType.test,
-						new List<BotDifficulty>
-						{
-							BotDifficulty.easy,
-							BotDifficulty.hard,
-							BotDifficulty.impossible
-						}
-					}
-				};
+				//GClass320.ExcludedDifficulties = new System.Collections.Generic.Dictionary<EFT.WildSpawnType, System.Collections.Generic.List<BotDifficulty>>()
+				//{
+				//	{
+				//		EFT.WildSpawnType.assaultGroup,
+				//		new List<BotDifficulty>
+				//		{
+				//			BotDifficulty.normal,
+				//			BotDifficulty.easy,
+				//			BotDifficulty.hard,
+				//			BotDifficulty.impossible
+				//		}
+				//	},
+				//	{
+				//		EFT.WildSpawnType.followerTest,
+				//		new List<BotDifficulty>
+				//		{
+				//			BotDifficulty.easy,
+				//			BotDifficulty.hard,
+				//			BotDifficulty.impossible
+				//		}
+				//	},
+				//	{
+				//		EFT.WildSpawnType.bossTest,
+				//		new List<BotDifficulty>
+				//		{
+				//			BotDifficulty.easy,
+				//			BotDifficulty.hard,
+				//			BotDifficulty.impossible
+				//		}
+				//	},
+				//	{
+				//		EFT.WildSpawnType.test,
+				//		new List<BotDifficulty>
+				//		{
+				//			BotDifficulty.easy,
+				//			BotDifficulty.hard,
+				//			BotDifficulty.impossible
+				//		}
+				//	}
+				//};
 			}
 		}
 	}

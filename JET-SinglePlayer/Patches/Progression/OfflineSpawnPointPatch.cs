@@ -6,6 +6,9 @@ using EFT;
 using EFT.Game.Spawning;
 using JET.Utilities.Patching;
 using UnityEngine;
+#if B14687
+using ISpawnPoints = GInterface239; // DestroySpawnPoint or CreateSpawnPoint as ginterface
+#endif
 #if B13074 || B13487
 using ISpawnPoints = GInterface229; // DestroySpawnPoint or CreateSpawnPoint as ginterface
 #endif
@@ -92,6 +95,11 @@ namespace JET.Patches.Progression
             }
         }
 #else
+#if B14687
+        public static bool PatchPrefix(ref ISpawnPoint __result, ISpawnPoints ___ginterface239_0, ESpawnCategory category, EPlayerSide side, string infiltration)
+        {
+            var spawnPoints = ___ginterface239_0.ToList();
+#endif
 #if B13074 || B13487
         public static bool PatchPrefix(ref ISpawnPoint __result, ISpawnPoints ___ginterface229_0, ESpawnCategory category, EPlayerSide side, string infiltration)
         {
@@ -112,7 +120,7 @@ namespace JET.Patches.Progression
         {
             var spawnPoints = ___ginterface208_0.ToList();
 #endif
-        var unfilteredSpawnPoints = spawnPoints.ToList();
+            var unfilteredSpawnPoints = spawnPoints.ToList();
             var infils = spawnPoints.Select(sp => sp.Infiltration).Distinct();
             Debug.LogError($"PatchPrefix SelectSpawnPoint Infiltrations: {spawnPoints.Count} | {String.Join(", ", infils)}");
 

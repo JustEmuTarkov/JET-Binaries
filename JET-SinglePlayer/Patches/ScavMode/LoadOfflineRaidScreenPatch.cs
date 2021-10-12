@@ -8,6 +8,13 @@ using EFT.UI.Screens;
 using HarmonyLib;
 using JET.Utilities.Patching;
 using JET.Utilities.Reflection;
+#if B14687
+using MenuController = GClass1454; // .SelectedKeyCard
+using WeatherSettings = GStruct91; // IsRandomTime and IsRandomWeather
+using BotsSettings = GStruct232; // IsScavWars and BotAmount
+using WavesSettings = GStruct92; // IsTaggedAndCursed and IsBosses
+using MatchmakerScreenCreator = EFT.UI.Matchmaker.MatchmakerOfflineRaid.GClass2325; // simply go to class below and search for new gclass simple as that...
+#endif
 #if B13074 || B13487
 using MenuController = GClass1253; // .SelectedKeyCard
 using WeatherSettings = GStruct93; // IsRandomTime and IsRandomWeather
@@ -71,6 +78,18 @@ private void method_38()
 	gclass.OnShowNextScreen += this.method_16;
 	gclass.ShowScreen(EScreenState.Queued);
 }
+from 14687
+private void method_40()
+{
+	if (this.method_42() && this.method_43())
+	{
+		MatchMakerAcceptScreen.GClass2322 gclass = new MatchMakerAcceptScreen.GClass2322(this.ginterface29_0.Session, this.esideType_0, this.SelectedDateTime, this.SelectedLocation, this.bool_0, this.SelectedKeyCard);
+		gclass.OnShowNextScreen += this.method_64;
+		gclass.ShowScreen(EScreenState.Queued);
+		return;
+	}
+}
+
 ** readyMethod **
 private void method_55(bool local, GStruct92 weatherSettings, GStruct233 botsSettings, GStruct93 wavesSettings)
 {
@@ -90,6 +109,10 @@ private void method_55(bool local, GStruct92 weatherSettings, GStruct233 botsSet
 	this.method_38();
 }
          */
+#if B14687
+        private const string loadReadyScreenMethod = "method_40";
+        private const string readyMethod = "method_61"; // method_xx(bool local, GStruct92 weatherSettings, GStruct233 botsSettings, GStruct93 wavesSettings)
+#endif
 #if B13074 || B13487
         private const string loadReadyScreenMethod = "method_40";
         /*
