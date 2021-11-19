@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using JET.Utilities.HTTP;
+#if B15317
+using IHealthController = GInterface190; // ActiveBuffsNames
+using StDamage = GStruct243; // BodyPartColliderType
+using IEffect = GInterface149; // AddWholeTime
+#endif
 #if B14687
 using IHealthController = GInterface187; // ActiveBuffsNames
 using StDamage = GStruct240; // BodyPartColliderType

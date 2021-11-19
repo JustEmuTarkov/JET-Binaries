@@ -6,6 +6,9 @@ using EFT;
 using EFT.Game.Spawning;
 using JET.Utilities.Patching;
 using UnityEngine;
+#if B15317
+using ISpawnPoints = GInterface242; // DestroySpawnPoint or CreateSpawnPoint as ginterface
+#endif
 #if B14687
 using ISpawnPoints = GInterface239; // DestroySpawnPoint or CreateSpawnPoint as ginterface
 #endif
@@ -95,10 +98,16 @@ namespace JET.Patches.Progression
             }
         }
 #else
-#if B14687
-        public static bool PatchPrefix(ref ISpawnPoint __result, ISpawnPoints ___ginterface239_0, ESpawnCategory category, EPlayerSide side, string infiltration)
+#if B15317 
+        //only way i can think to search for this is look for the ginterface shown below and go up in numbers until one pops up with `ginterface##_0`
+        public static bool PatchPrefix(ref ISpawnPoint __result, ISpawnPoints ___ginterface242_0, ESpawnCategory category, EPlayerSide side, string infiltration)
         {
-            var spawnPoints = ___ginterface239_0.ToList();
+            var spawnPoints = ___ginterface242_0.ToList();
+#endif
+#if B14687
+        public static bool PatchPrefix(ref ISpawnPoint __result, ISpawnPoints ___ginterface242_0, ESpawnCategory category, EPlayerSide side, string infiltration)
+        {
+            var spawnPoints = ___ginterface242_0.ToList();
 #endif
 #if B13074 || B13487
         public static bool PatchPrefix(ref ISpawnPoint __result, ISpawnPoints ___ginterface229_0, ESpawnCategory category, EPlayerSide side, string infiltration)

@@ -55,7 +55,9 @@ namespace JET
 		public delegate void Void();
 		public static event Void ApplicationQuitEvent;
 		public void OnApplicationQuit() => ApplicationQuitEvent?.Invoke();
-
+#if B15317
+		public static string GAME_VERSION = "0.12.11.7.15317";
+#endif
 #if B14687
 		public static string GAME_VERSION = "0.12.11.5.14687";
 #endif
@@ -94,7 +96,7 @@ namespace JET
 			// DEFAULT PATCHES
 			PatcherUtil.Patch<UnlockItemsIdLength>();
 			PatcherUtil.Patch<BarterSchemeAutoFill>();
-			#if B13074 || B13487 || B14687
+			#if B13074 || B13487 || B14687 || B15317
 			//PatcherUtil.Patch<HideoutRequirementIndicator>();
 			#endif
 			// BUNDLE LOADING PATCHES
@@ -107,7 +109,7 @@ namespace JET
 		}
 		private static void OfflineModePatchRoutes(Offline.OfflineMode EnabledElements)
 		{
-			#if !B13074 && !B13487 && !B14687
+			#if !B13074 && !B13487 && !B14687 && !B15317
 			if (EnabledElements.OfflineLootPatch)
 				PatcherUtil.Patch<OfflineLootPatch>();
 			#endif

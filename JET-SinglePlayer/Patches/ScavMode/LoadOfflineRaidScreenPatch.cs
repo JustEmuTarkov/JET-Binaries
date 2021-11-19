@@ -8,6 +8,13 @@ using EFT.UI.Screens;
 using HarmonyLib;
 using JET.Utilities.Patching;
 using JET.Utilities.Reflection;
+#if B15317
+using MenuController = GClass1478; // .SelectedKeyCard
+using WeatherSettings = GStruct94; // IsRandomTime and IsRandomWeather
+using BotsSettings = GStruct235; // IsScavWars and BotAmount
+using WavesSettings = GStruct95; // IsTaggedAndCursed and IsBosses
+using MatchmakerScreenCreator = EFT.UI.Matchmaker.MatchmakerOfflineRaid.GClass2374; //EFT.UI.Matchmaker.MatchmakerOfflineRaid.GClass####
+#endif
 #if B14687
 using MenuController = GClass1454; // .SelectedKeyCard
 using WeatherSettings = GStruct91; // IsRandomTime and IsRandomWeather
@@ -109,6 +116,23 @@ private void method_55(bool local, GStruct92 weatherSettings, GStruct233 botsSet
 	this.method_38();
 }
          */
+#if B15317
+        private const string loadReadyScreenMethod = "method_40"; //both of these strings you're searching for are in the same GClass
+                    /*
+                    private void method_40()
+	            {
+		            if (this.method_42() && this.method_43())
+		            {
+			            MatchMakerAcceptScreen.GClass2370 gclass = new MatchMakerAcceptScreen.GClass2370(this.ginterface29_0.Session, this.esideType_0, this.SelectedDateTime, this.SelectedLocation, this.bool_0, this.SelectedKeyCard);
+			            gclass.OnShowNextScreen += this.method_64;
+			            gclass.ShowScreen(EScreenState.Queued);
+			            return;
+		            }
+	            }
+                    */
+
+        private const string readyMethod = "method_61"; // method_xx(bool local, GStruct94 weatherSettings, GStruct235 botsSettings, GStruct95 wavesSettings)
+#endif
 #if B14687
         private const string loadReadyScreenMethod = "method_40";
         private const string readyMethod = "method_61"; // method_xx(bool local, GStruct92 weatherSettings, GStruct233 botsSettings, GStruct93 wavesSettings)
