@@ -134,7 +134,7 @@
       <HintPath>..\Shared\References_Unchangabled\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="netstandard" Condition=" '$(Configuration)' != '15317' And '$(Configuration)' == '13074' Or '$(Configuration)' == '13487' Or '$(Configuration)' == '14687' ">
+    <Reference Include="netstandard" Condition=" '$(Configuration)' == '15317' And '$(Configuration)' == '13074' Or '$(Configuration)' == '13487' Or '$(Configuration)' == '14687' ">
       <HintPath>..\Shared\References_$(Configuration)\netstandard.dll</HintPath>
       <Private>False</Private>
     </Reference>

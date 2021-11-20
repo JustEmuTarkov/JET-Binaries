@@ -10,7 +10,7 @@ using EFT.Hideout;
 using UnityEngine;
 using UnityEngine.UI;
 
-#if B13074 || B13487 || B14687
+#if B13074 || B13487 || B14687 || B15317
 
 #if B15317
 using Requirement = GClass1582; // EFT.Hideout.RelatedRequirements as Data field (list)

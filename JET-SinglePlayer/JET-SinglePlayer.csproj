@@ -69,6 +69,15 @@
     <WarningLevel>4</WarningLevel>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '15317|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>B15317;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '10988|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -105,7 +114,7 @@
       <HintPath>..\Shared\References_$(Configuration)\Assembly-CSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="bsg.componentace.compression.libs.zlib" Condition=" '$(Configuration)' == '13487' Or '$(Configuration)' == '13074' Or '$(Configuration)' == '14687' Or '$(Configuration)' == '12102' Or '$(Configuration)' == '11661' Or '$(Configuration)' == '10988' Or '$(Configuration)' == 'Debug' ">
+    <Reference Include="bsg.componentace.compression.libs.zlib" Condition=" '$(Configuration)' == '15317' Or '$(Configuration)' == '13487' Or '$(Configuration)' == '13074' Or '$(Configuration)' == '14687' Or '$(Configuration)' == '12102' Or '$(Configuration)' == '11661' Or '$(Configuration)' == '10988' Or '$(Configuration)' == 'Debug' ">
       <HintPath>..\Shared\References_Unchangabled\bsg.componentace.compression.libs.zlib.dll</HintPath>
       <Private>False</Private>
     </Reference>
@@ -117,11 +126,11 @@
       <HintPath>..\Shared\References_Unchangabled\ItemComponent.Types.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json" Condition=" '$(Configuration)' == '13074' Or '$(Configuration)' == '14687' ">
+    <Reference Include="Newtonsoft.Json" Condition=" '$(Configuration)' == '15317' Or '$(Configuration)' == '13074' Or '$(Configuration)' == '14687' ">
       <HintPath>..\Shared\References_$(Configuration)\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="FilesChecker" Condition=" '$(Configuration)' == '13074' Or '$(Configuration)' == '14687' ">
+    <Reference Include="FilesChecker" Condition=" '$(Configuration)' == '15317' Or '$(Configuration)' == '13074' Or '$(Configuration)' == '14687' ">
       <HintPath>..\Shared\References_$(Configuration)\FilesChecker.dll</HintPath>
       <Private>False</Private>
     </Reference>
@@ -129,11 +138,11 @@
       <HintPath>..\Shared\References_$(Configuration)\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json.UnityConverters" Condition=" '$(Configuration)' == '13074' Or '$(Configuration)' == '14687' ">
+    <Reference Include="Newtonsoft.Json.UnityConverters" Condition=" '$(Configuration)' == '15317' Or '$(Configuration)' == '13074' Or '$(Configuration)' == '14687' ">
       <HintPath>..\Shared\References_$(Configuration)\Newtonsoft.Json.UnityConverters.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="netstandard" Condition=" '$(Configuration)' == '13074' Or '$(Configuration)' == '14687' ">
+    <Reference Include="netstandard" Condition=" '$(Configuration)' == '15317' Or '$(Configuration)' == '13074' Or '$(Configuration)' == '14687' ">
       <HintPath>..\Shared\References_$(Configuration)\netstandard.dll</HintPath>
       <Private>False</Private>
     </Reference>
@@ -178,7 +187,7 @@
       <HintPath>..\Shared\References_Unchangabled\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="zlib.net" Condition=" '$(Configuration)' != '13074' And '$(Configuration)' != '13487' And '$(Configuration)' != '14687' ">
+    <Reference Include="zlib.net" Condition=" '$(Configuration)' != '13074' And '$(Configuration)' != '13487' And '$(Configuration)' != '14687'  And '$(Configuration)' != '15317' ">
       <HintPath>..\Shared\References_Unchangabled\zlib.net.dll</HintPath>
     </Reference>
   </ItemGroup>
