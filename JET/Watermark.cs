@@ -14,7 +14,7 @@ namespace JET
         EFT.UI.LocalizedText localizedText;
         internal void Do()
         {
-            if (MonoBehaviourSingleton<EFT.UI.PreloaderUI>.Instance != null)
+            if (Comfort.Common.Singleton<EFT.UI.PreloaderUI>.Instance != null)
             {
                 if (localizedText == null)
                 {
@@ -22,7 +22,7 @@ namespace JET
                         return;
                     localizedText = typeof(EFT.UI.PreloaderUI)
                     .GetField("_alphaVersionLabel", BindingFlags.NonPublic | BindingFlags.Instance)
-                    .GetValue(MonoBehaviourSingleton<EFT.UI.PreloaderUI>.Instance) as EFT.UI.LocalizedText;
+                    .GetValue(Comfort.Common.Singleton<EFT.UI.PreloaderUI>.Instance) as EFT.UI.LocalizedText;
                 }
                 if (localizedText.LocalizationKey == null)
                     return;

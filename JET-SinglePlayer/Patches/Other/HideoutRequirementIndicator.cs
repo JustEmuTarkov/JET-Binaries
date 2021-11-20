@@ -15,15 +15,14 @@ using UnityEngine.UI;
 #if B15317
 using Requirement = GClass1582; // EFT.Hideout.RelatedRequirements as Data field (list)
 using HideoutInstance = GClass1558; // search for AreaDatas (Member)
-#endif
-
-#if B14687
+#elif B14687
 using Requirement = GClass1549; // EFT.Hideout.RelatedRequirements as Data field (list)
 using HideoutInstance = GClass1525; // search for AreaDatas (Member)
 #else
 using Requirement = GClass1329; // EFT.Hideout.RelatedRequirements as Data field (list)
 using HideoutInstance = GClass1305; // search for AreaDatas (Member)
 #endif
+
 
 
 
@@ -106,7 +105,7 @@ namespace JET.Patches.Other
                         {
                             // Following calls base class method ShowGameObject()
                             // To call base methods without reverse patch, must modify IL code for this line from callvirt to call
-                            (__instance as EFT.UI.UIElement).ShowGameObject(false);
+                            (__instance as EFT.UI.UIElement).ShowGameObject();
                             ____questIconImage.sprite = ____foundInRaidSprite;
                             ____questIconImage.color = new Color(0.23137f, 0.93725f, 1);
 
@@ -119,7 +118,7 @@ namespace JET.Patches.Other
                     {
                         if (!foundNeeded)
                         {
-                            (__instance as EFT.UI.UIElement).ShowGameObject(false);
+                            (__instance as EFT.UI.UIElement).ShowGameObject();
                             ____questIconImage.sprite = ____foundInRaidSprite;
                             ____questIconImage.color = new Color(0.23922f, 1, 0.44314f);
 

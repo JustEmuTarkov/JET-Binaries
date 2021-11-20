@@ -27,6 +27,10 @@ using ConverterBucket = GClass887;
 using LocationInfo = GClass757.GClass759;
 using ConverterBucket = GClass882;
 #endif
+#if B15317
+using ConverterBucket = GClass704;
+using LocationInfo = GClass1025.GClass1027;
+#endif
 #if DEBUG
 using LocationInfo = GClass782.GClass784;
 using ConverterBucket = GClass912;
@@ -43,17 +47,19 @@ namespace JET.Patches.Progression
             // compile-time check
             _ = nameof(LocationInfo.BotLocationModifier);
         }
-#if B11661
+
+        #if B11661
         private static string method = "method_6";
-#else
+        #else
         private static string method = "method_5";
-#endif
+        #endif
+
         protected override MethodBase GetTargetMethod()
         {
             var localGameBaseType = PatcherConstants.LocalGameType.BaseType;
 
             _property = localGameBaseType.GetProperty($"{typeof(LocationInfo).Name}_0", BindingFlags.NonPublic | BindingFlags.Instance);
-            return localGameBaseType.GetMethod("method_5", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            return localGameBaseType.GetMethod(method, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
         }
 
         /// <summary>
@@ -73,7 +79,7 @@ namespace JET.Patches.Progression
             var json = request.GetJson("/api/location/" + location.Id);
             
             // some magic here. do not change =)
-            var locationLoot = JsonConvert.DeserializeObject<LocationInfo>(json, ConverterBucket.Converters);//.ParseJsonTo<LocationInfo>();
+            var locationLoot = ConverterBucket.ParseJsonTo<LocationInfo>(json);
 
             request.PostJson("/raid/map/name", Json.Serialize(new LocationName(location.Id)));
 

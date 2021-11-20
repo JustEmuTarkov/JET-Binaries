@@ -69,7 +69,7 @@
     <WarningLevel>4</WarningLevel>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '15317|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '15317|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -130,12 +130,9 @@
       <HintPath>..\Shared\References_$(Configuration)\FilesChecker.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="netstandard" />
     <Reference Include="Newtonsoft.Json" Condition=" '$(Configuration)' != '15317' And '$(Configuration)' != '13074' And '$(Configuration)' != '14687'">
       <HintPath>..\Shared\References_Unchangabled\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="netstandard" Condition=" '$(Configuration)' == '15317' And '$(Configuration)' == '13074' Or '$(Configuration)' == '13487' Or '$(Configuration)' == '14687' ">
-      <HintPath>..\Shared\References_$(Configuration)\netstandard.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json">
@@ -187,9 +184,6 @@
     <Reference Include="UnityEngine.UnityWebRequestTextureModule">
       <HintPath>..\Shared\References_Unchangabled\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
       <Private>False</Private>
-    </Reference>
-    <Reference Include="zlib.net" Condition=" '$(Configuration)' != '15317' And '$(Configuration)' != '13074' And '$(Configuration)' != '13487' And '$(Configuration)' != '14687' ">
-      <HintPath>..\Shared\References_Unchangabled\zlib.net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

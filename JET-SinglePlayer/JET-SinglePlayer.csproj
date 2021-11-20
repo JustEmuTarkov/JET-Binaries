@@ -69,7 +69,7 @@
     <WarningLevel>4</WarningLevel>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '15317|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '15317|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -186,9 +186,6 @@
     <Reference Include="UnityEngine.UnityWebRequestTextureModule">
       <HintPath>..\Shared\References_Unchangabled\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
       <Private>False</Private>
-    </Reference>
-    <Reference Include="zlib.net" Condition=" '$(Configuration)' != '13074' And '$(Configuration)' != '13487' And '$(Configuration)' != '14687'  And '$(Configuration)' != '15317' ">
-      <HintPath>..\Shared\References_Unchangabled\zlib.net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
