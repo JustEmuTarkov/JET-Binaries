@@ -38,7 +38,7 @@ namespace JET.Patches.Other
                             {
                                 if (paramInfo[0].ParameterType.Name == "TradingItemReference")
                                 {
-                                    Debug.LogError($"{m.Name} {m.ReturnType.Name} {MyType.FullName}");
+                                    //Debug.LogError($"{m.Name} {m.ReturnType.Name} {MyType.FullName}");
                                     return m;
                                 }
                             }
