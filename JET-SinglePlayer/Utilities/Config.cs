@@ -37,8 +37,18 @@ namespace JET.Utilities
             _ = nameof(ISession.GetPhpSessionId);
             _ = nameof(ClientConfig.BackendUrl);
         }
+        private static ISession _backEndSession;
+        public static ISession BackEndSession { 
+            get 
+            {
+                if (_backEndSession == null)
+                {
+                    _backEndSession = Singleton<ClientApplication>.Instance.GetClientBackEndSession();
+                }
 
-        public static ISession BackEndSession => Singleton<ClientApplication>.Instance.GetClientBackEndSession();
+                return _backEndSession;
+            }
+        } 
         public static string BackendUrl => ClientConfig.Config.BackendUrl;
         public static bool WeaponDurabilityEnabled = false;
     }
