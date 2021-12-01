@@ -7,9 +7,10 @@ using Comfort.Common;
 using EFT;
 using JET.Utilities.Patching;
 using UnityEngine;
+using JET.Utilities;
 #if B14687
 //using WaveInfo = GClass984; // not used // search for: Difficulty and chppse gclass with lower number whic hcontains Role and Limit variables
-using BotsPresets = GClass564; // Method: GetNewProfile (higher GClass number)
+using BotsPresets = GClass565; // Method: GetNewProfile (higher GClass number)
 using BotData = GInterface18; // Method: ChooseProfile
 using PoolManager = GClass1435; // CancellationToken: PoolsCancellationToken
 using JobPriority = GClass2446; // Delegate: Immediate also has General / Low
@@ -68,51 +69,31 @@ namespace JET.Patches.Bots
 {
     public class GetNewBotTemplatesPatch : GenericPatch<GetNewBotTemplatesPatch>
     {
-        public static FieldInfo __field;
+#if B14687
+        private static MethodInfo _getNewProfileMethod;
+#else
         private static Func<BotsPresets, BotData, Profile> _getNewProfileFunc;
+#endif
 
         public GetNewBotTemplatesPatch() : base(prefix: nameof(PatchPrefix))
         {
+            _ = nameof(BotData.PrepareToLoadBackend);
+            _ = nameof(BotsPresets.GetNewProfile);
+            _ = nameof(PoolManager.LoadBundlesAndCreatePools);
+            _ = nameof(JobPriority.General);
+
+            _getNewProfileMethod = typeof(BotsPresets)
+                .GetMethod(nameof(BotsPresets.GetNewProfile), BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
         }
 
         protected override MethodBase GetTargetMethod()
         {
-            foreach (var type in PatcherConstants.TargetAssembly.GetTypes())
-            {
-                if (type.Name.Contains("GClass"))
-                {
-                    // its proper gclass now lets check if our targeted method exists there
-                    var TargetedMethod = type.GetMethod("method_1", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-                    if (TargetedMethod == null)
-                    {
-                        continue;
-                    }
-                    MethodBase CreateProfileMethod = null;
-                    foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)) {
-                        if (method.Name == "CreateProfile" && method.GetParameters().Length == 1 && method.ReturnType.Name == "Task`1")
-                            CreateProfileMethod = method;
-                    }
-
-                    if (CreateProfileMethod == null)
-                    {
-                        continue;
-                    }
-                    if (CreateProfileMethod.GetParameters().Length != 1) 
-                        continue;
-
-
-                    _getNewProfileFunc = type.GetMethod("GetNewProfile", BindingFlags.NonPublic | BindingFlags.Instance)
-                        .CreateDelegate(typeof(Func<BotsPresets, BotData, Profile>)) as Func<BotsPresets, BotData, Profile>;
-                    if (_getNewProfileFunc == null) return null;
-                    return CreateProfileMethod;
-                }
-            }
-            return null;
+            var methods = typeof(BotsPresets).GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly).Where(method => method.Name == nameof(BotsPresets.CreateProfile));
+            return methods.FirstOrDefault();
         }
 
         public static bool PatchPrefix(ref Task<Profile> __result, BotsPresets __instance, BotData data)
         {
-            int i = 0;
             /*
                 in short when client wants new bot and GetNewProfile() return null (if not more available templates or they don't satisfied by Role and Difficulty condition)
                 then client gets new piece of WaveInfo collection (with Limit = 30 by default) and make request to server
@@ -123,38 +104,33 @@ namespace JET.Patches.Bots
                 new[] { new WaveInfo() { Limit = 1, Role = role, Difficulty = difficulty } }
                 then perform request to server and get only first value of resulting single element collection
             */
-            var session = Utilities.Config.BackEndSession;
             var taskScheduler = TaskScheduler.FromCurrentSynchronizationContext();
             var taskAwaiter = (Task<Profile>)null;
-
-            // try get profile from cache
-            var profile = _getNewProfileFunc(__instance, data);
+            var profile = (Profile)_getNewProfileMethod.Invoke(__instance, new object[] { data });
 
             if (profile == null)
             {
                 // load from server
-                Debug.LogError("[JET]: Loading bot profile from server");
+                Debug.Log("Loading bot profile from server");
                 var source = data.PrepareToLoadBackend(1).ToList();
-                taskAwaiter = session.LoadBots(source).ContinueWith(GetFirstResult, taskScheduler);
+                taskAwaiter = Config.BackEndSession.LoadBots(source).ContinueWith(GetFirstResult, taskScheduler);
             }
             else
             {
                 // return cached profile
-                Debug.LogError("[JET]: Loading bot profile from cache");
+                Debug.Log("Loading bot profile from cache");
                 taskAwaiter = Task.FromResult(profile);
             }
 
             // load bundles for bot profile
             var continuation = new Continuation(taskScheduler);
-
             __result = taskAwaiter.ContinueWith(continuation.LoadBundles, taskScheduler).Unwrap();
-
             return false;
         }
 
         private static Profile GetFirstResult(Task<Profile[]> task)
         {
-            return task.Result[0];
+            return task.Result.FirstOrDefault(); // make sure to not return null here
         }
 
         private struct Continuation
