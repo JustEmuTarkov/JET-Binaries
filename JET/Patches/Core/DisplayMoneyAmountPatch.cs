@@ -37,7 +37,7 @@ namespace JET.Patches
             CustomTextMeshProUGUI ___euros,
             CustomTextMeshProUGUI ___dollars)
         {
-            __instance.ShowGameObject(false);
+            __instance.ShowGameObject();
             var items = inventoryItems.SelectMany(new Func<Item, IEnumerable<Item>>(GetAllItems));
             var OnlyMoney = items.Where(new Func<EFT.InventoryLogic.Item, bool>(IsMoney));
             long CNT_ROUBLES = 0;

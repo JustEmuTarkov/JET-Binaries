@@ -18,6 +18,8 @@ namespace JET.Modding
             var pathToCustomMods = Path.Combine(GetGameDirectory, "ClientMods");
             var mods = Directory.GetFiles(pathToCustomMods, "*.dll").ToList();
 
+            if (mods.Count == 0) return;
+
             var availableMods = new Dictionary<Type, ModSettings>();
 
 
