@@ -57,7 +57,7 @@ namespace JET
 		public void OnApplicationQuit() => ApplicationQuitEvent?.Invoke();
 
 #if B16029
-		public static string GAME_VERSION = "0.12.11.5.14687";
+		public static string GAME_VERSION = "0.12.12.0.16029";
 #endif
 #if B14687
 		public static string GAME_VERSION = "0.12.11.5.14687";
