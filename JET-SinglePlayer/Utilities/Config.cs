@@ -1,5 +1,9 @@
 ﻿using Comfort.Common;
 using EFT;
+#if B16029
+using ISession = GInterface111; // GetPhpSessionId
+using ClientConfig = GClass558; // BackendCacheDir or LoadApplicationConfig
+#endif
 #if B14687
 using ISession = GInterface111; // GetPhpSessionId
 using ClientConfig = GClass537; // BackendCacheDir or LoadApplicationConfig

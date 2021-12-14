@@ -1,4 +1,4 @@
-﻿#if B13074 || B13487 || B14687 || B15453
+﻿#if B13074 || B13487 || B14687 || B15453 || B16023
 using FilesChecker;
 using JET.Utilities.Patching;
 using System;
@@ -23,7 +23,7 @@ namespace JET.Patches
 
 		static bool PatchPrefix(ref System.Collections.Generic.IReadOnlyList<FileConsistencyMetadata> __result)
 		{
-			Debug.LogError("No Files to check");
+			//Debug.LogError("No Files to check");
 			__result = new FileConsistencyMetadata[] {};
 			// you can add your own files to check to disallow game to run if something is not found 
 			// filename, size, checksum, is critical

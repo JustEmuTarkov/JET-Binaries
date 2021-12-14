@@ -11,6 +11,10 @@ using Newtonsoft.Json;
 using UnityEngine;
 
 
+#if B16029
+using LocationInfo = GClass1043.GClass1045; // NightTimeAllowedLocations
+using ConverterBucket = GClass1208; // Converters
+#endif
 #if B11661 || B12102
 using LocationInfo = GClass783.GClass785; // NightTimeAllowedLocations
 using ConverterBucket = GClass939; // Converters

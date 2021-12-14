@@ -4,7 +4,7 @@ using JET.Utilities.Patching;
 
 namespace JET.Patches.Progression
 {
-#if !B13074 && !B13487 && !B14687
+#if !B13074 && !B13487 && !B14687 && !B16029
     public class SingleModeJamPatch : GenericPatch<SingleModeJamPatch>
     {
 

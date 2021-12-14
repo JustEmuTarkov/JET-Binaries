@@ -4,11 +4,11 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using HarmonyLib;
-#if B14687
-using IBundleLock = GInterface272; //Property: IsLocked
-using BindableState = GClass2464<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
+#if B16029
+using IBundleLock = GInterface275; //Property: IsLocked
+using BindableState = GClass2534<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
 
-/* Example how bindable state looks like **
+/* Example how bindable state looks like ** from version 14687
 public sealed class GClass2464<T> : GClass2463<T>
 {
 	// Token: 0x17001A96 RID: 6806
@@ -33,6 +33,11 @@ public sealed class GClass2464<T> : GClass2463<T>
 	}
 }
 */
+
+#endif
+#if B14687
+using IBundleLock = GInterface272; //Property: IsLocked
+using BindableState = GClass2464<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
 
 #endif
 #if B13074 || B13487

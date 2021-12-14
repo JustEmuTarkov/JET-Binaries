@@ -6,6 +6,9 @@ using EFT;
 using EFT.Game.Spawning;
 using JET.Utilities.Patching;
 using UnityEngine;
+#if B16029
+using ISpawnPoints = GInterface240; // DestroySpawnPoint or CreateSpawnPoint as ginterface
+#endif
 #if B14687
 using ISpawnPoints = GInterface239; // DestroySpawnPoint or CreateSpawnPoint as ginterface
 #endif
@@ -95,6 +98,11 @@ namespace JET.Patches.Progression
             }
         }
 #else
+#if B16029
+        public static bool PatchPrefix(ref ISpawnPoint __result, ISpawnPoints ___ginterface240_0, ESpawnCategory category, EPlayerSide side, string infiltration)
+        {
+            var spawnPoints = ___ginterface240_0.ToList();
+#endif
 #if B14687
         public static bool PatchPrefix(ref ISpawnPoint __result, ISpawnPoints ___ginterface239_0, ESpawnCategory category, EPlayerSide side, string infiltration)
         {

@@ -1,6 +1,6 @@
-﻿namespace JET.Patches.ScavMode
+﻿/*namespace JET.Patches.ScavMode
 {
-    /*public class ScavSpawnPointPatch : GenericPatch<ScavSpawnPointPatch>
+    public class ScavSpawnPointPatch : GenericPatch<ScavSpawnPointPatch>
     {
         public ScavSpawnPointPatch() : base(prefix: nameof(PatchPrefix)) { }
 
@@ -27,5 +27,5 @@
 
             return true;
         }
-    }*/
-}
+    }
+}*/

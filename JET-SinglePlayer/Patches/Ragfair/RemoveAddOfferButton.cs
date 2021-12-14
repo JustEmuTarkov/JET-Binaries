@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using JET.Utilities.Patching;
-#if B10988 || B11661 || B12102 || B13074 || B13487 || B14687
+#if B10988 || B11661 || B12102 || B13074 || B13487 || B14687 || B16029
 using UI_Button = EFT.UI.DefaultUIButton;
 #endif
 #if B9767 || B9018
@@ -21,7 +21,7 @@ namespace JET.Patches.Ragfair
         {
             //____addOfferButton.gameObject.SetActive(false);
             ____addOfferButton.Interactable = false;
-#if B10988
+#if B10988 || B11661 || B12102 || B13074 || B13487 || B14687 || B16029
             ____addOfferButton.OnClick.RemoveAllListeners();
 #endif
         }
@@ -41,7 +41,7 @@ namespace JET.Patches.Ragfair
         {
             //____addOfferButton.gameObject.SetActive(false);
             ____addOfferButton.Interactable = false;
-#if B10988
+#if B10988 || B11661 || B12102 || B13074 || B13487 || B14687 || B16029
             ____addOfferButton.OnClick.RemoveAllListeners();
 #endif
         }

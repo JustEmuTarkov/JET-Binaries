@@ -8,6 +8,13 @@ using EFT;
 using JET.Utilities.Patching;
 using UnityEngine;
 using JET.Utilities;
+#if B16029
+//using WaveInfo = GClass984; // not used // search for: Difficulty and chppse gclass with lower number whic hcontains Role and Limit variables
+using BotsPresets = GClass586;
+using BotData = GInterface18;
+using PoolManager = GClass1482;
+using JobPriority = GClass2516;
+#endif
 #if B14687
 //using WaveInfo = GClass984; // not used // search for: Difficulty and chppse gclass with lower number whic hcontains Role and Limit variables
 using BotsPresets = GClass565; // Method: GetNewProfile (higher GClass number)
@@ -69,7 +76,7 @@ namespace JET.Patches.Bots
 {
     public class GetNewBotTemplatesPatch : GenericPatch<GetNewBotTemplatesPatch>
     {
-#if B14687
+#if B14687 || B16029
         private static MethodInfo _getNewProfileMethod;
 #else
         private static Func<BotsPresets, BotData, Profile> _getNewProfileFunc;
