@@ -107,7 +107,7 @@ namespace JET.Patches.Other
                         {
                             // Following calls base class method ShowGameObject()
                             // To call base methods without reverse patch, must modify IL code for this line from callvirt to call
-                            (__instance as EFT.UI.UIElement).ShowGameObject();
+                            (__instance as EFT.UI.UIElement).HideGameObject();
                             ____questIconImage.sprite = ____foundInRaidSprite;
                             ____questIconImage.color = new Color(0.23137f, 0.93725f, 1);
 
@@ -120,7 +120,7 @@ namespace JET.Patches.Other
                     {
                         if (!foundNeeded)
                         {
-                            (__instance as EFT.UI.UIElement).ShowGameObject();
+                            (__instance as EFT.UI.UIElement).HideGameObject();
                             ____questIconImage.sprite = ____foundInRaidSprite;
                             ____questIconImage.color = new Color(0.23922f, 1, 0.44314f);
 
