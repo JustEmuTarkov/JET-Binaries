@@ -95,7 +95,8 @@ namespace JET.Patches.Bots
 
         protected override MethodBase GetTargetMethod()
         {
-            var methods = typeof(BotsPresets).GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly).Where(method => method.Name == nameof(BotsPresets.CreateProfile));
+            var methods = typeof(BotsPresets).GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+                .Where(method => method.Name == nameof(BotsPresets.CreateProfile) && method.GetParameters().Length > 2);
             return methods.FirstOrDefault();
         }
 
