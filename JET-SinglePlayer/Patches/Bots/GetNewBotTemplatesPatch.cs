@@ -96,7 +96,7 @@ namespace JET.Patches.Bots
         protected override MethodBase GetTargetMethod()
         {
             var methods = typeof(BotsPresets).GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
-                .Where(method => method.Name == nameof(BotsPresets.CreateProfile) && method.GetParameters().Length > 2);
+                .Where(method => method.Name == nameof(BotsPresets.CreateProfile) && method.GetParameters().Length == 2);
             return methods.FirstOrDefault();
         }
 
@@ -114,7 +114,7 @@ namespace JET.Patches.Bots
             */
             var taskScheduler = TaskScheduler.FromCurrentSynchronizationContext();
             var taskAwaiter = (Task<Profile>)null;
-            var profile = (Profile)_getNewProfileMethod.Invoke(__instance, new object[] { data });
+            var profile = (Profile)_getNewProfileMethod.Invoke(__instance, parameters: new object[] { data }); 
 
             if (profile == null)
             {
