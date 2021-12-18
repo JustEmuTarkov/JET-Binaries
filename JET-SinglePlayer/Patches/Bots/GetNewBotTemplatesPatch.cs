@@ -10,7 +10,7 @@ using UnityEngine;
 using JET.Utilities;
 #if B16029
 //using WaveInfo = GClass984; // not used // search for: Difficulty and chppse gclass with lower number whic hcontains Role and Limit variables
-using BotsPresets = GClass587;
+using BotsPresets = GClass587; //changed from 586
 using BotData = GInterface18;
 using PoolManager = GClass1482;
 using JobPriority = GClass2516;

@@ -5,7 +5,14 @@ using UnityEngine;
 using JET.Utilities.HTTP;
 #if B16029
 using IHealthController = GInterface188; // ActiveBuffsNames
+/*
+ * 	// Token: 0x06008C39 RID: 35897
+	string[] ActiveBuffsNames();
+ */
 using StDamage = GStruct247; // BodyPartColliderType
+/*
+ * 
+ */
 using IEffect = GInterface147; // AddWholeTime
 #endif
 #if B14687

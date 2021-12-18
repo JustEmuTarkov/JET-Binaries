@@ -5,10 +5,44 @@ using System.Reflection;
 using System.Threading.Tasks;
 using HarmonyLib;
 #if B16029
-using IBundleLock = GInterface275; //Property: IsLocked
-using BindableState = GClass2534<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
 
-/* Example how bindable state looks like ** from version 14687
+/*
+        Class2559 for 16029 house these variables that're being matched(?)
+        All the variables that class EasyBundleHelper seems to be matching? are in Class2559
+
+        The BindableState reference is similar to Class2485
+
+        IBundleLock - IsLocked property is in GInterface273
+*/
+
+
+using IBundleLock = GInterface273; //Property: IsLocked
+    
+/*
+ * Original:
+ * GInterface275; //Property: IsLocked
+ * 
+public interface GInterface273
+{
+	// Token: 0x17001ADD RID: 6877
+	// (get) Token: 0x0600CADC RID: 51932
+	bool IsLocked { get; }
+
+	// Token: 0x0600CADD RID: 51933
+	void Lock();
+
+	// Token: 0x0600CADE RID: 51934
+	void Unlock();
+}
+*/
+
+using BindableState = GClass2485<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
+
+/* 
+ * Original:
+ * GClass2534<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
+ * 
+ * Example how bindable state looks like ** from version 14687
 public sealed class GClass2464<T> : GClass2463<T>
 {
 	// Token: 0x17001A96 RID: 6806

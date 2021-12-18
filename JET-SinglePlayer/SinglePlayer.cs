@@ -97,7 +97,7 @@ namespace JET
 			// DEFAULT PATCHES
 			PatcherUtil.Patch<UnlockItemsIdLength>();
 			PatcherUtil.Patch<BarterSchemeAutoFill>();
-			#if B13074 || B13487 || B14687
+			#if B13074 || B13487 || B14687 || B16029
 			//PatcherUtil.Patch<HideoutRequirementIndicator>();
 			#endif
 			// BUNDLE LOADING PATCHES
@@ -110,7 +110,7 @@ namespace JET
 		}
 		private static void OfflineModePatchRoutes(Offline.OfflineMode EnabledElements)
 		{
-			#if !B13074 && !B13487 && !B14687
+			#if !B13074 && !B13487 && !B14687 && !B16029
 			if (EnabledElements.OfflineLootPatch)
 				PatcherUtil.Patch<OfflineLootPatch>();
 			#endif

@@ -2,7 +2,49 @@
 using EFT;
 #if B16029
 using ISession = GInterface111; // GetPhpSessionId
+/*
+ * 	// Token: 0x06006C36 RID: 27702
+	[CanBeNull]
+	string GetPhpSessionId();
+ */
+
 using ClientConfig = GClass558; // BackendCacheDir or LoadApplicationConfig
+/*
+ * 	public static string BackendCacheDir
+	{
+		get
+		{
+			return Application.dataPath + "/../cache/";
+		}
+	}
+ *
+ * public static bool LoadApplicationConfig(GClass728 @default = null)
+	{
+		if (GClass536.Config != null)
+		{
+			return false;
+		}
+		if (!File.Exists(GClass536.ConfigFilePath))
+		{
+			GClass536.Config = @default;
+			return false;
+		}
+		bool result;
+		try
+		{
+			GClass536.Config = File.ReadAllText(GClass536.ConfigFilePath).ParseJsonTo(Array.Empty<JsonConverter>());
+			result = true;
+		}
+		catch (Exception exception)
+		{
+			Debug.LogException(exception);
+			GClass536.Config = @default;
+			result = false;
+		}
+		return result;
+	}
+*/
+
 #endif
 #if B14687
 using ISession = GInterface111; // GetPhpSessionId
