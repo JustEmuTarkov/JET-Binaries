@@ -155,6 +155,9 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="Unity.ScriptableBuildPipeline">
+      <HintPath>..\Shared\References_16029\Unity.ScriptableBuildPipeline.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\Shared\References_Unchangabled\UnityEngine.dll</HintPath>
       <Private>False</Private>

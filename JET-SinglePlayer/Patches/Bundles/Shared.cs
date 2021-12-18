@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using HarmonyLib;
 using JET.Utilities.Patching;
+using UnityEngine;
 
 namespace JET.Patches.Bundles
 {
@@ -23,6 +24,7 @@ namespace JET.Patches.Bundles
             {
                 if (_loaderType == null)
                     _loaderType = PatcherConstants.TargetAssembly.GetTypes().Single(x => x.IsClass && x.GetProperty("SameNameAsset") != null);
+                Debug.LogError("LoaderType: " + _loaderType.FullName);
                 return _loaderType;
             }
         }

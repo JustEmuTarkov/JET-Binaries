@@ -16,7 +16,7 @@ using HarmonyLib;
 */
 
 
-using IBundleLock = GInterface273; //Property: IsLocked
+using IBundleLock = GInterface275; //Property: IsLocked
     
 /*
  * Original:
@@ -36,7 +36,7 @@ public interface GInterface273
 }
 */
 
-using BindableState = GClass2485<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
+using BindableState = GClass2534<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
 
 /* 
  * Original:

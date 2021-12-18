@@ -12,6 +12,7 @@ using JET.Utilities.Patching;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.Build.Pipeline;
 
 namespace JET.Patches.Bundles
 {
@@ -43,8 +44,18 @@ namespace JET.Patches.Bundles
             foreach (var bundle in Shared.CachedBundles)
             {
                 var bundleLock = Shared.BundleLockConstructor.Invoke(new object[] { 1 });
-                var loaderInstance =
-                    Activator.CreateInstance(Shared.LoaderType, bundle.Key, string.Empty, null, bundleLock);
+
+                //still not works... Places i was visiting in the assembly (use tokens to move around)
+
+                // Token: 0x0600D002 RID: 53250 RVA: 0x00410E14 File Offset: 0x0040F014
+                // private async Task method_0([CanBeNull] GInterface275 bundleLock, string defaultKey, string rootPath, string platformName, [CanBeNull] Func<string, bool> shouldExclude, [CanBeNull] Func<string, Task> bundleCheck)
+
+                // Token: 0x0600D019 RID: 53273 RVA: 0x0041120C File Offset: 0x0040F40C
+                //public Class2614(string key, string rootPath, CompatibilityAssetBundleManifest manifest, GInterface275 bundleLock, Func<string, Task> bundleCheck)
+                
+                // it requires scriptable object now otherwise it will crash...
+                var loaderInstance = Activator.CreateInstance(Shared.LoaderType, bundle.Key, string.Empty, ScriptableObject.CreateInstance<CompatibilityAssetBundleManifest>(), bundleLock, null); // last parameter is bundleCheck
+
                 AccessTools.Property(Shared.LoaderType, "DependencyKeys").SetValue(loaderInstance, 
                     Shared.ManifestCache.ContainsKey(bundle.Key)
                         ? File.ReadAllLines(Shared.ManifestCache[bundle.Key])

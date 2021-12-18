@@ -97,13 +97,13 @@ namespace JET
 			// DEFAULT PATCHES
 			PatcherUtil.Patch<UnlockItemsIdLength>();
 			PatcherUtil.Patch<BarterSchemeAutoFill>();
-			#if B13074 || B13487 || B14687 || B16029
-			//PatcherUtil.Patch<HideoutRequirementIndicator>();
-			#endif
+#if B13074 || B13487 || B14687 || B16029
+			//PatcherUtil.Patch<HideoutRequirementIndicator>(); // this displays hideout requirements on item hover
+#endif
 			// BUNDLE LOADING PATCHES
 			PatcherUtil.Patch<EasyAssetsPatch>();
-			PatcherUtil.Patch<EasyBundlePatch>();
-			PatcherUtil.Patch<BundleLoadPatch>();
+			//PatcherUtil.Patch<EasyBundlePatch>();
+			//PatcherUtil.Patch<BundleLoadPatch>();
 
 			OfflineModePatchRoutes(Offline.LoadModules());
 
@@ -112,7 +112,7 @@ namespace JET
 		{
 			#if !B13074 && !B13487 && !B14687 && !B16029
 			if (EnabledElements.OfflineLootPatch)
-				PatcherUtil.Patch<OfflineLootPatch>();
+				PatcherUtil.Patch<OfflineLootPatch>(); // this changes backend url for map loot to api/location
 			#endif
 			if (EnabledElements.OfflineSaveProfilePatch)
 				PatcherUtil.Patch<OfflineSaveProfilePatch>();
@@ -199,6 +199,7 @@ namespace JET
 				PatcherUtil.Patch<NoFiltersPatch>();
 			if (EnabledElements.AllDifficultiesAvaliable)
 			{
+				// this unfortunatly crashes game client and game doesnt know what to do... propably lacks a few more places that need to be edited for that to work
 				//GClass320.ExcludedDifficulties = new System.Collections.Generic.Dictionary<EFT.WildSpawnType, System.Collections.Generic.List<BotDifficulty>>()
 				//{
 				//	{
