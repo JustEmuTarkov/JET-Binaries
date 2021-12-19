@@ -5,6 +5,9 @@ using System.Linq;
 using System.Net;
 using System.Net.Cache;
 using System.Reflection;
+using System.Threading.Tasks;
+using Diz.Jobs;
+using Diz.Resources;
 using HarmonyLib;
 using JET.Utilities;
 using JET.Utilities.HTTP;
@@ -18,24 +21,64 @@ namespace JET.Patches.Bundles
 {
     public class EasyAssetsPatch : GenericPatch<EasyAssetsPatch>
     {
-        private const string BUNDLE_URL = "/singleplayer/bundles";
-        private static WebClient Client = new WebClient { CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore) };
+        private const string BundleUrl = "/singleplayer/bundles";
+        private static readonly WebClient _client = new WebClient { CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore) };
 
         public EasyAssetsPatch() : base(prefix: nameof(PatchPrefix)) { }
 
         protected override MethodBase GetTargetMethod()
         {
+#if B16029
+            var targetType = PatcherConstants.TargetAssembly.GetTypes().First(IsTargetType);
+            return targetType.GetMethods().Single(x => x.Name == "method_0");
+#else
             var nodeInterfaceType = PatcherConstants.TargetAssembly.GetTypes().First(x => x.IsInterface && x.GetProperty("SameNameAsset") != null);
             var targetType = PatcherConstants.TargetAssembly.GetTypes().Single(IsTargetType).MakeGenericType(nodeInterfaceType);
             
             return targetType.GetConstructors().First();
+#endif
         }
 
         private static bool IsTargetType(Type type)
         {
+#if B16029
+            return type.IsClass && type.Name.EndsWith("EasyAssets");
+#else
             return type.IsClass && type.GetMethod("GetNode") != null && string.IsNullOrWhiteSpace(type.Namespace);
+#endif
         }
 
+#if B16029
+        private static bool PatchPrefix(EasyAssets __instance, object bundleLock, string defaultKey, string rootPath, string platformName, Func<string, bool> shouldExclude, Func<string, Task> bundleCheck)
+        {
+            CacheServerBundles();
+
+            var text = rootPath.Replace("file:///", "").Replace("file://", "") + "/" + platformName + "/";
+            var results =
+            JsonConvert.DeserializeObject<Dictionary<string, Shared.BundleDetailStruct>>(File.ReadAllText(text + platformName + ".json"))
+                .ToDictionary(k => k.Key, v => new BundleDetails
+                {
+                    FileName = v.Value.FileName,
+                    Crc = v.Value.Crc,
+                    Dependencies = v.Value.Dependencies
+                });
+            //TODO: Generate CRC and add bundles to results.
+            __instance.Manifest = ScriptableObject.CreateInstance<CompatibilityAssetBundleManifest>();
+            __instance.Manifest.SetResults(results);
+
+            var allAssetBundles = __instance.Manifest.GetAllAssetBundles();
+            var bundles = new object[allAssetBundles.Length];
+            bundleLock ??= Shared.BundleLockConstructor.Invoke(new object[] {int.MaxValue});
+            for (var i = 0; i < allAssetBundles.Length; i++)
+            {
+                bundles[i] = Activator.CreateInstance(Shared.LoaderType, allAssetBundles[i], string.Empty, __instance.Manifest, bundleLock, bundleCheck);
+                JobScheduler.Yield().GetAwaiter();
+            }
+
+            AccessTools.Property(__instance.GetType(), "System").SetValue(__instance, Activator.CreateInstance(Shared.NodeType, bundles, defaultKey, shouldExclude));
+            return false;
+        }
+#else
         private static bool PatchPrefix(ref object[] loadables, string defaultKey, [CanBeNull] Func<string, bool> shouldExclude)
         {
             CacheServerBundles();
@@ -45,18 +88,10 @@ namespace JET.Patches.Bundles
             {
                 var bundleLock = Shared.BundleLockConstructor.Invoke(new object[] { 1 });
 
-                //still not works... Places i was visiting in the assembly (use tokens to move around)
+                var loaderInstance =
+                    Activator.CreateInstance(Shared.LoaderType, bundle.Key, string.Empty, null, bundleLock);
 
-                // Token: 0x0600D002 RID: 53250 RVA: 0x00410E14 File Offset: 0x0040F014
-                // private async Task method_0([CanBeNull] GInterface275 bundleLock, string defaultKey, string rootPath, string platformName, [CanBeNull] Func<string, bool> shouldExclude, [CanBeNull] Func<string, Task> bundleCheck)
-
-                // Token: 0x0600D019 RID: 53273 RVA: 0x0041120C File Offset: 0x0040F40C
-                //public Class2614(string key, string rootPath, CompatibilityAssetBundleManifest manifest, GInterface275 bundleLock, Func<string, Task> bundleCheck)
-                
-                // it requires scriptable object now otherwise it will crash...
-                var loaderInstance = Activator.CreateInstance(Shared.LoaderType, bundle.Key, string.Empty, ScriptableObject.CreateInstance<CompatibilityAssetBundleManifest>(), bundleLock, null); // last parameter is bundleCheck
-
-                AccessTools.Property(Shared.LoaderType, "DependencyKeys").SetValue(loaderInstance, 
+                AccessTools.Property(Shared.LoaderType, "DependencyKeys").SetValue(loaderInstance,
                     Shared.ManifestCache.ContainsKey(bundle.Key)
                         ? File.ReadAllLines(Shared.ManifestCache[bundle.Key])
                         : new string[] { });
@@ -68,6 +103,8 @@ namespace JET.Patches.Bundles
 
             return true;
         }
+#endif
+
         private static string GetLocalBundlePath(Bundle bundle)
         {
             try
@@ -102,7 +139,7 @@ namespace JET.Patches.Bundles
 
                 Debug.Log("Downloading bundle from " + url);
 
-                Client.DownloadFile(url, cachePath);
+                _client.DownloadFile(url, cachePath);
 
                 return cachePath;
             }
@@ -117,7 +154,7 @@ namespace JET.Patches.Bundles
         {
             try
             {
-                var text = new Request(null, Config.BackendUrl).GetJson(BUNDLE_URL);
+                var text = new Request(null, Config.BackendUrl).GetJson(BundleUrl);
                 var serverBundles = JsonConvert.DeserializeObject<Bundle[]>(text);
                 foreach (var bundle in serverBundles)
                 {

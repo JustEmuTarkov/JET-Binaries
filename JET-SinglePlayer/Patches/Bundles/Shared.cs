@@ -40,6 +40,25 @@ namespace JET.Patches.Bundles
                 return _bundleLockType;
             }
         }
+
+        public static Type NodeType
+        {
+            get
+            {
+                if (_nodeType == null)
+                {
+                    var nodeInterfaceType = PatcherConstants.TargetAssembly.GetTypes()
+                        .First(x => x.IsInterface && x.GetProperty("SameNameAsset") != null);
+
+                    _nodeType = PatcherConstants.TargetAssembly.GetTypes()
+                        .Single(x =>
+                            x.IsClass && x.GetMethod("GetNode") != null && string.IsNullOrWhiteSpace(x.Namespace))
+                        .MakeGenericType(nodeInterfaceType);
+                }
+
+                return _nodeType;
+            }
+        }
         public static PropertyInfo LoadState
         {
             get
@@ -100,6 +119,7 @@ namespace JET.Patches.Bundles
         #region Backing Fields
         private static Type _loaderType;
         private static Type _bundleLockType;
+        private static Type _nodeType;
         private static PropertyInfo _loadState;
         private static PropertyInfo _loadStateProperty;
         private static FieldInfo _bundleLockField;
@@ -116,7 +136,7 @@ namespace JET.Patches.Bundles
         #region Types
         internal class BundleLockWrapper
         {
-            object _instance;
+            readonly object _instance;
 
             internal bool IsLocked
             {
@@ -134,6 +154,14 @@ namespace JET.Patches.Bundles
             internal void Unlock() =>
                 AccessTools.Method(_instance.GetType(), "Unlock").Invoke(_instance, new object[] { });
 
+        }
+
+        //This is meant to mimic the struct that is used to convert a JSON file to a Dictionary<string, BundleDetails> in EasyAssets.method_0
+        internal struct BundleDetailStruct
+        {
+            public string FileName;
+            public uint Crc;
+            public string[] Dependencies;
         }
         #endregion
     }
