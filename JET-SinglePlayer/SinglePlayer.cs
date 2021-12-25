@@ -56,6 +56,9 @@ namespace JET
 		public static event Void ApplicationQuitEvent;
 		public void OnApplicationQuit() => ApplicationQuitEvent?.Invoke();
 
+#if B16338
+		public static string GAME_VERSION = "0.12.12.10.16338";
+#endif
 #if B16029
 		public static string GAME_VERSION = "0.12.12.0.16029";
 #endif
@@ -97,7 +100,7 @@ namespace JET
 			// DEFAULT PATCHES
 			PatcherUtil.Patch<UnlockItemsIdLength>();
 			PatcherUtil.Patch<BarterSchemeAutoFill>();
-#if B13074 || B13487 || B14687 || B16029
+#if B13074 || B13487 || B14687 || B16029 || B16338
 			//PatcherUtil.Patch<HideoutRequirementIndicator>(); // this displays hideout requirements on item hover
 #endif
 			// BUNDLE LOADING PATCHES
@@ -110,7 +113,7 @@ namespace JET
 		}
 		private static void OfflineModePatchRoutes(Offline.OfflineMode EnabledElements)
 		{
-			#if !B13074 && !B13487 && !B14687 && !B16029
+			#if !B13074 && !B13487 && !B14687 && !B16029 && !B16338
 			if (EnabledElements.OfflineLootPatch)
 				PatcherUtil.Patch<OfflineLootPatch>(); // this changes backend url for map loot to api/location
 			#endif
