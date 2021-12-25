@@ -10,7 +10,12 @@ using JET.Utilities.Patching;
 using Newtonsoft.Json;
 using UnityEngine;
 
-
+#if B16338
+using LocationInfo = GClass1070.GClass1072;
+// NightTimeAllowedLocations
+using ConverterBucket = GClass1239;
+// .Converters
+#endif
 #if B16029
 using LocationInfo = GClass1043.GClass1045; // NightTimeAllowedLocations
 using ConverterBucket = GClass1208; // Converters
@@ -47,7 +52,7 @@ namespace JET.Patches.Progression
             // compile-time check
             _ = nameof(LocationInfo.BotLocationModifier);
         }
-#if B11661 || B16029
+#if B11661 || B16029 || B16338
         private static string method = "method_6";
 #else
         private static string method = "method_5";

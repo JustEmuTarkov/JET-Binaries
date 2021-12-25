@@ -8,6 +8,18 @@ using EFT.UI.Screens;
 using HarmonyLib;
 using JET.Utilities.Patching;
 using JET.Utilities.Reflection;
+#if B16338
+// .SelectedKeyCard
+using MenuController = GClass1536;
+// IsRandomTime and IsRandomWeather
+using WeatherSettings = GStruct97;
+// IsScavWars and BotAmount
+using BotsSettings = GStruct240;
+// IsTaggedAndCursed and IsBosses
+using WavesSettings = GStruct99;
+// Simple type EFT.UI.Matchmaker.MatchmakerOfflineRaid.GClass into dnSpy search and it'll show the GClass needed
+using MatchmakerScreenCreator = EFT.UI.Matchmaker.MatchmakerOfflineRaid.GClass2446;
+#endif
 #if B16029
 using MenuController = GClass1504; // .SelectedKeyCard
 using WeatherSettings = GStruct97; // IsRandomTime and IsRandomWeather
@@ -116,7 +128,7 @@ private void method_55(bool local, GStruct92 weatherSettings, GStruct233 botsSet
 	this.method_38();
 }
          */
-#if B16029
+#if B16029 || B16338
         private const string loadReadyScreenMethod = "method_39";
         private const string readyMethod = "method_60"; // method_xx(bool local, GStruct92 weatherSettings, GStruct233 botsSettings, GStruct93 wavesSettings)
 #endif

@@ -4,6 +4,13 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using HarmonyLib;
+
+#if B16338
+using IBundleLock = GInterface279;
+//Property: IsLocked
+using BindableState = GClass2587<Diz.DependencyManager.ELoadState>; 
+//Construct method parameter: initialValue
+#endif
 #if B16029
 
 /*
@@ -72,7 +79,6 @@ public sealed class GClass2464<T> : GClass2463<T>
 #if B14687
 using IBundleLock = GInterface272; //Property: IsLocked
 using BindableState = GClass2464<Diz.DependencyManager.ELoadState>; //Construct method parameter: initialValue
-
 #endif
 #if B13074 || B13487
 using IBundleLock = GInterface264; //Property: IsLocked

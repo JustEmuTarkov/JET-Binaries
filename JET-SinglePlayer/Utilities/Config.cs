@@ -1,15 +1,17 @@
 ﻿using Comfort.Common;
 using EFT;
-#if B16029
+
+
+/* START REFERENCE ######################################################################
 using ISession = GInterface111; // GetPhpSessionId
-/*
+
  * 	// Token: 0x06006C36 RID: 27702
 	[CanBeNull]
 	string GetPhpSessionId();
- */
+ 
 
 using ClientConfig = GClass558; // BackendCacheDir or LoadApplicationConfig
-/*
+
  * 	public static string BackendCacheDir
 	{
 		get
@@ -43,8 +45,20 @@ using ClientConfig = GClass558; // BackendCacheDir or LoadApplicationConfig
 		}
 		return result;
 	}
+ 
+END REFERENCE #############################################################
 */
 
+
+#if B16338
+using ISession = GInterface113;
+// GetPhpSessionId
+using ClientConfig = GClass570; 
+// BackendCacheDir or LoadApplicationConfig in dnSpy
+#endif
+#if B16029
+using ISession = GInterface111; // GetPhpSessionId
+using ClientConfig = GClass558; // BackendCacheDir or LoadApplicationConfig
 #endif
 #if B14687
 using ISession = GInterface111; // GetPhpSessionId

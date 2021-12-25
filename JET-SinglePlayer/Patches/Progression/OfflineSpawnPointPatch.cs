@@ -6,6 +6,10 @@ using EFT;
 using EFT.Game.Spawning;
 using JET.Utilities.Patching;
 using UnityEngine;
+#if B16338
+using ISpawnPoints = GInterface242;
+// DestroySpawnPoint or CreateSpawnPoint as ginterface
+#endif
 #if B16029
 using ISpawnPoints = GInterface240; // DestroySpawnPoint or CreateSpawnPoint as ginterface
 #endif
@@ -98,6 +102,11 @@ namespace JET.Patches.Progression
             }
         }
 #else
+#if B16338 // CheckFarthestFromOtherPlayers
+        public static bool PatchPrefix(ref ISpawnPoint __result, ISpawnPoints ___ginterface243_0, ESpawnCategory category, EPlayerSide side, string infiltration)
+        {
+            var spawnPoints = ___ginterface243_0.ToList();
+#endif
 #if B16029
         public static bool PatchPrefix(ref ISpawnPoint __result, ISpawnPoints ___ginterface240_0, ESpawnCategory category, EPlayerSide side, string infiltration)
         {
@@ -128,7 +137,7 @@ namespace JET.Patches.Progression
         {
             var spawnPoints = ___ginterface208_0.ToList();
 #endif
-            var unfilteredSpawnPoints = spawnPoints.ToList();
+        var unfilteredSpawnPoints = spawnPoints.ToList();
             var infils = spawnPoints.Select(sp => sp.Infiltration).Distinct();
             Debug.LogError($"PatchPrefix SelectSpawnPoint Infiltrations: {spawnPoints.Count} | {String.Join(", ", infils)}");
 
