@@ -69,6 +69,15 @@
     <WarningLevel>4</WarningLevel>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '16338|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>B16338;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == '15453|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -135,15 +144,15 @@
       <HintPath>..\Shared\References_Unchangabled\ItemComponent.Types.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="FilesChecker" Condition=" '$(Configuration)' == '16029' Or '$(Configuration)' == '15453' Or '$(Configuration)' == '14687' Or '$(Configuration)' == '13074' Or '$(Configuration)' == '13487' ">
+    <Reference Include="FilesChecker" Condition=" '$(Configuration)' == '16338' Or '$(Configuration)' == '16029' Or '$(Configuration)' == '15453' Or '$(Configuration)' == '14687' Or '$(Configuration)' == '13074' Or '$(Configuration)' == '13487' ">
       <HintPath>..\Shared\References_$(Configuration)\FilesChecker.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json" Condition=" '$(Configuration)' != '16029' And '$(Configuration)' != '15453' And '$(Configuration)' != '13074' And '$(Configuration)' != '14687'">
+    <Reference Include="Newtonsoft.Json" Condition=" '$(Configuration)' != '16338' And '$(Configuration)' != '16029' And '$(Configuration)' != '15453' And '$(Configuration)' != '13074' And '$(Configuration)' != '14687'">
       <HintPath>..\Shared\References_Unchangabled\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="netstandard" Condition=" '$(Configuration)' == '13074' Or '$(Configuration)' == '13487' Or '$(Configuration)' == '14687' ">
+    <Reference Include="netstandard" Condition=" '$(Configuration)' == '13074' Or '$(Configuration)' == '13487' Or '$(Configuration)' == '14687' Or '$(Configuration)' == '16338' ">
       <HintPath>..\Shared\References_$(Configuration)\netstandard.dll</HintPath>
       <Private>False</Private>
     </Reference>
@@ -197,7 +206,7 @@
       <HintPath>..\Shared\References_Unchangabled\UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="zlib.net" Condition=" '$(Configuration)' != '13074' And '$(Configuration)' != '13487' And '$(Configuration)' != '14687' And '$(Configuration)' != '15453' And '$(Configuration)' != '16029' ">
+    <Reference Include="zlib.net" Condition=" '$(Configuration)' != '13074' And '$(Configuration)' != '13487' And '$(Configuration)' != '14687' And '$(Configuration)' != '15453' And '$(Configuration)' != '16029' And '$(Configuration)' != '16338' ">
       <HintPath>..\Shared\References_Unchangabled\zlib.net.dll</HintPath>
     </Reference>
   </ItemGroup>
