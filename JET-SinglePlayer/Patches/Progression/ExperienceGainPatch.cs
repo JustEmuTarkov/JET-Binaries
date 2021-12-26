@@ -32,7 +32,7 @@ namespace JET.Patches.Progression
 
             if (parameters.Length != 3
                 || parameters[0].Name != "profile"
-                || parameters[1].ParameterType != typeof(bool)
+                || parameters[1].ParameterType == typeof(bool)
                 || parameters[1].Name != "isLocal"
                 || parameters[2].Name != "exitStatus")
             {

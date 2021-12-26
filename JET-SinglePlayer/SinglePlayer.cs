@@ -178,8 +178,8 @@ namespace JET
 			if (EnabledElements.BotStationaryWeaponPatch)
 				PatcherUtil.Patch<BotStationaryWeaponPatch>();
 
-			if (EnabledElements.BeaconPatch)
-				PatcherUtil.Patch<BeaconPatch>();
+			//if (EnabledElements.BeaconPatch)
+			//	PatcherUtil.Patch<BeaconPatch>();
 			if (EnabledElements.DogtagPatch)
 				PatcherUtil.Patch<DogtagPatch>();
 

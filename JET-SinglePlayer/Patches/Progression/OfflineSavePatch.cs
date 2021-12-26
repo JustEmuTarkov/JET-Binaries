@@ -28,9 +28,12 @@ namespace JET.Patches.Progression
                 //}
                 if(method.Name.StartsWith("method") &&
                     method.GetParameters().Length == 6 &&
-                    method.GetParameters()[0].ParameterType.Name == "String" &&
+                    method.GetParameters()[0].Name == "profileId" &&
+                    method.GetParameters()[1].Name == "savageProfile" &&
+                    method.GetParameters()[2].Name == "location" &&
                     method.GetParameters()[3].Name == "isLocal" &&
-                    method.GetParameters()[3].ParameterType.Name == "Boolean")
+                    method.GetParameters()[4].Name == "result" &&
+                    method.GetParameters()[5].Name == "timeHasComeScreenController")
                 {
                     return method;
                 }

@@ -1,4 +1,4 @@
-﻿#if !B13074 && !B13487 && !B14687
+﻿#if !B13074 && !B13487 && !B14687 && !B16338
 
 using System;
 using System.Reflection;
@@ -52,20 +52,40 @@ namespace JET.Patches.Progression
             // compile-time check
             _ = nameof(LocationInfo.BotLocationModifier);
         }
+
 #if B11661 || B16029
         private static string method = "method_6";
+        private static BindingFlags methodBFlags = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly;
 #else
-#if B16338
-        public static string method = "smethod_3";
-#else
-        private static string method = "method_5";
+    #if B16338
+            private static string method = "smethod_3";
+            private static BindingFlags methodBFlags = BindingFlags.NonPublic | BindingFlags.Static;
+    #else
+        #if B16338
+                    public static string method = "smethod_3";
+        #else
+                    private static string method = "method_5";
+                    private static BindingFlags methodBFlags = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly;
+        #endif
+    #endif
 #endif
+        /*
+private IEnumerator method_5()
+{
+	yield return null;
+	yield return null;
+	GClass2029.ToggleScreen(EScreenType.BattleUI, null);
+	yield break;
+}
+         */
+
+
         protected override MethodBase GetTargetMethod()
         {
             var localGameBaseType = PatcherConstants.LocalGameType.BaseType;
 
             _property = localGameBaseType.GetProperty($"{typeof(LocationInfo).Name}_0", BindingFlags.NonPublic | BindingFlags.Instance);
-            return localGameBaseType.GetMethod(method, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            return localGameBaseType.GetMethod(method, methodBFlags);
         }
 
         /// <summary>

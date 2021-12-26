@@ -166,9 +166,8 @@
       <HintPath>..\Shared\References_Unchangabled\NLog.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Sirenix.Serialization, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\Shared\References_Unchangabled\Sirenix.Serialization.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="Sirenix.Serialization">
+      <HintPath>..\..\JET-Project-Solution\Core Project\References\Unchangable\Sirenix.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="Unity.TextMeshPro">

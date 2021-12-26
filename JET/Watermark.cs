@@ -1,21 +1,27 @@
-﻿using JET.Utilities;
-using System;
-using System.Collections.Generic;
+﻿using Comfort.Common;
+using JET.Utilities;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-using Comfort.Common;
 
 namespace JET
 {
     class Watermark
     {
+        EFT.UI.PreloaderUI PreloaderUIInstance { get 
+            {
+#if B16338
+                return Singleton<EFT.UI.PreloaderUI>.Instance;
+#else
+                return MonoBehaviourSingleton<EFT.UI.PreloaderUI>.Instance;
+#endif
+            }
+        }
+
         EFT.UI.LocalizedText localizedText;
         internal void Do()
         {
-            if (Singleton<EFT.UI.PreloaderUI>.Instance != null)
+            if (PreloaderUIInstance != null)
             {
                 if (localizedText == null)
                 {
@@ -23,7 +29,7 @@ namespace JET
                         return;
                     localizedText = typeof(EFT.UI.PreloaderUI)
                     .GetField("_alphaVersionLabel", BindingFlags.NonPublic | BindingFlags.Instance)
-                    .GetValue(Singleton<EFT.UI.PreloaderUI>.Instance) as EFT.UI.LocalizedText;
+                    .GetValue(PreloaderUIInstance) as EFT.UI.LocalizedText;
                 }
                 if (localizedText.LocalizationKey == null)
                     return;
