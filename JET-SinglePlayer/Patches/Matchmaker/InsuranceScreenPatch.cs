@@ -1,6 +1,10 @@
 using System.Linq;
 using System.Reflection;
 using JET.Utilities.Patching;
+#if B16338
+using MenuController = GClass1536;
+// SelectedDateTime or get_SelectedDateTime as GClass (should ge first in dnspy)
+#endif
 #if B16029
 using MainMenuController = GClass1504;  // SelectedDateTime or get_SelectedDateTime as GClass (should ge first in dnspy)
 #endif
@@ -32,7 +36,7 @@ namespace JET.Patches.Matchmaker
     {
         static InsuranceScreenPatch()
         {
-            _ = nameof(MainMenuController.InventoryController);
+            _ = nameof(MenuController.InventoryController);
         }
 
         public InsuranceScreenPatch() : base(prefix: nameof(PrefixPatch), postfix: nameof(PostfixPatch)) { }
@@ -52,7 +56,7 @@ namespace JET.Patches.Matchmaker
         {
             // find method 
             // private void method_53(bool local, GStruct73 weatherSettings, GStruct177 botsSettings, GStruct74 wavesSettings)
-            return typeof(MainMenuController)
+            return typeof(MenuController)
                 .GetMethods(BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly)
                 .FirstOrDefault(IsTargetMethod);    // controller contains 2 methods with same signature. Usually target method is first of them.
         }

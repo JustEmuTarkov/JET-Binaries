@@ -6,6 +6,12 @@ using JET.Utilities;
 using JET.Utilities.HTTP;
 using JET.Utilities.Patching;
 using UnityEngine;
+#if B16338
+using WaveInfo = GClass1257;
+// search for: Difficulty and chppse gclass with lower number whic hcontains Role and Limit variables
+using BotsPresets = GClass600;
+// Method: GetNewProfile (higher GClass number)
+#endif
 #if B16029
 using WaveInfo = GClass1226; // search for: Difficulty and chppse gclass with lower number whic hcontains Role and Limit variables
 using BotsPresets = GClass586; // Method: GetNewProfile (higher GClass number)

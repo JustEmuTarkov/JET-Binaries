@@ -5,7 +5,7 @@ using System.Reflection;
 using EFT;
 using HarmonyLib;
 using JET.Utilities.Patching;
-#if B14687 || B16029
+#if B14687 || B16029 || B16338
 using BotData = GInterface18; // find ChooseProfile and get ginterface off that
 #endif
 #if B13074 || B13487

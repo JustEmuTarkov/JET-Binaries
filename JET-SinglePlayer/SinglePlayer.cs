@@ -104,7 +104,7 @@ namespace JET
 			//PatcherUtil.Patch<HideoutRequirementIndicator>(); // this displays hideout requirements on item hover
 #endif
 			// BUNDLE LOADING PATCHES
-			PatcherUtil.Patch<EasyAssetsPatch>();
+			//PatcherUtil.Patch<EasyAssetsPatch>();
 			//PatcherUtil.Patch<EasyBundlePatch>();
 			//PatcherUtil.Patch<BundleLoadPatch>();
 

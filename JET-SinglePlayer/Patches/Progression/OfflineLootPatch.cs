@@ -52,8 +52,11 @@ namespace JET.Patches.Progression
             // compile-time check
             _ = nameof(LocationInfo.BotLocationModifier);
         }
-#if B11661 || B16029 || B16338
+#if B11661 || B16029
         private static string method = "method_6";
+#else
+#if B16338
+        public static string method = "smethod_3";
 #else
         private static string method = "method_5";
 #endif
@@ -62,7 +65,7 @@ namespace JET.Patches.Progression
             var localGameBaseType = PatcherConstants.LocalGameType.BaseType;
 
             _property = localGameBaseType.GetProperty($"{typeof(LocationInfo).Name}_0", BindingFlags.NonPublic | BindingFlags.Instance);
-            return localGameBaseType.GetMethod("method_6", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            return localGameBaseType.GetMethod(method, BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly);
         }
 
         /// <summary>
